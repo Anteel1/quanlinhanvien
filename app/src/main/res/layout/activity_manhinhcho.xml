@@ -23,7 +23,7 @@
         android:layout_width="263dp"
         android:layout_height="50sp"
         android:text="Quản lý nhân viên"
-        android:textSize="26sp"
+        android:textSize="20sp"
         android:layout_marginTop="12dp"
         android:layout_gravity="center"
         android:textColor="@color/white"

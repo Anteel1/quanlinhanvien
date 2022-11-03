@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".LoginActivity"
     android:orientation="vertical"
+    android:padding="8dp"
     android:gravity="center">
 
     <TextView
@@ -29,7 +30,7 @@
     android:gravity="center"
     android:layout_margin="8dp">
     <EditText
-        android:layout_width="360dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="EMAIL*"
         android:id="@+id/edt_email"
@@ -44,7 +45,7 @@
         android:textSize="10dp"
         android:textColor="@color/red"/>
     <EditText
-        android:layout_width="360dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="PASSWORD*"
         android:inputType="textPassword"

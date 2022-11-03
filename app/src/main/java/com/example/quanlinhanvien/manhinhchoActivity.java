@@ -23,7 +23,7 @@ public class manhinhchoActivity extends AppCompatActivity {
             @Override
             public void run() {
                 chay();
-                startActivity(new Intent(manhinhchoActivity.this, MainActivity.class));
+                startActivity(new Intent(manhinhchoActivity.this, LoginActivity.class));
             }
         });
         thread.start();

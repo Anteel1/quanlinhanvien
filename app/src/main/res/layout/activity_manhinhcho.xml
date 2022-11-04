@@ -7,7 +7,6 @@
     tools:context=".manhinhchoActivity"
     android:background="#73AB6B"
     android:orientation="vertical"
-
     >
 
     <ImageView

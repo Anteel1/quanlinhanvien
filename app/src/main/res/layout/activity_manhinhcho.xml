@@ -6,9 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".manhinhchoActivity"
     android:background="#73AB6B"
-    android:orientation="vertical"
-    
-    >
+    android:orientation="vertical">
 
     <ImageView
         android:layout_width="268dp"

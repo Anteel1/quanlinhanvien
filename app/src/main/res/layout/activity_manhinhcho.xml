@@ -6,9 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".manhinhchoActivity"
     android:background="#73AB6B"
-    android:orientation="vertical"
-
-    >
+    android:orientation="vertical">
 
     <ImageView
         android:layout_width="268dp"
@@ -17,8 +15,8 @@
         android:layout_gravity="center"
         android:layout_alignParentTop="true"
         android:layout_marginTop="250dp"
-        android:src="@drawable/logo"
-        ></ImageView>
+        android:src="@drawable/logo"/>
+
     <TextView
         android:layout_width="263dp"
         android:layout_height="50sp"
@@ -27,8 +25,8 @@
         android:layout_marginTop="12dp"
         android:layout_gravity="center"
         android:textColor="@color/white"
-        android:gravity="center_horizontal|top"
-        ></TextView>
+        android:gravity="center_horizontal|top"/>
+
     <ProgressBar
         android:layout_marginTop="10dp"
         android:id="@+id/progress_bar"
@@ -39,6 +37,7 @@
         android:progressTint="#FFFFFF"
         android:progressBackgroundTint="#FFFFFF"
         android:layout_height="40dp"/>
+
     <TextView
         android:id="@+id/tv_chay"
         android:textSize="20sp"
@@ -48,4 +47,5 @@
         android:gravity="center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
+
 </LinearLayout>

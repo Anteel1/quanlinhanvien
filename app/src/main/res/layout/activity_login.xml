@@ -21,69 +21,65 @@
         android:layout_height="wrap_content"
         android:src="@drawable/img_login"/>
 
-
-
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:gravity="center"
-    android:layout_margin="8dp">
-    <EditText
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="EMAIL*"
-        android:id="@+id/edt_email"
-        android:padding="10dp"
-        android:paddingHorizontal="10dp"
-        android:layout_margin="8dp"
-        android:drawablePadding="12dp"
-        android:drawableStart="@drawable/custom_ic_email"
-        android:background="@drawable/custom_edt"/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/tv_validate_email"
-        android:textSize="10dp"
-        android:textColor="@color/red"/>
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="PASSWORD*"
-        android:inputType="textPassword"
-        android:padding="10dp"
-        android:id="@+id/edt_password"
-        android:layout_margin="8dp"
-        android:drawablePadding="12dp"
-        android:drawableStart="@drawable/custom_ic_lock"
-        android:background="@drawable/custom_edt"/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/tv_validate_password"
-        android:textSize="10dp"
-        android:textColor="@color/red"/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Forgot Password?"
-        android:id="@+id/tv_forgotpassword"
-        android:paddingHorizontal="10dp"
-        android:layout_gravity="left"
-        android:layout_margin="10dp" />
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_margin="8dp">
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="EMAIL*"
+            android:id="@+id/edt_email"
+            android:padding="10dp"
+            android:paddingHorizontal="10dp"
+            android:layout_margin="8dp"
+            android:drawablePadding="12dp"
+            android:drawableStart="@drawable/custom_ic_email"
+            android:background="@drawable/custom_edt"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_validate_email"
+            android:textSize="10dp"
+            android:textColor="@color/red"/>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="PASSWORD*"
+            android:inputType="textPassword"
+            android:padding="10dp"
+            android:id="@+id/edt_password"
+            android:layout_margin="8dp"
+            android:drawablePadding="12dp"
+            android:drawableStart="@drawable/custom_ic_lock"
+            android:background="@drawable/custom_edt"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_validate_password"
+            android:textSize="10dp"
+            android:textColor="@color/red"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Forgot Password?"
+            android:id="@+id/tv_forgotpassword"
+            android:paddingHorizontal="10dp"
+            android:layout_gravity="left"
+            android:layout_margin="10dp" />
 
-    <Button
-        android:layout_width="370dp"
-        android:layout_height="wrap_content"
-        android:text="Sign in"
-        android:padding="16dp"
-        android:id="@+id/btn_signin"
-        android:textColor="@color/white"
-        android:backgroundTint="#73AB6B"
-        android:layout_margin="8dp" />
+        <Button
+            android:layout_width="370dp"
+            android:layout_height="wrap_content"
+            android:text="Sign in"
+            android:padding="16dp"
+            android:id="@+id/btn_signin"
+            android:textColor="@color/white"
+            android:backgroundTint="#73AB6B"
+            android:layout_margin="8dp" />
 
-</LinearLayout>
-
-
-
+    </LinearLayout>
+    
 </LinearLayout>

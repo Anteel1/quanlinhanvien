@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/menu_home"
+        android:icon="@drawable/group"
+        android:title="HOME" />
+    <item
+        android:id="@+id/menu_Attendance"
+        android:icon="@drawable/desk"
+        android:title="Attendance" />
+    <item
+        android:id="@+id/menu_thongke"
+        android:icon="@drawable/desk_alt"
+        android:title="Số liệu thống kê" />
+    <item
+        android:id="@+id/menu_dk_lichlam"
+        android:icon="@drawable/notebook"
+        android:title="đăng kí" />
+    <item
+        android:id="@+id/menu_diemdanh"
+        android:icon="@drawable/notebook"
+        android:title="điểm danh " />
+    <item
+        android:id="@+id/menu_nhanvien"
+        android:icon="@drawable/notebook"
+        android:title="nhân viên" />
+    <item
+        android:id="@+id/menu_thaydoilichlam"
+        android:icon="@drawable/notebook"
+        android:title="thay đổi lịch làm" />
+    <item
+        android:id="@+id/menu_Logout"
+        android:icon="@drawable/sign_out_squre"
+        android:title="Log out" />
+
+
+
+</menu>

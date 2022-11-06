@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
@@ -37,17 +38,26 @@ public class TrangChuActivity extends AppCompatActivity {
         setContentView(R.layout.activity_trang_chu);
 
         anhxa();
+//        xuly_toolbar();
         menu_nav();
         clicknavigation();
 
     }
 
     public void anhxa() {
-//        toolbar = findViewById(R.id.toolbar);
+        toolbar = findViewById(R.id.toolbar);
         iv_menu = findViewById(R.id.iv_menu_toolbar);
         drawerLayout = findViewById(R.id.drawerLayout);
         navigationView = findViewById(R.id.navigation_view);
     }
+
+//    private void xuly_toolbar(){
+//        setSupportActionBar(toolbar);
+//        ActionBar actionBar = getSupportActionBar();
+//        actionBar.setTitle("QUẢN LÝ NHÂN VIÊN");
+//        actionBar.setHomeAsUpIndicator(R.drawable.ic_menu);
+//        actionBar.setDisplayHomeAsUpEnabled(true);
+//    }
 
     public void menu_nav() {
         iv_menu.setOnClickListener(new View.OnClickListener() {
@@ -56,6 +66,16 @@ public class TrangChuActivity extends AppCompatActivity {
                 drawerLayout.openDrawer(navigationView);
             }
         });
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+
+        if (item.getItemId() == android.R.id.home) {
+            drawerLayout.openDrawer(GravityCompat.END);
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
     private void clicknavigation(){

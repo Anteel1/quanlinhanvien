@@ -42,7 +42,8 @@ public class MainActivity extends AppCompatActivity {
         int day = n.get(Calendar.DAY_OF_MONTH);
         ngayht.setText("Ngày " + day + " tháng " + month + " năm " + year);
 
-        Animation animation = AnimationUtils.loadAnimation(MainActivity.this,R.anim.hien);
-        nen.startAnimation(animation);
-        }
+//        Animation animation = AnimationUtils.loadAnimation(MainActivity.this,R.anim.hien);
+//        nen.startAnimation(animation);
+
     }
+}

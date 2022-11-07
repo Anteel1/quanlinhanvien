@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
         int year = n.get(Calendar.YEAR);
         int month = n.get(Calendar.MONTH);
         int day = n.get(Calendar.DAY_OF_MONTH);
-        ngayht.setText("Ngày"+day+",tháng"+month+" năm "+year);
+        ngayht.setText("Day"+day+",Month"+month+" Year "+year);
 
        //
         Animation animation = AnimationUtils.loadAnimation(MainActivity.this,R.anim.hien);

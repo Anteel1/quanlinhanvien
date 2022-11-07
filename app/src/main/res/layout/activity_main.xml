@@ -8,7 +8,7 @@
     android:orientation="vertical"
     android:gravity="center_horizontal"
     >
-<TextView
+<TextClock
     android:id="@+id/giohienthi"
     android:text="09:55 AM"
     android:layout_width="254dp"
@@ -19,7 +19,7 @@
     android:layout_marginTop="80dp"
     android:textColor="#838383"
 
-    ></TextView>
+    ></TextClock>
  <TextView
      android:id="@+id/ngayhienthi"
      android:text="Wednesday, Feb 17"

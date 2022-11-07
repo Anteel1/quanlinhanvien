@@ -31,7 +31,7 @@ public class LoginActivity extends AppCompatActivity {
                 tv_validate_password.setText("");
                 tv_validate_email.setText("");
                 kiemtra();
-                intent =new Intent(LoginActivity.this, MainActivity.class);
+                intent =new Intent(LoginActivity.this, TrangChuActivity.class);
                 if (kiemtra_email() && kiemtra_password()){
                     startActivity(intent);
                     finish();

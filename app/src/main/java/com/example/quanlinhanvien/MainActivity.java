@@ -34,11 +34,12 @@ public class MainActivity extends AppCompatActivity {
     DrawerLayout drawerLayout;
     Toolbar toolbar;
     NavigationView navigationView;
+    TextView ngayht;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        gioht = findViewById(R.id.giohienthi);
+
         ngayht = findViewById(R.id.ngayhienthi);
         ImageButton nen = findViewById(R.id.nen);
         anhxa();
@@ -51,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
         //
         Animation animation = AnimationUtils.loadAnimation(MainActivity.this, R.anim.hien);
         nen.startAnimation(animation);
+
     }
 
     
@@ -65,8 +67,7 @@ public class MainActivity extends AppCompatActivity {
         ngayht.setText("Day"+day+",Month"+month+" Year "+year);
 
        //
-        Animation animation = AnimationUtils.loadAnimation(MainActivity.this,R.anim.hien);
-        nen.startAnimation(animation);
+
         }
     public void anhxa() {
         toolbar = findViewById(R.id.toolbar);

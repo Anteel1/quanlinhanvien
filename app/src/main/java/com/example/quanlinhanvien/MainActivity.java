@@ -35,46 +35,46 @@ public class MainActivity extends AppCompatActivity {
     Toolbar toolbar;
     NavigationView navigationView;
     TextView ngayht;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        ngayht = findViewById(R.id.ngayhienthi);
-        ImageButton nen = findViewById(R.id.nen);
+        //  ngayht = findViewById(R.id.ngayhienthi);
+        //  ImageButton nen = findViewById(R.id.nen);
         anhxa();
 //        xuly_toolbar();
         menu_nav();
         clicknavigation();
 
         //hien thi ngay
-        ngayht();
+//        ngayht();
         //
-        Animation animation = AnimationUtils.loadAnimation(MainActivity.this, R.anim.hien);
-        nen.startAnimation(animation);
 
     }
 
-    
-    public void ngayht() {
-        String thuchu = "vv";
-        String thangchu = "vv";
 
-        Calendar n = Calendar.getInstance();
-        int year = n.get(Calendar.YEAR);
-        int month = n.get(Calendar.MONTH);
-        int day = n.get(Calendar.DAY_OF_MONTH);
-        ngayht.setText("Day"+day+",Month"+month+" Year "+year);
-
-       //
-
-        }
+    //    public void ngayht() {
+//        String thuchu = "vv";
+//        String thangchu = "vv";
+//
+//        Calendar n = Calendar.getInstance();
+//        int year = n.get(Calendar.YEAR);
+//        int month = n.get(Calendar.MONTH);
+//        int day = n.get(Calendar.DAY_OF_MONTH);
+//        ngayht.setText("Day"+day+",Month"+month+" Year "+year);
+//
+//       //
+//
+//        }
     public void anhxa() {
         toolbar = findViewById(R.id.toolbar);
         iv_menu = findViewById(R.id.iv_menu_toolbar);
         drawerLayout = findViewById(R.id.drawerLayout);
         navigationView = findViewById(R.id.navigation_view);
     }
+
     public void menu_nav() {
         iv_menu.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -84,15 +84,20 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private void clicknavigation(){
+    private void clicknavigation() {
         FragmentManager fragmentManager = getSupportFragmentManager();
+        frm_trangchu frm_trangchu = new frm_trangchu();
+        fragmentManager
+                .beginTransaction()
+                .replace(R.id.linear, frm_trangchu)
+                .commit();
 
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 Fragment fragment;
 
-                switch (item.getItemId()){
+                switch (item.getItemId()) {
                     case R.id.menu_home:
                         fragment = new frm_trangchu();
                         break;
@@ -131,4 +136,4 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-    }
+}

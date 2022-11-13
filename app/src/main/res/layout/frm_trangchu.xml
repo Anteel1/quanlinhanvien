@@ -1,7 +1,48 @@
-<?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/green">
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <TextClock
+        android:id="@+id/tc_gio"
+        android:layout_width="254dp"
+        android:layout_height="53dp"
+        android:layout_marginTop="80dp"
+        android:gravity="center"
+        android:textColor="#838383"
+        android:textSize="44sp"
+        android:textStyle="bold"
+
+        />
+
+    <TextClock
+        android:id="@+id/tc_ngay"
+        android:layout_width="254dp"
+        android:layout_height="26dp"
+        android:gravity="center"
+        android:textColor="#838383"
+        android:textSize="20sp"
+        android:textStyle="italic"
+
+        />
+
+    <TextView
+
+        android:layout_width="254dp"
+        android:layout_height="26dp"
+        android:layout_marginTop="65dp"
+        android:gravity="center"
+        android:text="Welcome Back!"
+        android:textColor="#838383"
+        android:textSize="24sp"
+        android:textStyle="bold" />
+
+    <ImageButton
+        android:id="@+id/nen"
+        android:layout_width="260dp"
+        android:layout_height="260dp"
+        android:src="@drawable/nen" />
+
+
+</LinearLayout>

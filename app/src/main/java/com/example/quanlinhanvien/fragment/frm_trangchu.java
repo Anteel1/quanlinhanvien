@@ -23,7 +23,7 @@ public class frm_trangchu extends Fragment {
         tc_ngay = view.findViewById(R.id.tc_ngay);
 
         tc_gio.setFormat12Hour("hh:mma ");
-        tc_ngay.setFormat12Hour("E, d-M-yyyy ");
+        tc_ngay.setFormat12Hour("EE, d-M-yyyy ");
 
 
 

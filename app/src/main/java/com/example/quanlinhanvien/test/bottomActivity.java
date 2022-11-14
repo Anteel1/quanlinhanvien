@@ -1,4 +1,4 @@
-package com.example.quanlinhanvien;
+package com.example.quanlinhanvien.test;
 
 import android.os.Bundle;
 
@@ -8,6 +8,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.etebarian.meowbottomnavigation.MeowBottomNavigation;
+import com.example.quanlinhanvien.R;
 import com.example.quanlinhanvien.fragment.frm_dangkylichlam;
 import com.example.quanlinhanvien.fragment.frm_diemdanh;
 import com.example.quanlinhanvien.fragment.frm_nhanvien;

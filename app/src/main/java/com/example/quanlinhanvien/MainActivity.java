@@ -30,23 +30,24 @@ import com.google.android.material.navigation.NavigationView;
 import java.util.Calendar;
 
 public class MainActivity extends AppCompatActivity {
-   // @Override
-    //protected void onCreate(Bundle savedInstanceState) {
-      //  super.onCreate(savedInstanceState);
-       // setContentView(R.layout.activity_main);
-       // btnShowDialog = (Button) findViewById(R.id.btn_show_dialog);
-       // btnShowDialog.setOnClickListener(new View.OnClickListener() {
-           // @Override
-            //public void onClick(View view) {
-              //  //Show Dialog và truyền giá trị vào dialog
-                // Các bạn có thể truyền cả object nếu muốn.
-               // FragmentManager fm = getSupportFragmentManager();
-                //UserInfoDialog userInfoDialog = UserInfoDialog.newInstance("Nguyễn Văn Linh");
-              //  userInfoDialog.show(fm, null);
-           // }
-        //});
-    //}
-
+//    @Override
+//    protected void onCreate(Bundle savedInstanceState) {
+//        super.onCreate(savedInstanceState);
+//        setContentView(R.layout.activity_main);
+//        btnShowDialog = (Button) findViewById(R.id.btn_show_dialog);
+//        btnShowDialog.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                //Show Dialog và truyền giá trị vào dialog
+//                //Các bạn có thể truyền cả object nếu muốn.
+//                        FragmentManager fm = getSupportFragmentManager();
+//                UserInfoDialog userInfoDialog = UserInfoDialog.newInstance("Nguyễn Văn Linh");
+//                userInfoDialog.show(fm, null);
+//            }
+//        });
+//    }
+//}
+//
     TextView tv;
     ImageView iv_menu;
     DrawerLayout drawerLayout;

@@ -16,8 +16,8 @@ import androidx.fragment.app.FragmentManager;
 import com.example.quanlinhanvien.fragment.frm_dangkylichlam;
 import com.example.quanlinhanvien.fragment.frm_dangxuat;
 import com.example.quanlinhanvien.fragment.frm_diemdanh;
+import com.example.quanlinhanvien.fragment.frm_genQRcode;
 import com.example.quanlinhanvien.fragment.frm_nhanvien;
-import com.example.quanlinhanvien.fragment.frm_thaydoi_lichlam;
 import com.example.quanlinhanvien.fragment.frm_thongke;
 import com.example.quanlinhanvien.fragment.frm_trangchu;
 import com.google.android.material.navigation.NavigationView;
@@ -85,8 +85,8 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.menu_nhanvien:
                         fragment = new frm_nhanvien();
                         break;
-                    case R.id.menu_thaydoilichlam:
-                        fragment = new frm_thaydoi_lichlam();
+                    case R.id.menu_genqrcode:
+                        fragment = new frm_genQRcode();
                         break;
                     case R.id.menu_thongke:
                         fragment = new frm_thongke();

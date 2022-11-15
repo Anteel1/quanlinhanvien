@@ -26,9 +26,9 @@
         android:icon="@drawable/notebook"
         android:title="nhân viên" />
     <item
-        android:id="@+id/menu_thaydoilichlam"
+        android:id="@+id/menu_genqrcode"
         android:icon="@drawable/notebook"
-        android:title="thay đổi lịch làm" />
+        android:title="Tạo mã QR" />
     <item
         android:id="@+id/menu_Logout"
         android:icon="@drawable/sign_out_squre"

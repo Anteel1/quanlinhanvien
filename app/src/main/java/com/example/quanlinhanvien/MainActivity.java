@@ -28,18 +28,14 @@ public class MainActivity extends AppCompatActivity {
     DrawerLayout drawerLayout;
     Toolbar toolbar;
     NavigationView navigationView;
-
+    Fragment fragment;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-
         anhxa();
         menu_nav();
         clicknavigation();
-
-
     }
 
 
@@ -70,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                Fragment fragment;
+
 
                 switch (item.getItemId()) {
                     case R.id.menu_home:
@@ -92,23 +88,36 @@ public class MainActivity extends AppCompatActivity {
                         fragment = new frm_thongke();
                         break;
                     case R.id.menu_Logout:
-                        fragment = new frm_dangxuat();
+//                        fragment = new frm_dangxuat();
+                        new frm_dangxuat().show(getSupportFragmentManager(),frm_dangxuat.TAG);
                         break;
                     default:
                         fragment = new frm_trangchu();
                         break;
                 }
 
-                fragmentManager
-                        .beginTransaction()
-                        .replace(R.id.linear, fragment)
-                        .commit();
-
+//                fragmentManager
+//                        .beginTransaction()
+//                        .replace(R.id.linear, fragment)
+//                        .commit();
+//
                 drawerLayout.closeDrawer(navigationView);
                 setTitle(item.getTitle());
 
                 return false;
             }
         });
+    }
+
+    @Override
+    protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
+        if (savedInstanceState == null) {
+            getSupportFragmentManager().beginTransaction().
+                    add(R.id.linear, fragment).commit();
+        }
+        else {
+            getSupportFragmentManager().beginTransaction().
+                    replace(R.id.linear, fragment).commit();
+        }
     }
 }

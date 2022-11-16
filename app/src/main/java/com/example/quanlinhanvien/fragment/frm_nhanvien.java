@@ -17,11 +17,9 @@ import com.example.quanlinhanvien.adapter.adapter_nhanvien;
 import java.util.ArrayList;
 
 public class frm_nhanvien extends Fragment {
-
     ArrayList<String> list;
     RecyclerView recyclerView;
     adapter_nhanvien adapter_nhanvien;
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -29,12 +27,7 @@ public class frm_nhanvien extends Fragment {
 
         recyclerView = view.findViewById(R.id.rcv_nhanvien);
         list = new ArrayList<>();
-
         loaddata(list);
-
-
-
-
         return view;
     }
 

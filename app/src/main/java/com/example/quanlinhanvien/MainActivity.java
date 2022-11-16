@@ -11,7 +11,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 
 import com.example.quanlinhanvien.fragment.frm_dangkylichlam;
 import com.example.quanlinhanvien.fragment.frm_dangxuat;
@@ -35,7 +34,47 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         anhxa();
         menu_nav();
-        clicknavigation();
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.menu_home:
+                        fragment = new frm_trangchu();
+                        onRestoreInstanceState(savedInstanceState);
+                        break;
+                    case R.id.menu_diemdanh:
+                        fragment = new frm_diemdanh();
+                        onRestoreInstanceState(savedInstanceState);
+                        break;
+                    case R.id.menu_dk_lichlam:
+                        fragment = new frm_dangkylichlam();
+                        onRestoreInstanceState(savedInstanceState);
+                        break;
+                    case R.id.menu_nhanvien:
+                        fragment = new frm_nhanvien();
+                        onRestoreInstanceState(savedInstanceState);
+                        break;
+                    case R.id.menu_genqrcode:
+                        fragment = new frm_genQRcode();
+                        onRestoreInstanceState(savedInstanceState);
+                        break;
+                    case R.id.menu_thongke:
+                        fragment = new frm_thongke();
+                        onRestoreInstanceState(savedInstanceState);
+                        break;
+                    case R.id.menu_Logout:
+//                        fragment = new frm_dangxuat();
+                        new frm_dangxuat().show(getSupportFragmentManager(),frm_dangxuat.TAG);
+                        break;
+                    default:
+                        fragment = new frm_trangchu();
+                        break;
+                }
+                drawerLayout.closeDrawer(navigationView);
+                setTitle(item.getTitle());
+                return false;
+            }
+        });
     }
 
 
@@ -54,70 +93,17 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-
-    private void clicknavigation() {
-        FragmentManager fragmentManager = getSupportFragmentManager();
-
-        fragmentManager
-                .beginTransaction()
-                .replace(R.id.linear, new frm_trangchu())
-                .commit();
-
-        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-
-
-                switch (item.getItemId()) {
-                    case R.id.menu_home:
-                        fragment = new frm_trangchu();
-                        break;
-                    case R.id.menu_diemdanh:
-                        fragment = new frm_diemdanh();
-                        break;
-                    case R.id.menu_dk_lichlam:
-                        fragment = new frm_dangkylichlam();
-                        break;
-                    case R.id.menu_nhanvien:
-                        fragment = new frm_nhanvien();
-                        break;
-                    case R.id.menu_genqrcode:
-                        fragment = new frm_genQRcode();
-                        break;
-                    case R.id.menu_thongke:
-                        fragment = new frm_thongke();
-                        break;
-                    case R.id.menu_Logout:
-//                        fragment = new frm_dangxuat();
-                        new frm_dangxuat().show(getSupportFragmentManager(),frm_dangxuat.TAG);
-                        break;
-                    default:
-                        fragment = new frm_trangchu();
-                        break;
-                }
-
-//                fragmentManager
-//                        .beginTransaction()
-//                        .replace(R.id.linear, fragment)
-//                        .commit();
-//
-                drawerLayout.closeDrawer(navigationView);
-                setTitle(item.getTitle());
-
-                return false;
-            }
-        });
-    }
-
     @Override
     protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction().
-                    add(R.id.linear, fragment).commit();
+                    add(R.id.fragment_view, fragment).commit();
+
         }
         else {
             getSupportFragmentManager().beginTransaction().
-                    replace(R.id.linear, fragment).commit();
+                    replace(R.id.fragment_view, fragment).commit();
+
         }
     }
 }

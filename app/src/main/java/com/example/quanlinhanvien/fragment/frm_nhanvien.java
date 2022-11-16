@@ -1,9 +1,13 @@
 package com.example.quanlinhanvien.fragment;
 
+import static com.example.quanlinhanvien.service.service_API.Base_Service;
+
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -13,8 +17,17 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.quanlinhanvien.R;
 import com.example.quanlinhanvien.adapter.adapter_nhanvien;
+import com.example.quanlinhanvien.model.nhanvien;
+import com.example.quanlinhanvien.service.service_API;
+import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 
 import java.util.ArrayList;
+
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.schedulers.Schedulers;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class frm_nhanvien extends Fragment {
     ArrayList<String> list;
@@ -27,35 +40,43 @@ public class frm_nhanvien extends Fragment {
 
         recyclerView = view.findViewById(R.id.rcv_nhanvien);
         list = new ArrayList<>();
-        loaddata(list);
+        loaddata();
+        demoCallAPI();
         return view;
     }
-
-    public void loaddata(ArrayList<String> list1){
-        data();
+    private void loaddata(){
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
-        linearLayoutManager.setOrientation(recyclerView.VERTICAL);
         recyclerView.setLayoutManager(linearLayoutManager);
-        adapter_nhanvien = new adapter_nhanvien(getContext(), list1);
+        adapter_nhanvien = new adapter_nhanvien(getContext(),list);
         recyclerView.setAdapter(adapter_nhanvien);
     }
+    private void demoCallAPI() {
 
-    public void data(){
-        list.add("a");
-        list.add("b");
-        list.add("a");
-        list.add("b");
-        list.add("a");
-        list.add("b");
-        list.add("a");
-        list.add("b");
-        list.add("a");
-        list.add("b");
-        list.add("a");
-        list.add("b");
-        list.size();
+        service_API requestInterface = new Retrofit.Builder()
+                .baseUrl(Base_Service)
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create())
+                .build().create(service_API.class);
 
+        new CompositeDisposable().add(requestInterface.getModelAPI()
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(this::handleResponse, this::handleError)
+        );
     }
 
+    private void handleResponse(ArrayList<nhanvien> list1) {
+        //API trả về dữ liệu thành công, thực hiện việc lấy data
+        for(int i =0; i <list1.size(); i++){
+            list.add(i,list1.get(i).getTenNV());
+        }
+        adapter_nhanvien.notifyDataSetChanged();
+    }
+
+    private void handleError(Throwable error) {
+        Log.d("erro", error.toString());
+        Toast.makeText(getContext(), error.toString(), Toast.LENGTH_SHORT).show();
+        //khi gọi API KHÔNG THÀNH CÔNG thì thực hiện xử lý ở đây
+    }
 
 }

@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
     DrawerLayout drawerLayout;
     Toolbar toolbar;
     NavigationView navigationView;
-
+    Fragment fragment;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                Fragment fragment;
+
 
                 switch (item.getItemId()) {
                     case R.id.menu_home:
@@ -92,17 +92,23 @@ public class MainActivity extends AppCompatActivity {
                         fragment = new frm_thongke();
                         break;
                     case R.id.menu_Logout:
-                        fragment = new frm_dangxuat();
+                        new frm_dangxuat().show(getSupportFragmentManager(),frm_dangxuat.TAG);
+//                        LayoutInflater inflater = getLayoutInflater();
+//                        View v = inflater.inflate(R.layout.frm_dangxuat,null);
+//                        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+//                        builder.setView(v);
+//                        builder.show();
+//
                         break;
                     default:
                         fragment = new frm_trangchu();
                         break;
                 }
 
-                fragmentManager
-                        .beginTransaction()
-                        .replace(R.id.linear, fragment)
-                        .commit();
+//                fragmentManager
+//                        .beginTransaction()
+//                        .replace(R.id.linear, fragment)
+//                        .commit();
 
                 drawerLayout.closeDrawer(navigationView);
                 setTitle(item.getTitle());
@@ -110,5 +116,16 @@ public class MainActivity extends AppCompatActivity {
                 return false;
             }
         });
+    }
+    @Override
+    protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
+        if (savedInstanceState == null) {
+            getSupportFragmentManager().beginTransaction().
+                    add(R.id.linear, fragment).commit();
+        }
+        else {
+            getSupportFragmentManager().beginTransaction().
+                    replace(R.id.linear, fragment).commit();
+        }
     }
 }

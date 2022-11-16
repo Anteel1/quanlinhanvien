@@ -3,9 +3,7 @@ package com.example.quanlinhanvien.fragment;
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 
 import androidx.annotation.NonNull;
@@ -42,13 +40,5 @@ public class frm_dangxuat extends DialogFragment {
         dialog.show();
         return dialog;
     }
-
-    @Nullable
-    @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.frm_dangxuat, container, false);
-
-        return view;
-    }
-
+    public static String TAG ="Exit";
 }

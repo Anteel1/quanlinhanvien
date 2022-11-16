@@ -11,10 +11,8 @@ import android.widget.Button;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
-import androidx.fragment.app.Fragment;
 
 import com.example.quanlinhanvien.LoginActivity;
-import com.example.quanlinhanvien.MainActivity;
 import com.example.quanlinhanvien.R;
 
 public class frm_dangxuat extends DialogFragment {
@@ -27,8 +25,8 @@ public class frm_dangxuat extends DialogFragment {
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
         dialog = new Dialog(getContext());
         dialog.setContentView(R.layout.frm_dangxuat);
-        dialogYes = (Button) dialog.findViewById(R.id.btnYes);
-        dialogNo = (Button) dialog.findViewById(R.id.btnNo);
+        dialogYes =  dialog.findViewById(R.id.btnYes);
+        dialogNo =   dialog.findViewById(R.id.btnNo);
         dialogYes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

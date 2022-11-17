@@ -1,14 +1,33 @@
 package com.example.quanlinhanvien;
 
+import static com.example.quanlinhanvien.ServiceAPI.BASE_Service;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Patterns;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+
+import com.example.quanlinhanvien.model.ListUser;
+import com.example.quanlinhanvien.model.User;
+import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
+
+import java.util.ArrayList;
+
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.schedulers.Schedulers;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -17,6 +36,10 @@ public class LoginActivity extends AppCompatActivity {
     Button btn_signin;
     Intent intent;
     Bundle bundle;
+    ImageView logo;
+    ArrayList<User> list;
+    User user;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,10 +47,15 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         anhxa();
+        Animation animation = AnimationUtils.loadAnimation(LoginActivity.this,R.anim.hien);
 
+        logo.startAnimation(animation);
         btn_signin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                demoCallAPI();
+
                 tv_validate_password.setText("");
                 tv_validate_email.setText("");
                 kiemtra();
@@ -36,6 +64,7 @@ public class LoginActivity extends AppCompatActivity {
                     startActivity(intent);
                     finish();
                 }
+
             }
         });
 
@@ -51,6 +80,7 @@ public class LoginActivity extends AppCompatActivity {
         tv_validate_email = findViewById(R.id.tv_validate_email);
         tv_validate_password = findViewById(R.id.tv_validate_password);
         btn_signin = findViewById(R.id.btn_signin);
+         logo = findViewById(R.id.logo);
     }
 
     //kiểm tra không được bỏ trống thông tin đăng nhập
@@ -87,6 +117,7 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
+
     //kiểm tra các edit text
 
     public void kiemtra(){
@@ -115,4 +146,33 @@ public class LoginActivity extends AppCompatActivity {
             tv_validate_password.setText(thongbao_password);
         }
     }
+    private void demoCallAPI() {
+
+        ServiceAPI requestInterface = new Retrofit.Builder()
+                .baseUrl(BASE_Service)
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create())
+                .build().create(ServiceAPI.class);
+
+        new CompositeDisposable().add(requestInterface.GetListUser()
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(this::handleResponse, this::handleError)
+        );
+    }
+
+    private void handleResponse(ListUser listUser) {
+        //API trả về dữ liệu thành công, thực hiện việc lấy data
+
+       list = listUser.getData();
+
+
+    }
+
+    private void handleError(Throwable error) {
+        String a = "";
+        //khi gọi API KHÔNG THÀNH CÔNG thì thực hiện xử lý ở đây
+    }
+
+
 }

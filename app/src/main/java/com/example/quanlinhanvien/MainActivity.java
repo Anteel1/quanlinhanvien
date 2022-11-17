@@ -7,13 +7,9 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -25,8 +21,6 @@ import com.example.quanlinhanvien.fragment.frm_thaydoi_lichlam;
 import com.example.quanlinhanvien.fragment.frm_thongke;
 import com.example.quanlinhanvien.fragment.frm_trangchu;
 import com.google.android.material.navigation.NavigationView;
-
-import java.util.Calendar;
 
 public class MainActivity extends AppCompatActivity {
     TextView tv;
@@ -41,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
         //  ngayht = findViewById(R.id.ngayhienthi);
         //  ImageButton nen = findViewById(R.id.nen);
         anhxa();
@@ -53,6 +48,8 @@ public class MainActivity extends AppCompatActivity {
         //
 
     }
+    //
+
 
 
     //    public void ngayht() {
@@ -68,6 +65,7 @@ public class MainActivity extends AppCompatActivity {
 //       //
 //
 //        }
+
     public void anhxa() {
         toolbar = findViewById(R.id.toolbar);
         iv_menu = findViewById(R.id.iv_menu_toolbar);

@@ -4,7 +4,7 @@
     <item
         android:id="@+id/menu_home"
         android:icon="@drawable/ic_home"
-        android:title="HOME" />
+        android:title="Home" />
     <item
         android:id="@+id/menu_Attendance"
         android:icon="@drawable/desk"
@@ -12,23 +12,23 @@
     <item
         android:id="@+id/menu_thongke"
         android:icon="@drawable/desk_alt"
-        android:title="Số liệu thống kê" />
+        android:title="Statistics" />
     <item
         android:id="@+id/menu_dk_lichlam"
         android:icon="@drawable/notebook"
-        android:title="đăng kí" />
+        android:title="Create Attendance" />
     <item
-        android:id="@+id/menu_diemdanh"
+        android:id="@+id/menu_store"
         android:icon="@drawable/notebook"
-        android:title="điểm danh " />
+        android:title="Store" />
     <item
         android:id="@+id/menu_nhanvien"
         android:icon="@drawable/notebook"
-        android:title="nhân viên" />
+        android:title="Employees" />
     <item
         android:id="@+id/menu_genqrcode"
         android:icon="@drawable/notebook"
-        android:title="Tạo mã QR" />
+        android:title="Gen QR Code" />
     <item
         android:id="@+id/menu_Logout"
         android:icon="@drawable/sign_out_squre"

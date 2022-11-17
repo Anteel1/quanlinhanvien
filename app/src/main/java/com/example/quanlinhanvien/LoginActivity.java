@@ -49,24 +49,7 @@ public class LoginActivity extends AppCompatActivity {
         anhxa();
         demoCallAPI();
 
-        btn_signin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                tv_validate_password.setText("");
-                tv_validate_email.setText("");
-                kiemtra();
-                intent =new Intent(LoginActivity.this, MainActivity.class);
-                if (kiemtra_email() && kiemtra_password()){
-                    String email = edt_email.getText().toString();
-                    String password = edt_password.getText().toString();
-                    if(check_login(new model_tk(email, password))){
-                        startActivity(intent);
-                        finish();
-                    }
 
-                }
-            }
-        });
 
 
     }
@@ -166,7 +149,28 @@ public class LoginActivity extends AppCompatActivity {
         for(int i =0; i <list_tk.size(); i++){
             list.add(new model_tk(list_tk.get(i).getTaiKhoan(), list_tk.get(i).getMatKhau()));
         }
+
+
         Log.d("=========TAG", "handleResponse: "+list.size());
+        btn_signin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                tv_validate_password.setText("");
+                tv_validate_email.setText("");
+                kiemtra();
+                intent =new Intent(LoginActivity.this, MainActivity.class);
+                if (kiemtra_email() && kiemtra_password()){
+                    String email = edt_email.getText().toString();
+                    String password = edt_password.getText().toString();
+                    if(check_login(new model_tk(email, password))){
+                        startActivity(intent);
+                        finish();
+                    }
+
+                }
+            }
+        });
+
     }
 
     private void handleError(Throwable error) {

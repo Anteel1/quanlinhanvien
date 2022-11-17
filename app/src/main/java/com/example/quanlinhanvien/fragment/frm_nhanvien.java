@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -32,12 +33,13 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class frm_nhanvien extends Fragment {
     ArrayList<String> list;
     RecyclerView recyclerView;
+    TextView txtTotal;
     adapter_nhanvien adapter_nhanvien;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.frm_nhanvien, container, false);
-
+        txtTotal = view.findViewById(R.id.totalListNV);
         recyclerView = view.findViewById(R.id.rcv_nhanvien);
         list = new ArrayList<>();
         loaddata();
@@ -71,6 +73,7 @@ public class frm_nhanvien extends Fragment {
             list.add(i,list1.get(i).getTenNV());
         }
         adapter_nhanvien.notifyDataSetChanged();
+        txtTotal.setText("Total employees: "+list1.size());
     }
 
     private void handleError(Throwable error) {

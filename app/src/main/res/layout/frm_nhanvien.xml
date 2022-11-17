@@ -6,7 +6,6 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_toEndOf="@+id/rcv_nhanvien"
         android:text="Total employees"
         android:textAlignment="center"
         android:textSize="16dp"
@@ -14,10 +13,28 @@
         android:layout_alignParentLeft="true"
         android:id="@+id/totalListNV"
         />
-    <androidx.recyclerview.widget.RecyclerView
+    <View
+        android:layout_below="@+id/totalListNV"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="#919090"/>
+    <TextView
+        android:layout_margin="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/totalListNV"
+        android:id="@+id/line1"
+        android:textStyle="bold"
+        android:text="Name"/>
+    <View
+        android:layout_below="@+id/line1"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="#919090"/>
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/line1"
         android:layout_above="@+id/linearlayout"
         android:layout_alignParentLeft="true"
         android:layout_marginBottom="8dp"

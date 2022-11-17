@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -38,11 +39,12 @@ public class adapter_store extends RecyclerView.Adapter<adapter_store.ViewHolder
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         String str = list.get(position);
+        String location = listLocation.get(position);
         holder.tv.setText(str);
         holder.img.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Toast.makeText(context, "Location:"+location, Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -57,7 +59,7 @@ public class adapter_store extends RecyclerView.Adapter<adapter_store.ViewHolder
         ImageView img;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            tv = itemView.findViewById(R.id.txtTenNV);
+            tv = itemView.findViewById(R.id.txtTenStore);
             img = itemView.findViewById(R.id.imgLocation);
         }
     }

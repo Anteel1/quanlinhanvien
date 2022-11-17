@@ -55,7 +55,7 @@
 
             />
         <TextView
-
+             android:id="@+id/txttennv"
             android:layout_width="254dp"
             android:layout_height="26dp"
 

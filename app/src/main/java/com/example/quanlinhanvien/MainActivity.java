@@ -7,6 +7,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -28,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
     DrawerLayout drawerLayout;
     Toolbar toolbar;
     NavigationView navigationView;
-    TextView ngayht;
+    TextView ngayht,txttennv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,9 +37,11 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 
+
         //  ngayht = findViewById(R.id.ngayhienthi);
         //  ImageButton nen = findViewById(R.id.nen);
         anhxa();
+
 //        xuly_toolbar();
         menu_nav();
         clicknavigation();
@@ -71,6 +74,7 @@ public class MainActivity extends AppCompatActivity {
         iv_menu = findViewById(R.id.iv_menu_toolbar);
         drawerLayout = findViewById(R.id.drawerLayout);
         navigationView = findViewById(R.id.navigation_view);
+        txttennv =findViewById(R.id.txttennv);
     }
 
     public void menu_nav() {

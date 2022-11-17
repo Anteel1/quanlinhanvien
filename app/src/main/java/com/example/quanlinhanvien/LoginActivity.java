@@ -17,7 +17,6 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 
-import com.example.quanlinhanvien.model.ListUser;
 import com.example.quanlinhanvien.model.User;
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 
@@ -39,6 +38,7 @@ public class LoginActivity extends AppCompatActivity {
     ImageView logo;
     ArrayList<User> list;
     User user;
+    int kt=0;
 
 
     @Override
@@ -47,23 +47,25 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         anhxa();
-        Animation animation = AnimationUtils.loadAnimation(LoginActivity.this,R.anim.hien);
+        Animation animation = AnimationUtils.loadAnimation(LoginActivity.this, R.anim.hien);
 
         logo.startAnimation(animation);
         btn_signin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                demoCallAPI();
-
                 tv_validate_password.setText("");
                 tv_validate_email.setText("");
                 kiemtra();
-                intent =new Intent(LoginActivity.this, MainActivity.class);
-                if (kiemtra_email() && kiemtra_password()){
-                    startActivity(intent);
-                    finish();
-                }
+                demoCallAPI();
+//                 if(kt==1) {
+//                     intent = new Intent(LoginActivity.this, MainActivity.class);
+//                     if (kiemtra_email() && kiemtra_password()) {
+//                         startActivity(intent);
+//                         finish();
+//                     }
+//
+//                 }
 
             }
         });
@@ -80,7 +82,7 @@ public class LoginActivity extends AppCompatActivity {
         tv_validate_email = findViewById(R.id.tv_validate_email);
         tv_validate_password = findViewById(R.id.tv_validate_password);
         btn_signin = findViewById(R.id.btn_signin);
-         logo = findViewById(R.id.logo);
+        logo = findViewById(R.id.logo);
     }
 
     //kiểm tra không được bỏ trống thông tin đăng nhập
@@ -112,7 +114,7 @@ public class LoginActivity extends AppCompatActivity {
             bundle.putString("password", password);
             intent.putExtras(bundle);
             return true;
-        }else{
+        } else {
             return false;
         }
     }
@@ -120,7 +122,7 @@ public class LoginActivity extends AppCompatActivity {
 
     //kiểm tra các edit text
 
-    public void kiemtra(){
+    public void kiemtra() {
 
         String thongbao_email = "";
         String email = edt_email.getText().toString();
@@ -141,11 +143,13 @@ public class LoginActivity extends AppCompatActivity {
 
         String thongbao_password = "";
         if (!password.isEmpty()) {
-        }else{
+        } else {
             thongbao_password += "password không được để trống";
             tv_validate_password.setText(thongbao_password);
         }
+        demoCallAPI();
     }
+
     private void demoCallAPI() {
 
         ServiceAPI requestInterface = new Retrofit.Builder()
@@ -161,16 +165,34 @@ public class LoginActivity extends AppCompatActivity {
         );
     }
 
-    private void handleResponse(ListUser listUser) {
+    private void handleResponse(ArrayList<User> list1) {
         //API trả về dữ liệu thành công, thực hiện việc lấy data
 
-       list = listUser.getData();
+        for (int i = 0; i <= list1.size(); i++) {
+            if ((edt_email.getText().toString()).equals(list1.get(i).getTaiKhoan())) {
+                if ((edt_password.getText().toString()).equals(list1.get(i).getMatKhau())) {
+                    Toast.makeText(this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
+                    intent = new Intent(LoginActivity.this, MainActivity.class);
+                    if (kiemtra_email() && kiemtra_password()) {
+                        startActivity(intent);
+                        finish();
+                    }
+                    i=list1.size()+1;
+                    }
+                else {
+                    tv_validate_password.setText("sai mật khẩu");
+                    i=list1.size()+1;
+                }
+                }
+                }
+            }
 
 
-    }
 
     private void handleError(Throwable error) {
         String a = "";
+
+        Toast.makeText(this, "Lỗi", Toast.LENGTH_SHORT).show();
         //khi gọi API KHÔNG THÀNH CÔNG thì thực hiện xử lý ở đây
     }
 

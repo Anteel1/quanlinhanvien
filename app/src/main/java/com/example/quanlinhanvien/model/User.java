@@ -1,84 +1,84 @@
 package com.example.quanlinhanvien.model;
 
 public class User {
-    private int manv;
-    private String taikhoan;
-    private String matkhau;
-    private String tennv;
-    private String ngaysinh;
-    private String diachi;
-    private String ngaydk;
+    private int maNV;
+    private String taiKhoan;
+    private String matKhau;
+    private String tenNV;
+    private String ngaySinh;
+    private String diaChi;
+    private String ngayDK;
     private String imei;
-    private int mach;
-    private int macv;
+    private int maCH;
+    private int maCV;
 
-    public User(int manv, String taikhoan, String matkhau, String tennv, String ngaysinh, String diachi, String ngaydk, String imei, int mach, int macv) {
-        this.manv = manv;
-        this.taikhoan = taikhoan;
-        this.matkhau = matkhau;
-        this.tennv = tennv;
-        this.ngaysinh = ngaysinh;
-        this.diachi = diachi;
-        this.ngaydk = ngaydk;
+    public User(int maNV, String taiKhoan, String matKhau, String tenNV, String ngaySinh, String diaChi, String ngayDK, String imei, int maCH, int maCV) {
+        this.maNV = maNV;
+        this.taiKhoan = taiKhoan;
+        this.matKhau = matKhau;
+        this.tenNV = tenNV;
+        this.ngaySinh = ngaySinh;
+        this.diaChi = diaChi;
+        this.ngayDK = ngayDK;
         this.imei = imei;
-        this.mach = mach;
-        this.macv = macv;
+        this.maCH = maCH;
+        this.maCV = maCV;
     }
 
-    public int getManv() {
-        return manv;
+    public int getMaNV() {
+        return maNV;
     }
 
-    public void setManv(int manv) {
-        this.manv = manv;
+    public void setMaNV(int maNV) {
+        this.maNV = maNV;
     }
 
-    public String getTaikhoan() {
-        return taikhoan;
+    public String getTaiKhoan() {
+        return taiKhoan;
     }
 
-    public void setTaikhoan(String taikhoan) {
-        this.taikhoan = taikhoan;
+    public void setTaiKhoan(String taiKhoan) {
+        this.taiKhoan = taiKhoan;
     }
 
-    public String getMatkhau() {
-        return matkhau;
+    public String getMatKhau() {
+        return matKhau;
     }
 
-    public void setMatkhau(String matkhau) {
-        this.matkhau = matkhau;
+    public void setMatKhau(String matKhau) {
+        this.matKhau = matKhau;
     }
 
-    public String getTennv() {
-        return tennv;
+    public String getTenNV() {
+        return tenNV;
     }
 
-    public void setTennv(String tennv) {
-        this.tennv = tennv;
+    public void setTenNV(String tenNV) {
+        this.tenNV = tenNV;
     }
 
-    public String getNgaysinh() {
-        return ngaysinh;
+    public String getNgaySinh() {
+        return ngaySinh;
     }
 
-    public void setNgaysinh(String ngaysinh) {
-        this.ngaysinh = ngaysinh;
+    public void setNgaySinh(String ngaySinh) {
+        this.ngaySinh = ngaySinh;
     }
 
-    public String getDiachi() {
-        return diachi;
+    public String getDiaChi() {
+        return diaChi;
     }
 
-    public void setDiachi(String diachi) {
-        this.diachi = diachi;
+    public void setDiaChi(String diaChi) {
+        this.diaChi = diaChi;
     }
 
-    public String getNgaydk() {
-        return ngaydk;
+    public String getNgayDK() {
+        return ngayDK;
     }
 
-    public void setNgaydk(String ngaydk) {
-        this.ngaydk = ngaydk;
+    public void setNgayDK(String ngayDK) {
+        this.ngayDK = ngayDK;
     }
 
     public String getImei() {
@@ -89,19 +89,19 @@ public class User {
         this.imei = imei;
     }
 
-    public int getMach() {
-        return mach;
+    public int getMaCH() {
+        return maCH;
     }
 
-    public void setMach(int mach) {
-        this.mach = mach;
+    public void setMaCH(int maCH) {
+        this.maCH = maCH;
     }
 
-    public int getMacv() {
-        return macv;
+    public int getMaCV() {
+        return maCV;
     }
 
-    public void setMacv(int macv) {
-        this.macv = macv;
+    public void setMaCV(int maCV) {
+        this.maCV = maCV;
     }
 }

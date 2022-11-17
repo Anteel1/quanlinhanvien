@@ -12,6 +12,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 
+import com.example.quanlinhanvien.fragment.frm_attendance;
 import com.example.quanlinhanvien.fragment.frm_dangkylichlam;
 import com.example.quanlinhanvien.fragment.frm_dangxuat;
 import com.example.quanlinhanvien.fragment.frm_genQRcode;
@@ -40,6 +41,10 @@ public class MainActivity extends AppCompatActivity {
                 switch (item.getItemId()) {
                     case R.id.menu_home:
                         fragment = new frm_trangchu();
+                        onRestoreInstanceState(savedInstanceState);
+                        break;
+                    case R.id.menu_Attendance:
+                        fragment = new frm_attendance();
                         onRestoreInstanceState(savedInstanceState);
                         break;
                     case R.id.menu_store:

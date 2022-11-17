@@ -1,16 +1,31 @@
 package com.example.quanlinhanvien;
 
+import static com.example.quanlinhanvien.service.service_API.Base_Service;
+
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.quanlinhanvien.model.nhanvien;
+import com.example.quanlinhanvien.service.service_API;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
+import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
+
+import java.util.ArrayList;
+
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.schedulers.Schedulers;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -30,11 +45,11 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 kiemtra();
-                intent =new Intent(LoginActivity.this, MainActivity.class);
-                if (kiemtra_email() && kiemtra_password()){
-                    startActivity(intent);
-                    finish();
-                }
+                demoCallAPI();
+//                intent =new Intent(LoginActivity.this, MainActivity.class);
+//                startActivity(intent);
+//                finish();
+
             }
         });
 
@@ -53,38 +68,38 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     //kiểm tra không được bỏ trống thông tin đăng nhập
-    public boolean kiemtra_email() {
-        String email = edt_email.getText().toString();
-
-        //validate email
-        if (!email.isEmpty()) {
-            if (Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-                bundle = new Bundle();
-                bundle.putString("email", email);
-                intent.putExtras(bundle);
-                return true;
-            } else {
-                return false;
-            }
-        } else {
-            return false;
-        }
-
-    }
-
-    public boolean kiemtra_password() {
-        //validate password
-        String password = edt_password.getText().toString();
-
-        if (!password.isEmpty()) {
-            bundle = new Bundle();
-            bundle.putString("password", password);
-            intent.putExtras(bundle);
-            return true;
-        }else{
-            return false;
-        }
-    }
+//    public boolean kiemtra_email() {
+//        String email = edt_email.getText().toString();
+//
+//        //validate email
+//        if (!email.isEmpty()) {
+//            if (Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+//                bundle = new Bundle();
+//                bundle.putString("email", email);
+//                intent.putExtras(bundle);
+//                return true;
+//            } else {
+//                return false;
+//            }
+//        } else {
+//            return false;
+//        }
+//
+//    }
+//
+//    public boolean kiemtra_password() {
+//        //validate password
+//        String password = edt_password.getText().toString();
+//
+//        if (!password.isEmpty()) {
+//            bundle = new Bundle();
+//            bundle.putString("password", password);
+//            intent.putExtras(bundle);
+//            return true;
+//        }else{
+//            return false;
+//        }
+//    }
 
     //kiểm tra các edit text
 
@@ -117,4 +132,42 @@ public class LoginActivity extends AppCompatActivity {
             txtLayoutPassword.setHelperTextColor(getResources().getColorStateList(R.color.red));
         }
     }
+    private void demoCallAPI() {
+
+        service_API requestInterface = new Retrofit.Builder()
+                .baseUrl(Base_Service)
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create())
+                .build().create(service_API.class);
+
+        new CompositeDisposable().add(requestInterface.getModelAPI()
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(this::handleResponse, this::handleError)
+        );
+    }
+
+    private void handleResponse(ArrayList<nhanvien> list1) {
+        //API trả về dữ liệu thành công, thực hiện việc lấy data
+        for (int i = 0; i < list1.size(); i++) {
+            if ((edt_email.getText().toString()).equals(list1.get(i).getTaiKhoan())) {
+                if ((edt_password.getText().toString()).equals(list1.get(i).getMatKhau())) {
+                    Toast.makeText(this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
+                    intent = new Intent(LoginActivity.this, MainActivity.class);
+                    startActivity(intent);
+                    finish();
+                }else {
+                    txtLayoutPassword.setHelperText("Sai mật khẩu");
+                    txtLayoutPassword.setHelperTextColor(getResources().getColorStateList(R.color.red));
+                    break;
+                }
+            }
+        }
+    }
+    private void handleError(Throwable error) {
+        Log.d("erro", error.toString());
+        Toast.makeText(LoginActivity.this, error.toString(), Toast.LENGTH_SHORT).show();
+        //khi gọi API KHÔNG THÀNH CÔNG thì thực hiện xử lý ở đây
+    }
+
 }

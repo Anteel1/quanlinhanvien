@@ -181,10 +181,7 @@ public class LoginActivity extends AppCompatActivity {
             if (tk.getEmail().equals(list.get(i).getEmail())
                     && tk.getPassword().equals(list.get(i).getPassword()) ){
                 return true;
-            }else{
-                return false;
             }
-
         }
         return false;
     }

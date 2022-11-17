@@ -1,14 +1,34 @@
 package com.example.quanlinhanvien;
 
+import static com.example.quanlinhanvien.service.API_service.Base_Service;
+
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.quanlinhanvien.adapter.adapter_nhanvien;
+import com.example.quanlinhanvien.model_api.model_tk;
+import com.example.quanlinhanvien.model_api.nhanvien;
+import com.example.quanlinhanvien.service.API_service;
+import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
+
+import java.util.ArrayList;
+import java.util.Calendar;
+
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.schedulers.Schedulers;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -17,13 +37,17 @@ public class LoginActivity extends AppCompatActivity {
     Button btn_signin;
     Intent intent;
     Bundle bundle;
+    ArrayList<model_tk> list;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        list = new ArrayList<>();
         anhxa();
+        demoCallAPI();
 
         btn_signin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -33,8 +57,13 @@ public class LoginActivity extends AppCompatActivity {
                 kiemtra();
                 intent =new Intent(LoginActivity.this, MainActivity.class);
                 if (kiemtra_email() && kiemtra_password()){
-                    startActivity(intent);
-                    finish();
+                    String email = edt_email.getText().toString();
+                    String password = edt_password.getText().toString();
+                    if(check_login(new model_tk(email, password))){
+                        startActivity(intent);
+                        finish();
+                    }
+
                 }
             }
         });
@@ -115,4 +144,49 @@ public class LoginActivity extends AppCompatActivity {
             tv_validate_password.setText(thongbao_password);
         }
     }
+
+
+    private void demoCallAPI() {
+
+        API_service requestInterface = new Retrofit.Builder()
+                .baseUrl(Base_Service)
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create())
+                .build().create(API_service.class);
+
+        new CompositeDisposable().add(requestInterface.getModelAPI()
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(this::handleResponse, this::handleError)
+        );
+    }
+
+    private void handleResponse(ArrayList<nhanvien> list_tk) {
+        //API trả về dữ liệu thành công, thực hiện việc lấy data
+        for(int i =0; i <list_tk.size(); i++){
+            list.add(new model_tk(list_tk.get(i).getTaiKhoan(), list_tk.get(i).getMatKhau()));
+        }
+        Log.d("=========TAG", "handleResponse: "+list.size());
+    }
+
+    private void handleError(Throwable error) {
+        Log.d("erro", error.toString());
+        Toast.makeText(LoginActivity.this,"============="+ error.toString(), Toast.LENGTH_SHORT).show();
+        //khi gọi API KHÔNG THÀNH CÔNG thì thực hiện xử lý ở đây
+    }
+
+    public boolean check_login(model_tk tk){
+
+        for(int i = 0; i<list.size(); i++){
+            if (tk.getEmail().equals(list.get(i).getEmail())
+                    && tk.getPassword().equals(list.get(i).getPassword()) ){
+                return true;
+            }else{
+                return false;
+            }
+
+        }
+        return false;
+    }
+
 }

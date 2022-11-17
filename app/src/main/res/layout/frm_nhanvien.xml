@@ -9,6 +9,7 @@
         android:layout_toEndOf="@+id/rcv_nhanvien"
         android:text="Total employees"
         android:textAlignment="center"
+        android:textSize="16dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:id="@+id/totalListNV"

@@ -18,9 +18,9 @@ import androidx.fragment.app.Fragment;
 import com.example.quanlinhanvien.R;
 
 public class frm_nhanvien extends Fragment {
-    private Button btnsignup, btnupdate,btndangky ,btnthaydoi;
-    EditText edtname,edtusername,edtpassword,edtphonenum,edtaddress,edtid;
-    TextView txtva_name,tv_validate_username,tv_validate_password,tv_validate_phone_number,tv_validate_address,tv_validate_id;
+    EditText edtname, edtusername, edtpassword, edtphonenum, edtaddress, edtid;
+    TextView txtva_name, tv_validate_username, tv_validate_password, tv_validate_phone_number, tv_validate_address, tv_validate_id;
+    private Button btnsignup, btnupdate, btndangky, btnthaydoi;
 
     @Nullable
     @Override
@@ -37,9 +37,9 @@ public class frm_nhanvien extends Fragment {
                 builder.setView(view1);
                 Dialog dialog = builder.create();
                 dialog.show();
-                 edtname = view1.findViewById(R.id.edtname);
-                 txtva_name = view1.findViewById(R.id.tv_validate_name);
-                 //
+                edtname = view1.findViewById(R.id.edtname);
+                txtva_name = view1.findViewById(R.id.tv_validate_name);
+                //
                 edtusername = view1.findViewById(R.id.edtusername);
                 tv_validate_username = view1.findViewById(R.id.tv_validate_username);
                 //
@@ -54,11 +54,11 @@ public class frm_nhanvien extends Fragment {
                 //
                 edtid = view1.findViewById(R.id.edtid);
                 tv_validate_id = view1.findViewById(R.id.tv_validate_id);
-                 btndangky = view1.findViewById(R.id.btndangky);
+                btndangky = view1.findViewById(R.id.btndangky);
                 btndangky.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                         kiemtra();
+                        kiemtra();
 
                     }
                 });
@@ -91,7 +91,7 @@ public class frm_nhanvien extends Fragment {
                 //
                 edtid = view2.findViewById(R.id.edtid);
                 tv_validate_id = view2.findViewById(R.id.tv_validate_id);
-                btnthaydoi=view2.findViewById(R.id.btnthaydoi);
+                btnthaydoi = view2.findViewById(R.id.btnthaydoi);
                 btnthaydoi.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -105,32 +105,31 @@ public class frm_nhanvien extends Fragment {
 
         return view;
     }
-    public void kiemtra (){
-        if(edtname.getText().toString().equals("")){
+
+    public void kiemtra() {
+        if (edtname.getText().toString().equals("")) {
             txtva_name.setText("Không được để trống");
         }
         //
-        if(edtusername.getText().toString().equals("")){
+        if (edtusername.getText().toString().equals("")) {
             tv_validate_username.setText("Không được để trống");
         }
         //
-        if(edtpassword.getText().toString().equals("")){
+        if (edtpassword.getText().toString().equals("")) {
             tv_validate_password.setText("Không được để trống");
         }
         //
-        if(edtphonenum.getText().toString().equals("")){
+        if (edtphonenum.getText().toString().equals("")) {
             tv_validate_phone_number.setText("Không được để trống");
         }
         //
-        if(edtaddress.getText().toString().equals("")){
+        if (edtaddress.getText().toString().equals("")) {
             tv_validate_address.setText("Không được để trống");
         }
         //
-        if(edtid.getText().toString().equals("")){
+        if (edtid.getText().toString().equals("")) {
             tv_validate_id.setText("Không được để trống");
         }
-
-
 
 
     }

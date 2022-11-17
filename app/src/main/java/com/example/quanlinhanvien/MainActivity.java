@@ -11,9 +11,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -26,24 +23,25 @@ import com.example.quanlinhanvien.fragment.frm_thongke;
 import com.example.quanlinhanvien.fragment.frm_trangchu;
 import com.google.android.material.navigation.NavigationView;
 
-import java.util.Calendar;
-
 public class MainActivity extends AppCompatActivity {
     TextView tv;
     ImageView iv_menu;
     DrawerLayout drawerLayout;
     Toolbar toolbar;
     NavigationView navigationView;
-    TextView ngayht;
+    TextView ngayht,txttennv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
+
         //  ngayht = findViewById(R.id.ngayhienthi);
         //  ImageButton nen = findViewById(R.id.nen);
         anhxa();
+
 //        xuly_toolbar();
         menu_nav();
         clicknavigation();
@@ -53,6 +51,8 @@ public class MainActivity extends AppCompatActivity {
         //
 
     }
+    //
+
 
 
     //    public void ngayht() {
@@ -68,11 +68,13 @@ public class MainActivity extends AppCompatActivity {
 //       //
 //
 //        }
+
     public void anhxa() {
         toolbar = findViewById(R.id.toolbar);
         iv_menu = findViewById(R.id.iv_menu_toolbar);
         drawerLayout = findViewById(R.id.drawerLayout);
         navigationView = findViewById(R.id.navigation_view);
+        txttennv =findViewById(R.id.txttennv);
     }
 
     public void menu_nav() {

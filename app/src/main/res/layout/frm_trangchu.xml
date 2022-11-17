@@ -54,11 +54,23 @@
             android:textStyle="bold"
 
             />
+        <TextView
+             android:id="@+id/txttennv"
+            android:layout_width="254dp"
+            android:layout_height="26dp"
 
-
-
+            android:gravity="center"
+            android:text="User"
+            android:textColor="#838383"
+            android:textSize="24sp"
+            android:textStyle="bold"
 
             />
+
+
+
+
+
 
     </LinearLayout>
 
@@ -68,11 +80,10 @@
         android:layout_height="740dp"
         android:scaleType="fitXY"
         android:src="@drawable/img"
+        app:circularflow_radiusInDP="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        tools:ignore="MissingConstraints"
-        app:circularflow_radiusInDP="20dp"
-        ></ImageView>
+        tools:ignore="MissingConstraints"></ImageView>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

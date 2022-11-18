@@ -4,6 +4,7 @@ import static com.example.quanlinhanvien.ServiceAPI.BASE_Service;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.util.Patterns;
 import android.view.View;
 import android.view.animation.Animation;
@@ -11,6 +12,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -39,6 +41,7 @@ public class LoginActivity extends AppCompatActivity {
     ArrayList<User> list;
     User user;
     int kt=0;
+    ProgressBar progressBar;
 
 
     @Override
@@ -194,6 +197,26 @@ public class LoginActivity extends AppCompatActivity {
 
         Toast.makeText(this, "Lỗi", Toast.LENGTH_SHORT).show();
         //khi gọi API KHÔNG THÀNH CÔNG thì thực hiện xử lý ở đây
+    }
+    public void prb_run() {
+        new CountDownTimer(4000, 1000) {
+
+            public void onTick(long millisUntilFinished) {
+                progressBar.setVisibility(View.VISIBLE);
+            }
+
+            public void onFinish() {
+                progressBar.setVisibility(View.GONE);
+                tv_validate_password.setText("");
+                tv_validate_email.setText("");
+                kiemtra();
+
+                intent = new Intent(LoginActivity.this, MainActivity.class);
+
+
+
+            }
+        }.start();
     }
 
 

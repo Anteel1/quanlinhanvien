@@ -1,5 +1,11 @@
 package com.example.quanlinhanvien;
 
+import android.os.Bundle;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -37,37 +43,13 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 
-
-        //  ngayht = findViewById(R.id.ngayhienthi);
-        //  ImageButton nen = findViewById(R.id.nen);
         anhxa();
-
-//        xuly_toolbar();
         menu_nav();
         clicknavigation();
 
-        //hien thi ngay
-//        ngayht();
-        //
 
     }
-    //
 
-
-
-    //    public void ngayht() {
-//        String thuchu = "vv";
-//        String thangchu = "vv";
-//
-//        Calendar n = Calendar.getInstance();
-//        int year = n.get(Calendar.YEAR);
-//        int month = n.get(Calendar.MONTH);
-//        int day = n.get(Calendar.DAY_OF_MONTH);
-//        ngayht.setText("Day"+day+",Month"+month+" Year "+year);
-//
-//       //
-//
-//        }
 
     public void anhxa() {
         toolbar = findViewById(R.id.toolbar);
@@ -92,6 +74,11 @@ public class MainActivity extends AppCompatActivity {
         fragmentManager
                 .beginTransaction()
                 .replace(R.id.linear, frm_trangchu)
+                .commit();
+
+        fragmentManager
+                .beginTransaction()
+                .replace(R.id.linear, new frm_trangchu())
                 .commit();
 
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {

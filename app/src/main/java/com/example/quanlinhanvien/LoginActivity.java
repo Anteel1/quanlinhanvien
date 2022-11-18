@@ -4,6 +4,8 @@ import static com.example.quanlinhanvien.ServiceAPI.BASE_Service;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.CountDownTimer;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.view.animation.Animation;
@@ -11,6 +13,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -39,6 +42,8 @@ public class LoginActivity extends AppCompatActivity {
     ArrayList<User> list;
     User user;
     int kt=0;
+    ArrayList<model_tk> list;
+    ProgressBar progressBar;
 
 
     @Override
@@ -46,6 +51,7 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        list = new ArrayList<>();
         anhxa();
         Animation animation = AnimationUtils.loadAnimation(LoginActivity.this, R.anim.hien);
 
@@ -70,7 +76,6 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-
     }
 
 
@@ -83,6 +88,8 @@ public class LoginActivity extends AppCompatActivity {
         tv_validate_password = findViewById(R.id.tv_validate_password);
         btn_signin = findViewById(R.id.btn_signin);
         logo = findViewById(R.id.logo);
+        progressBar = findViewById(R.id.prb_login);
+
     }
 
     //kiểm tra không được bỏ trống thông tin đăng nhập
@@ -92,9 +99,7 @@ public class LoginActivity extends AppCompatActivity {
         //validate email
         if (!email.isEmpty()) {
             if (Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-                bundle = new Bundle();
-                bundle.putString("email", email);
-                intent.putExtras(bundle);
+
                 return true;
             } else {
                 return false;
@@ -110,9 +115,7 @@ public class LoginActivity extends AppCompatActivity {
         String password = edt_password.getText().toString();
 
         if (!password.isEmpty()) {
-            bundle = new Bundle();
-            bundle.putString("password", password);
-            intent.putExtras(bundle);
+
             return true;
         } else {
             return false;
@@ -196,5 +199,53 @@ public class LoginActivity extends AppCompatActivity {
         //khi gọi API KHÔNG THÀNH CÔNG thì thực hiện xử lý ở đây
     }
 
+    private void handleResponse(ArrayList<nhanvien> list_tk) {
+        //API trả về dữ liệu thành công, thực hiện việc lấy data
+        for (int i = 0; i < list_tk.size(); i++) {
+            list.add(new model_tk(list_tk.get(i).getTaiKhoan(), list_tk.get(i).getMatKhau()));
+        }
+        intent = new Intent(LoginActivity.this, MainActivity.class);
+        if (kiemtra_email() && kiemtra_password()) {
+            String email = edt_email.getText().toString();
+            String password = edt_password.getText().toString();
+            if (check_login(new model_tk(email, password))) {
+                prb_run();
+            }
+        }
+        Log.d("=========TAG", "handleResponse: " + list.size());
+
+
+    }
+
+    private void handleError(Throwable error) {
+        Log.d("erro", error.toString());
+        Toast.makeText(LoginActivity.this, "=============" + error, Toast.LENGTH_SHORT).show();
+        //khi gọi API KHÔNG THÀNH CÔNG thì thực hiện xử lý ở đây
+    }
+
+    public boolean check_login(model_tk tk) {
+
+        for (int i = 0; i < list.size(); i++) {
+            if (tk.getEmail().equals(list.get(i).getEmail())
+                    && tk.getPassword().equals(list.get(i).getPassword())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void prb_run() {
+        new CountDownTimer(4000, 1000) {
+
+            public void onTick(long millisUntilFinished) {
+                progressBar.setVisibility(View.VISIBLE);
+            }
+
+            public void onFinish() {
+                startActivity(intent);
+                finish();
+            }
+        }.start();
+    }
 
 }

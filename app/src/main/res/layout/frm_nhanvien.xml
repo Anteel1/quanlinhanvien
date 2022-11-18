@@ -28,5 +28,11 @@
         android:backgroundTint="#73AB6B"
 
         />
+    android:orientation="vertical">
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/rcv_nhanvien"/>
 
 </LinearLayout>

@@ -14,8 +14,13 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.quanlinhanvien.R;
+import com.example.quanlinhanvien.adapter.adapter_nhanvien;
+
+import java.util.ArrayList;
 
 public class frm_nhanvien extends Fragment {
     EditText edtname, edtusername, edtpassword, edtphonenum, edtaddress, edtid;
@@ -101,6 +106,14 @@ public class frm_nhanvien extends Fragment {
 
             }
         });
+
+
+        recyclerView = view.findViewById(R.id.rcv_nhanvien);
+        list = new ArrayList<>();
+
+        loaddata(list);
+
+
 
 
         return view;

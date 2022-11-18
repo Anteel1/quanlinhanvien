@@ -1,6 +1,7 @@
 package com.example.quanlinhanvien.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.quanlinhanvien.R;
+import com.example.quanlinhanvien.StoreActivity;
+import com.example.quanlinhanvien.service.StoreInterface;
 
 import java.util.ArrayList;
 
@@ -47,6 +50,13 @@ public class adapter_store extends RecyclerView.Adapter<adapter_store.ViewHolder
                 Toast.makeText(context, "Location:"+location, Toast.LENGTH_SHORT).show();
             }
         });
+
+        holder.setItemClickListener(new StoreInterface() {
+            @Override
+            public void onClick(View view, int position, boolean onLongClick) {
+                context.startActivity(new Intent(context, StoreActivity.class));
+            }
+        });
     }
 
     @Override
@@ -54,13 +64,32 @@ public class adapter_store extends RecyclerView.Adapter<adapter_store.ViewHolder
         return list.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener{
         TextView tv;
         ImageView img;
+        StoreInterface storeInterface;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             tv = itemView.findViewById(R.id.txtTenStore);
             img = itemView.findViewById(R.id.imgLocation);
+
+            itemView.setOnClickListener(this);
+            itemView.setOnLongClickListener(this);
+        }
+
+        public void setItemClickListener(StoreInterface storeInterface){
+            this.storeInterface = storeInterface;
+        }
+
+        @Override
+        public void onClick(View v) {
+            storeInterface.onClick(v, getAdapterPosition(), false);
+        }
+
+        @Override
+        public boolean onLongClick(View v) {
+            storeInterface.onClick(v, getAdapterPosition(), true);
+            return false;
         }
     }
 }

@@ -38,8 +38,8 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        anhxa();
 
+        anhxa();
         btn_signin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -103,6 +103,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void handleResponse(ArrayList<nhanvien> list1) {
+        Log.d("TAG", "handleResponse: done");
         for (int i = 0; i < list1.size(); i++) {
             if ((edt_email.getText().toString()).equals(list1.get(i).getTaiKhoan())) {
                 if ((edt_password.getText().toString()).equals(list1.get(i).getMatKhau())) {

@@ -8,7 +8,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class manhinhchoActivity extends AppCompatActivity {
+public class ManHinhChoActivity extends AppCompatActivity {
     ProgressBar progressBar;
     TextView textView;
     Handler handler = new Handler();
@@ -24,7 +24,7 @@ public class manhinhchoActivity extends AppCompatActivity {
             @Override
             public void run() {
                 chay();
-                startActivity(new Intent(manhinhchoActivity.this, LoginActivity.class));
+                startActivity(new Intent(ManHinhChoActivity.this, LoginActivity.class));
                 finish();
             }
         });

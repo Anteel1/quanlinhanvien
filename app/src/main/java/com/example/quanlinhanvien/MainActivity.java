@@ -1,5 +1,9 @@
 package com.example.quanlinhanvien;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -18,6 +22,7 @@ import com.example.quanlinhanvien.fragment.frm_dangxuat;
 import com.example.quanlinhanvien.fragment.frm_genQRcode;
 import com.example.quanlinhanvien.fragment.frm_nhanvien;
 import com.example.quanlinhanvien.fragment.frm_store;
+import com.example.quanlinhanvien.fragment.frm_store_2;
 import com.example.quanlinhanvien.fragment.frm_thongke;
 import com.example.quanlinhanvien.fragment.frm_trangchu;
 import com.google.android.material.navigation.NavigationView;
@@ -28,11 +33,15 @@ public class MainActivity extends AppCompatActivity {
     Toolbar toolbar;
     NavigationView navigationView;
     Fragment fragment;
+    IntentFilter intentFilter = new IntentFilter();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        intentFilter.addAction("store");
+
         anhxa();
         menu_nav();
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_view, new frm_trangchu()).commit();
@@ -109,4 +118,34 @@ public class MainActivity extends AppCompatActivity {
                     replace(R.id.fragment_view, fragment).commit();
         }
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        registerReceiver(broadcastReceiver, intentFilter);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        unregisterReceiver(broadcastReceiver);
+    }
+
+    private BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            Bundle bundle = intent.getExtras();
+
+            switch (intent.getAction()){
+                case "store":
+                    fragment = new frm_store_2(bundle.getInt("position", -1));
+                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_view, fragment).commit();
+                    break;
+
+                default:
+
+                    break;
+            }
+        }
+    };
 }

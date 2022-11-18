@@ -23,6 +23,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -59,7 +60,7 @@ public class frm_genQRcode extends Fragment {
     ArrayList<cuahang>list;
     adapter_store spnAdapter;
     String location;
-    Spinner edtInput;
+    EditText edtInput;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -67,7 +68,7 @@ public class frm_genQRcode extends Fragment {
         ImageView ivQRCode = view.findViewById(R.id.ivQRCode);
         Button btnGenerate = view.findViewById(R.id.btnGenerate);
         Button btnSave = view.findViewById(R.id.btnSave);
-//        edtInput = view.findViewById(R.id.edtInput);
+        edtInput = view.findViewById(R.id.edtInput);
 //        list = new ArrayList<>();
 //        demoCallAPI();
 //        loaddata();

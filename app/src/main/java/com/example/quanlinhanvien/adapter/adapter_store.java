@@ -2,6 +2,7 @@ package com.example.quanlinhanvien.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.quanlinhanvien.R;
 import com.example.quanlinhanvien.model.cuahang;
+import com.example.quanlinhanvien.service.StoreInterface;
 
 import java.util.ArrayList;
 
@@ -46,7 +48,12 @@ public class adapter_store extends RecyclerView.Adapter<adapter_store.ViewHolder
         holder.setItemClickListener(new StoreInterface() {
             @Override
             public void onClick(View view, int position, boolean onLongClick) {
-
+                Bundle bundle = new Bundle();
+                Intent intent = new Intent();
+                bundle.putInt("position", position);
+                intent.putExtras(bundle);
+                intent.setAction("store");
+                context.sendBroadcast(intent);
             }
         });
     }

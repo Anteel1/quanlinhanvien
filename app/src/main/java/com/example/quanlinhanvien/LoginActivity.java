@@ -49,6 +49,16 @@ public class LoginActivity extends AppCompatActivity {
         anhxa();
         demoCallAPI();
 
+        btn_signin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                tv_validate_password.setText("");
+                tv_validate_email.setText("");
+                kiemtra();
+
+            }
+        });
+
     }
 
 
@@ -71,9 +81,7 @@ public class LoginActivity extends AppCompatActivity {
         //validate email
         if (!email.isEmpty()) {
             if (Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-                bundle = new Bundle();
-                bundle.putString("email", email);
-                intent.putExtras(bundle);
+
                 return true;
             } else {
                 return false;
@@ -89,9 +97,7 @@ public class LoginActivity extends AppCompatActivity {
         String password = edt_password.getText().toString();
 
         if (!password.isEmpty()) {
-            bundle = new Bundle();
-            bundle.putString("password", password);
-            intent.putExtras(bundle);
+
             return true;
         } else {
             return false;
@@ -148,24 +154,16 @@ public class LoginActivity extends AppCompatActivity {
         for (int i = 0; i < list_tk.size(); i++) {
             list.add(new model_tk(list_tk.get(i).getTaiKhoan(), list_tk.get(i).getMatKhau()));
         }
-
-        Log.d("=========TAG", "handleResponse: " + list.size());
-        btn_signin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                tv_validate_password.setText("");
-                tv_validate_email.setText("");
-                kiemtra();
-                intent = new Intent(LoginActivity.this, MainActivity.class);
-                if (kiemtra_email() && kiemtra_password()) {
-                    String email = edt_email.getText().toString();
-                    String password = edt_password.getText().toString();
-                    if (check_login(new model_tk(email, password))) {
-                        prb_run();
-                    }
-                }
+        intent = new Intent(LoginActivity.this, MainActivity.class);
+        if (kiemtra_email() && kiemtra_password()) {
+            String email = edt_email.getText().toString();
+            String password = edt_password.getText().toString();
+            if (check_login(new model_tk(email, password))) {
+                prb_run();
             }
-        });
+        }
+        Log.d("=========TAG", "handleResponse: " + list.size());
+
 
     }
 
@@ -194,7 +192,6 @@ public class LoginActivity extends AppCompatActivity {
             }
 
             public void onFinish() {
-
                 startActivity(intent);
                 finish();
             }

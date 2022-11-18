@@ -22,14 +22,12 @@ public class frm_attendance extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-       View v = inflater.inflate(R.layout.frm_attendance,container,false);
-       // get location theo km
-            Log.d("Location",getData(0.02).size()+" ");
+        View v = inflater.inflate(R.layout.frm_attendance, container, false);
+        Log.d("Location", getData(0.02).size() + " ");
         return v;
     }
 
     private ArrayList<Location> getData(double distance) {
-        //data mẫu
         ArrayList<Location> list = new ArrayList<>();
         list.add(new Location(1, "Địa điểm A", "10.7564083,106.5754643"));
         list.add(new Location(2, "Địa điểm Nhà riêng", "10.7607871,106.5871427"));
@@ -38,7 +36,6 @@ public class frm_attendance extends Fragment {
         list.add(new Location(5, "Địa điểm E", "10.8123062,106.6953832"));
 
 
-        //lọc data
         ArrayList<Location> listResult = new ArrayList<>();
         for (Location location : list) {
             String vitri = location.getLglt();
@@ -54,6 +51,7 @@ public class frm_attendance extends Fragment {
 
         return listResult;
     }
+
     private double CalculationByDistance(LatLng StartP, LatLng EndP) {
         int Radius = 6371;// radius of earth in Km
         double lat1 = StartP.latitude;
@@ -78,6 +76,7 @@ public class frm_attendance extends Fragment {
 
         return Radius * c;
     }
+
     private LatLng currentLoaction() {
         GPSTracker gpsTracker = new GPSTracker(getContext());
         if (gpsTracker.canGetLocation()) {

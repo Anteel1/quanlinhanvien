@@ -44,6 +44,7 @@ import androidmads.library.qrgenearator.QRGSaver;
 
 public class frm_genQRcode extends Fragment {
     private Bitmap bitmap;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -70,11 +71,9 @@ public class frm_genQRcode extends Fragment {
 
                     QRGEncoder qrgEncoder = new QRGEncoder(edtInput.getText().toString(), null, QRGContents.Type.TEXT, dimen);
 
-                    //chỉnh màu sắc của QR
                     qrgEncoder.setColorBlack(Color.BLACK);
                     qrgEncoder.setColorWhite(Color.WHITE);
 
-                    //hiển thị QR
                     bitmap = qrgEncoder.getBitmap(0);
                     ivQRCode.setImageBitmap(bitmap);
                 }
@@ -84,7 +83,6 @@ public class frm_genQRcode extends Fragment {
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //xin quyền
                 String filename = edtInput.getText().toString().trim();
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
                     try {

@@ -28,13 +28,12 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class LoginActivity extends AppCompatActivity {
-
     TextView tv_forgotpassword;
-    TextInputLayout txtlayoutEmail,txtLayoutPassword;
+    TextInputLayout txtlayoutEmail, txtLayoutPassword;
     TextInputEditText edt_email, edt_password;
     Button btn_signin;
     Intent intent;
-    Bundle bundle;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,18 +45,12 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 kiemtra();
                 demoCallAPI();
-//                intent =new Intent(LoginActivity.this, MainActivity.class);
-//                startActivity(intent);
-//                finish();
-
             }
         });
 
 
     }
 
-
-    //ánh xạ
     public void anhxa() {
         edt_email = findViewById(R.id.edt_email);
         edt_password = findViewById(R.id.edt_password);
@@ -67,48 +60,9 @@ public class LoginActivity extends AppCompatActivity {
         btn_signin = findViewById(R.id.btn_signin);
     }
 
-    //kiểm tra không được bỏ trống thông tin đăng nhập
-//    public boolean kiemtra_email() {
-//        String email = edt_email.getText().toString();
-//
-//        //validate email
-//        if (!email.isEmpty()) {
-//            if (Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-//                bundle = new Bundle();
-//                bundle.putString("email", email);
-//                intent.putExtras(bundle);
-//                return true;
-//            } else {
-//                return false;
-//            }
-//        } else {
-//            return false;
-//        }
-//
-//    }
-//
-//    public boolean kiemtra_password() {
-//        //validate password
-//        String password = edt_password.getText().toString();
-//
-//        if (!password.isEmpty()) {
-//            bundle = new Bundle();
-//            bundle.putString("password", password);
-//            intent.putExtras(bundle);
-//            return true;
-//        }else{
-//            return false;
-//        }
-//    }
-
-    //kiểm tra các edit text
-
-    public void kiemtra(){
-
+    public void kiemtra() {
         String thongbao_email = "";
         String email = edt_email.getText().toString();
-
-        //validate email
         if (!email.isEmpty()) {
             if (Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
             } else {
@@ -126,12 +80,13 @@ public class LoginActivity extends AppCompatActivity {
 
         String thongbao_password = "";
         if (!password.isEmpty()) {
-        }else{
+        } else {
             thongbao_password += "Password không được để trống";
             txtLayoutPassword.setHelperText(thongbao_password);
             txtLayoutPassword.setHelperTextColor(getResources().getColorStateList(R.color.red));
         }
     }
+
     private void demoCallAPI() {
 
         service_API requestInterface = new Retrofit.Builder()
@@ -148,7 +103,6 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void handleResponse(ArrayList<nhanvien> list1) {
-        //API trả về dữ liệu thành công, thực hiện việc lấy data
         for (int i = 0; i < list1.size(); i++) {
             if ((edt_email.getText().toString()).equals(list1.get(i).getTaiKhoan())) {
                 if ((edt_password.getText().toString()).equals(list1.get(i).getMatKhau())) {
@@ -156,7 +110,7 @@ public class LoginActivity extends AppCompatActivity {
                     intent = new Intent(LoginActivity.this, MainActivity.class);
                     startActivity(intent);
                     finish();
-                }else {
+                } else {
                     txtLayoutPassword.setHelperText("Sai mật khẩu");
                     txtLayoutPassword.setHelperTextColor(getResources().getColorStateList(R.color.red));
                     break;
@@ -164,10 +118,10 @@ public class LoginActivity extends AppCompatActivity {
             }
         }
     }
+
     private void handleError(Throwable error) {
         Log.d("erro", error.toString());
         Toast.makeText(LoginActivity.this, error.toString(), Toast.LENGTH_SHORT).show();
-        //khi gọi API KHÔNG THÀNH CÔNG thì thực hiện xử lý ở đây
     }
 
 }

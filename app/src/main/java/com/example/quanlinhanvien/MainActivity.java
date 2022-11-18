@@ -23,18 +23,19 @@ import com.example.quanlinhanvien.fragment.frm_trangchu;
 import com.google.android.material.navigation.NavigationView;
 
 public class MainActivity extends AppCompatActivity {
-    TextView tv;
     ImageView iv_menu;
     DrawerLayout drawerLayout;
     Toolbar toolbar;
     NavigationView navigationView;
     Fragment fragment;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         anhxa();
         menu_nav();
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_view, new frm_trangchu()).commit();
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -68,8 +69,7 @@ public class MainActivity extends AppCompatActivity {
                         onRestoreInstanceState(savedInstanceState);
                         break;
                     case R.id.menu_Logout:
-//                        fragment = new frm_dangxuat();
-                        new frm_dangxuat().show(getSupportFragmentManager(),frm_dangxuat.TAG);
+                        new frm_dangxuat().show(getSupportFragmentManager(), frm_dangxuat.TAG);
                         break;
                     default:
                         fragment = new frm_trangchu();
@@ -98,17 +98,15 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
     @Override
     protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction().
                     add(R.id.fragment_view, fragment).commit();
-
-        }
-        else {
+        } else {
             getSupportFragmentManager().beginTransaction().
                     replace(R.id.fragment_view, fragment).commit();
-
         }
     }
 }

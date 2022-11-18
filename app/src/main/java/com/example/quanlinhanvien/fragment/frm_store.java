@@ -73,7 +73,6 @@ public class frm_store extends Fragment {
     }
 
     private void handleResponse(ArrayList<cuahang> list1) {
-        //API trả về dữ liệu thành công, thực hiện việc lấy data
         for(int i =0; i <list1.size(); i++){
             list.add(i,list1.get(i).getTenCH());
             listLocation.add(i,list1.get(i).getDiaChi());
@@ -85,6 +84,5 @@ public class frm_store extends Fragment {
     private void handleError(Throwable error) {
         Log.d("erro", error.toString());
         Toast.makeText(getContext(), error.toString(), Toast.LENGTH_SHORT).show();
-        //khi gọi API KHÔNG THÀNH CÔNG thì thực hiện xử lý ở đây
     }
 }

@@ -26,7 +26,6 @@ public class manhinhchoActivity extends AppCompatActivity {
                 chay();
                 startActivity(new Intent(manhinhchoActivity.this, LoginActivity.class));
                 finish();
-
             }
         });
         thread.start();

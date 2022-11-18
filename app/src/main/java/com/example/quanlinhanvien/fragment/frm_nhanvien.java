@@ -93,7 +93,6 @@ public class frm_nhanvien extends Fragment implements DatePickerDialog.OnDateSet
     }
 
     private void handleResponse(ArrayList<nhanvien> list1) {
-        //API trả về dữ liệu thành công, thực hiện việc lấy data
         for(int i =0; i <list1.size(); i++){
             list.add(i,list1.get(i).getTenNV());
         }
@@ -104,7 +103,6 @@ public class frm_nhanvien extends Fragment implements DatePickerDialog.OnDateSet
     private void handleError(Throwable error) {
         Log.d("erro", error.toString());
         Toast.makeText(getContext(), error.toString(), Toast.LENGTH_SHORT).show();
-        //khi gọi API KHÔNG THÀNH CÔNG thì thực hiện xử lý ở đây
     }
     private void showDatePicker() {
         DatePickerDialog datePickerDialog = new DatePickerDialog(
@@ -150,6 +148,5 @@ public class frm_nhanvien extends Fragment implements DatePickerDialog.OnDateSet
             btnDangky.setText("Update");
             Toast.makeText(getContext(), "Cập nhật", Toast.LENGTH_SHORT).show();
         }
-
     }
 }

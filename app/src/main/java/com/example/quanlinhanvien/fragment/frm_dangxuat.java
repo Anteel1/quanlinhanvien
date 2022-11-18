@@ -23,8 +23,8 @@ public class frm_dangxuat extends DialogFragment {
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
         dialog = new Dialog(getContext());
         dialog.setContentView(R.layout.frm_dangxuat);
-        dialogYes =  dialog.findViewById(R.id.btnYes);
-        dialogNo =   dialog.findViewById(R.id.btnNo);
+        dialogYes = dialog.findViewById(R.id.btnYes);
+        dialogNo = dialog.findViewById(R.id.btnNo);
         dialogYes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -40,6 +40,7 @@ public class frm_dangxuat extends DialogFragment {
         dialog.show();
         return dialog;
     }
-    public static String TAG ="Exit";
+
+    public static String TAG = "Exit";
 }
 

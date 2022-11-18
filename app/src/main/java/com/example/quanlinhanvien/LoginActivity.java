@@ -5,6 +5,9 @@ import static com.example.quanlinhanvien.ServiceAPI.BASE_Service;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+
+import android.util.Log;
+
 import android.util.Patterns;
 import android.view.View;
 import android.view.animation.Animation;
@@ -49,18 +52,16 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        list = new ArrayList<>();
         anhxa();
-        Animation animation = AnimationUtils.loadAnimation(LoginActivity.this, R.anim.hien);
+//        Animation animation = AnimationUtils.loadAnimation(LoginActivity.this, R.anim.hien);
 
-        logo.startAnimation(animation);
         btn_signin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                prb_run();
                 tv_validate_password.setText("");
                 tv_validate_email.setText("");
-                kiemtra();
-                demoCallAPI();
 //                 if(kt==1) {
 //                     intent = new Intent(LoginActivity.this, MainActivity.class);
 //                     if (kiemtra_email() && kiemtra_password()) {
@@ -73,7 +74,6 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-
     }
 
 
@@ -85,7 +85,8 @@ public class LoginActivity extends AppCompatActivity {
         tv_validate_email = findViewById(R.id.tv_validate_email);
         tv_validate_password = findViewById(R.id.tv_validate_password);
         btn_signin = findViewById(R.id.btn_signin);
-        logo = findViewById(R.id.logo);
+        progressBar = findViewById(R.id.prb_login);
+
     }
 
     //kiểm tra không được bỏ trống thông tin đăng nhập
@@ -95,9 +96,7 @@ public class LoginActivity extends AppCompatActivity {
         //validate email
         if (!email.isEmpty()) {
             if (Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-                bundle = new Bundle();
-                bundle.putString("email", email);
-                intent.putExtras(bundle);
+
                 return true;
             } else {
                 return false;
@@ -113,9 +112,7 @@ public class LoginActivity extends AppCompatActivity {
         String password = edt_password.getText().toString();
 
         if (!password.isEmpty()) {
-            bundle = new Bundle();
-            bundle.putString("password", password);
-            intent.putExtras(bundle);
+
             return true;
         } else {
             return false;
@@ -199,7 +196,7 @@ public class LoginActivity extends AppCompatActivity {
         //khi gọi API KHÔNG THÀNH CÔNG thì thực hiện xử lý ở đây
     }
     public void prb_run() {
-        new CountDownTimer(4000, 1000) {
+        new CountDownTimer(3000, 1000) {
 
             public void onTick(long millisUntilFinished) {
                 progressBar.setVisibility(View.VISIBLE);
@@ -207,17 +204,18 @@ public class LoginActivity extends AppCompatActivity {
 
             public void onFinish() {
                 progressBar.setVisibility(View.GONE);
-                tv_validate_password.setText("");
-                tv_validate_email.setText("");
                 kiemtra();
-
-                intent = new Intent(LoginActivity.this, MainActivity.class);
+                demoCallAPI();
 
 
 
             }
         }.start();
     }
+
+
+
+
 
 
 }

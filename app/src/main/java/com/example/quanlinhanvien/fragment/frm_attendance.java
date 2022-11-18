@@ -1,5 +1,7 @@
 package com.example.quanlinhanvien.fragment;
 
+import static com.example.quanlinhanvien.service.service_API.Base_Service;
+
 import android.app.Activity;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
@@ -8,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -21,18 +24,27 @@ import com.budiyev.android.codescanner.DecodeCallback;
 import com.budiyev.android.codescanner.ScanMode;
 import com.example.quanlinhanvien.R;
 import com.example.quanlinhanvien.model.Location;
+import com.example.quanlinhanvien.model.cuahang;
 import com.example.quanlinhanvien.others.GPSTracker;
+import com.example.quanlinhanvien.service.service_API;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.zxing.Result;
+import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.schedulers.Schedulers;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class frm_attendance extends Fragment {
     private CodeScanner mCodeScanner;
     private CodeScannerView scannerView;
     TextView txtTitle,txtResutl;
-
+    ArrayList<Location> list;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -40,9 +52,15 @@ public class frm_attendance extends Fragment {
         scanQRpermission();
         txtResutl =v.findViewById(R.id.resutl);
         scannerView =v.findViewById(R.id.scanner_view);
+        list = new ArrayList<>();
         codeScanner();
+        demoCallAPI();
+        if(getData(0.02).size() == 1){
+            Toast.makeText(getContext(), "Chấm công thành công", Toast.LENGTH_SHORT).show();
+            // gọi post lên update bảng chấm công
+        }
         // get location theo km
-        Log.d("Location",getData(0.02).size()+" ");
+        Log.d("Location",getData(20).size()+" ");
         return v;
     }
     @Override
@@ -94,14 +112,12 @@ public class frm_attendance extends Fragment {
 
     private ArrayList<Location> getData(double distance) {
         //data mẫu
-        ArrayList<Location> list = new ArrayList<>();
-        list.add(new Location(1, "Địa điểm A", "10.7564083,106.5754643"));
-        list.add(new Location(2, "Địa điểm Nhà riêng", "10.7607871,106.5871427"));
-        list.add(new Location(3, "CoopMart", "10.7587318,106.584954"));
-        list.add(new Location(4, "Trường tiểu học A", "10.7614933,106.5879044"));
-        list.add(new Location(5, "Tòa F", "10.8525201,106.6249008"));
+//        list.add(new Location(1, "Địa điểm A", "10.7564083,106.5754643"));
+//        list.add(new Location(2, "Địa điểm Nhà riêng", "10.7607871,106.5871427"));
+//        list.add(new Location(3, "CoopMart", "10.7587318,106.584954"));
+//        list.add(new Location(4, "Trường tiểu học A", "10.7614933,106.5879044"));
+//        list.add(new Location(5, "Tòa F", "10.8525201,106.6249008"));
         // viet api goi vi tri cua hang
-
         //lọc data
         ArrayList<Location> listResult = new ArrayList<>();
         for (Location location : list) {
@@ -152,5 +168,34 @@ public class frm_attendance extends Fragment {
             // gpsTracker.showSettingsAlert();
             return new LatLng(0, 0);
         }
+    }
+    private void demoCallAPI() {
+
+        service_API requestInterface = new Retrofit.Builder()
+                .baseUrl(Base_Service)
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create())
+                .build().create(service_API.class);
+
+        new CompositeDisposable().add(requestInterface.getModelCHAPI()
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(this::handleResponse, this::handleError)
+        );
+    }
+
+    private void handleResponse(ArrayList<cuahang> list1) {
+        //API trả về dữ liệu thành công, thực hiện việc lấy data
+        for(int i =0; i <list1.size(); i++){
+            String locationName = list1.get(i).getTenCH();
+            String locationLeLg = list1.get(i).getDiaChi();
+            list.add(i,new Location(i,locationName,locationLeLg));
+        }
+    }
+
+    private void handleError(Throwable error) {
+        Log.d("erro", error.toString());
+        Toast.makeText(getContext(), error.toString(), Toast.LENGTH_SHORT).show();
+        //khi gọi API KHÔNG THÀNH CÔNG thì thực hiện xử lý ở đây
     }
 }

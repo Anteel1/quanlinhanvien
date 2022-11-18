@@ -108,10 +108,6 @@ public class frm_nhanvien extends Fragment {
         });
 
 
-        recyclerView = view.findViewById(R.id.rcv_nhanvien);
-        list = new ArrayList<>();
-
-        loaddata(list);
 
 
 

@@ -18,10 +18,6 @@ public class frm_trangchu extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.frm_trangchu, container, false);
-        ImageView im = view.findViewById(R.id.image);
-        TextView gio = view.findViewById(R.id.giohienthi);
-
-
 
 //        im.animate().translationY(-1100).setDuration(800).setStartDelay(600).translationX(-200);
 //        gio.animate().translationY(-250).setDuration(800).setStartDelay(600).translationX(-90);

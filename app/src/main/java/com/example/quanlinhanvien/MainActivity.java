@@ -56,7 +56,6 @@ public class MainActivity extends AppCompatActivity {
         iv_menu = findViewById(R.id.iv_menu_toolbar);
         drawerLayout = findViewById(R.id.drawerLayout);
         navigationView = findViewById(R.id.navigation_view);
-        txttennv =findViewById(R.id.txttennv);
     }
 
     public void menu_nav() {

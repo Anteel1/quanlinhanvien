@@ -42,7 +42,6 @@ public class LoginActivity extends AppCompatActivity {
     ArrayList<User> list;
     User user;
     int kt=0;
-    ArrayList<model_tk> list;
     ProgressBar progressBar;
 
 
@@ -53,17 +52,16 @@ public class LoginActivity extends AppCompatActivity {
 
         list = new ArrayList<>();
         anhxa();
-        Animation animation = AnimationUtils.loadAnimation(LoginActivity.this, R.anim.hien);
+//        Animation animation = AnimationUtils.loadAnimation(LoginActivity.this, R.anim.hien);
 
-        logo.startAnimation(animation);
         btn_signin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                demoCallAPI();
+                prb_run();
                 tv_validate_password.setText("");
                 tv_validate_email.setText("");
                 kiemtra();
-                demoCallAPI();
 //                 if(kt==1) {
 //                     intent = new Intent(LoginActivity.this, MainActivity.class);
 //                     if (kiemtra_email() && kiemtra_password()) {
@@ -87,7 +85,6 @@ public class LoginActivity extends AppCompatActivity {
         tv_validate_email = findViewById(R.id.tv_validate_email);
         tv_validate_password = findViewById(R.id.tv_validate_password);
         btn_signin = findViewById(R.id.btn_signin);
-        logo = findViewById(R.id.logo);
         progressBar = findViewById(R.id.prb_login);
 
     }
@@ -199,40 +196,8 @@ public class LoginActivity extends AppCompatActivity {
         //khi gọi API KHÔNG THÀNH CÔNG thì thực hiện xử lý ở đây
     }
 
-    private void handleResponse(ArrayList<nhanvien> list_tk) {
-        //API trả về dữ liệu thành công, thực hiện việc lấy data
-        for (int i = 0; i < list_tk.size(); i++) {
-            list.add(new model_tk(list_tk.get(i).getTaiKhoan(), list_tk.get(i).getMatKhau()));
-        }
-        intent = new Intent(LoginActivity.this, MainActivity.class);
-        if (kiemtra_email() && kiemtra_password()) {
-            String email = edt_email.getText().toString();
-            String password = edt_password.getText().toString();
-            if (check_login(new model_tk(email, password))) {
-                prb_run();
-            }
-        }
-        Log.d("=========TAG", "handleResponse: " + list.size());
 
 
-    }
-
-    private void handleError(Throwable error) {
-        Log.d("erro", error.toString());
-        Toast.makeText(LoginActivity.this, "=============" + error, Toast.LENGTH_SHORT).show();
-        //khi gọi API KHÔNG THÀNH CÔNG thì thực hiện xử lý ở đây
-    }
-
-    public boolean check_login(model_tk tk) {
-
-        for (int i = 0; i < list.size(); i++) {
-            if (tk.getEmail().equals(list.get(i).getEmail())
-                    && tk.getPassword().equals(list.get(i).getPassword())) {
-                return true;
-            }
-        }
-        return false;
-    }
 
     public void prb_run() {
         new CountDownTimer(4000, 1000) {
@@ -242,8 +207,7 @@ public class LoginActivity extends AppCompatActivity {
             }
 
             public void onFinish() {
-                startActivity(intent);
-                finish();
+
             }
         }.start();
     }

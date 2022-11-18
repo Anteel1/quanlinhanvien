@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Total employees"
+        android:textAlignment="center"
+        android:textSize="16dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:id="@+id/totalListNV"
+        />
+    <View
+        android:layout_below="@+id/totalListNV"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="#919090"/>
+    <TextView
+        android:layout_margin="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/totalListNV"
+        android:id="@+id/line1"
+        android:textStyle="bold"
+        android:text="Name"/>
+    <View
+        android:layout_below="@+id/line1"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="#919090"/>
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/line1"
+        android:layout_above="@+id/linearlayout"
+        android:layout_alignParentLeft="true"
+        android:layout_marginBottom="8dp"
+        android:id="@+id/rcv_nhanvien"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:id="@+id/linearlayout"
+        android:orientation="horizontal"
+        >
+
+        <Button
+            android:id="@+id/btnsignup"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:text="Sign up"
+            android:textSize="18sp"
+            android:layout_marginLeft="43dp"
+            android:backgroundTint="#73AB6B"
+            />
+
+        <Button
+            android:id="@+id/btnupdate"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_marginLeft="80dp"
+            android:text="Update"
+            android:textSize="18sp"
+            android:backgroundTint="#73AB6B"
+
+            />
+
+    </LinearLayout>
+</RelativeLayout>

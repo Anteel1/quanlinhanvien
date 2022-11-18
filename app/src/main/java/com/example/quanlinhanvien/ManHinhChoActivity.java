@@ -1,14 +1,14 @@
 package com.example.quanlinhanvien;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-public class ManHinhChoActivity extends AppCompatActivity {
+import androidx.appcompat.app.AppCompatActivity;
+
+public class manhinhchoActivity extends AppCompatActivity {
     ProgressBar progressBar;
     TextView textView;
     Handler handler = new Handler();
@@ -24,10 +24,14 @@ public class ManHinhChoActivity extends AppCompatActivity {
             @Override
             public void run() {
                 chay();
-                startActivity(new Intent(ManHinhChoActivity.this, LoginActivity.class));
+                startActivity(new Intent(manhinhchoActivity.this, LoginActivity.class));
+                finish();
+
             }
         });
         thread.start();
+
+
     }
 
     private void chay() {

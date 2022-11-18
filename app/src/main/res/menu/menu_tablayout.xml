@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/qrCode" android:title="QR Code"/>
+    <item android:id="@+id/thongTin" android:title="Thông tin"/>
+    <item android:id="@+id/viTri" android:title="Vị trí"/>
+</menu>

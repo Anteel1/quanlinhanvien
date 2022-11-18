@@ -30,6 +30,7 @@
     android:gravity="center"
     android:layout_margin="8dp">
     <EditText
+        android:textCursorDrawable="@drawable/custom_edit_text_cursor"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="EMAIL*"
@@ -47,6 +48,7 @@
         android:textSize="10dp"
         android:textColor="@color/red"/>
     <EditText
+        android:textCursorDrawable="@drawable/custom_edit_text_cursor"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="PASSWORD*"

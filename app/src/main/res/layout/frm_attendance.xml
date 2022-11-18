@@ -6,4 +6,33 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     >
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:textAlignment="center"
+        android:text="Check in"
+        android:id="@+id/txtTitle"
+        android:layout_marginVertical="8dp"
+        />
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="400dp">
+
+        <com.budiyev.android.codescanner.CodeScannerView
+            android:id="@+id/scanner_view"
+            android:layout_width="match_parent"
+            map:flashButtonColor="@color/white"
+            map:flashButtonVisible="true"
+            map:autoFocusButtonColor="@color/white"
+            map:autoFocusButtonVisible="true"
+            map:maskColor="#D01B1717"
+            android:layout_height="match_parent"/>
+    </FrameLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/resutl"
+        />
 </LinearLayout>

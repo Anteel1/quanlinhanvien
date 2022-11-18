@@ -18,6 +18,7 @@ public class manhinhchoActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_manhinhcho);
+
         progressBar = findViewById(R.id.progress_bar);
         textView = findViewById(R.id.tv_chay);
         Thread thread = new Thread(new Runnable() {

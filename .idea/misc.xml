@@ -3,8 +3,12 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/du_an_1/quanlinhanvien/app/src/main/res/layout/activity_login.xml" value="0.22826086956521738" />
+        <entry key="..\:/du_an_1/quanlinhanvien/app/src/main/res/drawable/bg_prb.xml" value="0.1295" />
+        <entry key="..\:/du_an_1/quanlinhanvien/app/src/main/res/drawable/custom_progressbar.xml" value="0.1295" />
+        <entry key="..\:/du_an_1/quanlinhanvien/app/src/main/res/layout/activity_login.xml" value="0.2" />
+        <entry key="..\:/du_an_1/quanlinhanvien/app/src/main/res/layout/activity_main.xml" value="0.12360688956433637" />
         <entry key="..\:/du_an_1/quanlinhanvien/app/src/main/res/layout/activity_manhinhcho.xml" value="0.22826086956521738" />
+        <entry key="..\:/du_an_1/quanlinhanvien/app/src/main/res/layout/activity_progressbar.xml" value="0.22826086956521738" />
         <entry key="..\:/du_an_1/quanlinhanvien/app/src/main/res/layout/frm_dangkylichlam.xml" value="0.22826086956521738" />
         <entry key="..\:/du_an_1/quanlinhanvien/app/src/main/res/layout/frm_dangxuat.xml" value="0.22826086956521738" />
         <entry key="..\:/du_an_1/quanlinhanvien/app/src/main/res/layout/frm_thongke.xml" value="0.22826086956521738" />

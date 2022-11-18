@@ -2,27 +2,26 @@ package com.example.quanlinhanvien;
 
 import static com.example.quanlinhanvien.service.API_service.Base_Service;
 
-import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.quanlinhanvien.adapter.adapter_nhanvien;
 import com.example.quanlinhanvien.model_api.model_tk;
 import com.example.quanlinhanvien.model_api.nhanvien;
 import com.example.quanlinhanvien.service.API_service;
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
@@ -38,6 +37,7 @@ public class LoginActivity extends AppCompatActivity {
     Intent intent;
     Bundle bundle;
     ArrayList<model_tk> list;
+    ProgressBar progressBar;
 
 
     @Override
@@ -48,9 +48,6 @@ public class LoginActivity extends AppCompatActivity {
         list = new ArrayList<>();
         anhxa();
         demoCallAPI();
-
-
-
 
     }
 
@@ -63,6 +60,8 @@ public class LoginActivity extends AppCompatActivity {
         tv_validate_email = findViewById(R.id.tv_validate_email);
         tv_validate_password = findViewById(R.id.tv_validate_password);
         btn_signin = findViewById(R.id.btn_signin);
+        progressBar = findViewById(R.id.prb_login);
+
     }
 
     //kiểm tra không được bỏ trống thông tin đăng nhập
@@ -94,14 +93,14 @@ public class LoginActivity extends AppCompatActivity {
             bundle.putString("password", password);
             intent.putExtras(bundle);
             return true;
-        }else{
+        } else {
             return false;
         }
     }
 
     //kiểm tra các edit text
 
-    public void kiemtra(){
+    public void kiemtra() {
 
         String thongbao_email = "";
         String email = edt_email.getText().toString();
@@ -122,7 +121,7 @@ public class LoginActivity extends AppCompatActivity {
 
         String thongbao_password = "";
         if (!password.isEmpty()) {
-        }else{
+        } else {
             thongbao_password += "password không được để trống";
             tv_validate_password.setText(thongbao_password);
         }
@@ -146,27 +145,24 @@ public class LoginActivity extends AppCompatActivity {
 
     private void handleResponse(ArrayList<nhanvien> list_tk) {
         //API trả về dữ liệu thành công, thực hiện việc lấy data
-        for(int i =0; i <list_tk.size(); i++){
+        for (int i = 0; i < list_tk.size(); i++) {
             list.add(new model_tk(list_tk.get(i).getTaiKhoan(), list_tk.get(i).getMatKhau()));
         }
 
-
-        Log.d("=========TAG", "handleResponse: "+list.size());
+        Log.d("=========TAG", "handleResponse: " + list.size());
         btn_signin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 tv_validate_password.setText("");
                 tv_validate_email.setText("");
                 kiemtra();
-                intent =new Intent(LoginActivity.this, MainActivity.class);
-                if (kiemtra_email() && kiemtra_password()){
+                intent = new Intent(LoginActivity.this, MainActivity.class);
+                if (kiemtra_email() && kiemtra_password()) {
                     String email = edt_email.getText().toString();
                     String password = edt_password.getText().toString();
-                    if(check_login(new model_tk(email, password))){
-                        startActivity(intent);
-                        finish();
+                    if (check_login(new model_tk(email, password))) {
+                        prb_run();
                     }
-
                 }
             }
         });
@@ -175,19 +171,34 @@ public class LoginActivity extends AppCompatActivity {
 
     private void handleError(Throwable error) {
         Log.d("erro", error.toString());
-        Toast.makeText(LoginActivity.this,"============="+ error.toString(), Toast.LENGTH_SHORT).show();
+        Toast.makeText(LoginActivity.this, "=============" + error, Toast.LENGTH_SHORT).show();
         //khi gọi API KHÔNG THÀNH CÔNG thì thực hiện xử lý ở đây
     }
 
-    public boolean check_login(model_tk tk){
+    public boolean check_login(model_tk tk) {
 
-        for(int i = 0; i<list.size(); i++){
+        for (int i = 0; i < list.size(); i++) {
             if (tk.getEmail().equals(list.get(i).getEmail())
-                    && tk.getPassword().equals(list.get(i).getPassword()) ){
+                    && tk.getPassword().equals(list.get(i).getPassword())) {
                 return true;
             }
         }
         return false;
+    }
+
+    public void prb_run() {
+        new CountDownTimer(4000, 1000) {
+
+            public void onTick(long millisUntilFinished) {
+                progressBar.setVisibility(View.VISIBLE);
+            }
+
+            public void onFinish() {
+
+                startActivity(intent);
+                finish();
+            }
+        }.start();
     }
 
 }

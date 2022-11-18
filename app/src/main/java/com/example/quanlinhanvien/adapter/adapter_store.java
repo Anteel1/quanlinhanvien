@@ -13,7 +13,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.quanlinhanvien.R;
-import com.example.quanlinhanvien.StoreActivity;
 import com.example.quanlinhanvien.service.StoreInterface;
 
 import java.util.ArrayList;
@@ -54,7 +53,7 @@ public class adapter_store extends RecyclerView.Adapter<adapter_store.ViewHolder
         holder.setItemClickListener(new StoreInterface() {
             @Override
             public void onClick(View view, int position, boolean onLongClick) {
-                context.startActivity(new Intent(context, StoreActivity.class));
+
             }
         });
     }

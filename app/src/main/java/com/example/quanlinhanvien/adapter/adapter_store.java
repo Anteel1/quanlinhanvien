@@ -6,27 +6,22 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.quanlinhanvien.R;
+import com.example.quanlinhanvien.model.cuahang;
 
 import java.util.ArrayList;
 
 public class adapter_store extends RecyclerView.Adapter<adapter_store.ViewHolder>{
-
     Context context;
-    ArrayList<String> list;
-    ArrayList<String>listLocation;
-    public adapter_store(Context context , ArrayList<String> list,ArrayList<String>listLocation){
+    ArrayList<cuahang> list;
+    public adapter_store(Context context , ArrayList<cuahang> list){
         this.context = context;
         this.list = list;
-        this.listLocation = listLocation;
     }
-
-
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -38,13 +33,12 @@ public class adapter_store extends RecyclerView.Adapter<adapter_store.ViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        String str = list.get(position);
-        String location = listLocation.get(position);
-        holder.tv.setText(str);
+        cuahang str = list.get(position);
+        holder.tv.setText(str.getTenCH());
         holder.img.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(context, "Location:"+location, Toast.LENGTH_SHORT).show();
+
             }
         });
     }
@@ -64,3 +58,36 @@ public class adapter_store extends RecyclerView.Adapter<adapter_store.ViewHolder
         }
     }
 }
+//    @NonNull
+//    @Override
+//    public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+//        View v = convertView;
+//        if(v==null){
+//            LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+//            v =inflater.inflate(R.layout.item_store,null);
+//        }
+//        cuahang item = list.get(position);
+//        if(item !=null){
+//            txtTenStore = v.findViewById(R.id.txtTenStore);
+//            imgLocation =v.findViewById(R.id.imgLocation);
+//            txtTenStore.setText(item.getTenCH());
+//        }
+//        return v;
+//    }
+//
+//    @Override
+//    public View getDropDownView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+//        View v = convertView;
+//        if(v==null){
+//            LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+//            v =inflater.inflate(R.layout.item_store,null);
+//        }
+//        cuahang item = list.get(position);
+//        if(item !=null){
+//            txtTenStore = v.findViewById(R.id.txtTenStore);
+//            imgLocation =v.findViewById(R.id.imgLocation);
+//            txtTenStore.setText(item.getTenCH());
+//        }
+//        return v;
+//    }
+

@@ -1,6 +1,7 @@
 package com.example.quanlinhanvien.fragment;
 
 import static android.content.Context.WINDOW_SERVICE;
+import static com.example.quanlinhanvien.service.service_API.Base_Service;
 
 import android.Manifest;
 import android.content.ContentResolver;
@@ -15,14 +16,15 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -32,18 +34,32 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import com.example.quanlinhanvien.R;
+import com.example.quanlinhanvien.adapter.adapter_store;
+import com.example.quanlinhanvien.model.cuahang;
+import com.example.quanlinhanvien.service.service_API;
+import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.ArrayList;
 import java.util.Objects;
 
 import androidmads.library.qrgenearator.QRGContents;
 import androidmads.library.qrgenearator.QRGEncoder;
 import androidmads.library.qrgenearator.QRGSaver;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.schedulers.Schedulers;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 
 public class frm_genQRcode extends Fragment {
     private Bitmap bitmap;
+    ArrayList<cuahang>list;
+    adapter_store spnAdapter;
+    String location;
+    Spinner edtInput;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -51,12 +67,25 @@ public class frm_genQRcode extends Fragment {
         ImageView ivQRCode = view.findViewById(R.id.ivQRCode);
         Button btnGenerate = view.findViewById(R.id.btnGenerate);
         Button btnSave = view.findViewById(R.id.btnSave);
-        EditText edtInput = view.findViewById(R.id.edtInput);
-
+//        edtInput = view.findViewById(R.id.edtInput);
+//        list = new ArrayList<>();
+//        demoCallAPI();
+//        loaddata();
+//        edtInput.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+//            @Override
+//            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+//                location = list.get(position).getDiaChi();
+//            }
+//
+//            @Override
+//            public void onNothingSelected(AdapterView<?> parent) {
+//
+//            }
+//        });
         btnGenerate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (TextUtils.isEmpty(edtInput.getText().toString())) {
+                if (TextUtils.isEmpty(location)) {
                     Toast.makeText(getContext(), "Nhập nội dung cần tạo QR", Toast.LENGTH_SHORT).show();
                 } else {
                     WindowManager manager = (WindowManager) getActivity().getSystemService(WINDOW_SERVICE);
@@ -67,13 +96,10 @@ public class frm_genQRcode extends Fragment {
                     int height = point.y;
                     int dimen = Math.min(width, height);
                     dimen = dimen * 3 / 4;
-
-                    QRGEncoder qrgEncoder = new QRGEncoder(edtInput.getText().toString(), null, QRGContents.Type.TEXT, dimen);
-
+                    QRGEncoder qrgEncoder = new QRGEncoder(location, null, QRGContents.Type.TEXT, dimen);
                     //chỉnh màu sắc của QR
                     qrgEncoder.setColorBlack(Color.BLACK);
                     qrgEncoder.setColorWhite(Color.WHITE);
-
                     //hiển thị QR
                     bitmap = qrgEncoder.getBitmap(0);
                     ivQRCode.setImageBitmap(bitmap);
@@ -85,7 +111,7 @@ public class frm_genQRcode extends Fragment {
             @Override
             public void onClick(View view) {
                 //xin quyền
-                String filename = edtInput.getText().toString().trim();
+                String filename = location.trim();
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
                     try {
                         ContentResolver resolver = view.getContext().getContentResolver();
@@ -119,4 +145,36 @@ public class frm_genQRcode extends Fragment {
         });
         return view;
     }
+    private void demoCallAPI() {
+
+        service_API requestInterface = new Retrofit.Builder()
+                .baseUrl(Base_Service)
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create())
+                .build().create(service_API.class);
+
+        new CompositeDisposable().add(requestInterface.getModelCHAPI()
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(this::handleResponse, this::handleError)
+        );
+    }
+
+    private void handleResponse(ArrayList<cuahang> list1) {
+        //API trả về dữ liệu thành công, thực hiện việc lấy data
+        for(int i =0; i <list1.size(); i++){
+            list.add(i,list1.get(i));
+        }
+        spnAdapter.notifyDataSetChanged();
+    }
+
+    private void handleError(Throwable error) {
+        Log.d("erro", error.toString());
+        Toast.makeText(getContext(), error.toString(), Toast.LENGTH_SHORT).show();
+        //khi gọi API KHÔNG THÀNH CÔNG thì thực hiện xử lý ở đây
+    }
+//    private void loaddata(){
+//        spnAdapter = new adapter_store(getContext(),list);
+//        edtInput.setAdapter(spnAdapter);
+//    }
 }

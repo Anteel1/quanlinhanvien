@@ -32,11 +32,11 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class frm_store extends Fragment {
-    ArrayList<String> list,listLocation;
     RecyclerView recyclerView;
     TextView txtTotal;
     adapter_store adapter_store;
     Button btnsignup,btnUpdate;
+    ArrayList<cuahang>list;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -46,7 +46,6 @@ public class frm_store extends Fragment {
         btnsignup = view.findViewById(R.id.btnsignup);
         btnUpdate = view.findViewById(R.id.btnupdate);
         list = new ArrayList<>();
-        listLocation=new ArrayList<>();
         loaddata();
         demoCallAPI();
         return view;
@@ -54,7 +53,7 @@ public class frm_store extends Fragment {
     private void loaddata(){
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(linearLayoutManager);
-        adapter_store = new adapter_store(getContext(),list,listLocation);
+        adapter_store = new adapter_store(getContext(),list);
         recyclerView.setAdapter(adapter_store);
     }
     private void demoCallAPI() {
@@ -75,8 +74,7 @@ public class frm_store extends Fragment {
     private void handleResponse(ArrayList<cuahang> list1) {
         //API trả về dữ liệu thành công, thực hiện việc lấy data
         for(int i =0; i <list1.size(); i++){
-            list.add(i,list1.get(i).getTenCH());
-            listLocation.add(i,list1.get(i).getDiaChi());
+            list.add(i,list1.get(i));
         }
         adapter_store.notifyDataSetChanged();
         txtTotal.setText("Total store: "+list1.size());

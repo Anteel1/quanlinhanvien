@@ -100,7 +100,7 @@ public class frm_attendance extends Fragment {
         list.add(new Location(3, "CoopMart", "10.7587318,106.584954"));
         list.add(new Location(4, "Trường tiểu học A", "10.7614933,106.5879044"));
         list.add(new Location(5, "Tòa F", "10.8525201,106.6249008"));
-
+        // viet api goi vi tri cua hang
 
         //lọc data
         ArrayList<Location> listResult = new ArrayList<>();

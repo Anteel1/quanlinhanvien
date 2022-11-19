@@ -78,12 +78,7 @@ public class LoginActivity extends AppCompatActivity {
 
         //validate email
         if (!email.isEmpty()) {
-            if (Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-
-                return true;
-            } else {
-                return false;
-            }
+            return Patterns.EMAIL_ADDRESS.matcher(email).matches();
         } else {
             return false;
         }
@@ -94,12 +89,7 @@ public class LoginActivity extends AppCompatActivity {
         //validate password
         String password = edt_password.getText().toString();
 
-        if (!password.isEmpty()) {
-
-            return true;
-        } else {
-            return false;
-        }
+        return !password.isEmpty();
     }
 
     //kiểm tra các edit text
@@ -188,14 +178,13 @@ public class LoginActivity extends AppCompatActivity {
                 tv_validate_email.setText("");
                 kiemtra();
 
-                intent = new Intent(LoginActivity.this, MainActivity.class);
                 if (kiemtra_email() && kiemtra_password()) {
                     String email = edt_email.getText().toString();
                     String password = edt_password.getText().toString();
                     if (check_login(new model_tk(email, password))) {
-                        startActivity(intent);
+                        startActivity(intent = new Intent(LoginActivity.this, MainActivity.class));
                         finish();
-                    }else{
+                    } else {
                         Toast.makeText(LoginActivity.this, "đăng nhập thất bại", Toast.LENGTH_SHORT).show();
                     }
                 }

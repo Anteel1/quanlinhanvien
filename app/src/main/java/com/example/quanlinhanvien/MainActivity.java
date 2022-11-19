@@ -13,6 +13,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
+import com.example.quanlinhanvien.fragment.frm_calam;
 import com.example.quanlinhanvien.fragment.frm_dangkylichlam;
 import com.example.quanlinhanvien.fragment.frm_dangxuat;
 import com.example.quanlinhanvien.fragment.frm_diemdanh;
@@ -87,6 +88,9 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     case R.id.menu_thaydoilichlam:
                         fragment = new frm_thaydoi_lichlam();
+                        break;
+                    case R.id.menu_calam:
+                        fragment = new frm_calam();
                         break;
                     case R.id.menu_thongke:
                         fragment = new frm_thongke();

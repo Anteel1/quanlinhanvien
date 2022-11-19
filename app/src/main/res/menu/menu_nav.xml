@@ -10,6 +10,10 @@
         android:icon="@drawable/desk"
         android:title="Attendance" />
     <item
+        android:id="@+id/menu_calam"
+        android:icon="@drawable/desk"
+        android:title="Ca Làm" />
+    <item
         android:id="@+id/menu_thongke"
         android:icon="@drawable/desk_alt"
         android:title="Số liệu thống kê" />

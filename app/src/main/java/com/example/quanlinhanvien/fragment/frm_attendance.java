@@ -9,6 +9,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextClock;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,6 +36,7 @@ import com.google.zxing.Result;
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 
 import java.text.DecimalFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -43,12 +48,47 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class frm_attendance extends Fragment {
     private CodeScanner mCodeScanner;
     private CodeScannerView scannerView;
-    TextView txtTitle,txtResutl;
+    TextView txtTitle,txtResutl,tc_ngay;
     ArrayList<Location> list;
+    TextClock tc_gio;
+    LinearLayout layout_icon;
+    ImageView imgCheckIn,imgCheckOut;
+    FrameLayout layout_scan;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.frm_attendance, container, false);
+        //set time
+        tc_gio = v.findViewById(R.id.tc_gio);
+        tc_ngay = v.findViewById(R.id.tc_ngay);
+        layout_icon = v.findViewById(R.id.layout_icon);
+        txtTitle = v.findViewById(R.id.txtTitle);
+        layout_scan = v.findViewById(R.id.layout_scan);
+        //
+        tc_gio.setFormat12Hour("hh:mma");
+        tc_ngay.setText(LocalDate.now().getDayOfWeek().toString()+","+LocalDate.now().getMonth()+" "+LocalDate.now().getDayOfMonth());
+        imgCheckIn = v.findViewById(R.id.btnCheckin);
+        imgCheckOut=v.findViewById(R.id.btnCheckOut);
+        imgCheckIn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                layout_icon.setVisibility(View.GONE);
+                txtTitle.setVisibility(View.VISIBLE);
+                txtTitle.setText("Check in");
+                layout_scan.setVisibility(View.VISIBLE);
+                checkIn();
+            }
+        });
+        imgCheckOut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                layout_icon.setVisibility(View.GONE);
+                txtTitle.setVisibility(View.VISIBLE);
+                txtTitle.setText("Check out");
+                layout_scan.setVisibility(View.VISIBLE);
+                checkOut();
+            }
+        });
         scanQRpermission();
         txtResutl =v.findViewById(R.id.resutl);
         scannerView =v.findViewById(R.id.scanner_view);
@@ -197,5 +237,11 @@ public class frm_attendance extends Fragment {
         Log.d("erro", error.toString());
         Toast.makeText(getContext(), error.toString(), Toast.LENGTH_SHORT).show();
         //khi gọi API KHÔNG THÀNH CÔNG thì thực hiện xử lý ở đây
+    }
+    private void checkIn(){
+
+    }
+    private void checkOut(){
+
     }
 }

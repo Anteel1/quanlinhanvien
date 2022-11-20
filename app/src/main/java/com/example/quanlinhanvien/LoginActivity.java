@@ -45,6 +45,7 @@ public class LoginActivity extends AppCompatActivity {
         btn_signin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                progressBar.setVisibility(View.VISIBLE);
                 kiemtra();
                 demoCallAPI();
 //                intent =new Intent(LoginActivity.this, MainActivity.class);
@@ -151,7 +152,6 @@ public class LoginActivity extends AppCompatActivity {
 
     private void handleResponse(ArrayList<nhanvien> list1) {
         //API trả về dữ liệu thành công, thực hiện việc lấy data
-        progressBar.setVisibility(View.VISIBLE);
         for (int i = 0; i < list1.size(); i++) {
             if ((edt_email.getText().toString()).equals(list1.get(i).getTaiKhoan())) {
                 if ((edt_password.getText().toString()).equals(list1.get(i).getMatKhau())) {

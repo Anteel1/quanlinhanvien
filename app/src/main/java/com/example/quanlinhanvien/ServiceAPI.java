@@ -1,6 +1,7 @@
 package com.example.quanlinhanvien;
 
 import com.example.quanlinhanvien.model.User;
+import com.example.quanlinhanvien.model.chamcong;
 
 import java.util.ArrayList;
 
@@ -11,5 +12,8 @@ public interface ServiceAPI {
     String BASE_Service = "https://circle.kynalab.com/";
     @GET("api/getAllNV")
     Observable<ArrayList<User>> GetListUser();
+    String BASE_ServiceCC = "https://circle.kynalab.com/";
+    @GET("api/getAllCC")
+    Observable<ArrayList<chamcong>> GetListChamcong();
 
 }

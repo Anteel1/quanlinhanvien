@@ -1,5 +1,6 @@
 package com.example.quanlinhanvien.service;
 
+import com.example.quanlinhanvien.model.calam;
 import com.example.quanlinhanvien.model.cuahang;
 import com.example.quanlinhanvien.model.nhanvien;
 
@@ -16,5 +17,6 @@ public interface service_API {
     Observable<ArrayList<nhanvien>> getModelAPI();
     @GET("api/getAllCH")
     Observable<ArrayList<cuahang>> getModelCHAPI();
-
+    @GET("api/getAllCL")
+    Observable<ArrayList<calam>> getModelAPI_calam();
 }

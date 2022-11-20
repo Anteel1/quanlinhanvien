@@ -28,6 +28,7 @@ import com.budiyev.android.codescanner.DecodeCallback;
 import com.budiyev.android.codescanner.ScanMode;
 import com.example.quanlinhanvien.R;
 import com.example.quanlinhanvien.model.Location;
+import com.example.quanlinhanvien.model.calam;
 import com.example.quanlinhanvien.model.cuahang;
 import com.example.quanlinhanvien.others.GPSTracker;
 import com.example.quanlinhanvien.service.service_API;
@@ -37,6 +38,7 @@ import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 
 import java.text.DecimalFormat;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -54,17 +56,19 @@ public class frm_attendance extends Fragment {
     LinearLayout layout_icon;
     ImageView imgCheckIn,imgCheckOut;
     FrameLayout layout_scan;
+    ArrayList<calam>listCalam;
+    int gio,phut;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.frm_attendance, container, false);
-        //set time
         tc_gio = v.findViewById(R.id.tc_gio);
         tc_ngay = v.findViewById(R.id.tc_ngay);
         layout_icon = v.findViewById(R.id.layout_icon);
         txtTitle = v.findViewById(R.id.txtTitle);
         layout_scan = v.findViewById(R.id.layout_scan);
-        //
+        listCalam = new ArrayList<>();
+
         tc_gio.setFormat12Hour("hh:mma");
         tc_ngay.setText(LocalDate.now().getDayOfWeek().toString()+","+LocalDate.now().getMonth()+" "+LocalDate.now().getDayOfMonth());
         imgCheckIn = v.findViewById(R.id.btnCheckin);
@@ -72,21 +76,44 @@ public class frm_attendance extends Fragment {
         imgCheckIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // get localtime
+                gio = LocalDateTime.now().getHour();
+                phut = LocalDateTime.now().getMinute();
+
                 layout_icon.setVisibility(View.GONE);
                 txtTitle.setVisibility(View.VISIBLE);
                 txtTitle.setText("Check in");
                 layout_scan.setVisibility(View.VISIBLE);
-                checkIn();
+
+                // check distance
+                if(getData(0.02).size() == 1){
+                    checkIn();
+                    // gọi post lên update bảng chấm công
+                }else{
+                    Toast.makeText(getContext(), "Bạn không nằm trong phạm vi check in", Toast.LENGTH_SHORT).show();
+                }
+
             }
         });
         imgCheckOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // get localtime
+                gio = LocalDateTime.now().getHour();
+                phut = LocalDateTime.now().getMinute();
+
                 layout_icon.setVisibility(View.GONE);
                 txtTitle.setVisibility(View.VISIBLE);
                 txtTitle.setText("Check out");
                 layout_scan.setVisibility(View.VISIBLE);
-                checkOut();
+
+                //check distance
+                if(getData(0.02).size() == 1){
+                    checkOut();
+                    // gọi post lên update bảng chấm công
+                }else{
+                    Toast.makeText(getContext(), "Bạn không nằm trong phạm vi check in", Toast.LENGTH_SHORT).show();
+                }
             }
         });
         scanQRpermission();
@@ -95,10 +122,7 @@ public class frm_attendance extends Fragment {
         list = new ArrayList<>();
         codeScanner();
         demoCallAPI();
-        if(getData(0.02).size() == 1){
-            Toast.makeText(getContext(), "Chấm công thành công", Toast.LENGTH_SHORT).show();
-            // gọi post lên update bảng chấm công
-        }
+
         // get location theo km
         Log.d("Location",getData(20).size()+" ");
         return v;
@@ -238,8 +262,39 @@ public class frm_attendance extends Fragment {
         Toast.makeText(getContext(), error.toString(), Toast.LENGTH_SHORT).show();
         //khi gọi API KHÔNG THÀNH CÔNG thì thực hiện xử lý ở đây
     }
-    private void checkIn(){
+    private void demoCallAPI_calam() {
 
+        service_API requestInterface = new Retrofit.Builder()
+                .baseUrl(Base_Service)
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create())
+                .build().create(service_API.class);
+
+        new CompositeDisposable().add(requestInterface.getModelAPI_calam()
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(this::handleResponse_calam, this::handleError_calam)
+        );
+    }
+
+    private void handleResponse_calam(ArrayList<calam> list1) {
+        //API trả về dữ liệu thành công, thực hiện việc lấy data
+        for(int i =0; i <list1.size(); i++){
+            listCalam.add(new calam(list1.get(i).getMaCL(),list1.get(i).getTenCL(),
+                    list1.get(i).getGioBD(),list1.get(i).getGioKT()));
+        }
+    }
+
+    private void handleError_calam(Throwable error) {
+        Log.d("erro", error.toString());
+        Toast.makeText(getContext(), error.toString(), Toast.LENGTH_SHORT).show();
+        //khi gọi API KHÔNG THÀNH CÔNG thì thực hiện xử lý ở đây
+    }
+    private void checkIn(){
+        // get ca làm từ bảng chấm công
+
+        // so sánh giờ hiện tại và ca làm
+        
     }
     private void checkOut(){
 

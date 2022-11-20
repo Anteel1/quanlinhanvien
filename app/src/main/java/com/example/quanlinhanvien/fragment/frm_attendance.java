@@ -294,7 +294,8 @@ public class frm_attendance extends Fragment {
         // get ca làm từ bảng chấm công
 
         // so sánh giờ hiện tại và ca làm
-        
+       //switch(macl){case1-7 }
+
     }
     private void checkOut(){
 

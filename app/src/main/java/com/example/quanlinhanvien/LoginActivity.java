@@ -8,6 +8,7 @@ import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,7 +29,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class LoginActivity extends AppCompatActivity {
-
+    ProgressBar progressBar;
     TextView tv_forgotpassword;
     TextInputLayout txtlayoutEmail,txtLayoutPassword;
     TextInputEditText edt_email, edt_password;
@@ -65,6 +66,7 @@ public class LoginActivity extends AppCompatActivity {
         txtlayoutEmail = findViewById(R.id.txtlayoutEmail);
         txtLayoutPassword = findViewById(R.id.txtlayoutPassword);
         btn_signin = findViewById(R.id.btn_signin);
+        progressBar = findViewById(R.id.prb_login);
     }
 
     //kiểm tra không được bỏ trống thông tin đăng nhập
@@ -149,15 +151,18 @@ public class LoginActivity extends AppCompatActivity {
 
     private void handleResponse(ArrayList<nhanvien> list1) {
         //API trả về dữ liệu thành công, thực hiện việc lấy data
+        progressBar.setVisibility(View.VISIBLE);
         for (int i = 0; i < list1.size(); i++) {
             if ((edt_email.getText().toString()).equals(list1.get(i).getTaiKhoan())) {
                 if ((edt_password.getText().toString()).equals(list1.get(i).getMatKhau())) {
                     Toast.makeText(this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
+                    progressBar.setVisibility(View.GONE);
                     intent = new Intent(LoginActivity.this, MainActivity.class);
                     startActivity(intent);
                     finish();
                 }else {
                     txtLayoutPassword.setHelperText("Sai mật khẩu");
+                    progressBar.setVisibility(View.GONE);
                     txtLayoutPassword.setHelperTextColor(getResources().getColorStateList(R.color.red));
                     break;
                 }

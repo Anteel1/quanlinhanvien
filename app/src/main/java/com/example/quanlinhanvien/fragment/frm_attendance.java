@@ -58,6 +58,8 @@ public class frm_attendance extends Fragment {
     FrameLayout layout_scan;
     ArrayList<calam>listCalam;
     int gio,phut;
+    int maCL;
+    boolean tregio;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -295,7 +297,23 @@ public class frm_attendance extends Fragment {
 
         // so sánh giờ hiện tại và ca làm
        //switch(macl){case1-7 }
-
+//        for(calam s: listCalam){
+//
+//            if (s.getGioBD().equals(gio){
+//
+//            }
+//        }
+//
+//        for(chamcong cc: listchamcong){
+//                for (calam s:listCalam) {
+//                    if(cc.getCaLam == s.getMaCL()){
+//                        if(s.getGioBD()-0.5) <=gio && s.getGioBD().getGioBD()+0.5 >gio ){
+//                            Toast.makeText(getContext(), "Check in thành công", Toast.LENGTH_SHORT).show();
+//                            break;
+//                        }
+//                    }
+//        }
+//        }
     }
     private void checkOut(){
 

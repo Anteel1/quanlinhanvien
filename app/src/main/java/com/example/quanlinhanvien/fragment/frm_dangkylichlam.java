@@ -39,7 +39,7 @@ public class frm_dangkylichlam extends Fragment {
 
         return view;
     }
-    private void demoCallAPI() {
+    private void CallAPIcc() {
 
         ServiceAPI requestInterface = new Retrofit.Builder()
                 .baseUrl(BASE_ServiceCC)
@@ -59,6 +59,7 @@ public class frm_dangkylichlam extends Fragment {
 
 
 
+
     }
 
 
@@ -69,35 +70,6 @@ public class frm_dangkylichlam extends Fragment {
 
         //khi gọi API KHÔNG THÀNH CÔNG thì thực hiện xử lý ở đây
     }
-
-    private void CallAPIcc() {
-
-        ServiceAPI requestInterface = new Retrofit.Builder()
-                .baseUrl(BASE_Service)
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                .addConverterFactory(GsonConverterFactory.create())
-                .build().create(ServiceAPI.class);
-
-        new CompositeDisposable().add(requestInterface.GetListUser()
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeOn(Schedulers.io())
-                .subscribe(this::handleResponse, this::handleError1)
-        );
-    }
-
-    private void handleError1(Throwable throwable) {
-    }
-
-    private void handleResponse(ArrayList<User> list2) {
-        //API trả về dữ liệu thành công, thực hiện việc lấy data
-
-        for (int i = 0; i <= list2.size(); i++) {
-
-        }
-    }
-
-
-
 
 
 

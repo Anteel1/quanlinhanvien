@@ -43,7 +43,7 @@ public class LoginActivity extends AppCompatActivity {
     ImageView logo;
     ArrayList<User> list;
     User user;
-    int kt=0;
+    int kt = 0;
     ProgressBar progressBar;
 
 
@@ -62,14 +62,7 @@ public class LoginActivity extends AppCompatActivity {
                 prb_run();
                 tv_validate_password.setText("");
                 tv_validate_email.setText("");
-//                 if(kt==1) {
-//                     intent = new Intent(LoginActivity.this, MainActivity.class);
-//                     if (kiemtra_email() && kiemtra_password()) {
-//                         startActivity(intent);
-//                         finish();
-//                     }
-//
-//                 }
+
 
             }
         });
@@ -177,16 +170,14 @@ public class LoginActivity extends AppCompatActivity {
                         startActivity(intent);
                         finish();
                     }
-                    i=list1.size()+1;
-                    }
-                else {
+                    i = list1.size() + 1;
+                } else {
                     tv_validate_password.setText("sai mật khẩu");
-                    i=list1.size()+1;
-                }
-                }
+                    i = list1.size() + 1;
                 }
             }
-
+        }
+    }
 
 
     private void handleError(Throwable error) {
@@ -195,6 +186,7 @@ public class LoginActivity extends AppCompatActivity {
         Toast.makeText(this, "Lỗi", Toast.LENGTH_SHORT).show();
         //khi gọi API KHÔNG THÀNH CÔNG thì thực hiện xử lý ở đây
     }
+
     public void prb_run() {
         new CountDownTimer(3000, 1000) {
 
@@ -208,14 +200,9 @@ public class LoginActivity extends AppCompatActivity {
                 demoCallAPI();
 
 
-
             }
         }.start();
     }
-
-
-
-
 
 
 }

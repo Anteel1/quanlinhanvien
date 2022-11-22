@@ -5,6 +5,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
+import com.example.quanlinhanvien.model.chamcong;
+
 import java.util.ArrayList;
 
 public class adapter_chamcong extends BaseAdapter {

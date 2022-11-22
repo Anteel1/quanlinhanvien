@@ -140,7 +140,7 @@ public class LoginActivity extends AppCompatActivity {
             thongbao_password += "password không được để trống";
             tv_validate_password.setText(thongbao_password);
         }
-        demoCallAPI();
+
     }
 
     private void demoCallAPI() {

@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 
@@ -19,6 +21,7 @@ import com.example.quanlinhanvien.LoginActivity;
 import com.example.quanlinhanvien.MainActivity;
 import com.example.quanlinhanvien.R;
 import com.example.quanlinhanvien.ServiceAPI;
+import com.example.quanlinhanvien.adapter.adapter_chamcong;
 import com.example.quanlinhanvien.model.User;
 import com.example.quanlinhanvien.model.chamcong;
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
@@ -32,11 +35,17 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class frm_dangkylichlam extends Fragment {
+    ArrayList<chamcong> list;
+    TextView txtsonv;
+    ListView listviewcc;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.frm_dangkylichlam, container, false);
-
+        View view  = inflater.inflate(R.layout.frm_dangkylichlam, container, false);
+        txtsonv    = view.findViewById(R.id.txtsonv);
+        listviewcc = view.findViewById(R.id.listviewcc);
+        CallAPIcc();
         return view;
     }
     private void CallAPIcc() {
@@ -56,6 +65,10 @@ public class frm_dangkylichlam extends Fragment {
 
     private void handleRespons(ArrayList<chamcong> list1) {
         //API trả về dữ liệu thành công, thực hiện việc lấy data
+       txtsonv.setText(""+list1.size());
+       adapter_chamcong adapter_chamcong =new adapter_chamcong(list1,frm_dangkylichlam.this);
+       listviewcc.setAdapter(adapter_chamcong);
+
 
 
 
@@ -65,7 +78,8 @@ public class frm_dangkylichlam extends Fragment {
 
 
     private void handleError(Throwable error) {
-        String a = "";
+        String a = "lololol";
+        txtsonv.setText(a);
 
 
         //khi gọi API KHÔNG THÀNH CÔNG thì thực hiện xử lý ở đây

@@ -66,9 +66,11 @@ public class frm_dangkylichlam extends Fragment {
     private void handleRespons(ArrayList<chamcong> list1) {
         //API trả về dữ liệu thành công, thực hiện việc lấy data
        txtsonv.setText(""+list1.size());
-       adapter_chamcong adapter_chamcong =new adapter_chamcong(list1,frm_dangkylichlam.this);
-       listviewcc.setAdapter(adapter_chamcong);
-
+        for (int i = 0; i <= list1.size(); i++) {
+            list.add(list1.get(i));
+        }
+//        adapter_chamcong adapter_chamcong = new adapter_chamcong(list, getContext());
+//       listviewcc.setAdapter(adapter_chamcong);
 
 
 
@@ -80,6 +82,7 @@ public class frm_dangkylichlam extends Fragment {
     private void handleError(Throwable error) {
         String a = "lololol";
         txtsonv.setText(a);
+        Toast.makeText(getContext(), "loi", Toast.LENGTH_SHORT).show();
 
 
         //khi gọi API KHÔNG THÀNH CÔNG thì thực hiện xử lý ở đây

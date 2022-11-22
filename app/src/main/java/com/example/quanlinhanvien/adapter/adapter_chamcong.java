@@ -16,13 +16,13 @@ import java.util.ArrayList;
 
 public class adapter_chamcong extends BaseAdapter {
    private ArrayList<chamcong> list1 ;
-   private frm_dangkylichlam frm_dangkylichlam;
+   private Context context;
 
 
 
-    public adapter_chamcong(ArrayList<chamcong> list1, frm_dangkylichlam frm_dangkylichlam) {
+    public adapter_chamcong(ArrayList<chamcong> list1, Context context) {
         this.list1 = list1;
-        this.frm_dangkylichlam =frm_dangkylichlam;
+        this.context=context;
     }
 
     @Override
@@ -50,7 +50,7 @@ public class adapter_chamcong extends BaseAdapter {
     @Override
     public View getView(int i, View view, ViewGroup parent) {
         ViewOfItem viewOfItem;
-        LayoutInflater inflater = (frm_dangkylichlam).getLayoutInflater();
+        LayoutInflater inflater = ((Activity)context).getLayoutInflater();
         if(view == null){
             viewOfItem = new ViewOfItem();
             view = inflater.inflate(R.layout.item_chamcong, null);

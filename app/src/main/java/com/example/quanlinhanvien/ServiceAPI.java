@@ -13,7 +13,7 @@ public interface ServiceAPI {
     @GET("api/getAllNV")
     Observable<ArrayList<User>> GetListUser();
     String BASE_ServiceCC = "https://circle.kynalab.com/";
-    @GET("api/getAllCL")
+    @GET("api/getNV1")
     Observable<ArrayList<chamcong>> GetListChamcong();
 
 }

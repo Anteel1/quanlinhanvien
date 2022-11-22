@@ -63,12 +63,12 @@ public class adapter_chamcong extends BaseAdapter {
             viewOfItem = (ViewOfItem) view.getTag();
         }
         viewOfItem.txtnv.setText(""+list1.get(i).getTenNV());
-        if(viewOfItem.txtgiovao == null){
-            viewOfItem.txtgiovao.setText("--|--");      }
-        else {viewOfItem.txtgiovao.setText(""+list1.get(i).getGiobd().toString());}
-        if(viewOfItem.txtgiora == null){
-            viewOfItem.txtgiora.setText("--|--");    }
-        else {viewOfItem.txtgiora.setText(""+list1.get(i).getGiokt().toString());}
+     //   if(viewOfItem.txtgiovao == null){
+            viewOfItem.txtgiovao.setText("--|--");  //    }
+     //   else {viewOfItem.txtgiovao.setText(""+list1.get(i).getGiobd().toString());}
+      //  if(viewOfItem.txtgiora == null){
+            viewOfItem.txtgiora.setText("--|--");  //  }
+      //  else {viewOfItem.txtgiora.setText(""+list1.get(i).getGiokt().toString());}
 
         return null;
     }

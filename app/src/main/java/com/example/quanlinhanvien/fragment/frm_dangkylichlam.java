@@ -45,6 +45,7 @@ public class frm_dangkylichlam extends Fragment {
         View view  = inflater.inflate(R.layout.frm_dangkylichlam, container, false);
         txtsonv    = view.findViewById(R.id.txtsonv);
         listviewcc = view.findViewById(R.id.listviewcc);
+        list = new ArrayList<chamcong>();
         CallAPIcc();
         return view;
     }
@@ -66,11 +67,11 @@ public class frm_dangkylichlam extends Fragment {
     private void handleRespons(ArrayList<chamcong> list1) {
         //API trả về dữ liệu thành công, thực hiện việc lấy data
        txtsonv.setText(""+list1.size());
-        for (int i = 0; i <= list1.size(); i++) {
+        for (int i = 0; i < list1.size(); i++) {
             list.add(list1.get(i));
         }
-//        adapter_chamcong adapter_chamcong = new adapter_chamcong(list, getContext());
-//       listviewcc.setAdapter(adapter_chamcong);
+       adapter_chamcong adapter_chamcong = new adapter_chamcong(list, getContext());
+       listviewcc.setAdapter(adapter_chamcong);
 
 
 

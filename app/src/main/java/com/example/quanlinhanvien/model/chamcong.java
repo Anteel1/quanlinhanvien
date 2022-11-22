@@ -1,14 +1,14 @@
 package com.example.quanlinhanvien.model;
 
 
-import com.google.type.DateTime;
+
 
 public class chamcong {
     private String tenNV;
-    private DateTime giobd;
-    private DateTime giokt;
+    private String giobd;
+    private String giokt;
 
-    public chamcong(String tenNV, DateTime giobd, DateTime giokt) {
+    public chamcong(String tenNV, String giobd, String giokt) {
         this.tenNV = tenNV;
         this.giobd = giobd;
         this.giokt = giokt;
@@ -24,19 +24,19 @@ public class chamcong {
         this.tenNV = tenNV;
     }
 
-    public DateTime getGiobd() {
+    public String getGiobd() {
         return giobd;
     }
 
-    public void setGiobd(DateTime giobd) {
+    public void setGiobd(String giobd) {
         this.giobd = giobd;
     }
 
-    public DateTime getGiokt() {
+    public String getGiokt() {
         return giokt;
     }
 
-    public void setGiokt(DateTime giokt) {
+    public void setGiokt(String giokt) {
         this.giokt = giokt;
     }
 }

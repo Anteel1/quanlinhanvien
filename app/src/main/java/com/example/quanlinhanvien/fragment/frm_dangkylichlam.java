@@ -45,8 +45,11 @@ public class frm_dangkylichlam extends Fragment {
         View view  = inflater.inflate(R.layout.frm_dangkylichlam, container, false);
         txtsonv    = view.findViewById(R.id.txtsonv);
         listviewcc = view.findViewById(R.id.listviewcc);
-        list = new ArrayList<chamcong>();
+        list = new ArrayList<>();
+
         CallAPIcc();
+
+        show(list);
         return view;
     }
     private void CallAPIcc() {
@@ -71,7 +74,7 @@ public class frm_dangkylichlam extends Fragment {
             list.add(list1.get(i));
         }
 
-     //     show(list);
+          show(list);
 
 
     }

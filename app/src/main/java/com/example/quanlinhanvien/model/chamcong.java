@@ -4,11 +4,11 @@ package com.example.quanlinhanvien.model;
 
 
 public class chamcong {
-    private String tenNV;
-    private String giobd;
-    private String giokt;
+    private Object tenNV;
+    private Object giobd;
+    private Object giokt;
 
-    public chamcong(String tenNV, String giobd, String giokt) {
+    public chamcong(Object tenNV, Object giobd, Object giokt) {
         this.tenNV = tenNV;
         this.giobd = giobd;
         this.giokt = giokt;
@@ -16,27 +16,27 @@ public class chamcong {
 
 
 
-    public String getTenNV() {
+    public Object getTenNV() {
         return tenNV;
     }
 
-    public void setTenNV(String tenNV) {
+    public void setTenNV(Object tenNV) {
         this.tenNV = tenNV;
     }
 
-    public String getGiobd() {
+    public Object getGiobd() {
         return giobd;
     }
 
-    public void setGiobd(String giobd) {
+    public void setGiobd(Object giobd) {
         this.giobd = giobd;
     }
 
-    public String getGiokt() {
+    public Object getGiokt() {
         return giokt;
     }
 
-    public void setGiokt(String giokt) {
+    public void setGiokt(Object giokt) {
         this.giokt = giokt;
     }
 }

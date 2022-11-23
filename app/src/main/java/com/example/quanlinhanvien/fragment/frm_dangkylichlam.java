@@ -70,10 +70,8 @@ public class frm_dangkylichlam extends Fragment {
         for (int i = 0; i < list1.size(); i++) {
             list.add(list1.get(i));
         }
-       adapter_chamcong adapter_chamcong = new adapter_chamcong(list, getContext());
-       listviewcc.setAdapter(adapter_chamcong);
 
-
+     //     show(list);
 
 
     }
@@ -87,6 +85,13 @@ public class frm_dangkylichlam extends Fragment {
 
 
         //khi gọi API KHÔNG THÀNH CÔNG thì thực hiện xử lý ở đây
+    }
+    private void show(ArrayList<chamcong> listcc){
+        adapter_chamcong adapter_chamcong = new adapter_chamcong(listcc, getContext());
+        listviewcc.setAdapter(adapter_chamcong);
+
+
+
     }
 
 

@@ -15,25 +15,25 @@ import com.example.quanlinhanvien.model.chamcong;
 import java.util.ArrayList;
 
 public class adapter_chamcong extends BaseAdapter {
-   private ArrayList<chamcong> list1 ;
+   private ArrayList<chamcong> list ;
    private Context context;
 
 
 
-    public adapter_chamcong(ArrayList<chamcong> list1, Context context) {
-        this.list1 = list1;
+    public adapter_chamcong(ArrayList<chamcong> list, Context context) {
+        this.list = list;
         this.context=context;
     }
 
     @Override
     public int getCount() {
-        return list1.size();
+        return list.size();
     }
 
 
     @Override
     public Object getItem(int position) {
-        return list1.get(position);
+        return list.get(position);
     }
 
 
@@ -47,28 +47,29 @@ public class adapter_chamcong extends BaseAdapter {
     }
 
 
+
     @Override
     public View getView(int i, View view, ViewGroup parent) {
-        ViewOfItem viewOfItem;
+        ViewOfItem viewOf;
         LayoutInflater inflater = ((Activity)context).getLayoutInflater();
         if(view == null){
-            viewOfItem = new ViewOfItem();
+            viewOf = new ViewOfItem();
             view = inflater.inflate(R.layout.item_chamcong, null);
-            viewOfItem.txtnv = view.findViewById(R.id.txtnv);
-            viewOfItem.txtgiovao = view.findViewById(R.id.txtgiovao);
-            viewOfItem.txtgiora = view.findViewById(R.id.txtgiora);
+            viewOf.txtnv = view.findViewById(R.id.txtnv);
+            viewOf.txtgiovao = view.findViewById(R.id.txtgiovao);
+            viewOf.txtgiora = view.findViewById(R.id.txtgiora);
 
-            view.setTag(viewOfItem);
+            view.setTag(viewOf);
         }else {
-            viewOfItem = (ViewOfItem) view.getTag();
+            viewOf = (ViewOfItem) view.getTag();
         }
-        viewOfItem.txtnv.setText(""+list1.get(i).getTenNV());
+        viewOf.txtnv.setText(""+list.get(i).getTenNV());
      //   if(viewOfItem.txtgiovao == null){
-            viewOfItem.txtgiovao.setText("--|--");  //    }
-     //   else {viewOfItem.txtgiovao.setText(""+list1.get(i).getGiobd().toString());}
+            viewOf.txtgiovao.setText("--|--");  //    }
+     //   else {viewOfItem.txtgiovao.setText(""+list.get(i).getGiobd().toString());}
       //  if(viewOfItem.txtgiora == null){
-            viewOfItem.txtgiora.setText("--|--");  //  }
-      //  else {viewOfItem.txtgiora.setText(""+list1.get(i).getGiokt().toString());}
+            viewOf.txtgiora.setText("--|--");  //  }
+      //  else {viewOfItem.txtgiora.setText(""+list.get(i).getGiokt().toString());}
 
         return null;
     }

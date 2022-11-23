@@ -304,7 +304,7 @@ public class frm_attendance extends Fragment {
 //            }
 //        }
 //
-//        for(chamcong cc: listchamcong){
+//        for(chamcong cc: listchacong){
 //                for (calam s:listCalam) {
 //                    if(cc.getCaLam == s.getMaCL()){
 //                        if(s.getGioBD()-0.5) <=gio && s.getGioBD().getGioBD()+0.5 >gio ){

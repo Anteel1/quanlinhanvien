@@ -1,35 +1,6 @@
 package com.example.quanlinhanvien.fragment;
 
-import static com.example.quanlinhanvien.service.service_API.Base_Service;
-
-import android.os.Bundle;
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.TextView;
-import android.widget.Toast;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
-import com.example.quanlinhanvien.R;
-import com.example.quanlinhanvien.adapter.adapter_store;
-import com.example.quanlinhanvien.model.cuahang;
-import com.example.quanlinhanvien.service.service_API;
-import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
-
-import java.util.ArrayList;
-
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.CompositeDisposable;
-import io.reactivex.schedulers.Schedulers;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 public class frm_store extends Fragment {
 //    RecyclerView recyclerView;

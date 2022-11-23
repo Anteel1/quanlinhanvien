@@ -3,13 +3,14 @@
     android:layout_width="match_parent"
     android:orientation="vertical"
     android:padding="10dp"
+
     android:layout_height="wrap_content">
     <TextView
         android:layout_marginTop="10dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/title_dialog"
-        android:text="Đăng xuất"
+        android:text="Log out"
         android:textSize="24sp"
         android:layout_gravity="center_horizontal"
         android:textColor="@color/black"
@@ -29,7 +30,7 @@
         android:layout_gravity="center"
         android:textSize="20sp"
         android:textColor="@color/black"
-        android:text="Bạn xác nhận rời khỏi hệ thống chứ ?"
+        android:text="Do you want to log out ?"
         />
     <LinearLayout
         android:layout_width="match_parent"
@@ -40,7 +41,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/btnYes"
             android:padding="16dp"
-            android:text="Đồng ý"
+            android:text="Yes"
             android:backgroundTint="@color/statusbar"
             android:layout_weight="1"
             android:layout_margin="20dp"
@@ -56,7 +57,7 @@
             android:backgroundTint="@color/white"
             android:textSize="18dp"
             android:layout_margin="20dp"
-            android:text="Hủy bỏ"
+            android:text="No"
             />
     </LinearLayout>
 </LinearLayout>

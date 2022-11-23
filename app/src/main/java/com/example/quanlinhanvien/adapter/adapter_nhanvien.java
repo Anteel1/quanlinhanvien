@@ -48,7 +48,7 @@ public class adapter_nhanvien extends RecyclerView.Adapter<adapter_nhanvien.View
         TextView tv;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            tv = itemView.findViewById(R.id.tv_);
+            tv = itemView.findViewById(R.id.txtTenNV);
         }
     }
 }

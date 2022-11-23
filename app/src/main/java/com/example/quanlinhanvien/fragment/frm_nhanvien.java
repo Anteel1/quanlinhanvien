@@ -1,68 +1,155 @@
 package com.example.quanlinhanvien.fragment;
 
+import static com.example.quanlinhanvien.service.service_API.Base_Service;
+
+import android.app.DatePickerDialog;
+import android.app.Dialog;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.DatePicker;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.quanlinhanvien.R;
 import com.example.quanlinhanvien.adapter.adapter_nhanvien;
+import com.example.quanlinhanvien.model.nhanvien;
+import com.example.quanlinhanvien.service.service_API;
+import com.google.android.material.textfield.TextInputEditText;
+import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Calendar;
 
-public class frm_nhanvien extends Fragment {
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.schedulers.Schedulers;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
+public class frm_nhanvien extends Fragment implements DatePickerDialog.OnDateSetListener {
     ArrayList<String> list;
     RecyclerView recyclerView;
+    TextView txtTotal,txtTitle;
     adapter_nhanvien adapter_nhanvien;
-
+    String ngay;
+    TextInputEditText txtName,txtNameUser,txtPassword,txtCreateDate,txtPhoneNumber,txtAddress,txtStore,txtDutyID;
+    Button btnsignup,btnUpdate,btnDangky;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.frm_nhanvien, container, false);
-
+        txtTotal = view.findViewById(R.id.totalListNV);
         recyclerView = view.findViewById(R.id.rcv_nhanvien);
+        btnsignup = view.findViewById(R.id.btnsignup);
+        btnUpdate = view.findViewById(R.id.btnupdate);
+        btnsignup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openDialog(1);
+            }
+        });
+        btnUpdate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openDialog(2);
+            }
+        });
         list = new ArrayList<>();
-
-        loaddata(list);
-
-
-
-
+        loaddata();
+        demoCallAPI();
         return view;
     }
-
-    public void loaddata(ArrayList<String> list1){
-        data();
+    private void loaddata(){
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
-        linearLayoutManager.setOrientation(recyclerView.VERTICAL);
         recyclerView.setLayoutManager(linearLayoutManager);
-        adapter_nhanvien = new adapter_nhanvien(getContext(), list1);
+        adapter_nhanvien = new adapter_nhanvien(getContext(),list);
         recyclerView.setAdapter(adapter_nhanvien);
     }
+    private void demoCallAPI() {
 
-    public void data(){
-        list.add("a");
-        list.add("b");
-        list.add("a");
-        list.add("b");
-        list.add("a");
-        list.add("b");
-        list.add("a");
-        list.add("b");
-        list.add("a");
-        list.add("b");
-        list.add("a");
-        list.add("b");
-        list.size();
+        service_API requestInterface = new Retrofit.Builder()
+                .baseUrl(Base_Service)
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create())
+                .build().create(service_API.class);
 
+        new CompositeDisposable().add(requestInterface.getModelAPI()
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(this::handleResponse, this::handleError)
+        );
     }
 
+    private void handleResponse(ArrayList<nhanvien> list1) {
+        //API trả về dữ liệu thành công, thực hiện việc lấy data
+        for(int i =0; i <list1.size(); i++){
+            list.add(i,list1.get(i).getTenNV());
+        }
+        adapter_nhanvien.notifyDataSetChanged();
+        txtTotal.setText("Total employees: "+list1.size());
+    }
 
+    private void handleError(Throwable error) {
+        Log.d("erro", error.toString());
+        Toast.makeText(getContext(), error.toString(), Toast.LENGTH_SHORT).show();
+        //khi gọi API KHÔNG THÀNH CÔNG thì thực hiện xử lý ở đây
+    }
+    private void showDatePicker() {
+        DatePickerDialog datePickerDialog = new DatePickerDialog(
+                getContext(), this, Calendar.getInstance().get(Calendar.YEAR),
+                Calendar.getInstance().get(Calendar.MONTH),
+                Calendar.getInstance().get(Calendar.DAY_OF_MONTH)
+        );
+        datePickerDialog.show();
+    }
+
+    @Override
+    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+        ngay = dayOfMonth + "-" + month + "-" + year;
+        txtCreateDate.setText(ngay);
+    }
+    private void openDialog(int type){
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        LayoutInflater inflater1 =getActivity().getLayoutInflater();
+        View v2 =inflater1.inflate(R.layout.dialog_signup,null);
+        builder.setView(v2);
+        Dialog dialog = builder.create();
+        dialog.show();
+        txtTitle = v2.findViewById(R.id.txtTitle);
+        txtName = v2.findViewById(R.id.txtName);
+        txtNameUser = v2.findViewById(R.id.txtNameUser);
+        txtPassword = v2.findViewById(R.id.txtPassword);
+        txtCreateDate= v2.findViewById(R.id.txtCreateDate);
+        txtPhoneNumber= v2.findViewById(R.id.txtPhoneNumber);
+        txtAddress = v2.findViewById(R.id.txtAddress);
+        txtStore = v2.findViewById(R.id.txtStore);
+        txtDutyID = v2.findViewById(R.id.txtDutyID);
+        btnDangky = v2.findViewById(R.id.btndangky);
+        if(type==1){
+            txtCreateDate.setText(LocalDate.now().getDayOfMonth()+"-"+LocalDate.now().getMonthValue()+"-"+LocalDate.now().getYear());
+            txtCreateDate.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    showDatePicker();
+                }
+            });
+        }else{
+            txtTitle.setText("Update Profile");
+            btnDangky.setText("Update");
+            Toast.makeText(getContext(), "Cập nhật", Toast.LENGTH_SHORT).show();
+        }
+
+    }
 }

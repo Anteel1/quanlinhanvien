@@ -16,15 +16,18 @@
 
   <include layout="@layout/toolbar"/>
 
-  <LinearLayout
+  <RelativeLayout
       android:layout_width="match_parent"
       android:layout_height="match_parent"
-      android:id="@+id/linear"
-      android:orientation="vertical">
+      >
 
-
-
-  </LinearLayout>
+   <androidx.fragment.app.FragmentContainerView
+       android:id="@+id/fragment_view"
+       android:layout_width="match_parent"
+       android:layout_height="match_parent"
+       android:layout_alignParentTop="true"
+       android:layout_alignParentBottom="true" />
+  </RelativeLayout>
 
  </LinearLayout>
 

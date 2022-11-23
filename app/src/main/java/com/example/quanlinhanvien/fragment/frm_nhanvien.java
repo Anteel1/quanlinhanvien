@@ -1,145 +1,155 @@
 package com.example.quanlinhanvien.fragment;
 
-import android.app.AlertDialog;
+import static com.example.quanlinhanvien.service.service_API.Base_Service;
+
+import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
+import android.widget.DatePicker;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.quanlinhanvien.R;
 import com.example.quanlinhanvien.adapter.adapter_nhanvien;
+import com.example.quanlinhanvien.model.nhanvien;
+import com.example.quanlinhanvien.service.service_API;
+import com.google.android.material.textfield.TextInputEditText;
+import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Calendar;
 
-public class frm_nhanvien extends Fragment {
-    EditText edtname, edtusername, edtpassword, edtphonenum, edtaddress, edtid;
-    TextView txtva_name, tv_validate_username, tv_validate_password, tv_validate_phone_number, tv_validate_address, tv_validate_id;
-    private Button btnsignup, btnupdate, btndangky, btnthaydoi;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.schedulers.Schedulers;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
+public class frm_nhanvien extends Fragment implements DatePickerDialog.OnDateSetListener {
+    ArrayList<String> list;
+    RecyclerView recyclerView;
+    TextView txtTotal,txtTitle;
+    adapter_nhanvien adapter_nhanvien;
+    String ngay;
+    TextInputEditText txtName,txtNameUser,txtPassword,txtCreateDate,txtPhoneNumber,txtAddress,txtStore,txtDutyID;
+    Button btnsignup,btnUpdate,btnDangky;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.frm_nhanvien, container, false);
+        txtTotal = view.findViewById(R.id.totalListNV);
+        recyclerView = view.findViewById(R.id.rcv_nhanvien);
         btnsignup = view.findViewById(R.id.btnsignup);
-        btnupdate = view.findViewById(R.id.btnupdate);
-        //
+        btnUpdate = view.findViewById(R.id.btnupdate);
         btnsignup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-                View view1 = LayoutInflater.from(getContext()).inflate(R.layout.dialog_signup, null);
-                builder.setView(view1);
-                Dialog dialog = builder.create();
-                dialog.show();
-                edtname = view1.findViewById(R.id.edtname);
-                txtva_name = view1.findViewById(R.id.tv_validate_name);
-                //
-                edtusername = view1.findViewById(R.id.edtusername);
-                tv_validate_username = view1.findViewById(R.id.tv_validate_username);
-                //
-                edtpassword = view1.findViewById(R.id.edtpassword);
-                tv_validate_password = view1.findViewById(R.id.tv_validate_password);
-                //
-                edtaddress = view1.findViewById(R.id.edtaddress);
-                tv_validate_address = view1.findViewById(R.id.tv_validate_address);
-                //
-                edtphonenum = view1.findViewById(R.id.edtphonenum);
-                tv_validate_phone_number = view1.findViewById(R.id.tv_validate_phone_number);
-                //
-                edtid = view1.findViewById(R.id.edtid);
-                tv_validate_id = view1.findViewById(R.id.tv_validate_id);
-                btndangky = view1.findViewById(R.id.btndangky);
-                btndangky.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        kiemtra();
-
-                    }
-                });
-
-
+                openDialog(1);
             }
         });
-        btnupdate.setOnClickListener(new View.OnClickListener() {
+        btnUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-                View view2 = LayoutInflater.from(getContext()).inflate(R.layout.dialog_update, null);
-                builder.setView(view2);
-                Dialog dialog = builder.create();
-                dialog.show();
-                edtname = view2.findViewById(R.id.edtname);
-                txtva_name = view2.findViewById(R.id.tv_validate_name);
-                //
-                edtusername = view2.findViewById(R.id.edtusername);
-                tv_validate_username = view2.findViewById(R.id.tv_validate_username);
-                //
-                edtpassword = view2.findViewById(R.id.edtpassword);
-                tv_validate_password = view2.findViewById(R.id.tv_validate_password);
-                //
-                edtaddress = view2.findViewById(R.id.edtaddress);
-                tv_validate_address = view2.findViewById(R.id.tv_validate_address);
-                //
-                edtphonenum = view2.findViewById(R.id.edtphonenum);
-                tv_validate_phone_number = view2.findViewById(R.id.tv_validate_phone_number);
-                //
-                edtid = view2.findViewById(R.id.edtid);
-                tv_validate_id = view2.findViewById(R.id.tv_validate_id);
-                btnthaydoi = view2.findViewById(R.id.btnthaydoi);
-                btnthaydoi.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        kiemtra();
-                    }
-                });
-
+                openDialog(2);
             }
         });
-
-
-
-
-
-
+        list = new ArrayList<>();
+        loaddata();
+        demoCallAPI();
         return view;
     }
+    private void loaddata(){
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
+        recyclerView.setLayoutManager(linearLayoutManager);
+        adapter_nhanvien = new adapter_nhanvien(getContext(),list);
+        recyclerView.setAdapter(adapter_nhanvien);
+    }
+    private void demoCallAPI() {
 
-    public void kiemtra() {
-        if (edtname.getText().toString().equals("")) {
-            txtva_name.setText("Không được để trống");
-        }
-        //
-        if (edtusername.getText().toString().equals("")) {
-            tv_validate_username.setText("Không được để trống");
-        }
-        //
-        if (edtpassword.getText().toString().equals("")) {
-            tv_validate_password.setText("Không được để trống");
-        }
-        //
-        if (edtphonenum.getText().toString().equals("")) {
-            tv_validate_phone_number.setText("Không được để trống");
-        }
-        //
-        if (edtaddress.getText().toString().equals("")) {
-            tv_validate_address.setText("Không được để trống");
-        }
-        //
-        if (edtid.getText().toString().equals("")) {
-            tv_validate_id.setText("Không được để trống");
-        }
+        service_API requestInterface = new Retrofit.Builder()
+                .baseUrl(Base_Service)
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create())
+                .build().create(service_API.class);
 
+        new CompositeDisposable().add(requestInterface.getModelAPI()
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(this::handleResponse, this::handleError)
+        );
+    }
+
+    private void handleResponse(ArrayList<nhanvien> list1) {
+        //API trả về dữ liệu thành công, thực hiện việc lấy data
+        for(int i =0; i <list1.size(); i++){
+            list.add(i,list1.get(i).getTenNV());
+        }
+        adapter_nhanvien.notifyDataSetChanged();
+        txtTotal.setText("Total employees: "+list1.size());
+    }
+
+    private void handleError(Throwable error) {
+        Log.d("erro", error.toString());
+        Toast.makeText(getContext(), error.toString(), Toast.LENGTH_SHORT).show();
+        //khi gọi API KHÔNG THÀNH CÔNG thì thực hiện xử lý ở đây
+    }
+    private void showDatePicker() {
+        DatePickerDialog datePickerDialog = new DatePickerDialog(
+                getContext(), this, Calendar.getInstance().get(Calendar.YEAR),
+                Calendar.getInstance().get(Calendar.MONTH),
+                Calendar.getInstance().get(Calendar.DAY_OF_MONTH)
+        );
+        datePickerDialog.show();
+    }
+
+    @Override
+    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+        ngay = dayOfMonth + "-" + month + "-" + year;
+        txtCreateDate.setText(ngay);
+    }
+    private void openDialog(int type){
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        LayoutInflater inflater1 =getActivity().getLayoutInflater();
+        View v2 =inflater1.inflate(R.layout.dialog_signup,null);
+        builder.setView(v2);
+        Dialog dialog = builder.create();
+        dialog.show();
+        txtTitle = v2.findViewById(R.id.txtTitle);
+        txtName = v2.findViewById(R.id.txtName);
+        txtNameUser = v2.findViewById(R.id.txtNameUser);
+        txtPassword = v2.findViewById(R.id.txtPassword);
+        txtCreateDate= v2.findViewById(R.id.txtCreateDate);
+        txtPhoneNumber= v2.findViewById(R.id.txtPhoneNumber);
+        txtAddress = v2.findViewById(R.id.txtAddress);
+        txtStore = v2.findViewById(R.id.txtStore);
+        txtDutyID = v2.findViewById(R.id.txtDutyID);
+        btnDangky = v2.findViewById(R.id.btndangky);
+        if(type==1){
+            txtCreateDate.setText(LocalDate.now().getDayOfMonth()+"-"+LocalDate.now().getMonthValue()+"-"+LocalDate.now().getYear());
+            txtCreateDate.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    showDatePicker();
+                }
+            });
+        }else{
+            txtTitle.setText("Update Profile");
+            btnDangky.setText("Update");
+            Toast.makeText(getContext(), "Cập nhật", Toast.LENGTH_SHORT).show();
+        }
 
     }
 }

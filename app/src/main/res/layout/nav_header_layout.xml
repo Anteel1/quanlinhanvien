@@ -4,7 +4,7 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:gravity="center"
-    android:background="@color/green">
+    android:background="@color/statusbar">
 
     <ImageView
         android:layout_width="wrap_content"
@@ -13,9 +13,10 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="30dp"
+        android:textSize="20dp"
+        android:textColor="@color/white"
         android:id="@+id/name"
-        android:text="NHÓM 1"/>
+        android:text="Hi! User name"/>
 
 
 

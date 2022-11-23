@@ -42,4 +42,3 @@ public class frm_dangxuat extends DialogFragment {
     }
     public static String TAG ="Exit";
 }
-

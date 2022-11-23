@@ -10,14 +10,22 @@
         android:layout_height="wrap_content"
         android:padding="8dp"
         android:background="@drawable/custom_edt"
-        android:orientation="vertical"
+        android:orientation="horizontal"
         >
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textStyle="italic"
+            android:layout_weight="1"
             android:text="Nguyễn văn A"
-            android:id="@+id/txtTenNV"
+            android:id="@+id/txtTenStore"
+            />
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/pngwing"
+            android:layout_weight="1"
+            android:id="@+id/imgLocation"
             />
     </LinearLayout>
 

@@ -11,14 +11,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 
-import com.example.quanlinhanvien.fragment.frm_calam;
+import com.example.quanlinhanvien.fragment.frm_attendance;
 import com.example.quanlinhanvien.fragment.frm_dangkylichlam;
 import com.example.quanlinhanvien.fragment.frm_dangxuat;
-import com.example.quanlinhanvien.fragment.frm_diemdanh;
+import com.example.quanlinhanvien.fragment.frm_genQRcode;
 import com.example.quanlinhanvien.fragment.frm_nhanvien;
-import com.example.quanlinhanvien.fragment.frm_thaydoi_lichlam;
+import com.example.quanlinhanvien.fragment.frm_store;
 import com.example.quanlinhanvien.fragment.frm_thongke;
 import com.example.quanlinhanvien.fragment.frm_trangchu;
 import com.google.android.material.navigation.NavigationView;
@@ -29,18 +28,58 @@ public class MainActivity extends AppCompatActivity {
     DrawerLayout drawerLayout;
     Toolbar toolbar;
     NavigationView navigationView;
-
+    Fragment fragment;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-
         anhxa();
         menu_nav();
-        clicknavigation();
-
-
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.menu_home:
+                        fragment = new frm_trangchu();
+                        onRestoreInstanceState(savedInstanceState);
+                        break;
+                    case R.id.menu_Attendance:
+                        fragment = new frm_attendance();
+                        onRestoreInstanceState(savedInstanceState);
+                        break;
+                    case R.id.menu_store:
+                        fragment = new frm_store();
+                        onRestoreInstanceState(savedInstanceState);
+                        break;
+                    case R.id.menu_dk_lichlam:
+                        fragment = new frm_dangkylichlam();
+                        onRestoreInstanceState(savedInstanceState);
+                        break;
+                    case R.id.menu_nhanvien:
+                        fragment = new frm_nhanvien();
+                        onRestoreInstanceState(savedInstanceState);
+                        break;
+                    case R.id.menu_genqrcode:
+                        fragment = new frm_genQRcode();
+                        onRestoreInstanceState(savedInstanceState);
+                        break;
+                    case R.id.menu_thongke:
+                        fragment = new frm_thongke();
+                        onRestoreInstanceState(savedInstanceState);
+                        break;
+                    case R.id.menu_Logout:
+//                        fragment = new frm_dangxuat();
+                        new frm_dangxuat().show(getSupportFragmentManager(),frm_dangxuat.TAG);
+                        break;
+                    default:
+                        fragment = new frm_trangchu();
+                        break;
+                }
+                drawerLayout.closeDrawer(navigationView);
+                setTitle(item.getTitle());
+                return false;
+            }
+        });
     }
 
 
@@ -59,60 +98,17 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+    @Override
+    protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
+        if (savedInstanceState == null) {
+            getSupportFragmentManager().beginTransaction().
+                    add(R.id.fragment_view, fragment).commit();
 
-    private void clicknavigation() {
-        FragmentManager fragmentManager = getSupportFragmentManager();
+        }
+        else {
+            getSupportFragmentManager().beginTransaction().
+                    replace(R.id.fragment_view, fragment).commit();
 
-        fragmentManager
-                .beginTransaction()
-                .replace(R.id.linear, new frm_trangchu())
-                .commit();
-
-        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                Fragment fragment;
-
-                switch (item.getItemId()) {
-                    case R.id.menu_home:
-                        fragment = new frm_trangchu();
-                        break;
-                    case R.id.menu_diemdanh:
-                        fragment = new frm_diemdanh();
-                        break;
-                    case R.id.menu_dk_lichlam:
-                        fragment = new frm_dangkylichlam();
-                        break;
-                    case R.id.menu_nhanvien:
-                        fragment = new frm_nhanvien();
-                        break;
-                    case R.id.menu_thaydoilichlam:
-                        fragment = new frm_thaydoi_lichlam();
-                        break;
-                    case R.id.menu_calam:
-                        fragment = new frm_calam();
-                        break;
-                    case R.id.menu_thongke:
-                        fragment = new frm_thongke();
-                        break;
-                    case R.id.menu_Logout:
-                        fragment = new frm_dangxuat();
-                        break;
-                    default:
-                        fragment = new frm_trangchu();
-                        break;
-                }
-
-                fragmentManager
-                        .beginTransaction()
-                        .replace(R.id.linear, fragment)
-                        .commit();
-
-                drawerLayout.closeDrawer(navigationView);
-                setTitle(item.getTitle());
-
-                return false;
-            }
-        });
+        }
     }
 }

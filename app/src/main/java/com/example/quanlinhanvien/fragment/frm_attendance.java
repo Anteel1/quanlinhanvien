@@ -3,12 +3,16 @@ package com.example.quanlinhanvien.fragment;
 import static com.example.quanlinhanvien.service.service_API.Base_Service;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -50,6 +54,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class frm_attendance extends Fragment {
     private CodeScanner mCodeScanner;
     private CodeScannerView scannerView;
+    Button btnQRCode,btnNFC;
     TextView txtTitle,txtResutl,tc_ngay;
     ArrayList<Location> list;
     TextClock tc_gio;
@@ -57,6 +62,7 @@ public class frm_attendance extends Fragment {
     ImageView imgCheckIn,imgCheckOut;
     FrameLayout layout_scan;
     ArrayList<calam>listCalam;
+    ImageView imgCamera;
     int gio,phut;
     int maCL;
     boolean tregio;
@@ -70,7 +76,26 @@ public class frm_attendance extends Fragment {
         txtTitle = v.findViewById(R.id.txtTitle);
         layout_scan = v.findViewById(R.id.layout_scan);
         listCalam = new ArrayList<>();
+        btnNFC = v.findViewById(R.id.btnNFC);
+        btnQRCode=v.findViewById(R.id.btnQR);
+        imgCamera = v.findViewById(R.id.imgCamera);
 
+
+        btnQRCode.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                layout_icon.setVisibility(View.VISIBLE);
+                btnNFC.setVisibility(View.GONE);
+                btnQRCode.setVisibility(View.GONE);
+            }
+        });
+        btnNFC.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                btnNFC.setVisibility(View.GONE);
+                btnQRCode.setVisibility(View.GONE);
+            }
+        });
         tc_gio.setFormat12Hour("hh:mma");
         tc_ngay.setText(LocalDate.now().getDayOfWeek().toString()+","+LocalDate.now().getMonth()+" "+LocalDate.now().getDayOfMonth());
         imgCheckIn = v.findViewById(R.id.btnCheckin);
@@ -86,14 +111,9 @@ public class frm_attendance extends Fragment {
                 txtTitle.setVisibility(View.VISIBLE);
                 txtTitle.setText("Check in");
                 layout_scan.setVisibility(View.VISIBLE);
-
-                // check distance
-                if(getData(0.02).size() == 1){
-                    checkIn();
+                checkIn();
                     // gọi post lên update bảng chấm công
-                }else{
-                    Toast.makeText(getContext(), "Bạn không nằm trong phạm vi check in", Toast.LENGTH_SHORT).show();
-                }
+
 
             }
         });
@@ -108,14 +128,8 @@ public class frm_attendance extends Fragment {
                 txtTitle.setVisibility(View.VISIBLE);
                 txtTitle.setText("Check out");
                 layout_scan.setVisibility(View.VISIBLE);
-
-                //check distance
-                if(getData(0.02).size() == 1){
-                    checkOut();
+                checkOut();
                     // gọi post lên update bảng chấm công
-                }else{
-                    Toast.makeText(getContext(), "Bạn không nằm trong phạm vi check in", Toast.LENGTH_SHORT).show();
-                }
             }
         });
         scanQRpermission();
@@ -154,7 +168,7 @@ public class frm_attendance extends Fragment {
                 getActivity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        txtResutl.setText(result.toString());
+                        list.add(0,new Location(0,"Cửa hàng City Food",result.toString()));
                     }
                 });
             }
@@ -293,29 +307,38 @@ public class frm_attendance extends Fragment {
         //khi gọi API KHÔNG THÀNH CÔNG thì thực hiện xử lý ở đây
     }
     private void checkIn(){
-        // get ca làm từ bảng chấm công
-
-        // so sánh giờ hiện tại và ca làm
-       //switch(macl){case1-7 }
-//        for(calam s: listCalam){
-//
-//            if (s.getGioBD().equals(gio){
-//
-//            }
-//        }
-//
-//        for(chamcong cc: listchacong){
-//                for (calam s:listCalam) {
-//                    if(cc.getCaLam == s.getMaCL()){
-//                        if(s.getGioBD()-0.5) <=gio && s.getGioBD().getGioBD()+0.5 >gio ){
-//                            Toast.makeText(getContext(), "Check in thành công", Toast.LENGTH_SHORT).show();
-//                            break;
-//                        }
-//                    }
-//        }
-//        }
+    // check distance
+        if(getData(0.02).size() ==1){
+            for(calam calam:listCalam){
+                if(Integer.parseInt(calam.getGioBD())-1 <= gio && Integer.parseInt(calam.getGioKT())-1 >=gio){
+                    maCL = calam.getMaCL();
+                    layout_scan.setVisibility(View.GONE);
+                    turnonCamera();
+                }else{
+                    Toast.makeText(getContext(), "Chấm công thất bại", Toast.LENGTH_SHORT).show();
+                }
+            }
+        }else{
+            Log.d("Distance","noooooo");
+            Toast.makeText(getContext(), "Bạn không nằm trong khu vực cửa hàng", Toast.LENGTH_SHORT).show();
+        }
     }
     private void checkOut(){
 
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        if (requestCode == 2323 ){
+            Bitmap bitmap = (Bitmap) data.getExtras().get("data");
+            imgCamera.setImageBitmap(bitmap);
+            imgCamera.setVisibility(View.VISIBLE);
+        }
+
+        super.onActivityResult(requestCode, resultCode, data);
+    }
+    private void turnonCamera(){
+        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        startActivityForResult(intent,2323);
     }
 }

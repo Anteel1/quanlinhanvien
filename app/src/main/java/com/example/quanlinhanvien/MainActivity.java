@@ -35,6 +35,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         anhxa();
         menu_nav();
+        fragment = new frm_trangchu();
+        onRestoreInstanceState(savedInstanceState);
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {

@@ -4,48 +4,48 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".manhinhchoActivity"
     android:background="#73AB6B"
     android:orientation="vertical"
-
-    >
+    tools:context=".manhinhchoActivity">
 
     <ImageView
         android:layout_width="268dp"
         android:layout_height="94dp"
         android:layout_alignParentLeft="true"
-        android:layout_gravity="center"
         android:layout_alignParentTop="true"
+        android:layout_gravity="center"
         android:layout_marginTop="250dp"
-        android:src="@drawable/logo"
-        ></ImageView>
+        android:src="@drawable/logo" />
+
     <TextView
         android:layout_width="263dp"
         android:layout_height="50sp"
-        android:text="Quản lý nhân viên"
-        android:textSize="20sp"
-        android:layout_marginTop="12dp"
         android:layout_gravity="center"
-        android:textColor="@color/white"
+        android:layout_marginTop="12dp"
         android:gravity="center_horizontal|top"
-        ></TextView>
+        android:text="Quản lý nhân viên"
+        android:textColor="@color/white"
+        android:textSize="20sp" />
+
     <ProgressBar
-        android:layout_marginTop="10dp"
         android:id="@+id/progress_bar"
-        android:layout_marginLeft="20sp"
-        android:layout_marginRight="20sp"
         style="@style/Widget.AppCompat.ProgressBar.Horizontal"
         android:layout_width="match_parent"
-        android:progressTint="#FFFFFF"
+        android:layout_height="40dp"
+        android:layout_marginLeft="20sp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="20sp"
         android:progressBackgroundTint="#FFFFFF"
-        android:layout_height="40dp"/>
+        android:progressTint="#FFFFFF" />
+
     <TextView
         android:id="@+id/tv_chay"
-        android:textSize="20sp"
-        android:textColor="#FFFFFF"
-        android:text="100%"
-        android:textStyle="bold"
-        android:gravity="center"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="100%"
+        android:textColor="#FFFFFF"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
 </LinearLayout>

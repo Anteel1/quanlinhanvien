@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:map="http://schemas.android.com/apk/res-auto"
-    android:background="@color/white"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    >
+    android:background="@color/white"
+    android:orientation="vertical">
+
     <TextClock
         android:id="@+id/tc_gio"
         android:layout_width="match_parent"
@@ -14,8 +14,7 @@
         android:gravity="center"
         android:textColor="#838383"
         android:textSize="20sp"
-        android:textStyle="bold"
-        />
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/tc_ngay"
@@ -24,125 +23,129 @@
         android:gravity="center"
         android:textColor="#838383"
         android:textSize="20sp"
-        android:textStyle="italic"
-        />
+        android:textStyle="italic" />
 
     <Button
-        android:layout_gravity="center"
-        android:layout_width="wrap_content"
-        android:layout_height="50dp"
         android:id="@+id/btnNFC"
-        android:text="Check in NFC"
-
-        android:backgroundTint="@color/statusbar"
-        android:textAllCaps="false"
-        />
-    <Button
-
-        android:layout_gravity="center"
         android:layout_width="wrap_content"
         android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:backgroundTint="@color/statusbar"
+        android:text="Check in NFC"
+        android:textAllCaps="false" />
+
+    <Button
         android:id="@+id/btnQR"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
         android:backgroundTint="@color/statusbar"
         android:text="Check in QRCode"
-        android:textAllCaps="false"
-        /> <LinearLayout
+        android:textAllCaps="false" />
+
+    <LinearLayout
+        android:id="@+id/layout_icon"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/layout_icon"
-        android:visibility="gone"
-        android:padding="8dp"
         android:orientation="horizontal"
-        >
+        android:padding="8dp"
+        android:visibility="gone">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_weight="1"
             android:layout_margin="14dp"
-            android:paddingVertical="14dp"
+            android:layout_weight="1"
+            android:background="@drawable/custom_edt"
             android:backgroundTint="@color/statusbar"
-            android:background="@drawable/custom_edt"
-            > <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:src="@drawable/icon_checkin"
-            android:contextClickable="true"
-            android:id="@+id/btnCheckin"
-            />
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Check in"
-            android:gravity="center"
-            android:textStyle="bold"
-            android:textColor="@color/white"
-            />
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_weight="1"
-            android:layout_margin="14dp"
-            android:paddingVertical="14dp"
-            android:background="@drawable/custom_edt"
-            android:backgroundTint="@color/black"
-            > <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:src="@drawable/icon"
-            android:contextClickable="true"
-            android:id="@+id/btnCheckOut"
-            />
+            android:paddingVertical="14dp">
+
+            <ImageView
+                android:id="@+id/btnCheckin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:contextClickable="true"
+                android:src="@drawable/icon_checkin" />
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Check out"
                 android:gravity="center"
-                android:textStyle="bold"
+                android:text="Check in"
                 android:textColor="@color/white"
-                />
+                android:textStyle="bold" />
+
         </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="14dp"
+            android:layout_weight="1"
+            android:background="@drawable/custom_edt"
+            android:backgroundTint="@color/black"
+            android:orientation="vertical"
+            android:paddingVertical="14dp">
+
+            <ImageView
+                android:id="@+id/btnCheckOut"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:contextClickable="true"
+                android:src="@drawable/icon" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Check out"
+                android:textColor="@color/white"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
     </LinearLayout>
+
     <TextView
+        android:id="@+id/txtTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginVertical="8dp"
+        android:text="Check in"
+        android:textAlignment="center"
         android:textSize="20sp"
         android:textStyle="bold"
-        android:textAlignment="center"
-        android:text="Check in"
-        android:id="@+id/txtTitle"
-        android:layout_marginVertical="8dp"
-        android:visibility="gone"
-        />
+        android:visibility="gone" />
+
     <FrameLayout
-        android:layout_width="match_parent"
-        android:visibility="gone"
         android:id="@+id/layout_scan"
-        android:layout_height="400dp">
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
+        android:visibility="gone">
 
         <com.budiyev.android.codescanner.CodeScannerView
             android:id="@+id/scanner_view"
             android:layout_width="match_parent"
-            map:flashButtonColor="@color/white"
-            map:flashButtonVisible="true"
+            android:layout_height="match_parent"
             map:autoFocusButtonColor="@color/white"
             map:autoFocusButtonVisible="true"
-            map:maskColor="#D01B1717"
-            android:layout_height="match_parent"/>
+            map:flashButtonColor="@color/white"
+            map:flashButtonVisible="true"
+            map:maskColor="#D01B1717" />
+
     </FrameLayout>
+
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:id="@+id/resutl"
-        />
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
     <ImageView
-        android:layout_margin="80dp"
-        android:visibility="gone"
+        android:id="@+id/imgCamera"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/imgCamera"
-        />
+        android:layout_margin="80dp"
+        android:visibility="gone" />
 
 </LinearLayout>

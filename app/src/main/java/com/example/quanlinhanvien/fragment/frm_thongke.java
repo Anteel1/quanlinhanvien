@@ -20,6 +20,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.quanlinhanvien.R;
 import com.example.quanlinhanvien.adapter.adapter_calendar;
 import com.example.quanlinhanvien.model.luong;
+import com.example.quanlinhanvien.model.ngaylam;
 import com.example.quanlinhanvien.service.service_API;
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 
@@ -43,6 +44,7 @@ public class frm_thongke extends Fragment {
     LocalDate selectedDate;
     Button btnback,btnnext;
     TextView txtSalary;
+    ArrayList<String>dayCompare;
     int idNV;
     @Nullable
     @Override
@@ -54,6 +56,7 @@ public class frm_thongke extends Fragment {
         btnnext = view.findViewById(R.id.btnNext);
         txtSalary= view.findViewById(R.id.txtTienLuong);
         selectedDate = LocalDate.now();
+        dayCompare = new ArrayList<>();
         loadData();
         btnback.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -82,19 +85,18 @@ public class frm_thongke extends Fragment {
 //
 //                i++;
 //        }
-
         return view;
     }
     private void loadData()
     {
+        demoCallAPI_ngaylam();
+        demoCallAPILuong();
         month.setText((selectedDate).getMonth()+" "+(selectedDate).getYear());
         ArrayList<String> daysInMonth = daysInMonthArray(selectedDate);
-
-        adapter = new adapter_calendar(getContext(),daysInMonth);
+        adapter = new adapter_calendar(getContext(),daysInMonth,dayCompare);
         RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getContext(), 7);
         calendarRecyclerView.setLayoutManager(layoutManager);
         calendarRecyclerView.setAdapter(adapter);
-        demoCallAPILuong();
     }
     // list ngay trong thang
     private ArrayList<String> daysInMonthArray(LocalDate date)
@@ -154,6 +156,36 @@ public class frm_thongke extends Fragment {
     }
 
     private void handleError(Throwable error) {
+        Log.d("erro", error.toString());
+        Toast.makeText(getContext(), error.toString(), Toast.LENGTH_SHORT).show();
+        //khi gọi API KHÔNG THÀNH CÔNG thì thực hiện xử lý ở đây
+    }
+    private void demoCallAPI_ngaylam() {
+
+        service_API requestInterface = new Retrofit.Builder()
+                .baseUrl(Base_Service)
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create())
+                .build().create(service_API.class);
+
+        new CompositeDisposable().add(requestInterface.getNgayLam(1,LocalDate.now().getMonth().getValue())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(this::handleResponse_ngaylam, this::handleError_ngayLam)
+        );
+    }
+
+    private void handleResponse_ngaylam(ArrayList<ngaylam>list) {
+        //API trả về dữ liệu thành công, thực hiện việc lấy data
+        dayCompare.clear();
+        for(int i = 0;i < list.size(); i++){
+            dayCompare.add(i,list.get(i).getNgaylam());
+        }
+        adapter.notifyDataSetChanged();
+        Log.d("Ngày làm:"," "+dayCompare.size());
+    }
+
+    private void handleError_ngayLam(Throwable error) {
         Log.d("erro", error.toString());
         Toast.makeText(getContext(), error.toString(), Toast.LENGTH_SHORT).show();
         //khi gọi API KHÔNG THÀNH CÔNG thì thực hiện xử lý ở đây

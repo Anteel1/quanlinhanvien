@@ -1,5 +1,6 @@
 package com.example.quanlinhanvien;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -29,10 +30,15 @@ public class MainActivity extends AppCompatActivity {
     Toolbar toolbar;
     NavigationView navigationView;
     Fragment fragment;
+    Intent intent;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        //get id nhan vien
+//        Intent intent = getIntent();
+//        Bundle bundle =intent.getExtras();
+//        int idNV = bundle.getInt("idNV",-1);
         anhxa();
         menu_nav();
         fragment = new frm_trangchu();
@@ -66,11 +72,10 @@ public class MainActivity extends AppCompatActivity {
                         onRestoreInstanceState(savedInstanceState);
                         break;
                     case R.id.menu_thongke:
-                        fragment = new frm_thongke();
+                        fragment = new frm_thongke(11);
                         onRestoreInstanceState(savedInstanceState);
                         break;
                     case R.id.menu_Logout:
-//                        fragment = new frm_dangxuat();
                         new frm_dangxuat().show(getSupportFragmentManager(),frm_dangxuat.TAG);
                         break;
                     default:

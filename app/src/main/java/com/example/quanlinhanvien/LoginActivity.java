@@ -157,6 +157,9 @@ public class LoginActivity extends AppCompatActivity {
                 if ((edt_password.getText().toString()).equals(list1.get(i).getMatKhau())) {
                     Toast.makeText(this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
                     progressBar.setVisibility(View.GONE);
+                    Bundle bundle1 = new Bundle();
+                    bundle1.putInt("idNV",list1.get(i).getMaNV());
+                    intent.putExtras(bundle1);
                     intent = new Intent(LoginActivity.this, MainActivity.class);
                     startActivity(intent);
                     finish();

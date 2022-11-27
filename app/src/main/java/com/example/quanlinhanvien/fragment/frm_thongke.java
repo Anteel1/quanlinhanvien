@@ -25,17 +25,18 @@ public class frm_thongke extends Fragment {
     RecyclerView calendarRecyclerView;
     TextView month;
     LocalDate selectedDate;
-    Button btnback,btnnext;
+    Button btnback, btnnext;
     TextView txtSalary;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.frm_thongke, container, false);
         month = view.findViewById(R.id.tvMonth);
-        calendarRecyclerView= view.findViewById(R.id.calendarRecyclerView);
+        calendarRecyclerView = view.findViewById(R.id.calendarRecyclerView);
         btnback = view.findViewById(R.id.btnBack);
         btnnext = view.findViewById(R.id.btnNext);
-        txtSalary= view.findViewById(R.id.txtTienLuong);
+        txtSalary = view.findViewById(R.id.txtTienLuong);
         txtSalary.setText("Salary: +2000000 VND");
         selectedDate = LocalDate.now();
         loadData();
@@ -69,19 +70,19 @@ public class frm_thongke extends Fragment {
 
         return view;
     }
-    private void loadData()
-    {
-        month.setText((selectedDate).getMonth()+" "+(selectedDate).getYear());
+
+    private void loadData() {
+        month.setText((selectedDate).getMonth() + " " + (selectedDate).getYear());
         ArrayList<String> daysInMonth = daysInMonthArray(selectedDate);
 
-        adapter = new adapter_calendar(getContext(),daysInMonth);
+        adapter = new adapter_calendar(getContext(), daysInMonth);
         RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getContext(), 7);
         calendarRecyclerView.setLayoutManager(layoutManager);
         calendarRecyclerView.setAdapter(adapter);
     }
+
     // list ngay trong thang
-    private ArrayList<String> daysInMonthArray(LocalDate date)
-    {
+    private ArrayList<String> daysInMonthArray(LocalDate date) {
         ArrayList<String> daysInMonthArray = new ArrayList<>();
         YearMonth yearMonth = YearMonth.from(date);
 
@@ -90,27 +91,22 @@ public class frm_thongke extends Fragment {
         LocalDate firstOfMonth = selectedDate.withDayOfMonth(1);
         int dayOfWeek = firstOfMonth.getDayOfWeek().getValue();
 
-        for(int i = 1; i <= 42; i++)
-        {
-            if(i <= dayOfWeek || i > daysInMonth + dayOfWeek)
-            {
+        for (int i = 1; i <= 42; i++) {
+            if (i <= dayOfWeek || i > daysInMonth + dayOfWeek) {
                 daysInMonthArray.add("");
-            }
-            else
-            {
+            } else {
                 daysInMonthArray.add(String.valueOf(i - dayOfWeek));
             }
         }
-        return  daysInMonthArray;
+        return daysInMonthArray;
     }
-    public void previousMonthAction()
-    {
+
+    public void previousMonthAction() {
         selectedDate = selectedDate.minusMonths(1);
 
     }
 
-    public void nextMonthAction()
-    {
+    public void nextMonthAction() {
         selectedDate = selectedDate.plusMonths(1);
 
     }

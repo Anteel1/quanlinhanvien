@@ -34,9 +34,10 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class frm_thongke extends Fragment {
-    public frm_thongke(int idNV){
+    public frm_thongke(int idNV) {
         this.idNV = idNV;
     }
+
     adapter_calendar adapter;
     RecyclerView calendarRecyclerView;
     TextView month;
@@ -44,6 +45,7 @@ public class frm_thongke extends Fragment {
     Button btnback, btnnext;
     TextView txtSalary;
     int idNV;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -52,7 +54,7 @@ public class frm_thongke extends Fragment {
         calendarRecyclerView = view.findViewById(R.id.calendarRecyclerView);
         btnback = view.findViewById(R.id.btnBack);
         btnnext = view.findViewById(R.id.btnNext);
-        txtSalary= view.findViewById(R.id.txtTienLuong);
+        txtSalary = view.findViewById(R.id.txtTienLuong);
         selectedDate = LocalDate.now();
         loadData();
         btnback.setOnClickListener(new View.OnClickListener() {
@@ -135,7 +137,7 @@ public class frm_thongke extends Fragment {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build().create(service_API.class);
 
-        new CompositeDisposable().add(requestInterface.getLuong(1,selectedDate.getMonth().getValue())
+        new CompositeDisposable().add(requestInterface.getLuong(1, selectedDate.getMonth().getValue())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe(this::handleResponse, this::handleError)
@@ -144,8 +146,8 @@ public class frm_thongke extends Fragment {
 
     private void handleResponse(luong luong) {
         //API trả về dữ liệu thành công, thực hiện việc lấy data
-        Log.d("luong infor",luong.getTonggiolam() + " "+ luong.getTongLuong());
-        txtSalary.setText("Salary: "+ luong.getTongLuong()+"00 VND");
+        Log.d("luong infor", luong.getTonggiolam() + " " + luong.getTongLuong());
+        txtSalary.setText("Salary: " + luong.getTongLuong() + "00 VND");
     }
 
     private void handleError(Throwable error) {

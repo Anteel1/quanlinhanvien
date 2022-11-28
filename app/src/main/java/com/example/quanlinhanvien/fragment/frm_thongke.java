@@ -139,7 +139,7 @@ public class frm_thongke extends Fragment {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build().create(service_API.class);
 
-        new CompositeDisposable().add(requestInterface.getLuong(1, selectedDate.getMonth().getValue())
+        new CompositeDisposable().add(requestInterface.getLuong(idNV, selectedDate.getMonth().getValue())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe(this::handleResponse, this::handleError)
@@ -165,7 +165,7 @@ public class frm_thongke extends Fragment {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build().create(service_API.class);
 
-        new CompositeDisposable().add(requestInterface.getNgayLam(1,LocalDate.now().getMonth().getValue())
+        new CompositeDisposable().add(requestInterface.getNgayLam(idNV,selectedDate.getMonth().getValue())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe(this::handleResponse_ngaylam, this::handleError_ngayLam)

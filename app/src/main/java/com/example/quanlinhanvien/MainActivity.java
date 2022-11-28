@@ -36,9 +36,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         //get id nhan vien
-//        Intent intent = getIntent();
-//        Bundle bundle =intent.getExtras();
-//        int idNV = bundle.getInt("idNV",-1);
+        intent = getIntent();
+        Bundle bundle =intent.getExtras();
+        int idNV = bundle.getInt("idNV",-1);
         anhxa();
         menu_nav();
         fragment = new frm_trangchu();
@@ -72,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
                         onRestoreInstanceState(savedInstanceState);
                         break;
                     case R.id.menu_thongke:
-                        fragment = new frm_thongke(11);
+                        fragment = new frm_thongke(idNV);
                         onRestoreInstanceState(savedInstanceState);
                         break;
                     case R.id.menu_Logout:

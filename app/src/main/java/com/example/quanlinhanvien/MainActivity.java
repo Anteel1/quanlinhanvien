@@ -1,6 +1,8 @@
 package com.example.quanlinhanvien;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
@@ -23,16 +25,22 @@ import com.example.quanlinhanvien.fragment.frm_trangchu;
 import com.google.android.material.navigation.NavigationView;
 
 public class MainActivity extends AppCompatActivity {
-    TextView tv;
+    TextView tv_tieude;
     ImageView iv_menu;
     DrawerLayout drawerLayout;
     Toolbar toolbar;
     NavigationView navigationView;
     Fragment fragment;
+    Intent intent;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+//        intent = getIntent();
+//        Bundle bundle = intent.getExtras();
+//        Log.d("===========TAG", "onCreate: "+bundle.getInt("idNV"));
+
 
         anhxa();
         menu_nav();
@@ -77,7 +85,7 @@ public class MainActivity extends AppCompatActivity {
                         break;
                 }
                 drawerLayout.closeDrawer(navigationView);
-                setTitle(item.getTitle());
+                tv_tieude.setText(item.getTitle());
                 return false;
             }
         });
@@ -87,6 +95,7 @@ public class MainActivity extends AppCompatActivity {
     public void anhxa() {
         toolbar = findViewById(R.id.toolbar);
         iv_menu = findViewById(R.id.iv_menu_toolbar);
+        tv_tieude = findViewById(R.id.tv_tieude);
         drawerLayout = findViewById(R.id.drawerLayout);
         navigationView = findViewById(R.id.navigation_view);
     }

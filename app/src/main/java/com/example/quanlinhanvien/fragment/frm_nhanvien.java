@@ -24,12 +24,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.quanlinhanvien.R;
 import com.example.quanlinhanvien.adapter.adapter_nhanvien;
 //import com.example.quanlinhanvien.model.nhanvien;
-import com.example.quanlinhanvien.model_api.nhanvien;
+import com.example.quanlinhanvien.model.nhanvien;
 import com.example.quanlinhanvien.service.service_API;
 import com.google.android.material.textfield.TextInputEditText;
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Calendar;
 

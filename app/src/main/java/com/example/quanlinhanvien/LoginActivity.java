@@ -20,7 +20,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
-import com.example.quanlinhanvien.model_api.nhanvien;
+import com.example.quanlinhanvien.model.nhanvien;
 import com.example.quanlinhanvien.service.service_API;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
@@ -171,10 +171,11 @@ public class LoginActivity extends AppCompatActivity {
                 if ((edt_password.getText().toString()).equals(list1.get(i).getMatKhau())) {
                     Toast.makeText(LoginActivity.this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
                     progressBar.setVisibility(View.GONE);
-                    Bundle bundle1 = new Bundle();
-                    bundle1.putInt("idNV",list1.get(i).getMaNV());
-                    intent.putExtras(bundle1);
                     intent = new Intent(LoginActivity.this, MainActivity.class);
+                    Bundle bundle1 = new Bundle();
+                    int idNV = list1.get(i).getMaNV();
+                    bundle1.putInt("idNV",idNV);
+                    intent.putExtras(bundle1);
                     startActivity(intent);
                     finish();
                 } else {

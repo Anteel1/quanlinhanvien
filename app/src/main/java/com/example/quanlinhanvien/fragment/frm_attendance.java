@@ -1,51 +1,6 @@
 package com.example.quanlinhanvien.fragment;
 
-//import static com.example.quanlinhanvien.service.service_API.Base_Service;
-//
-//import android.app.Activity;
-//import android.content.pm.PackageManager;
-//import android.os.Bundle;
-//import android.util.Log;
-//import android.view.LayoutInflater;
-//import android.view.View;
-//import android.view.ViewGroup;
-//import android.widget.FrameLayout;
-//import android.widget.ImageView;
-//import android.widget.LinearLayout;
-//import android.widget.TextClock;
-//import android.widget.TextView;
-//import android.widget.Toast;
-//
-//import androidx.annotation.NonNull;
-//import androidx.annotation.Nullable;
-//import androidx.core.app.ActivityCompat;
-//import androidx.fragment.app.Fragment;
-//
-//import com.budiyev.android.codescanner.AutoFocusMode;
-//import com.budiyev.android.codescanner.CodeScanner;
-//import com.budiyev.android.codescanner.CodeScannerView;
-//import com.budiyev.android.codescanner.DecodeCallback;
-//import com.budiyev.android.codescanner.ScanMode;
-//import com.example.quanlinhanvien.R;
-//import com.example.quanlinhanvien.model.Location;
-//import com.example.quanlinhanvien.model.calam;
-//import com.example.quanlinhanvien.model.cuahang;
-//import com.example.quanlinhanvien.others.GPSTracker;
-//import com.example.quanlinhanvien.service.service_API;
-//import com.google.android.gms.maps.model.LatLng;
-//import com.google.zxing.Result;
-//import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
-//
-//import java.text.DecimalFormat;
-//import java.time.LocalDate;
-//import java.time.LocalDateTime;
-//import java.util.ArrayList;
-//
-//import io.reactivex.android.schedulers.AndroidSchedulers;
-//import io.reactivex.disposables.CompositeDisposable;
-//import io.reactivex.schedulers.Schedulers;
-//import retrofit2.Retrofit;
-//import retrofit2.converter.gson.GsonConverterFactory;
+import static com.example.quanlinhanvien.service.service_API.Base_Service;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -69,6 +24,31 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
+
+import com.budiyev.android.codescanner.AutoFocusMode;
+import com.budiyev.android.codescanner.CodeScanner;
+import com.budiyev.android.codescanner.CodeScannerView;
+import com.budiyev.android.codescanner.DecodeCallback;
+import com.budiyev.android.codescanner.ScanMode;
+import com.example.quanlinhanvien.R;
+import com.example.quanlinhanvien.model.Location;
+import com.example.quanlinhanvien.model.calam;
+import com.example.quanlinhanvien.model.cuahang;
+import com.example.quanlinhanvien.others.GPSTracker;
+import com.example.quanlinhanvien.service.service_API;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.zxing.Result;
+import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
+
+import java.text.DecimalFormat;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.schedulers.Schedulers;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class frm_attendance extends Fragment {
     private CodeScanner mCodeScanner;

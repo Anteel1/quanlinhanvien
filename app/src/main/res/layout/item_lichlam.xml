@@ -11,31 +11,31 @@
         android:orientation="vertical"
         android:layout_marginLeft="20dp"
         >
-    <TextView
-        android:id="@+id/txtnv"
-        android:layout_width="180dp"
-        android:layout_height="20dp"
-        android:text="Faius Mojumder Nahin"
-        android:layout_marginLeft="6dp"
-        android:layout_marginTop="10dp"
-        android:textColor="#D1000000"
-        android:textSize="16sp"
-        />
-    <TextView
-        android:id="@+id/txtid"
-        android:layout_width="75dp"
-        android:layout_height="20dp"
-        android:layout_marginLeft="6dp"
-        android:text="id nv"
-        android:textColor="#80000000"
-        android:textSize="14sp"
-        />
         <TextView
-            android:id="@+id/txtch"
+            android:id="@+id/txtnv"
+            android:layout_width="180dp"
+            android:layout_height="20dp"
+            android:text="Faius Mojumder Nahin"
+            android:layout_marginLeft="6dp"
+            android:layout_marginTop="10dp"
+            android:textColor="#D1000000"
+            android:textSize="16sp"
+            />
+        <TextView
+            android:id="@+id/txtcalam"
             android:layout_width="75dp"
             android:layout_height="20dp"
             android:layout_marginLeft="6dp"
-            android:text="cua hang"
+            android:text="ca"
+            android:textColor="#80000000"
+            android:textSize="14sp"
+            />
+        <TextView
+            android:id="@+id/txtngaylam"
+            android:layout_width="75dp"
+            android:layout_height="20dp"
+            android:layout_marginLeft="6dp"
+            android:text="ngaylam"
             android:textColor="#80000000"
             android:textSize="14sp"
             />

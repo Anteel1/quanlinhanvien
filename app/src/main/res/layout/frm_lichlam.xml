@@ -5,43 +5,46 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:background="@color/white"
     android:orientation="vertical">
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="90dp"
-    android:orientation="vertical"
-    >
-   <TextView
-       android:layout_width="300dp"
-       android:layout_height="wrap_content"
-       android:text="Attendance"
-       android:layout_marginLeft="29dp"
-       android:layout_gravity="center"
-       android:textSize="40dp"
-       />
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
+        android:orientation="vertical"
         >
-    <TextView
-        android:layout_width="150dp"
-        android:layout_height="34dp"
-        android:text="Total Employees: "
-        android:layout_marginLeft="220dp"
-        android:textSize="18sp"
-        />
-    <TextView
-        android:id="@+id/txtsonv"
-        android:layout_width="170dp"
-        android:layout_height="34dp"
-        android:text="40"
-        android:textColor="#53D11E"
+        <TextView
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:text="Lịch làm"
+            android:layout_marginLeft="35dp"
+            android:layout_gravity="center"
+            android:textSize="40dp"
+            />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="140dp"
+            android:orientation="vertical"
+            >
+           <EditText
+               android:id="@+id/edtthang"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:hint="Tháng"
+               ></EditText>
 
-        android:textSize="20sp"
-        />
+           <EditText
+               android:id="@+id/edtidnv"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:hint="id nhân viên"
+               ></EditText>
+            <Button
+                android:id="@+id/btnhien"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="hiện"
+                android:backgroundTint="#73AB6B"
+                ></Button>
+        </LinearLayout>
     </LinearLayout>
-
-</LinearLayout>
     <View
         android:layout_width="match_parent"
         android:layout_height="2dp"
@@ -84,8 +87,7 @@
         android:layout_height="2dp"
         android:background="#80CAC3C3"/>
     <ListView
-        android:id="@+id/listviewcc"
+        android:id="@+id/listviewll"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
-
-</LinearLayout>
+   </LinearLayout>

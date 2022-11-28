@@ -1,16 +1,15 @@
 package com.example.quanlinhanvien.fragment;
 
-
 import static com.example.quanlinhanvien.service.service_API.Base_Service;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.TextView;
-import android.widget.Toast;
-
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -18,8 +17,9 @@ import androidx.fragment.app.Fragment;
 
 import com.example.quanlinhanvien.R;
 import com.example.quanlinhanvien.adapter.adapter_chamcong;
-import com.example.quanlinhanvien.model.calam;
+import com.example.quanlinhanvien.adapter.adapter_lichlam;
 import com.example.quanlinhanvien.model.chamcong;
+import com.example.quanlinhanvien.model.lichlam;
 import com.example.quanlinhanvien.service.service_API;
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 
@@ -31,26 +31,36 @@ import io.reactivex.schedulers.Schedulers;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class frm_dangkylichlam extends Fragment {
-    ArrayList<chamcong> list;
-    TextView txtsonv;
-    ListView listviewcc;
-
+public class frm_lichlam extends Fragment {
+   Button btnhien;
+   EditText edtthang,edtidnv;
+   ArrayList<lichlam> list;
+   ListView listviewll;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.frm_dangkylichlam, container, false);
-        txtsonv = view.findViewById(R.id.txtsonv);
-        listviewcc = view.findViewById(R.id.listviewcc);
-        list = new ArrayList<>();
+        View view = inflater.inflate(R.layout.frm_lichlam, container, false);
+          btnhien = view.findViewById(R.id.btnhien);
+          edtthang = view.findViewById(R.id.edtthang);
+          edtidnv = view.findViewById(R.id.edtidnv);
+          listviewll = view.findViewById(R.id.listviewll);
+          list = new ArrayList<>();
+          btnhien.setOnClickListener(new View.OnClickListener() {
+              @Override
+              public void onClick(View v) {
+                  int manv = Integer.parseInt(String.valueOf(edtidnv.getText()));
+                  int thang =Integer.parseInt(String.valueOf(edtthang.getText()));
+                  demoCallAPI(manv,thang);
+                  show(list);
+              }
+          });
 
-        CallAPIcc();
 
-        show(list);
+
         return view;
     }
 
-    private void CallAPIcc() {
+    private void demoCallAPI(int maNV,int thang) {
 
         service_API requestInterface = new Retrofit.Builder()
                 .baseUrl(Base_Service)
@@ -58,40 +68,31 @@ public class frm_dangkylichlam extends Fragment {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build().create(service_API.class);
 
-        new CompositeDisposable().add(requestInterface.getModelAPI_chamcong()
+        new CompositeDisposable().add(requestInterface.getLichlamnv(maNV,thang)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
-                .subscribe(this::handleRespons, this::handleError)
+                .subscribe(this::handleResponse, this::handleError)
         );
     }
 
-    private void handleRespons(ArrayList<chamcong> list1) {
-        //API trả về dữ liệu thành công, thực hiện việc lấy data
-        txtsonv.setText("" + list1.size());
-        for (int i = 0; i < list1.size(); i++) {
-            list.add(list1.get(i));
+    private void handleResponse(ArrayList<lichlam> lichlams) {
+        for (int i = 0; i < lichlams.size(); i++) {
+            list.add(lichlams.get(i));
         }
 
         show(list);
-
 
     }
 
 
     private void handleError(Throwable error) {
-
-        Toast.makeText(getContext(), "loi", Toast.LENGTH_SHORT).show();
-
-
+        Log.d("TAG","loi_________________");
         //khi gọi API KHÔNG THÀNH CÔNG thì thực hiện xử lý ở đây
     }
-
-    private void show(ArrayList<chamcong> listcc) {
-        adapter_chamcong adapter_chamcong = new adapter_chamcong(listcc, getContext());
-        listviewcc.setAdapter(adapter_chamcong);
+    private void show(ArrayList<lichlam> listll) {
+        adapter_lichlam adapter_lichlam = new adapter_lichlam(listll, getContext());
+        listviewll.setAdapter(adapter_lichlam);
 
 
     }
-
-
 }

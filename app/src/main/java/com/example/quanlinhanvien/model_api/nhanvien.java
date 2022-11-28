@@ -1,30 +1,20 @@
 package com.example.quanlinhanvien.model_api;
 
 public class nhanvien {
-    int maNV;
-    String taiKhoan;
-    String matKhau;
-    String tenNV;
-    String ngaySinh;
-    String diaChi;
-    String ngayDK;
-    String imeil;
-    int maCH;
-    int maCV;
+    private int maNV;
+    private String tenNV;
+    private String taiKhoan;
+    private String matKhau;
+    private String imei;
+    private int maCV;
 
-
-
-    public nhanvien(int maNV, int maCH, int maCV, String taiKhoan, String matKhau, String tenNV, String ngaySinh, String diaChi, String ngayDK, String imeil) {
+    public nhanvien(int maNV, String tenNV, String taiKhoan, String matKhau, String imei, int maCV) {
         this.maNV = maNV;
-        this.maCH = maCH;
-        this.maCV = maCV;
+        this.tenNV = tenNV;
         this.taiKhoan = taiKhoan;
         this.matKhau = matKhau;
-        this.tenNV = tenNV;
-        this.ngaySinh = ngaySinh;
-        this.diaChi = diaChi;
-        this.ngayDK = ngayDK;
-        this.imeil = imeil;
+        this.imei = imei;
+        this.maCV = maCV;
     }
 
     public int getMaNV() {
@@ -35,20 +25,12 @@ public class nhanvien {
         this.maNV = maNV;
     }
 
-    public int getMaCH() {
-        return maCH;
+    public String getTenNV() {
+        return tenNV;
     }
 
-    public void setMaCH(int maCH) {
-        this.maCH = maCH;
-    }
-
-    public int getMaCV() {
-        return maCV;
-    }
-
-    public void setMaCV(int maCV) {
-        this.maCV = maCV;
+    public void setTenNV(String tenNV) {
+        this.tenNV = tenNV;
     }
 
     public String getTaiKhoan() {
@@ -67,43 +49,19 @@ public class nhanvien {
         this.matKhau = matKhau;
     }
 
-    public String getTenNV() {
-        return tenNV;
+    public String getImei() {
+        return imei;
     }
 
-    public void setTenNV(String tenNV) {
-        this.tenNV = tenNV;
+    public void setImei(String imei) {
+        this.imei = imei;
     }
 
-    public String getNgaySinh() {
-        return ngaySinh;
+    public int getMaCV() {
+        return maCV;
     }
 
-    public void setNgaySinh(String ngaySinh) {
-        this.ngaySinh = ngaySinh;
-    }
-
-    public String getDiaChi() {
-        return diaChi;
-    }
-
-    public void setDiaChi(String diaChi) {
-        this.diaChi = diaChi;
-    }
-
-    public String getNgayDK() {
-        return ngayDK;
-    }
-
-    public void setNgayDK(String ngayDK) {
-        this.ngayDK = ngayDK;
-    }
-
-    public String getImeil() {
-        return imeil;
-    }
-
-    public void setImeil(String imeil) {
-        this.imeil = imeil;
+    public void setMaCV(int maCV) {
+        this.maCV = maCV;
     }
 }

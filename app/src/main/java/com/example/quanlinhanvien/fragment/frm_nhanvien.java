@@ -23,7 +23,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.quanlinhanvien.R;
 import com.example.quanlinhanvien.adapter.adapter_nhanvien;
-import com.example.quanlinhanvien.model.nhanvien;
+//import com.example.quanlinhanvien.model.nhanvien;
+import com.example.quanlinhanvien.model_api.nhanvien;
 import com.example.quanlinhanvien.service.service_API;
 import com.google.android.material.textfield.TextInputEditText;
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
@@ -44,28 +45,33 @@ public class frm_nhanvien extends Fragment implements DatePickerDialog.OnDateSet
     TextView txtTotal,txtTitle;
     adapter_nhanvien adapter_nhanvien;
     String ngay;
-    TextInputEditText txtName,txtNameUser,txtPassword,txtCreateDate,txtPhoneNumber,txtAddress,txtStore,txtDutyID;
+    TextInputEditText txtName,txtNameUser,txtPassword
+            ,txtCreateDate,txtPhoneNumber,txtAddress,txtStore,txtDutyID;
     Button btnsignup,btnUpdate,btnDangky;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.frm_nhanvien, container, false);
+
         txtTotal = view.findViewById(R.id.totalListNV);
         recyclerView = view.findViewById(R.id.rcv_nhanvien);
         btnsignup = view.findViewById(R.id.btnsignup);
         btnUpdate = view.findViewById(R.id.btnupdate);
+
         btnsignup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 openDialog(1);
             }
         });
+
         btnUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 openDialog(2);
             }
         });
+
         list = new ArrayList<>();
         loaddata();
         demoCallAPI();
@@ -106,6 +112,7 @@ public class frm_nhanvien extends Fragment implements DatePickerDialog.OnDateSet
         Toast.makeText(getContext(), error.toString(), Toast.LENGTH_SHORT).show();
         //khi gọi API KHÔNG THÀNH CÔNG thì thực hiện xử lý ở đây
     }
+
     private void showDatePicker() {
         DatePickerDialog datePickerDialog = new DatePickerDialog(
                 getContext(), this, Calendar.getInstance().get(Calendar.YEAR),
@@ -138,7 +145,8 @@ public class frm_nhanvien extends Fragment implements DatePickerDialog.OnDateSet
         txtDutyID = v2.findViewById(R.id.txtDutyID);
         btnDangky = v2.findViewById(R.id.btndangky);
         if(type==1){
-            txtCreateDate.setText(LocalDate.now().getDayOfMonth()+"-"+LocalDate.now().getMonthValue()+"-"+LocalDate.now().getYear());
+//            txtCreateDate.setText(LocalDate.now().getDayOfMonth()+"-"+LocalDate.now()
+//                    .getMonthValue()+"-"+LocalDate.now().getYear());
             txtCreateDate.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

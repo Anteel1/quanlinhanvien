@@ -2,8 +2,12 @@ package com.example.quanlinhanvien;
 
 import static com.example.quanlinhanvien.service.service_API.Base_Service;
 
+import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
@@ -12,9 +16,11 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
-import com.example.quanlinhanvien.model.nhanvien;
+import com.example.quanlinhanvien.model_api.nhanvien;
 import com.example.quanlinhanvien.service.service_API;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
@@ -29,19 +35,23 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class LoginActivity extends AppCompatActivity {
+    private static final int REQUEST_CODE = 101;
     ProgressBar progressBar;
     TextView tv_forgotpassword;
-    TextInputLayout txtlayoutEmail,txtLayoutPassword;
+    TextInputLayout txtlayoutEmail, txtLayoutPassword;
     TextInputEditText edt_email, edt_password;
     Button btn_signin;
     Intent intent;
     Bundle bundle;
+    String IMEINumber, imei;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        anhxa();
 
+        anhxa();
+        imei = getImei();
         btn_signin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -51,6 +61,7 @@ public class LoginActivity extends AppCompatActivity {
 //                intent =new Intent(LoginActivity.this, MainActivity.class);
 //                startActivity(intent);
 //                finish();
+//                getImei();
 
             }
         });
@@ -106,7 +117,7 @@ public class LoginActivity extends AppCompatActivity {
 
     //kiểm tra các edit text
 
-    public void kiemtra(){
+    public void kiemtra() {
 
         String thongbao_email = "";
         String email = edt_email.getText().toString();
@@ -129,12 +140,13 @@ public class LoginActivity extends AppCompatActivity {
 
         String thongbao_password = "";
         if (!password.isEmpty()) {
-        }else{
+        } else {
             thongbao_password += "Password không được để trống";
             txtLayoutPassword.setHelperText(thongbao_password);
             txtLayoutPassword.setHelperTextColor(getResources().getColorStateList(R.color.red));
         }
     }
+
     private void demoCallAPI() {
 
         service_API requestInterface = new Retrofit.Builder()
@@ -150,17 +162,19 @@ public class LoginActivity extends AppCompatActivity {
         );
     }
 
-    private void handleResponse(ArrayList<nhanvien> list1) {
+     private void handleResponse(ArrayList<nhanvien> list1) {
         //API trả về dữ liệu thành công, thực hiện việc lấy data
-        for (int i = 0; i < list1.size(); i++) {
+         Toast.makeText(LoginActivity.this, "thành công", Toast.LENGTH_SHORT).show();
+
+         for (int i = 0; i < list1.size(); i++) {
             if ((edt_email.getText().toString()).equals(list1.get(i).getTaiKhoan())) {
                 if ((edt_password.getText().toString()).equals(list1.get(i).getMatKhau())) {
-                    Toast.makeText(this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
                     progressBar.setVisibility(View.GONE);
                     intent = new Intent(LoginActivity.this, MainActivity.class);
                     startActivity(intent);
                     finish();
-                }else {
+                } else {
                     txtLayoutPassword.setHelperText("Sai mật khẩu");
                     progressBar.setVisibility(View.GONE);
                     txtLayoutPassword.setHelperTextColor(getResources().getColorStateList(R.color.red));
@@ -169,10 +183,38 @@ public class LoginActivity extends AppCompatActivity {
             }
         }
     }
+
     private void handleError(Throwable error) {
         Log.d("erro", error.toString());
         Toast.makeText(LoginActivity.this, error.toString(), Toast.LENGTH_SHORT).show();
         //khi gọi API KHÔNG THÀNH CÔNG thì thực hiện xử lý ở đây
+    }
+
+    //get api
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        switch (requestCode) {
+            case REQUEST_CODE: {
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    Toast.makeText(this, "Permission granted.", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(this, "Permission denied.", Toast.LENGTH_SHORT).show();
+                }
+            }
+        }
+    }
+
+    public String getImei() {
+        TelephonyManager telephonyManager = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
+        if (ActivityCompat.checkSelfPermission(LoginActivity.this, Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(LoginActivity.this, new String[]{Manifest.permission.READ_PHONE_STATE}, REQUEST_CODE);
+
+        }
+
+        IMEINumber = telephonyManager.getDeviceId();
+        Log.d("============TAG", "getImei: "+IMEINumber);
+        return IMEINumber;
     }
 
 }

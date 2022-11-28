@@ -35,26 +35,28 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class frm_thongke extends Fragment {
-    public frm_thongke(int idNV){
+    public frm_thongke(int idNV) {
         this.idNV = idNV;
     }
+
     adapter_calendar adapter;
     RecyclerView calendarRecyclerView;
     TextView month;
     LocalDate selectedDate;
-    Button btnback,btnnext;
+    Button btnback, btnnext;
     TextView txtSalary;
     ArrayList<String>dayCompare;
     int idNV;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.frm_thongke, container, false);
         month = view.findViewById(R.id.tvMonth);
-        calendarRecyclerView= view.findViewById(R.id.calendarRecyclerView);
+        calendarRecyclerView = view.findViewById(R.id.calendarRecyclerView);
         btnback = view.findViewById(R.id.btnBack);
         btnnext = view.findViewById(R.id.btnNext);
-        txtSalary= view.findViewById(R.id.txtTienLuong);
+        txtSalary = view.findViewById(R.id.txtTienLuong);
         selectedDate = LocalDate.now();
         dayCompare = new ArrayList<>();
         loadData();
@@ -98,9 +100,9 @@ public class frm_thongke extends Fragment {
         calendarRecyclerView.setLayoutManager(layoutManager);
         calendarRecyclerView.setAdapter(adapter);
     }
+
     // list ngay trong thang
-    private ArrayList<String> daysInMonthArray(LocalDate date)
-    {
+    private ArrayList<String> daysInMonthArray(LocalDate date) {
         ArrayList<String> daysInMonthArray = new ArrayList<>();
         YearMonth yearMonth = YearMonth.from(date);
 
@@ -109,27 +111,22 @@ public class frm_thongke extends Fragment {
         LocalDate firstOfMonth = selectedDate.withDayOfMonth(1);
         int dayOfWeek = firstOfMonth.getDayOfWeek().getValue();
 
-        for(int i = 1; i <= 42; i++)
-        {
-            if(i <= dayOfWeek || i > daysInMonth + dayOfWeek)
-            {
+        for (int i = 1; i <= 42; i++) {
+            if (i <= dayOfWeek || i > daysInMonth + dayOfWeek) {
                 daysInMonthArray.add("");
-            }
-            else
-            {
+            } else {
                 daysInMonthArray.add(String.valueOf(i - dayOfWeek));
             }
         }
-        return  daysInMonthArray;
+        return daysInMonthArray;
     }
-    public void previousMonthAction()
-    {
+
+    public void previousMonthAction() {
         selectedDate = selectedDate.minusMonths(1);
 
     }
 
-    public void nextMonthAction()
-    {
+    public void nextMonthAction() {
         selectedDate = selectedDate.plusMonths(1);
 
     }
@@ -142,7 +139,7 @@ public class frm_thongke extends Fragment {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build().create(service_API.class);
 
-        new CompositeDisposable().add(requestInterface.getLuong(1,selectedDate.getMonth().getValue())
+        new CompositeDisposable().add(requestInterface.getLuong(1, selectedDate.getMonth().getValue())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe(this::handleResponse, this::handleError)
@@ -151,8 +148,8 @@ public class frm_thongke extends Fragment {
 
     private void handleResponse(luong luong) {
         //API trả về dữ liệu thành công, thực hiện việc lấy data
-        Log.d("luong infor",luong.getTonggiolam() + " "+ luong.getTongLuong());
-        txtSalary.setText("Salary: "+ luong.getTongLuong()+"00 VND");
+        Log.d("luong infor", luong.getTonggiolam() + " " + luong.getTongLuong());
+        txtSalary.setText("Salary: " + luong.getTongLuong() + "00 VND");
     }
 
     private void handleError(Throwable error) {

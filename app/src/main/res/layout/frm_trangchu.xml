@@ -7,6 +7,7 @@
 
     <TextClock
         android:id="@+id/tc_gio"
+        style="@style/textBold"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="80dp"
@@ -17,15 +18,16 @@
 
     <TextClock
         android:id="@+id/tc_ngay"
+        style="@style/textMedium"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="12dp"
         android:gravity="center"
         android:textColor="#838383"
-        android:textSize="30sp"
-        android:textStyle="normal"
-        android:layout_marginBottom="12dp"/>
+        android:textSize="28sp" />
 
     <TextView
+        style="@style/textMedium"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
@@ -33,8 +35,7 @@
         android:gravity="center"
         android:text="Welcome Back!"
         android:textColor="#838383"
-        android:textSize="26sp"
-        android:textStyle="normal" />
+        android:textSize="24sp" />
 
     <ImageView
         android:id="@+id/nen"

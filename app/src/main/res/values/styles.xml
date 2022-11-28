@@ -1,9 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-
         <item name="android:background">@drawable/bg_nav</item>
+    </style>
 
+    <style name="textLight">
+        <item name="fontFamily">@font/roboto_light</item>
+        <item name="fontWeight">300</item>
+    </style>
+
+    <style name="textMedium">
+        <item name="fontFamily">@font/roboto_medium</item>
+        <item name="fontWeight">500</item>
+    </style>
+
+    <style name="textBold">
+        <item name="fontFamily">@font/roboto_bold</item>
+        <item name="fontWeight">600</item>
+    </style>
+
+    <style name="MyCustomTextAppearance" parent="TextAppearance.Design.Tab">
+        <item name="textAllCaps">false</item>
+        <item name="android:textSize">16sp</item>
+        <item name="fontFamily">@font/roboto_medium</item>
     </style>
 </resources>

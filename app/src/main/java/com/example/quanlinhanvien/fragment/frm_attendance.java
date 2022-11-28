@@ -55,9 +55,9 @@ public class frm_attendance extends Fragment {
     private CodeScanner mCodeScanner;
     private CodeScannerView scannerView;
     Button btnQRCode,btnNFC;
-    TextView txtTitle,txtResutl,tc_ngay;
+    TextView txtTitle,txtResutl;
     ArrayList<Location> list;
-    TextClock tc_gio;
+    TextClock tc_gio, tc_ngay;
     LinearLayout layout_icon;
     ImageView imgCheckIn,imgCheckOut;
     FrameLayout layout_scan;
@@ -96,8 +96,8 @@ public class frm_attendance extends Fragment {
                 btnQRCode.setVisibility(View.GONE);
             }
         });
-        tc_gio.setFormat12Hour("hh:mma");
-        tc_ngay.setText(LocalDate.now().getDayOfWeek().toString()+","+LocalDate.now().getMonth()+" "+LocalDate.now().getDayOfMonth());
+        tc_gio.setFormat12Hour("hh:mm a");
+        tc_ngay.setFormat12Hour("EEE, MMM d");
         imgCheckIn = v.findViewById(R.id.btnCheckin);
         imgCheckOut=v.findViewById(R.id.btnCheckOut);
         imgCheckIn.setOnClickListener(new View.OnClickListener() {

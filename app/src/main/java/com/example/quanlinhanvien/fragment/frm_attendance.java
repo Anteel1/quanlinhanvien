@@ -30,10 +30,12 @@ import com.budiyev.android.codescanner.CodeScanner;
 import com.budiyev.android.codescanner.CodeScannerView;
 import com.budiyev.android.codescanner.DecodeCallback;
 import com.budiyev.android.codescanner.ScanMode;
+import com.cloudinary.android.MediaManager;
+import com.cloudinary.android.callback.ErrorInfo;
+import com.cloudinary.android.callback.UploadCallback;
 import com.example.quanlinhanvien.R;
 import com.example.quanlinhanvien.model.Location;
 import com.example.quanlinhanvien.model.calam;
-import com.example.quanlinhanvien.model.cuahang;
 import com.example.quanlinhanvien.others.GPSTracker;
 import com.example.quanlinhanvien.service.service_API;
 import com.google.android.gms.maps.model.LatLng;
@@ -43,6 +45,8 @@ import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import java.text.DecimalFormat;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
@@ -53,7 +57,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class frm_attendance extends Fragment {
     private CodeScanner mCodeScanner;
     private CodeScannerView scannerView;
-    Button btnQRCode,btnNFC;
+    Button btnQRCode,btnNFC,btnUpdate;
     TextView txtTitle,txtResutl;
     ArrayList<Location> list;
     TextClock tc_gio, tc_ngay;
@@ -65,6 +69,7 @@ public class frm_attendance extends Fragment {
     int gio,phut;
     int maCL;
     boolean tregio;
+    private HashMap config = new HashMap();
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -75,11 +80,14 @@ public class frm_attendance extends Fragment {
         txtTitle = v.findViewById(R.id.txtTitle);
         layout_scan = v.findViewById(R.id.layout_scan);
         listCalam = new ArrayList<>();
+        list = new ArrayList<>();
         btnNFC = v.findViewById(R.id.btnNFC);
         btnQRCode=v.findViewById(R.id.btnQR);
+        btnUpdate=v.findViewById(R.id.btnUpdateIMG);
         imgCamera = v.findViewById(R.id.imgCamera);
 
-
+        demoCallAPI_calam();
+        configCloudinary();
         btnQRCode.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -136,10 +144,9 @@ public class frm_attendance extends Fragment {
         scannerView =v.findViewById(R.id.scanner_view);
         list = new ArrayList<>();
         codeScanner();
-        demoCallAPI();
 
         // get location theo km
-        Log.d("Location",getData(20).size()+" ");
+        Log.d("Location",getData(0.02).size()+" ");
         return v;
     }
     @Override
@@ -190,13 +197,8 @@ public class frm_attendance extends Fragment {
 
 
     private ArrayList<Location> getData(double distance) {
-        //data mẫu
-//        list.add(new Location(1, "Địa điểm A", "10.7564083,106.5754643"));
-//        list.add(new Location(2, "Địa điểm Nhà riêng", "10.7607871,106.5871427"));
-//        list.add(new Location(3, "CoopMart", "10.7587318,106.584954"));
-//        list.add(new Location(4, "Trường tiểu học A", "10.7614933,106.5879044"));
-//        list.add(new Location(5, "Tòa F", "10.8525201,106.6249008"));
-        // viet api goi vi tri cua hang
+        //data location cua hang
+        list.add(0,new Location(0,"City food Store","10.8529995,106.6270037"));
         //lọc data
         ArrayList<Location> listResult = new ArrayList<>();
         for (Location location : list) {
@@ -248,35 +250,7 @@ public class frm_attendance extends Fragment {
             return new LatLng(0, 0);
         }
     }
-    private void demoCallAPI() {
 
-        service_API requestInterface = new Retrofit.Builder()
-                .baseUrl(Base_Service)
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                .addConverterFactory(GsonConverterFactory.create())
-                .build().create(service_API.class);
-
-        new CompositeDisposable().add(requestInterface.getModelCHAPI()
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeOn(Schedulers.io())
-                .subscribe(this::handleResponse, this::handleError)
-        );
-    }
-
-    private void handleResponse(ArrayList<cuahang> list1) {
-        //API trả về dữ liệu thành công, thực hiện việc lấy data
-        for(int i =0; i <list1.size(); i++){
-            String locationName = list1.get(i).getTenCH();
-            String locationLeLg = list1.get(i).getDiaChi();
-            list.add(i,new Location(i,locationName,locationLeLg));
-        }
-    }
-
-    private void handleError(Throwable error) {
-        Log.d("erro", error.toString());
-        Toast.makeText(getContext(), error.toString(), Toast.LENGTH_SHORT).show();
-        //khi gọi API KHÔNG THÀNH CÔNG thì thực hiện xử lý ở đây
-    }
     private void demoCallAPI_calam() {
 
         service_API requestInterface = new Retrofit.Builder()
@@ -325,13 +299,19 @@ public class frm_attendance extends Fragment {
     private void checkOut(){
 
     }
-
+    // hien thi hinh anh
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         if (requestCode == 2323 ){
             Bitmap bitmap = (Bitmap) data.getExtras().get("data");
             imgCamera.setImageBitmap(bitmap);
             imgCamera.setVisibility(View.VISIBLE);
+            btnUpdate.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    uploadIMG(bitmap);
+                }
+            });
         }
 
         super.onActivityResult(requestCode, resultCode, data);
@@ -339,5 +319,40 @@ public class frm_attendance extends Fragment {
     private void turnonCamera(){
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         startActivityForResult(intent,2323);
+    }
+    private void uploadIMG(Bitmap bitmap) {
+        MediaManager.get().upload(String.valueOf(bitmap)).callback(new UploadCallback() {
+            @Override
+            public void onStart(String requestId) {
+                Log.d("CHECK", "onStart");
+            }
+
+            @Override
+            public void onProgress(String requestId, long bytes, long totalBytes) {
+                Log.d("CHECK", "onProgress");
+            }
+
+            @Override
+            public void onSuccess(String requestId, Map resultData) {
+                Log.d("CHECK", "onSuccess");
+                Log.d("IMG URL",resultData.get("url").toString());
+            }
+
+            @Override
+            public void onError(String requestId, ErrorInfo error) {
+                Log.d("CHECK", "onError: " + error);
+            }
+
+            @Override
+            public void onReschedule(String requestId, ErrorInfo error) {
+                Log.d("CHECK", "onReschedule: " + error);
+            }
+        }).dispatch();
+    }
+    private void configCloudinary() {
+        config.put("cloud_name", "dnxe9l57i");
+        config.put("api_key", "991189484643755");
+        config.put( "api_secret", "e6ZiAtks5BeldzKgTew3IqC8KHk");
+        MediaManager.init(getContext(), config);
     }
 }

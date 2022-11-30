@@ -57,19 +57,20 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class frm_attendance extends Fragment {
     private CodeScanner mCodeScanner;
     private CodeScannerView scannerView;
-    Button btnQRCode,btnNFC,btnUpdate;
-    TextView txtTitle,txtResutl;
+    Button btnQRCode, btnNFC, btnUpdate;
+    TextView txtTitle, txtResutl;
     ArrayList<Location> list;
     TextClock tc_gio, tc_ngay;
     LinearLayout layout_icon;
-    ImageView imgCheckIn,imgCheckOut;
+    ImageView imgCheckIn, imgCheckOut;
     FrameLayout layout_scan;
-    ArrayList<calam>listCalam;
+    ArrayList<calam> listCalam;
     ImageView imgCamera;
-    int gio,phut;
+    int gio, phut;
     int maCL;
     boolean tregio;
     private HashMap config = new HashMap();
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -82,8 +83,8 @@ public class frm_attendance extends Fragment {
         listCalam = new ArrayList<>();
         list = new ArrayList<>();
         btnNFC = v.findViewById(R.id.btnNFC);
-        btnQRCode=v.findViewById(R.id.btnQR);
-        btnUpdate=v.findViewById(R.id.btnUpdateIMG);
+        btnQRCode = v.findViewById(R.id.btnQR);
+        btnUpdate = v.findViewById(R.id.btnUpdateIMG);
         imgCamera = v.findViewById(R.id.imgCamera);
 
         demoCallAPI_calam();
@@ -106,7 +107,7 @@ public class frm_attendance extends Fragment {
         tc_gio.setFormat12Hour("hh:mm a");
         tc_ngay.setFormat12Hour("EEE, MMM d");
         imgCheckIn = v.findViewById(R.id.btnCheckin);
-        imgCheckOut=v.findViewById(R.id.btnCheckOut);
+        imgCheckOut = v.findViewById(R.id.btnCheckOut);
         imgCheckIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -119,7 +120,7 @@ public class frm_attendance extends Fragment {
                 txtTitle.setText("Check in");
                 layout_scan.setVisibility(View.VISIBLE);
                 checkIn();
-                    // gọi post lên update bảng chấm công
+                // gọi post lên update bảng chấm công
 
 
             }
@@ -136,19 +137,20 @@ public class frm_attendance extends Fragment {
                 txtTitle.setText("Check out");
                 layout_scan.setVisibility(View.VISIBLE);
                 checkOut();
-                    // gọi post lên update bảng chấm công
+                // gọi post lên update bảng chấm công
             }
         });
         scanQRpermission();
-        txtResutl =v.findViewById(R.id.resutl);
-        scannerView =v.findViewById(R.id.scanner_view);
+        txtResutl = v.findViewById(R.id.resutl);
+        scannerView = v.findViewById(R.id.scanner_view);
         list = new ArrayList<>();
         codeScanner();
 
         // get location theo km
-        Log.d("Location",getData(0.02).size()+" ");
+        Log.d("Location", getData(0.02).size() + " ");
         return v;
     }
+
     @Override
     public void onResume() {
         super.onResume();
@@ -160,8 +162,9 @@ public class frm_attendance extends Fragment {
         mCodeScanner.releaseResources();
         super.onPause();
     }
-    private void codeScanner(){
-        mCodeScanner = new CodeScanner(getContext(),scannerView);
+
+    private void codeScanner() {
+        mCodeScanner = new CodeScanner(getContext(), scannerView);
         mCodeScanner.setCamera(CodeScanner.CAMERA_BACK);
         mCodeScanner.setFormats(CodeScanner.ALL_FORMATS);
         mCodeScanner.setAutoFocusMode(AutoFocusMode.SAFE);
@@ -174,7 +177,7 @@ public class frm_attendance extends Fragment {
                 getActivity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        list.add(0,new Location(0,"Cửa hàng City Food",result.toString()));
+                        list.add(0, new Location(0, "Cửa hàng City Food", result.toString()));
                     }
                 });
             }
@@ -186,10 +189,11 @@ public class frm_attendance extends Fragment {
             }
         });
     }
-    private void scanQRpermission(){
-        int permission = ActivityCompat.checkSelfPermission((Activity)getContext(), android.Manifest.permission.CAMERA);
-        if(permission != PackageManager.PERMISSION_GRANTED){
-            ActivityCompat.requestPermissions((Activity)getContext(),new String[]{android.Manifest.permission.CAMERA},
+
+    private void scanQRpermission() {
+        int permission = ActivityCompat.checkSelfPermission((Activity) getContext(), android.Manifest.permission.CAMERA);
+        if (permission != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions((Activity) getContext(), new String[]{android.Manifest.permission.CAMERA},
                     100);
         }
 
@@ -198,7 +202,7 @@ public class frm_attendance extends Fragment {
 
     private ArrayList<Location> getData(double distance) {
         //data location cua hang
-        list.add(0,new Location(0,"City food Store","10.8529995,106.6270037"));
+        list.add(0, new Location(0, "City food Store", "10.8529995,106.6270037"));
         //lọc data
         ArrayList<Location> listResult = new ArrayList<>();
         for (Location location : list) {
@@ -215,6 +219,7 @@ public class frm_attendance extends Fragment {
 
         return listResult;
     }
+
     private double CalculationByDistance(LatLng StartP, LatLng EndP) {
         int Radius = 6371;// radius of earth in Km
         double lat1 = StartP.latitude;
@@ -239,6 +244,7 @@ public class frm_attendance extends Fragment {
 
         return Radius * c;
     }
+
     private LatLng currentLoaction() {
         GPSTracker gpsTracker = new GPSTracker(getContext());
         if (gpsTracker.canGetLocation()) {
@@ -268,9 +274,9 @@ public class frm_attendance extends Fragment {
 
     private void handleResponse_calam(ArrayList<calam> list1) {
         //API trả về dữ liệu thành công, thực hiện việc lấy data
-        for(int i =0; i <list1.size(); i++){
-            listCalam.add(new calam(list1.get(i).getMaCL(),list1.get(i).getTenCL(),
-                    list1.get(i).getGioBD(),list1.get(i).getGioKT()));
+        for (int i = 0; i < list1.size(); i++) {
+            listCalam.add(new calam(list1.get(i).getMaCL(), list1.get(i).getTenCL(),
+                    list1.get(i).getGioBD(), list1.get(i).getGioKT()));
         }
     }
 
@@ -279,30 +285,33 @@ public class frm_attendance extends Fragment {
         Toast.makeText(getContext(), error.toString(), Toast.LENGTH_SHORT).show();
         //khi gọi API KHÔNG THÀNH CÔNG thì thực hiện xử lý ở đây
     }
-    private void checkIn(){
-    // check distance
-        if(getData(0.02).size() ==1){
-            for(calam calam:listCalam){
-                if(Integer.parseInt(calam.getGioBD())-1 <= gio && Integer.parseInt(calam.getGioKT())-1 >=gio){
+
+    private void checkIn() {
+        // check distance
+        if (getData(0.02).size() == 1) {
+            for (calam calam : listCalam) {
+                if (Integer.parseInt(calam.getGioBD()) - 1 <= gio && Integer.parseInt(calam.getGioKT()) - 1 >= gio) {
                     maCL = calam.getMaCL();
                     layout_scan.setVisibility(View.GONE);
                     turnonCamera();
-                }else{
+                } else {
                     Toast.makeText(getContext(), "Chấm công thất bại", Toast.LENGTH_SHORT).show();
                 }
             }
-        }else{
-            Log.d("Distance","noooooo");
+        } else {
+            Log.d("Distance", "noooooo");
             Toast.makeText(getContext(), "Bạn không nằm trong khu vực cửa hàng", Toast.LENGTH_SHORT).show();
         }
     }
-    private void checkOut(){
+
+    private void checkOut() {
 
     }
+
     // hien thi hinh anh
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        if (requestCode == 2323 ){
+        if (requestCode == 2323) {
             Bitmap bitmap = (Bitmap) data.getExtras().get("data");
             imgCamera.setImageBitmap(bitmap);
             imgCamera.setVisibility(View.VISIBLE);
@@ -316,10 +325,12 @@ public class frm_attendance extends Fragment {
 
         super.onActivityResult(requestCode, resultCode, data);
     }
-    private void turnonCamera(){
+
+    private void turnonCamera() {
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        startActivityForResult(intent,2323);
+        startActivityForResult(intent, 2323);
     }
+
     private void uploadIMG(Bitmap bitmap) {
         MediaManager.get().upload(String.valueOf(bitmap)).callback(new UploadCallback() {
             @Override
@@ -335,7 +346,7 @@ public class frm_attendance extends Fragment {
             @Override
             public void onSuccess(String requestId, Map resultData) {
                 Log.d("CHECK", "onSuccess");
-                Log.d("IMG URL",resultData.get("url").toString());
+                Log.d("IMG URL", resultData.get("url").toString());
             }
 
             @Override
@@ -349,10 +360,11 @@ public class frm_attendance extends Fragment {
             }
         }).dispatch();
     }
+
     private void configCloudinary() {
         config.put("cloud_name", "dnxe9l57i");
         config.put("api_key", "991189484643755");
-        config.put( "api_secret", "e6ZiAtks5BeldzKgTew3IqC8KHk");
+        config.put("api_secret", "e6ZiAtks5BeldzKgTew3IqC8KHk");
         MediaManager.init(getContext(), config);
     }
 }

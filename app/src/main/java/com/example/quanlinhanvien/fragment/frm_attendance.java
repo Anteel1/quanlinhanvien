@@ -25,11 +25,9 @@ import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 
-import com.budiyev.android.codescanner.AutoFocusMode;
 import com.budiyev.android.codescanner.CodeScanner;
 import com.budiyev.android.codescanner.CodeScannerView;
 import com.budiyev.android.codescanner.DecodeCallback;
-import com.budiyev.android.codescanner.ScanMode;
 import com.cloudinary.android.MediaManager;
 import com.cloudinary.android.callback.ErrorInfo;
 import com.cloudinary.android.callback.UploadCallback;
@@ -38,7 +36,6 @@ import com.example.quanlinhanvien.model.Location;
 import com.example.quanlinhanvien.model.calam;
 import com.example.quanlinhanvien.others.GPSTracker;
 import com.example.quanlinhanvien.service.service_API;
-
 import com.google.android.gms.maps.model.LatLng;
 import com.google.zxing.Result;
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
@@ -287,6 +284,13 @@ public class frm_attendance extends Fragment {
         if (getData(2).size() == 1) {
             for (calam calam : listCalam) {
                 if (Integer.parseInt(calam.getGioBD().substring(0,2)) - 1 <= gio && Integer.parseInt(calam.getGioKT().substring(0,2)) - 1 >= gio) {
+                    if(gio <Integer.parseInt(calam.getGioBD().substring(0,2)) ){
+
+                    }else if(gio ==Integer.parseInt(calam.getGioBD().substring(0,2))){
+
+                    }else{
+                        
+                    }
                     maCL = calam.getMaCL();
                     layout_scan.setVisibility(View.GONE);
                     ok = 2;

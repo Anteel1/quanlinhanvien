@@ -6,7 +6,9 @@ import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.util.Patterns;
@@ -18,7 +20,6 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
 
 import com.example.quanlinhanvien.model.nhanvien;
 import com.example.quanlinhanvien.service.service_API;
@@ -35,7 +36,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class LoginActivity extends AppCompatActivity {
-    private static final int REQUEST_CODE = 101;
+    private static final int REQUEST_CODE = 1;
     ProgressBar progressBar;
     TextView tv_forgotpassword;
     TextInputLayout txtlayoutEmail, txtLayoutPassword;
@@ -210,14 +211,30 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public String getImei() {
-        TelephonyManager telephonyManager = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
-        if (ActivityCompat.checkSelfPermission(LoginActivity.this, Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(LoginActivity.this, new String[]{Manifest.permission.READ_PHONE_STATE}, REQUEST_CODE);
-
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q)
+        {
+            IMEINumber = Settings.Secure.getString(this.getContentResolver(), Settings.Secure.ANDROID_ID);
+        } else {
+            final TelephonyManager mTelephony = (TelephonyManager) this.getSystemService(Context.TELEPHONY_SERVICE);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                if (this.checkSelfPermission(Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED) {
+                    return "";
+                }
+            }
+            assert mTelephony != null;
+            if (mTelephony.getDeviceId() != null)
+            {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
+                {
+                    IMEINumber = mTelephony.getImei();
+                }else {
+                    IMEINumber = mTelephony.getDeviceId();
+                }
+            } else {
+                IMEINumber = Settings.Secure.getString(this.getContentResolver(), Settings.Secure.ANDROID_ID);
+            }
         }
-
-        IMEINumber = telephonyManager.getDeviceId();
-        Log.d("============TAG", "getImei: "+IMEINumber);
+        Log.d("deviceId", IMEINumber);
         return IMEINumber;
     }
 

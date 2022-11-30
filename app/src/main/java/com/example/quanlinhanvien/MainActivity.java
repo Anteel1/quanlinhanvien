@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
                         onRestoreInstanceState(savedInstanceState);
                         break;
                     case R.id.menu_lichlam:
-                        fragment = new frm_lichlam();
+                        fragment = new frm_lichlam(idNV);
                         onRestoreInstanceState(savedInstanceState);
                         break;
                     case R.id.menu_calam:

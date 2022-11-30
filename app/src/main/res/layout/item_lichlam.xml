@@ -9,12 +9,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_marginLeft="20dp"
+
         >
         <TextView
             android:id="@+id/txtnv"
-            android:layout_width="180dp"
-            android:layout_height="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:text="Faius Mojumder Nahin"
             android:layout_marginLeft="6dp"
             android:layout_marginTop="10dp"
@@ -23,8 +23,8 @@
             />
         <TextView
             android:id="@+id/txtcalam"
-            android:layout_width="75dp"
-            android:layout_height="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginLeft="6dp"
             android:text="ca"
             android:textColor="#80000000"
@@ -32,7 +32,7 @@
             />
         <TextView
             android:id="@+id/txtngaylam"
-            android:layout_width="75dp"
+            android:layout_width="match_parent"
             android:layout_height="20dp"
             android:layout_marginLeft="6dp"
             android:text="ngaylam"
@@ -48,10 +48,10 @@
         android:background="#80CAC3C3"/>
     <TextView
         android:id="@+id/txtgiovao"
-        android:layout_width="wrap_content"
-        android:layout_height="20dp"
+        android:layout_width="match_parent"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"
         android:text="09:55"
-        android:layout_marginLeft="14dp"
         android:layout_marginTop="18dp"
         android:textColor="#D12C2C2C"
         android:textSize="16sp"
@@ -64,10 +64,11 @@
         android:background="#80CAC3C3"/>
     <TextView
         android:id="@+id/txtgiora"
-        android:layout_width="wrap_content"
-        android:layout_height="20dp"
+        android:layout_width="match_parent"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"
         android:text="13:55"
-        android:layout_marginLeft="10dp"
+
         android:layout_marginTop="18dp"
         android:textColor="#D12C2C2C"
         android:textSize="16sp"

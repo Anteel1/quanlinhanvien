@@ -11,39 +11,13 @@
         android:orientation="vertical"
         >
         <TextView
-            android:layout_width="300dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Lịch làm"
-            android:layout_marginLeft="35dp"
-            android:layout_gravity="center"
-            android:textSize="40dp"
+            android:gravity="center"
+            android:textSize="30dp"
             />
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="140dp"
-            android:orientation="vertical"
-            >
-           <EditText
-               android:id="@+id/edtthang"
-               android:layout_width="match_parent"
-               android:layout_height="wrap_content"
-               android:hint="Tháng"
-               ></EditText>
 
-           <EditText
-               android:id="@+id/edtidnv"
-               android:layout_width="match_parent"
-               android:layout_height="wrap_content"
-               android:hint="id nhân viên"
-               ></EditText>
-            <Button
-                android:id="@+id/btnhien"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="hiện"
-                android:backgroundTint="#73AB6B"
-                ></Button>
-        </LinearLayout>
     </LinearLayout>
     <View
         android:layout_width="match_parent"
@@ -55,27 +29,27 @@
         android:orientation="horizontal"
         >
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
+            android:layout_weight="1"
             android:layout_marginTop="9dp"
             android:text="Name"
             android:textSize="18sp"
             android:textColor="@color/black"
             />
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="210dp"
+            android:layout_weight="3"
             android:layout_marginTop="9dp"
             android:text="In"
             android:textSize="18sp"
             android:textColor="@color/black"
             />
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_weight="3"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="50dp"
             android:layout_marginTop="9dp"
             android:text="Out"
             android:textSize="18sp"

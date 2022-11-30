@@ -22,7 +22,7 @@
         android:id="@+id/menu_lichlam"
         android:icon="@drawable/desk_alt"
         android:title="Attendance" />
-    
+
     <item
         android:id="@+id/menu_store"
         android:icon="@drawable/notebook"

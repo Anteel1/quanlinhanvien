@@ -166,7 +166,6 @@ public class LoginActivity extends AppCompatActivity {
      private void handleResponse(ArrayList<nhanvien> list1) {
         //API trả về dữ liệu thành công, thực hiện việc lấy data
          Toast.makeText(LoginActivity.this, "thành công", Toast.LENGTH_SHORT).show();
-
          for (int i = 0; i < list1.size(); i++) {
             if ((edt_email.getText().toString()).equals(list1.get(i).getTaiKhoan())) {
                 if ((edt_password.getText().toString()).equals(list1.get(i).getMatKhau())) {

@@ -6,6 +6,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
@@ -46,6 +47,7 @@ import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import java.text.DecimalFormat;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -109,6 +111,16 @@ public class frm_attendance extends Fragment {
         tc_ngay.setFormat12Hour("EEE, MMM d");
         imgCheckIn = v.findViewById(R.id.btnCheckin);
         imgCheckOut = v.findViewById(R.id.btnCheckOut);
+
+        Calendar calendar = Calendar.getInstance();
+        int hour = calendar.get(Calendar.HOUR_OF_DAY);
+        int mitune = calendar.get(Calendar.MINUTE);
+
+//        if (hour == 20 && mitune >= 40) {
+//            imgCheckIn.setEnabled(false);
+//            imgCheckIn.setColorFilter(Color.parseColor("#10A19D"));
+//        }
+
         imgCheckIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -286,7 +298,7 @@ public class frm_attendance extends Fragment {
         int ok = 1;
         if (getData(2).size() == 1) {
             for (calam calam : listCalam) {
-                if (Integer.parseInt(calam.getGioBD().substring(0,2)) - 1 <= gio && Integer.parseInt(calam.getGioKT().substring(0,2)) - 1 >= gio) {
+                if (Integer.parseInt(calam.getGioBD().substring(0, 2)) - 1 <= gio && Integer.parseInt(calam.getGioKT().substring(0, 2)) - 1 >= gio) {
                     maCL = calam.getMaCL();
                     layout_scan.setVisibility(View.GONE);
                     ok = 2;
@@ -294,9 +306,9 @@ public class frm_attendance extends Fragment {
                     break;
                 }
             }
-            if(ok == 2 ){
+            if (ok == 2) {
                 turnonCamera();
-            }else{
+            } else {
                 Toast.makeText(getContext(), "Cham cong that bai", Toast.LENGTH_SHORT).show();
             }
         } else {

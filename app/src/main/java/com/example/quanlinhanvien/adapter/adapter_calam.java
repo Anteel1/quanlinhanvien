@@ -10,7 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.quanlinhanvien.R;
-import com.example.quanlinhanvien.model_api.calam;
+import com.example.quanlinhanvien.model.calam;
 
 import java.util.ArrayList;
 

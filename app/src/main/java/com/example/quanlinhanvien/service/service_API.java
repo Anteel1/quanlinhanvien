@@ -4,6 +4,9 @@ import com.example.quanlinhanvien.model.calam;
 import com.example.quanlinhanvien.model.cuahang;
 import com.example.quanlinhanvien.model.luong;
 import com.example.quanlinhanvien.model.ngaylam;
+import com.example.quanlinhanvien.model.chamcong;
+import com.example.quanlinhanvien.model.cuahang;
+import com.example.quanlinhanvien.model.lichlam;
 import com.example.quanlinhanvien.model.nhanvien;
 
 import java.util.ArrayList;
@@ -27,4 +30,8 @@ public interface service_API {
     @GET("api/getLichSuLamNV")
     Observable<ArrayList<ngaylam>>getNgayLam(@Query("maNV") int maNV, @Query("thang") int thang);
 
+    @GET("api/getNV1")
+    Observable<ArrayList<chamcong>> getModelAPI_chamcong();
+    @GET("api/getLichLamNV")
+    Observable<ArrayList<lichlam>> getLichlamnv(@Query("manv") int maNV , @Query("thang") int thang );
 }

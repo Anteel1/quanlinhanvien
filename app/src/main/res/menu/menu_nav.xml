@@ -9,6 +9,7 @@
         android:id="@+id/menu_Attendance"
         android:icon="@drawable/desk"
         android:title="Attendance" />
+
     <item
         android:id="@+id/menu_calam"
         android:icon="@drawable/desk"
@@ -17,6 +18,14 @@
         android:id="@+id/menu_thongke"
         android:icon="@drawable/desk_alt"
         android:title="Statistics" />
+    <item
+        android:id="@+id/menu_calam"
+        android:icon="@drawable/desk_alt"
+        android:title="Ca lam" />
+    <item
+        android:id="@+id/menu_lichlam"
+        android:icon="@drawable/desk_alt"
+        android:title="Lich làm" />
     <item
         android:id="@+id/menu_dk_lichlam"
         android:icon="@drawable/notebook"

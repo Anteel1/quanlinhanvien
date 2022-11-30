@@ -70,6 +70,7 @@ public class frm_attendance extends Fragment {
     int maCL;
     boolean tregio;
     private HashMap config = new HashMap();
+    int type;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -118,7 +119,7 @@ public class frm_attendance extends Fragment {
                 txtTitle.setVisibility(View.VISIBLE);
                 txtTitle.setText("Check in");
                 layout_scan.setVisibility(View.VISIBLE);
-                checkIn();
+                type = 1;
                     // gọi post lên update bảng chấm công
 
 
@@ -135,7 +136,7 @@ public class frm_attendance extends Fragment {
                 txtTitle.setVisibility(View.VISIBLE);
                 txtTitle.setText("Check out");
                 layout_scan.setVisibility(View.VISIBLE);
-                checkOut();
+                type = 2;
                     // gọi post lên update bảng chấm công
             }
         });
@@ -143,9 +144,8 @@ public class frm_attendance extends Fragment {
         txtResutl =v.findViewById(R.id.resutl);
         scannerView =v.findViewById(R.id.scanner_view);
         list = new ArrayList<>();
-        codeScanner();
+        codeScanner(type);
 
-        // get location theo km
         Log.d("Location",getData(0.02).size()+" ");
         return v;
     }
@@ -160,31 +160,61 @@ public class frm_attendance extends Fragment {
         mCodeScanner.releaseResources();
         super.onPause();
     }
-    private void codeScanner(){
-        mCodeScanner = new CodeScanner(getContext(),scannerView);
-        mCodeScanner.setCamera(CodeScanner.CAMERA_BACK);
-        mCodeScanner.setFormats(CodeScanner.ALL_FORMATS);
-        mCodeScanner.setAutoFocusMode(AutoFocusMode.SAFE);
-        mCodeScanner.setScanMode(ScanMode.CONTINUOUS);
-        mCodeScanner.setAutoFocusEnabled(true);
-        mCodeScanner.setFlashEnabled(false);
-        mCodeScanner.setDecodeCallback(new DecodeCallback() {
-            @Override
-            public void onDecoded(@NonNull final Result result) {
-                getActivity().runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        list.add(0,new Location(0,"Cửa hàng City Food",result.toString()));
-                    }
-                });
-            }
-        });
-        scannerView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mCodeScanner.startPreview();
-            }
-        });
+    private void codeScanner(int type){
+        if(type == 1){
+            mCodeScanner = new CodeScanner(getContext(),scannerView);
+            mCodeScanner.setCamera(CodeScanner.CAMERA_BACK);
+            mCodeScanner.setFormats(CodeScanner.ALL_FORMATS);
+            mCodeScanner.setAutoFocusMode(AutoFocusMode.SAFE);
+            mCodeScanner.setScanMode(ScanMode.CONTINUOUS);
+            mCodeScanner.setAutoFocusEnabled(true);
+            mCodeScanner.setFlashEnabled(false);
+            mCodeScanner.setDecodeCallback(new DecodeCallback() {
+                @Override
+                public void onDecoded(@NonNull final Result result) {
+                    getActivity().runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            list.add(0,new Location(0,"Cửa hàng City Food",result.toString()));
+                            checkIn();
+                        }
+                    });
+                }
+            });
+            scannerView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    mCodeScanner.startPreview();
+                }
+            });
+        }else{
+            mCodeScanner = new CodeScanner(getContext(),scannerView);
+            mCodeScanner.setCamera(CodeScanner.CAMERA_BACK);
+            mCodeScanner.setFormats(CodeScanner.ALL_FORMATS);
+            mCodeScanner.setAutoFocusMode(AutoFocusMode.SAFE);
+            mCodeScanner.setScanMode(ScanMode.CONTINUOUS);
+            mCodeScanner.setAutoFocusEnabled(true);
+            mCodeScanner.setFlashEnabled(false);
+            mCodeScanner.setDecodeCallback(new DecodeCallback() {
+                @Override
+                public void onDecoded(@NonNull final Result result) {
+                    getActivity().runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            list.add(0,new Location(0,"Cửa hàng City Food",result.toString()));
+                            checkOut();
+                        }
+                    });
+                }
+            });
+            scannerView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    mCodeScanner.startPreview();
+                }
+            });
+        }
+
     }
     private void scanQRpermission(){
         int permission = ActivityCompat.checkSelfPermission((Activity)getContext(), android.Manifest.permission.CAMERA);

@@ -8,12 +8,8 @@
     <item
         android:id="@+id/menu_Attendance"
         android:icon="@drawable/desk"
-        android:title="Attendance" />
+        android:title="Timekeeping" />
 
-    <item
-        android:id="@+id/menu_calam"
-        android:icon="@drawable/desk"
-        android:title="Ca Làm" />
     <item
         android:id="@+id/menu_thongke"
         android:icon="@drawable/desk_alt"
@@ -21,15 +17,12 @@
     <item
         android:id="@+id/menu_calam"
         android:icon="@drawable/desk_alt"
-        android:title="Ca lam" />
+        android:title="Shift" />
     <item
         android:id="@+id/menu_lichlam"
         android:icon="@drawable/desk_alt"
-        android:title="Lich làm" />
-    <item
-        android:id="@+id/menu_dk_lichlam"
-        android:icon="@drawable/notebook"
-        android:title="Create Attendance" />
+        android:title="Attendance" />
+    
     <item
         android:id="@+id/menu_store"
         android:icon="@drawable/notebook"

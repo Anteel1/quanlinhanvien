@@ -15,7 +15,6 @@ import androidx.fragment.app.Fragment;
 
 import com.example.quanlinhanvien.fragment.frm_attendance;
 import com.example.quanlinhanvien.fragment.frm_calam;
-import com.example.quanlinhanvien.fragment.frm_dangkylichlam;
 import com.example.quanlinhanvien.fragment.frm_dangxuat;
 import com.example.quanlinhanvien.fragment.frm_genQRcode;
 import com.example.quanlinhanvien.fragment.frm_lichlam;
@@ -59,10 +58,6 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     case R.id.menu_store:
                         fragment = new frm_store();
-                        onRestoreInstanceState(savedInstanceState);
-                        break;
-                    case R.id.menu_dk_lichlam:
-                        fragment = new frm_dangkylichlam();
                         onRestoreInstanceState(savedInstanceState);
                         break;
                     case R.id.menu_lichlam:

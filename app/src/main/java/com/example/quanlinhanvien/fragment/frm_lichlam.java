@@ -32,35 +32,35 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class frm_lichlam extends Fragment {
-   Button btnhien;
-   EditText edtthang,edtidnv;
-   ArrayList<lichlam> list;
-   ListView listviewll;
+    Button btnhien;
+    EditText edtthang, edtidnv;
+    ArrayList<lichlam> list;
+    ListView listviewll;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.frm_lichlam, container, false);
-          btnhien = view.findViewById(R.id.btnhien);
-          edtthang = view.findViewById(R.id.edtthang);
-          edtidnv = view.findViewById(R.id.edtidnv);
-          listviewll = view.findViewById(R.id.listviewll);
-          list = new ArrayList<>();
-          btnhien.setOnClickListener(new View.OnClickListener() {
-              @Override
-              public void onClick(View v) {
-                  int manv = Integer.parseInt(String.valueOf(edtidnv.getText()));
-                  int thang =Integer.parseInt(String.valueOf(edtthang.getText()));
-                  demoCallAPI(manv,thang);
-                  show(list);
-              }
-          });
-
+        btnhien = view.findViewById(R.id.btnhien);
+        edtthang = view.findViewById(R.id.edtthang);
+        edtidnv = view.findViewById(R.id.edtidnv);
+        listviewll = view.findViewById(R.id.listviewll);
+        list = new ArrayList<>();
+        btnhien.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int manv = Integer.parseInt(String.valueOf(edtidnv.getText()));
+                int thang = Integer.parseInt(String.valueOf(edtthang.getText()));
+                demoCallAPI(manv, thang);
+                show(list);
+            }
+        });
 
 
         return view;
     }
 
-    private void demoCallAPI(int maNV,int thang) {
+    private void demoCallAPI(int maNV, int thang) {
 
         service_API requestInterface = new Retrofit.Builder()
                 .baseUrl(Base_Service)
@@ -68,7 +68,7 @@ public class frm_lichlam extends Fragment {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build().create(service_API.class);
 
-        new CompositeDisposable().add(requestInterface.getLichlamnv(maNV,thang)
+        new CompositeDisposable().add(requestInterface.getLichlamnv(maNV, thang)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe(this::handleResponse, this::handleError)
@@ -86,9 +86,10 @@ public class frm_lichlam extends Fragment {
 
 
     private void handleError(Throwable error) {
-        Log.d("TAG","loi_________________");
+        Log.d("TAG", "loi_________________");
         //khi gọi API KHÔNG THÀNH CÔNG thì thực hiện xử lý ở đây
     }
+
     private void show(ArrayList<lichlam> listll) {
         adapter_lichlam adapter_lichlam = new adapter_lichlam(listll, getContext());
         listviewll.setAdapter(adapter_lichlam);

@@ -25,4 +25,6 @@ public interface service_API {
     Observable<ArrayList<chamcong>> getModelAPI_chamcong();
     @GET("api/getLichLamNV")
     Observable<ArrayList<lichlam>> getLichlamnv(@Query("manv") int maNV , @Query("thang") int thang );
+//    @Override("api/getLichLamNV")
+//    Observable<ArrayList<lichlam>> getLichlamnv(@Query("manv") int maNV , @Query("thang") int thang );
 }

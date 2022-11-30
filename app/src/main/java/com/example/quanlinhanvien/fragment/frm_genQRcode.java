@@ -61,7 +61,8 @@ public class frm_genQRcode extends Fragment {
         Button btnGenerate = view.findViewById(R.id.btnGenerate);
         Button btnSave = view.findViewById(R.id.btnSave);
         list = new ArrayList<>();
-        location = "10.8525201,106.6249008";
+        location = "10.8525148,106.6249008";
+        //10.8525148,106.6249008
 //        edtInput.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 //            @Override
 //            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {

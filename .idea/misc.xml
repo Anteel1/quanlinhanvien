@@ -44,9 +44,14 @@
         <entry key="..\:/github/quanlinhanvien/app/src/main/res/layout/activity_manhinhcho.xml" value="0.1" />
         <entry key="..\:/github/quanlinhanvien/app/src/main/res/layout/activity_trang_chu.xml" value="0.1875" />
         <entry key="..\:/github/quanlinhanvien/app/src/main/res/layout/frm_attendance.xml" value="0.1875" />
+        <entry key="..\:/github/quanlinhanvien/app/src/main/res/layout/frm_calam.xml" value="0.18645833333333334" />
         <entry key="..\:/github/quanlinhanvien/app/src/main/res/layout/frm_dangkylichlam.xml" value="0.1" />
         <entry key="..\:/github/quanlinhanvien/app/src/main/res/layout/frm_diemdanh.xml" value="0.1" />
+        <entry key="..\:/github/quanlinhanvien/app/src/main/res/layout/frm_lichlam.xml" value="0.18645833333333334" />
+        <entry key="..\:/github/quanlinhanvien/app/src/main/res/layout/frm_nhanvien.xml" value="0.18645833333333334" />
+        <entry key="..\:/github/quanlinhanvien/app/src/main/res/layout/item_calam.xml" value="0.18645833333333334" />
         <entry key="..\:/github/quanlinhanvien/app/src/main/res/layout/item_date.xml" value="0.25" />
+        <entry key="..\:/github/quanlinhanvien/app/src/main/res/layout/item_lichlam.xml" value="0.22" />
         <entry key="..\:/github/quanlinhanvien/app/src/main/res/layout/toolbar.xml" value="0.1875" />
         <entry key="..\:/github/quanlinhanvien/app/src/main/res/menu/menu_nav.xml" value="0.25" />
       </map>

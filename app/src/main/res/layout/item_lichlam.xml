@@ -2,25 +2,23 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="horizontal"
-    >
+    android:orientation="horizontal">
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
+        android:orientation="vertical">
 
-        >
         <TextView
             android:id="@+id/txtnv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Faius Mojumder Nahin"
             android:layout_marginLeft="6dp"
             android:layout_marginTop="10dp"
+            android:text="Faius Mojumder Nahin"
             android:textColor="#D1000000"
-            android:textSize="16sp"
-            />
+            android:textSize="16sp" />
+
         <TextView
             android:id="@+id/txtcalam"
             android:layout_width="match_parent"
@@ -28,8 +26,8 @@
             android:layout_marginLeft="6dp"
             android:text="ca"
             android:textColor="#80000000"
-            android:textSize="14sp"
-            />
+            android:textSize="14sp" />
+
         <TextView
             android:id="@+id/txtngaylam"
             android:layout_width="match_parent"
@@ -37,44 +35,43 @@
             android:layout_marginLeft="6dp"
             android:text="ngaylam"
             android:textColor="#80000000"
-            android:textSize="14sp"
-            />
+            android:textSize="14sp" />
     </LinearLayout>
+
     <View
         android:layout_width="2dp"
-        android:layout_marginTop="6dp"
         android:layout_height="60dp"
         android:layout_marginLeft="30dp"
-        android:background="#80CAC3C3"/>
+        android:layout_marginTop="6dp"
+        android:background="#80CAC3C3" />
+
     <TextView
         android:id="@+id/txtgiovao"
         android:layout_width="match_parent"
-        android:layout_weight="1"
         android:layout_height="wrap_content"
-        android:text="09:55"
         android:layout_marginTop="18dp"
+        android:layout_weight="1"
+        android:text="09:55"
         android:textColor="#D12C2C2C"
-        android:textSize="16sp"
-        />
+        android:textSize="16sp" />
+
     <View
         android:layout_width="2dp"
+        android:layout_height="20dp"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="19dp"
-        android:layout_height="20dp"
-        android:background="#80CAC3C3"/>
+        android:background="#80CAC3C3" />
+
     <TextView
         android:id="@+id/txtgiora"
         android:layout_width="match_parent"
-        android:layout_weight="1"
         android:layout_height="wrap_content"
-        android:text="13:55"
-
         android:layout_marginTop="18dp"
+        android:layout_weight="1"
+
+        android:text="13:55"
         android:textColor="#D12C2C2C"
-        android:textSize="16sp"
-        />
-
-
+        android:textSize="16sp" />
 
 
 </LinearLayout>

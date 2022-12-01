@@ -32,9 +32,10 @@
 
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/navigation_view"
+        style="@style/textMedium"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_gravity="end"
+        android:layout_gravity="start"
         android:background="@drawable/bg_nav"
         app:headerLayout="@layout/nav_header_layout"
         app:menu="@menu/menu_nav" />

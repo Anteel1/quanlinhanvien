@@ -7,24 +7,27 @@
 
     <TextView
         android:id="@+id/title_dialog"
+        style="@style/textMedium"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="10dp"
-        android:text="Log out"
+        android:text="LOG OUT"
         android:textColor="@color/black"
-        android:textSize="24sp" />
+        android:textSize="20sp"
+        android:textStyle="bold" />
 
     <View
         android:layout_width="200dp"
         android:layout_height="2dp"
         android:layout_gravity="center"
         android:layout_marginTop="10dp"
-        android:layout_marginBottom="40dp"
+        android:layout_marginBottom="20dp"
         android:background="#d9d9d9" />
 
     <TextView
         android:id="@+id/content_dialog"
+        style="@style/textMedium"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -35,30 +38,34 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:paddingHorizontal="60dp">
 
         <Button
             android:id="@+id/btnYes"
-            android:layout_width="match_parent"
+            style="@style/textMedium"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_margin="20dp"
+            android:layout_marginEnd="4dp"
             android:layout_weight="1"
             android:backgroundTint="@color/statusbar"
-            android:padding="16dp"
             android:text="Yes"
-            android:textSize="18dp" />
+            android:textAllCaps="false"
+            android:textSize="16sp" />
 
         <Button
             android:id="@+id/btnNo"
-            android:layout_width="match_parent"
+            style="@style/textMedium"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_margin="20dp"
+            android:layout_marginStart="4dp"
             android:layout_weight="1"
             android:backgroundTint="@color/white"
-            android:padding="16dp"
             android:text="No"
+            android:textAllCaps="false"
             android:textColor="@color/statusbar"
-            android:textSize="18dp" />
+            android:textSize="16sp" />
 
     </LinearLayout>
 

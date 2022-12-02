@@ -2,6 +2,8 @@ package com.example.quanlinhanvien.fragment;
 
 import static com.example.quanlinhanvien.service.service_API.Base_Service;
 
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -60,6 +62,8 @@ public class frm_thongke extends Fragment {
         selectedDate = LocalDate.now();
         dayCompare = new ArrayList<>();
         loadData();
+        btnback.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        btnnext.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         btnback.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

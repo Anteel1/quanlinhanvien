@@ -32,14 +32,15 @@ public class MainActivity extends AppCompatActivity {
     NavigationView navigationView;
     Fragment fragment;
     Intent intent;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         //get id nhan vien
         intent = getIntent();
-        Bundle bundle =intent.getExtras();
-        int idNV = bundle.getInt("idNV",-1);
+        Bundle bundle = intent.getExtras();
+        int idNV = bundle.getInt("idNV", -1);
         anhxa();
         menu_nav();
         fragment = new frm_trangchu();
@@ -81,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
                         onRestoreInstanceState(savedInstanceState);
                         break;
                     case R.id.menu_Logout:
-                        new frm_dangxuat().show(getSupportFragmentManager(),frm_dangxuat.TAG);
+                        new frm_dangxuat().show(getSupportFragmentManager(), frm_dangxuat.TAG);
                         break;
                     default:
                         fragment = new frm_trangchu();
@@ -110,13 +111,13 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
     @Override
     protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction().
                     add(R.id.fragment_view, fragment).commit();
-        }
-        else {
+        } else {
             getSupportFragmentManager().beginTransaction().
                     replace(R.id.fragment_view, fragment).commit();
 

@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
@@ -49,6 +50,7 @@ import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
@@ -116,6 +118,16 @@ public class frm_attendance extends Fragment {
         tc_ngay.setText(LocalDate.now().getDayOfMonth()+","+LocalDate.now().getDayOfWeek()+","+LocalDate.now().getMonth()+","+LocalDate.now().getYear());
         imgCheckIn = v.findViewById(R.id.btnCheckin);
         imgCheckOut = v.findViewById(R.id.btnCheckOut);
+
+        Calendar calendar = Calendar.getInstance();
+        int hour = calendar.get(Calendar.HOUR_OF_DAY);
+        int mitune = calendar.get(Calendar.MINUTE);
+
+//        if (hour == 20 && mitune >= 40) {
+//            imgCheckIn.setEnabled(false);
+//            imgCheckIn.setColorFilter(Color.parseColor("#10A19D"));
+//        }
+
         imgCheckIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

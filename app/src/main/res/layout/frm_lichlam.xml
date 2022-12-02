@@ -29,7 +29,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="back"
-                android:id="@+id/btnback"
+                android:id="@+id/btnBack"
                 android:textColor="@color/statusbar"
                 android:backgroundTint="@color/white"
                 android:textStyle="bold"

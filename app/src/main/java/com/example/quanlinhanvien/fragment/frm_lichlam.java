@@ -2,9 +2,7 @@ package com.example.quanlinhanvien.fragment;
 
 import static com.example.quanlinhanvien.service.service_API.Base_Service;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.telecom.TelecomManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,14 +17,13 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.quanlinhanvien.R;
-import com.example.quanlinhanvien.adapter.adapter_chamcong;
 import com.example.quanlinhanvien.adapter.adapter_lichlam;
-import com.example.quanlinhanvien.model.chamcong;
 import com.example.quanlinhanvien.model.lichlam;
 import com.example.quanlinhanvien.service.service_API;
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 
 import java.time.LocalDate;
+import java.time.Month;
 import java.util.ArrayList;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -36,11 +33,12 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class frm_lichlam extends Fragment {
-    Button btnhien;
+    Button btnBack,btnNext;
     EditText edtthang, edtidnv;
     ArrayList<lichlam> list;
     ListView listviewll;
     TextView tvMonth;
+    Month thanght;
     int idnv;
     public frm_lichlam(int idnv){
         this.idnv =idnv;
@@ -51,16 +49,38 @@ public class frm_lichlam extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.frm_lichlam, container, false);
         tvMonth = view.findViewById(R.id.tvMonth);
-        tvMonth.setText(LocalDate.now().getMonth()+" 2022");
+        tvMonth.setText(LocalDate.now().getMonth()+" "+LocalDate.now().getYear());
+        thanght = LocalDate.now().getMonth();
         listviewll = view.findViewById(R.id.listviewll);
+        btnBack = view.findViewById(R.id.btnBack);
+        btnNext = view.findViewById(R.id.btnNext);
         list = new ArrayList<>();
-
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                thangtruoc();
+                demoCallAPI(idnv,thanght.getValue());
+            }
+        });
+        btnNext.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                thangsau();
+                demoCallAPI(idnv,thanght.getValue());
+            }
+        });
                 demoCallAPI(idnv, LocalDate.now().getMonth().getValue());
-                show(list);
+
 
 
 
         return view;
+    }
+    private void thangtruoc(){
+        thanght =thanght.minus(1);
+    }
+    private void thangsau(){
+        thanght =thanght.plus(1);
     }
 
     private void demoCallAPI(int maNV, int thang) {

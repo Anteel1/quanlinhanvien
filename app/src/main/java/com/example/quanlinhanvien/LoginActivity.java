@@ -34,7 +34,7 @@ public class LoginActivity extends AppCompatActivity {
     TextInputLayout txtlayoutEmail,txtLayoutPassword;
     TextInputEditText edt_email, edt_password;
     Button btn_signin;
-    Intent intent;
+    Intent intent,i;
     Bundle bundle;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -158,6 +158,8 @@ public class LoginActivity extends AppCompatActivity {
                     Toast.makeText(this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
                     progressBar.setVisibility(View.GONE);
                     intent = new Intent(LoginActivity.this, MainActivity.class);
+                    int idnv = list1.get(i).getMaNV();
+                    intent.putExtra("idnv",idnv);
                     startActivity(intent);
                     finish();
                 }else {

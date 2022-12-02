@@ -13,8 +13,8 @@
 
         <TextView
             android:id="@+id/tv_ten_calam"
-            android:layout_width="180dp"
-            android:layout_height="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginLeft="6dp"
             android:layout_marginTop="20dp"
             android:text="Faius Mojumder Nahin"
@@ -33,7 +33,7 @@
     <TextView
         android:id="@+id/tv_gioBD_calam"
         android:layout_width="wrap_content"
-        android:layout_height="20dp"
+        android:layout_height="wrap_content"
         android:layout_marginLeft="14dp"
         android:layout_marginTop="18dp"
         android:text="09:55"
@@ -50,7 +50,7 @@
     <TextView
         android:id="@+id/tv_gioKT_calam"
         android:layout_width="wrap_content"
-        android:layout_height="20dp"
+        android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="18dp"
         android:text="13:55"

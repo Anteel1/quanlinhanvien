@@ -1,5 +1,6 @@
 package com.example.quanlinhanvien;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -37,6 +38,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         anhxa();
         menu_nav();
+        Intent i = this.getIntent();
+        int idnv = i.getIntExtra("idnv",0);
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -58,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
                         onRestoreInstanceState(savedInstanceState);
                         break;
                     case R.id.menu_lichlam:
-                        fragment = new frm_lichlam();
+                        fragment = new frm_lichlam(idnv);
                         onRestoreInstanceState(savedInstanceState);
                         break;
                     case R.id.menu_calam:

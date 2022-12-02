@@ -2,6 +2,7 @@ package com.example.quanlinhanvien.fragment;
 
 import static com.example.quanlinhanvien.service.service_API.Base_Service;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -23,6 +24,7 @@ import com.example.quanlinhanvien.model.lichlam;
 import com.example.quanlinhanvien.service.service_API;
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -36,25 +38,21 @@ public class frm_lichlam extends Fragment {
     EditText edtthang, edtidnv;
     ArrayList<lichlam> list;
     ListView listviewll;
+    int idnv;
+    public frm_lichlam(int idnv){
+        this.idnv =idnv;
 
+    }
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.frm_lichlam, container, false);
-        btnhien = view.findViewById(R.id.btnhien);
-        edtthang = view.findViewById(R.id.edtthang);
-        edtidnv = view.findViewById(R.id.edtidnv);
         listviewll = view.findViewById(R.id.listviewll);
         list = new ArrayList<>();
-        btnhien.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                int manv = Integer.parseInt(String.valueOf(edtidnv.getText()));
-                int thang = Integer.parseInt(String.valueOf(edtthang.getText()));
-                demoCallAPI(manv, thang);
+
+                demoCallAPI(idnv, LocalDate.now().getMonth().getValue());
                 show(list);
-            }
-        });
+
 
 
         return view;

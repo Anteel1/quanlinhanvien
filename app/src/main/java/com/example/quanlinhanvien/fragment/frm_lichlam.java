@@ -4,6 +4,7 @@ import static com.example.quanlinhanvien.service.service_API.Base_Service;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.telecom.TelecomManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -38,6 +40,7 @@ public class frm_lichlam extends Fragment {
     EditText edtthang, edtidnv;
     ArrayList<lichlam> list;
     ListView listviewll;
+    TextView tvMonth;
     int idnv;
     public frm_lichlam(int idnv){
         this.idnv =idnv;
@@ -47,6 +50,8 @@ public class frm_lichlam extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.frm_lichlam, container, false);
+        tvMonth = view.findViewById(R.id.tvMonth);
+        tvMonth.setText(LocalDate.now().getMonth()+" 2022");
         listviewll = view.findViewById(R.id.listviewll);
         list = new ArrayList<>();
 

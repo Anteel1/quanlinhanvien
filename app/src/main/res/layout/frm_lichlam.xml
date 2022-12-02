@@ -17,12 +17,48 @@
             android:gravity="center"
             android:textSize="30dp"
             />
-
-        <Switch
-            android:id="@+id/switch2"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Switch" />
+            android:orientation="horizontal"
+            android:layout_marginBottom="20dp"
+            android:layout_marginTop="20dp">
+
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="back"
+                android:id="@+id/btnback"
+                android:textColor="@color/statusbar"
+                android:backgroundTint="@color/white"
+                android:textStyle="bold"
+                android:textSize="20sp"/>
+
+            <TextView
+                android:id="@+id/tvMonth"
+                android:layout_width="0dp"
+                android:layout_weight="2"
+                android:layout_height="wrap_content"
+                android:text="Feb 2021"
+                android:textSize="16sp"
+                android:textAllCaps="false"
+                android:textAlignment="center"
+                android:textColor="@color/statusbar"/>
+
+            <Button
+                android:id="@+id/btnNext"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="next"
+                android:textColor="@color/statusbar"
+                android:backgroundTint="@color/white"
+                android:textStyle="bold"
+                android:textSize="20sp"/>
+
+        </LinearLayout>
+
 
 
     </LinearLayout>

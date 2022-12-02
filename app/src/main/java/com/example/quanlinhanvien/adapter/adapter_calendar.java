@@ -31,7 +31,6 @@ public class adapter_calendar extends RecyclerView.Adapter<adapter_calendar.View
         LayoutInflater layoutInflater = LayoutInflater.from(context);
         View v = layoutInflater.inflate(R.layout.item_date,parent,false);
         ViewHolder viewHolder = new ViewHolder(v);
-
         return viewHolder;
     }
 

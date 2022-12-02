@@ -10,42 +10,43 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
+        android:layout_marginTop="20dp"
         android:layout_marginBottom="20dp"
-        android:layout_marginTop="20dp">
+        android:orientation="horizontal">
 
         <Button
+            android:id="@+id/btnBack"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/back"
-            android:id="@+id/btnBack"
-            android:textColor="@color/statusbar"
             android:backgroundTint="@color/white"
-            android:textStyle="bold"
-            android:textSize="20sp"/>
+            android:text="@string/back"
+            android:textColor="@color/statusbar"
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/tvMonth"
+            style="@style/textMedium"
             android:layout_width="0dp"
-            android:layout_weight="2"
             android:layout_height="wrap_content"
+            android:layout_weight="2"
             android:text="Feb 2021"
-            android:textSize="16sp"
-            android:textAllCaps="false"
             android:textAlignment="center"
-            android:textColor="@color/statusbar"/>
+            android:textAllCaps="false"
+            android:textColor="@color/statusbar"
+            android:textSize="16sp" />
 
         <Button
             android:id="@+id/btnNext"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:backgroundTint="@color/white"
             android:text="@string/next"
             android:textColor="@color/statusbar"
-            android:backgroundTint="@color/white"
-            android:textStyle="bold"
-            android:textSize="20sp"/>
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
     </LinearLayout>
 
@@ -55,82 +56,88 @@
         android:orientation="horizontal">
 
         <TextView
+            style="@style/textMedium"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="SUN"
-            android:textColor="@color/statusbar"
             android:textAlignment="center"
-            android:textSize="14sp"/>
+            android:textColor="@color/statusbar"
+            android:textSize="14sp" />
 
         <TextView
+            style="@style/textMedium"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="MON"
-            android:textColor="@color/statusbar"
             android:textAlignment="center"
-            android:textSize="14sp"/>
+            android:textColor="@color/statusbar"
+            android:textSize="14sp" />
 
         <TextView
+            style="@style/textMedium"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="TUE"
-            android:textColor="@color/statusbar"
             android:textAlignment="center"
-            android:textSize="14sp"/>
+            android:textColor="@color/statusbar"
+            android:textSize="14sp" />
 
         <TextView
+            style="@style/textMedium"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="WED"
-            android:textColor="@color/statusbar"
             android:textAlignment="center"
-            android:textSize="14sp"/>
+            android:textColor="@color/statusbar"
+            android:textSize="14sp" />
 
         <TextView
+            style="@style/textMedium"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="THU"
-            android:textColor="@color/statusbar"
             android:textAlignment="center"
-            android:textSize="14sp"/>
+            android:textColor="@color/statusbar"
+            android:textSize="14sp" />
 
         <TextView
+            style="@style/textMedium"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="FRI"
-            android:textColor="@color/statusbar"
             android:textAlignment="center"
-            android:textSize="14sp"/>
+            android:textColor="@color/statusbar"
+            android:textSize="14sp" />
 
         <TextView
+            style="@style/textMedium"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="SAT"
-
-            android:textColor="@color/statusbar"
             android:textAlignment="center"
-            android:textSize="14sp"/>
-
+            android:textColor="@color/statusbar"
+            android:textSize="14sp" />
 
     </LinearLayout>
-
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/calendarRecyclerView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content" />
+
     <TextView
-        android:layout_margin="14dp"
+        android:id="@+id/txtTienLuong"
+        style="@style/textMedium"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Salary : 2000000 VND"
-        android:id="@+id/txtTienLuong"
-        />
+        android:layout_margin="14dp"
+        android:text="Salary : 2000000 VND" />
+
 </LinearLayout>

@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -45,9 +46,10 @@ public class frm_thongke extends Fragment {
     RecyclerView calendarRecyclerView;
     TextView month;
     LocalDate selectedDate;
-    Button btnback, btnnext;
+    //    Button btnback, btnnext;
+    ImageView imgBack, imgNext;
     TextView txtSalary;
-    ArrayList<String>dayCompare;
+    ArrayList<String> dayCompare;
     int idNV;
 
     @Nullable
@@ -56,28 +58,33 @@ public class frm_thongke extends Fragment {
         View view = inflater.inflate(R.layout.frm_thongke, container, false);
         month = view.findViewById(R.id.tvMonth);
         calendarRecyclerView = view.findViewById(R.id.calendarRecyclerView);
-        btnback = view.findViewById(R.id.btnBack);
-        btnnext = view.findViewById(R.id.btnNext);
+//        btnback = view.findViewById(R.id.btnBack);
+//        btnnext = view.findViewById(R.id.btnNext);
+        imgBack = view.findViewById(R.id.imgBack);
+        imgNext = view.findViewById(R.id.imgNext);
         txtSalary = view.findViewById(R.id.txtTienLuong);
         selectedDate = LocalDate.now();
         dayCompare = new ArrayList<>();
         loadData();
-        btnback.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        btnnext.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        btnback.setOnClickListener(new View.OnClickListener() {
+//        btnback.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+//        btnnext.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+        imgBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 previousMonthAction();
                 loadData();
             }
         });
-        btnnext.setOnClickListener(new View.OnClickListener() {
+
+        imgNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 nextMonthAction();
                 loadData();
             }
         });
+
 //        ArrayList<String>listDate = new ArrayList<>();
 //        listDate.add(0,"2022-11-21");
 //        listDate.add(1,"2022-11-24");
@@ -93,13 +100,13 @@ public class frm_thongke extends Fragment {
 //        }
         return view;
     }
-    private void loadData()
-    {
+
+    private void loadData() {
         demoCallAPI_ngaylam();
         demoCallAPILuong();
-        month.setText((selectedDate).getMonth()+" "+(selectedDate).getYear());
+        month.setText((selectedDate).getMonth() + " " + (selectedDate).getYear());
         ArrayList<String> daysInMonth = daysInMonthArray(selectedDate);
-        adapter = new adapter_calendar(getContext(),daysInMonth,dayCompare);
+        adapter = new adapter_calendar(getContext(), daysInMonth, dayCompare);
         RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getContext(), 7);
         calendarRecyclerView.setLayoutManager(layoutManager);
         calendarRecyclerView.setAdapter(adapter);
@@ -161,6 +168,7 @@ public class frm_thongke extends Fragment {
         Toast.makeText(getContext(), error.toString(), Toast.LENGTH_SHORT).show();
         //khi gọi API KHÔNG THÀNH CÔNG thì thực hiện xử lý ở đây
     }
+
     private void demoCallAPI_ngaylam() {
 
         service_API requestInterface = new Retrofit.Builder()
@@ -169,21 +177,21 @@ public class frm_thongke extends Fragment {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build().create(service_API.class);
 
-        new CompositeDisposable().add(requestInterface.getNgayLam(idNV,selectedDate.getMonth().getValue())
+        new CompositeDisposable().add(requestInterface.getNgayLam(idNV, selectedDate.getMonth().getValue())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe(this::handleResponse_ngaylam, this::handleError_ngayLam)
         );
     }
 
-    private void handleResponse_ngaylam(ArrayList<ngaylam>list) {
+    private void handleResponse_ngaylam(ArrayList<ngaylam> list) {
         //API trả về dữ liệu thành công, thực hiện việc lấy data
         dayCompare.clear();
-        for(int i = 0;i < list.size(); i++){
-            dayCompare.add(i,list.get(i).getNgaylam());
+        for (int i = 0; i < list.size(); i++) {
+            dayCompare.add(i, list.get(i).getNgaylam());
         }
         adapter.notifyDataSetChanged();
-        Log.d("Ngày làm:"," "+dayCompare.size());
+        Log.d("Ngày làm:", " " + dayCompare.size());
     }
 
     private void handleError_ngayLam(Throwable error) {

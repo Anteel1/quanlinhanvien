@@ -29,7 +29,7 @@ public class adapter_calendar extends RecyclerView.Adapter<adapter_calendar.View
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(context);
-        View v = layoutInflater.inflate(R.layout.item_date,parent,false);
+        View v = layoutInflater.inflate(R.layout.item_datnnnne,parent,false);
         ViewHolder viewHolder = new ViewHolder(v);
         return viewHolder;
     }

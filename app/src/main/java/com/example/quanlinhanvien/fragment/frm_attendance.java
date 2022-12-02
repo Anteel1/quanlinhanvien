@@ -6,7 +6,9 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -28,6 +30,7 @@ import androidx.fragment.app.Fragment;
 import com.budiyev.android.codescanner.CodeScanner;
 import com.budiyev.android.codescanner.CodeScannerView;
 import com.budiyev.android.codescanner.DecodeCallback;
+import com.bumptech.glide.Glide;
 import com.cloudinary.android.MediaManager;
 import com.cloudinary.android.callback.ErrorInfo;
 import com.cloudinary.android.callback.UploadCallback;
@@ -40,11 +43,15 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.zxing.Result;
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.text.DecimalFormat;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
@@ -58,17 +65,18 @@ public class frm_attendance extends Fragment {
     Button btnQRCode, btnNFC, btnUpdate;
     TextView txtTitle, txtResutl;
     ArrayList<Location> list;
-    TextClock tc_gio, tc_ngay;
+    TextClock tc_gio;
+    TextView tc_ngay;
     LinearLayout layout_icon;
     ImageView imgCheckIn, imgCheckOut;
     FrameLayout layout_scan;
     ArrayList<calam> listCalam;
     ImageView imgCamera;
+    String url;
     int gio, phut;
     int maCL;
     boolean tregio;
     private HashMap config = new HashMap();
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -93,6 +101,7 @@ public class frm_attendance extends Fragment {
                 layout_icon.setVisibility(View.VISIBLE);
                 btnNFC.setVisibility(View.GONE);
                 btnQRCode.setVisibility(View.GONE);
+
             }
         });
         btnNFC.setOnClickListener(new View.OnClickListener() {
@@ -100,10 +109,11 @@ public class frm_attendance extends Fragment {
             public void onClick(View v) {
                 btnNFC.setVisibility(View.GONE);
                 btnQRCode.setVisibility(View.GONE);
+                turnonCamera();
             }
         });
         tc_gio.setFormat12Hour("hh:mm a");
-        tc_ngay.setFormat12Hour("EEE, MMM d");
+        tc_ngay.setText(LocalDate.now().getDayOfMonth()+","+LocalDate.now().getDayOfWeek()+","+LocalDate.now().getMonth()+","+LocalDate.now().getYear());
         imgCheckIn = v.findViewById(R.id.btnCheckin);
         imgCheckOut = v.findViewById(R.id.btnCheckOut);
         imgCheckIn.setOnClickListener(new View.OnClickListener() {
@@ -289,7 +299,7 @@ public class frm_attendance extends Fragment {
                     }else if(gio ==Integer.parseInt(calam.getGioBD().substring(0,2))){
 
                     }else{
-                        
+
                     }
                     maCL = calam.getMaCL();
                     layout_scan.setVisibility(View.GONE);
@@ -299,9 +309,9 @@ public class frm_attendance extends Fragment {
                 }
             }
             if(ok == 2 ){
-                turnonCamera();
+
             }else{
-                Toast.makeText(getContext(), "Cham cong that bai", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "Chấm công thất bại", Toast.LENGTH_SHORT).show();
             }
         } else {
             Log.d("Distance", "noooooo");
@@ -318,13 +328,37 @@ public class frm_attendance extends Fragment {
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         if (requestCode == 2323) {
             Bitmap bitmap = (Bitmap) data.getExtras().get("data");
-            imgCamera.setImageBitmap(bitmap);
+            Glide.with(getContext()).load(bitmap).into(imgCamera);
             imgCamera.setVisibility(View.VISIBLE);
             btnUpdate.setVisibility(View.VISIBLE);
             btnUpdate.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    uploadIMG(bitmap);
+                    try{
+                        // gen file sau khi chup
+                        File root  = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
+                        File file =  new File(root + "/img_request");
+                        file.mkdirs();
+                        Random generation =  new Random();
+                        int n = 10000;
+                        n = generation.nextInt(n);
+                        String stringFile = "Image_"+n+".png";
+                        File fileImg =  new File(file,stringFile);
+                        Log.d("file:"," "+fileImg);
+                        if(fileImg.exists())
+                            fileImg.delete();
+                        FileOutputStream out = new FileOutputStream(fileImg);
+                        bitmap.compress(Bitmap.CompressFormat.PNG,90,out);
+                        Log.d("file_img"," "+fileImg);
+                        uploadIMG(fileImg);
+                        out.flush();
+                        out.close();
+                    }catch (Exception ex){
+                        Log.d("exception   ",ex.toString());
+                        Toast.makeText(getContext(), "Chấm công thất bại, thử lại", Toast.LENGTH_SHORT).show();
+                    }
+
+
                 }
             });
         }
@@ -337,40 +371,56 @@ public class frm_attendance extends Fragment {
         startActivityForResult(intent, 2323);
     }
 
-    private void uploadIMG(Bitmap bitmap) {
-        MediaManager.get().upload(String.valueOf(bitmap)).callback(new UploadCallback() {
-            @Override
-            public void onStart(String requestId) {
-                Log.d("CHECK", "onStart");
-            }
+    private void uploadIMG(File file) {
+       MediaManager.get().upload(Uri.fromFile(file)).callback(new UploadCallback() {
+           @Override
+           public void onStart(String requestId) {
 
-            @Override
-            public void onProgress(String requestId, long bytes, long totalBytes) {
-                Log.d("CHECK", "onProgress");
-            }
+           }
 
-            @Override
-            public void onSuccess(String requestId, Map resultData) {
-                Log.d("CHECK", "onSuccess");
-                Log.d("IMG URL", resultData.get("url").toString());
-            }
+           @Override
+           public void onProgress(String requestId, long bytes, long totalBytes) {
 
-            @Override
-            public void onError(String requestId, ErrorInfo error) {
-                Log.d("CHECK", "onError: " + error);
-            }
+           }
 
-            @Override
-            public void onReschedule(String requestId, ErrorInfo error) {
-                Log.d("CHECK", "onReschedule: " + error);
-            }
-        }).dispatch();
+           @Override
+           public void onSuccess(String requestId, Map resultData) {
+                Log.d("Result",resultData.get("url").toString());
+                url = resultData.get("url").toString();
+               Toast.makeText(getContext(), "Chấm công thành công", Toast.LENGTH_SHORT).show();
+                // post o day
+               imgCamera.setVisibility(View.GONE);
+               btnUpdate.setVisibility(View.GONE);
+               btnNFC.setVisibility(View.VISIBLE);
+               btnQRCode.setVisibility(View.VISIBLE);
+           }
+
+           @Override
+           public void onError(String requestId, ErrorInfo error) {
+
+           }
+
+           @Override
+           public void onReschedule(String requestId, ErrorInfo error) {
+
+           }
+       }).dispatch();
     }
 
     private void configCloudinary() {
         config.put("cloud_name", "dnxe9l57i");
         config.put("api_key", "991189484643755");
         config.put("api_secret", "e6ZiAtks5BeldzKgTew3IqC8KHk");
-        MediaManager.init(getContext(), config);
+
+
+    }
+
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        if (outState == null){
+            MediaManager.init(getContext(), config);
+        }else{
+            super.onSaveInstanceState(outState);
+        }
     }
 }

@@ -17,7 +17,7 @@
         android:textSize="20sp"
         android:textStyle="bold" />
 
-    <TextClock
+    <TextView
         android:id="@+id/tc_ngay"
         style="@style/textMedium"
         android:layout_width="match_parent"
@@ -146,8 +146,9 @@
 
     <ImageView
         android:id="@+id/imgCamera"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
+        android:layout_margin="8dp"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
         android:layout_gravity="center"
         android:visibility="gone" />
     <Button

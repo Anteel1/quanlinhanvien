@@ -43,7 +43,7 @@ public class frm_calam extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.frm_calam, container, false);
-        socl = view.findViewById(R.id.txtsocl);
+       // socl = view.findViewById(R.id.txtsocl);
         recyclerView = view.findViewById(R.id.rcv_calam);
         list = new ArrayList<>();
         demoCallAPI();

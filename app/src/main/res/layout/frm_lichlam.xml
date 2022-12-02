@@ -11,12 +11,11 @@
         android:orientation="vertical"
         >
         <TextView
-            android:layout_width="300dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Lịch làm"
-            android:layout_marginLeft="35dp"
-            android:layout_gravity="center"
-            android:textSize="40dp"
+            android:gravity="center"
+            android:textSize="30dp"
             />
 
     </LinearLayout>
@@ -30,27 +29,27 @@
         android:orientation="horizontal"
         >
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
+            android:layout_weight="1"
             android:layout_marginTop="9dp"
             android:text="Name"
             android:textSize="18sp"
             android:textColor="@color/black"
             />
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="210dp"
+            android:layout_weight="3"
             android:layout_marginTop="9dp"
             android:text="In"
             android:textSize="18sp"
             android:textColor="@color/black"
             />
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_weight="3"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="50dp"
             android:layout_marginTop="9dp"
             android:text="Out"
             android:textSize="18sp"
@@ -65,4 +64,4 @@
         android:id="@+id/listviewll"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
-   </LinearLayout>
+</LinearLayout>

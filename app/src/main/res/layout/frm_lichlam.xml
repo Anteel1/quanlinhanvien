@@ -107,5 +107,12 @@
     <ListView
         android:id="@+id/listviewll"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="wrap_content"/>
+    <Button
+        android:id="@+id/btnthemlichlam"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#73AB6B"
+        android:text="Thêm lịch làm"
+        ></Button>
 </LinearLayout>

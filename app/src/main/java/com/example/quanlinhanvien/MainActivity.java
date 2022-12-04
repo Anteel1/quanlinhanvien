@@ -7,9 +7,11 @@ import android.content.IntentFilter;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentContainerView;
 import androidx.viewpager2.widget.ViewPager2;
@@ -36,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
-        FragmentContainerView fragmentContainerView = findViewById(R.id.fragment_view);
+        TextView tvTitle = findViewById(R.id.tvTitle);
 
         //get id nhan vien
 //        intent = getIntent();
@@ -104,14 +106,17 @@ public class MainActivity extends AppCompatActivity {
                 switch (item.getItemId()){
                     case R.id.home:
                         fragment = new frm_trangchu();
+                        tvTitle.setText("Employees Management");
                         break;
 
                     case R.id.scan:
                         fragment = new frm_attendance();
+                        tvTitle.setText("Scan QR Code");
                         break;
 
                     case R.id.me:
                         fragment = new frm_nhanvien();
+                        tvTitle.setText("Nguyễn Duy Hiền Sỹ");
                         break;
 
                     default:

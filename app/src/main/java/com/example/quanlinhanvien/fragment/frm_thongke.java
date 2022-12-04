@@ -166,13 +166,11 @@ public class frm_thongke extends Fragment {
     }
 
     private void demoCallAPI_ngaylam() {
-
         service_API requestInterface = new Retrofit.Builder()
                 .baseUrl(Base_Service)
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create())
                 .build().create(service_API.class);
-
         new CompositeDisposable().add(requestInterface.getNgayLam(idNV, selectedDate.getMonth().getValue())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
@@ -181,6 +179,7 @@ public class frm_thongke extends Fragment {
     }
 
     private void handleResponse_ngaylam(ArrayList<ngaylam> list) {
+        Log.d("TAG", "handleResponse_ngaylam: " + list.get(1).getNgaylam() + " - " + list.get(1).getSccl());
         //API trả về dữ liệu thành công, thực hiện việc lấy data
         dayCompare.clear();
         for (int i = 0; i < list.size(); i++) {

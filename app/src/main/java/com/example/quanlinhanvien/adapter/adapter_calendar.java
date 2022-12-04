@@ -2,13 +2,16 @@ package com.example.quanlinhanvien.adapter;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.quanlinhanvien.R;
@@ -46,10 +49,14 @@ public class adapter_calendar extends RecyclerView.Adapter<adapter_calendar.View
             int month = date1.getDayOfMonth();
             Log.d("day",year+" "+month+" "+day1);
             if(day.equals(day1)){
-                holder.item.setTextColor(Color.GREEN);
-                break;
+//                holder.item.setTextColor(Color.GREEN);
+//                holder.cardView.setCardBackgroundColor(Color.parseColor("#B173AB6B"));
+                    holder.line.setBackgroundColor(new Color().parseColor("#fff"));
+//                holder.cardView.setBackgroundColor(Color.parseColor("B173AB6B"));
+//                holder.cardView.setRadius(32);
+//                break;
             }else{
-                holder.item.setTextColor(Color.GRAY);
+//                holder.item.setTextColor(Color.GRAY);
             }
         }
         holder.item.setText(day);
@@ -57,9 +64,13 @@ public class adapter_calendar extends RecyclerView.Adapter<adapter_calendar.View
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
+//        CardView cardView;
+        LinearLayout line;
         TextView item;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
+//            cardView = itemView.findViewById(R.id.cardView);
+            line = itemView.findViewById(R.id.line);
             item = itemView.findViewById(R.id.item_date);
         }
     }

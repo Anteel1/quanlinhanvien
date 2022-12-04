@@ -7,9 +7,11 @@
         <entry key="..\:/Sy/FPT_POLYTECHNIC/BAITAP/KY_4/DuAnMot/GIT/quanlinhanvien/app/src/main/res/drawable/custom_bg_btnv.xml" value="0.1165" />
         <entry key="..\:/Sy/FPT_POLYTECHNIC/BAITAP/KY_4/DuAnMot/GIT/quanlinhanvien/app/src/main/res/drawable/custom_button.xml" value="0.1165" />
         <entry key="..\:/Sy/FPT_POLYTECHNIC/BAITAP/KY_4/DuAnMot/GIT/quanlinhanvien/app/src/main/res/drawable/custom_color_icon_bottomnav.xml" value="0.1165" />
+        <entry key="..\:/Sy/FPT_POLYTECHNIC/BAITAP/KY_4/DuAnMot/GIT/quanlinhanvien/app/src/main/res/drawable/custom_dialog_logout.xml" value="0.1165" />
         <entry key="..\:/Sy/FPT_POLYTECHNIC/BAITAP/KY_4/DuAnMot/GIT/quanlinhanvien/app/src/main/res/drawable/custom_home_icon.xml" value="0.1165" />
         <entry key="..\:/Sy/FPT_POLYTECHNIC/BAITAP/KY_4/DuAnMot/GIT/quanlinhanvien/app/src/main/res/drawable/custom_icon_bottom_nav.xml" value="0.1165" />
         <entry key="..\:/Sy/FPT_POLYTECHNIC/BAITAP/KY_4/DuAnMot/GIT/quanlinhanvien/app/src/main/res/drawable/custom_me_icon.xml" value="0.1165" />
+        <entry key="..\:/Sy/FPT_POLYTECHNIC/BAITAP/KY_4/DuAnMot/GIT/quanlinhanvien/app/src/main/res/drawable/custom_option_me.xml" value="0.1165" />
         <entry key="..\:/Sy/FPT_POLYTECHNIC/BAITAP/KY_4/DuAnMot/GIT/quanlinhanvien/app/src/main/res/drawable/custom_qrcode_icon.xml" value="0.1165" />
         <entry key="..\:/Sy/FPT_POLYTECHNIC/BAITAP/KY_4/DuAnMot/GIT/quanlinhanvien/app/src/main/res/drawable/custom_scrollview.xml" value="0.1165" />
         <entry key="..\:/Sy/FPT_POLYTECHNIC/BAITAP/KY_4/DuAnMot/GIT/quanlinhanvien/app/src/main/res/drawable/ic_home.xml" value="0.1165" />
@@ -30,10 +32,10 @@
         <entry key="..\:/Sy/FPT_POLYTECHNIC/BAITAP/KY_4/DuAnMot/GIT/quanlinhanvien/app/src/main/res/layout/dialog_update.xml" value="0.1734375" />
         <entry key="..\:/Sy/FPT_POLYTECHNIC/BAITAP/KY_4/DuAnMot/GIT/quanlinhanvien/app/src/main/res/layout/frm_attendance.xml" value="0.1734375" />
         <entry key="..\:/Sy/FPT_POLYTECHNIC/BAITAP/KY_4/DuAnMot/GIT/quanlinhanvien/app/src/main/res/layout/frm_dangkylichlam.xml" value="0.1734375" />
-        <entry key="..\:/Sy/FPT_POLYTECHNIC/BAITAP/KY_4/DuAnMot/GIT/quanlinhanvien/app/src/main/res/layout/frm_dangxuat.xml" value="0.2" />
+        <entry key="..\:/Sy/FPT_POLYTECHNIC/BAITAP/KY_4/DuAnMot/GIT/quanlinhanvien/app/src/main/res/layout/frm_dangxuat.xml" value="0.25" />
         <entry key="..\:/Sy/FPT_POLYTECHNIC/BAITAP/KY_4/DuAnMot/GIT/quanlinhanvien/app/src/main/res/layout/frm_diemdanh.xml" value="0.1638888888888889" />
         <entry key="..\:/Sy/FPT_POLYTECHNIC/BAITAP/KY_4/DuAnMot/GIT/quanlinhanvien/app/src/main/res/layout/frm_genqrcode_layout.xml" value="0.1734375" />
-        <entry key="..\:/Sy/FPT_POLYTECHNIC/BAITAP/KY_4/DuAnMot/GIT/quanlinhanvien/app/src/main/res/layout/frm_me.xml" value="0.2" />
+        <entry key="..\:/Sy/FPT_POLYTECHNIC/BAITAP/KY_4/DuAnMot/GIT/quanlinhanvien/app/src/main/res/layout/frm_me.xml" value="0.18" />
         <entry key="..\:/Sy/FPT_POLYTECHNIC/BAITAP/KY_4/DuAnMot/GIT/quanlinhanvien/app/src/main/res/layout/frm_qrcode.xml" value="0.1734375" />
         <entry key="..\:/Sy/FPT_POLYTECHNIC/BAITAP/KY_4/DuAnMot/GIT/quanlinhanvien/app/src/main/res/layout/frm_store_2.xml" value="0.130078125" />
         <entry key="..\:/Sy/FPT_POLYTECHNIC/BAITAP/KY_4/DuAnMot/GIT/quanlinhanvien/app/src/main/res/layout/frm_thongke.xml" value="0.25" />
@@ -45,7 +47,7 @@
         <entry key="..\:/Sy/FPT_POLYTECHNIC/BAITAP/KY_4/DuAnMot/GIT/quanlinhanvien/app/src/main/res/layout/item_nhanvien.xml" value="0.1638888888888889" />
         <entry key="..\:/Sy/FPT_POLYTECHNIC/BAITAP/KY_4/DuAnMot/GIT/quanlinhanvien/app/src/main/res/layout/item_store.xml" value="0.1734375" />
         <entry key="..\:/Sy/FPT_POLYTECHNIC/BAITAP/KY_4/DuAnMot/GIT/quanlinhanvien/app/src/main/res/layout/nav_header_layout.xml" value="0.5347432024169184" />
-        <entry key="..\:/Sy/FPT_POLYTECHNIC/BAITAP/KY_4/DuAnMot/GIT/quanlinhanvien/app/src/main/res/layout/toolbar.xml" value="0.33" />
+        <entry key="..\:/Sy/FPT_POLYTECHNIC/BAITAP/KY_4/DuAnMot/GIT/quanlinhanvien/app/src/main/res/layout/toolbar.xml" value="0.2" />
         <entry key="..\:/Sy/FPT_POLYTECHNIC/BAITAP/KY_4/DuAnMot/GIT/quanlinhanvien/app/src/main/res/menu/menu_bottom_nav.xml" value="0.2" />
         <entry key="..\:/Sy/FPT_POLYTECHNIC/BAITAP/KY_4/DuAnMot/GIT/quanlinhanvien/app/src/main/res/menu/menu_nav.xml" value="0.33" />
         <entry key="..\:/Sy/FPT_POLYTECHNIC/BAITAP/KY_4/DuAnMot/GIT/quanlinhanvien/app/src/main/res/menu/menu_tablayout.xml" value="0.1734375" />

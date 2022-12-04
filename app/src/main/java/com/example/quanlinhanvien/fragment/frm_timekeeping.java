@@ -7,7 +7,6 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.net.Uri;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
@@ -61,7 +60,7 @@ import io.reactivex.schedulers.Schedulers;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class frm_attendance extends Fragment {
+public class frm_timekeeping extends Fragment {
     private CodeScanner mCodeScanner;
     private CodeScannerView scannerView;
     Button btnQRCode, btnNFC, btnUpdate;
@@ -83,7 +82,7 @@ public class frm_attendance extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.frm_attendance, container, false);
+        View v = inflater.inflate(R.layout.frm_timekeeping, container, false);
         tc_gio = v.findViewById(R.id.tc_gio);
         tc_ngay = v.findViewById(R.id.tc_ngay);
         layout_icon = v.findViewById(R.id.layout_icon);

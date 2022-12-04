@@ -5,33 +5,38 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentContainerView;
-import androidx.viewpager2.widget.ViewPager2;
 
-import com.example.quanlinhanvien.fragment.frm_attendance;
+import com.example.quanlinhanvien.fragment.frm_timekeeping;
+import com.example.quanlinhanvien.fragment.frm_calam;
+import com.example.quanlinhanvien.fragment.frm_lichlam;
 import com.example.quanlinhanvien.fragment.frm_me;
-import com.example.quanlinhanvien.fragment.frm_nhanvien;
+import com.example.quanlinhanvien.fragment.frm_thongke;
 import com.example.quanlinhanvien.fragment.frm_trangchu;
 import com.example.quanlinhanvien.model.nhanvien;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
 public class MainActivity extends AppCompatActivity {
-//    TextView tv;
+    //    TextView tv;
 //    ImageView iv_menu;
 //    DrawerLayout drawerLayout;
 //    Toolbar toolbar;
 //    NavigationView navigationView;
     Fragment fragment;
+    nhanvien nhanvien;
+    Toolbar toolbar;
+    TextView tvTitle;
+    ImageView imgNav;
+    IntentFilter intentFilter = new IntentFilter();
 //    Intent intent;
 
 
@@ -40,11 +45,25 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        intentFilter.addAction("statistics");
+        intentFilter.addAction("shift");
+        intentFilter.addAction("attendance");
+
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
-        Toolbar toolbar = findViewById(R.id.toolbar);
+        toolbar = findViewById(R.id.toolbar);
+        tvTitle = findViewById(R.id.tvTitle);
+        imgNav = findViewById(R.id.imgNav);
 
         Bundle bundle = getIntent().getExtras();
-        nhanvien nhanvien = (nhanvien) bundle.getSerializable("nv");
+        nhanvien = (nhanvien) bundle.getSerializable("nv");
+
+        imgNav.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_view, new frm_me(nhanvien)).commit();
+                toolbar.setVisibility(View.GONE);
+            }
+        });
 
         //get id nhan vien
 //        intent = getIntent();
@@ -109,14 +128,16 @@ public class MainActivity extends AppCompatActivity {
         bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()){
+                switch (item.getItemId()) {
                     case R.id.home:
                         fragment = new frm_trangchu();
                         toolbar.setVisibility(View.VISIBLE);
+                        tvTitle.setText("Employees Manager");
+                        imgNav.setVisibility(View.INVISIBLE);
                         break;
 
                     case R.id.scan:
-                        fragment = new frm_attendance();
+                        fragment = new frm_timekeeping();
                         toolbar.setVisibility(View.GONE);
                         break;
 
@@ -133,8 +154,51 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             }
         });
-
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        registerReceiver(broadcastReceiver, intentFilter);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        unregisterReceiver(broadcastReceiver);
+    }
+
+    private BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            switch (intent.getAction()) {
+                case "statistics":
+                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_view, new frm_thongke(nhanvien.getMaNV())).commit();
+                    toolbar.setVisibility(View.VISIBLE);
+                    tvTitle.setText("Statistics");
+                    imgNav.setVisibility(View.VISIBLE);
+                    break;
+
+                case "shift":
+                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_view, new frm_calam()).commit();
+                    toolbar.setVisibility(View.VISIBLE);
+                    tvTitle.setText("Shift");
+                    imgNav.setVisibility(View.VISIBLE);
+                    break;
+
+                case "attendance":
+                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_view, new frm_lichlam(nhanvien.getMaNV())).commit();
+                    toolbar.setVisibility(View.VISIBLE);
+                    tvTitle.setText("Attendance");
+                    imgNav.setVisibility(View.VISIBLE);
+                    break;
+
+                default:
+
+                    break;
+            }
+        }
+    };
 
 
 //    public void anhxa() {

@@ -173,8 +173,9 @@ public class LoginActivity extends AppCompatActivity {
                     progressBar.setVisibility(View.GONE);
                     intent = new Intent(LoginActivity.this, MainActivity.class);
                     Bundle bundle1 = new Bundle();
-                    int idNV = list1.get(i).getMaNV();
-                    bundle1.putInt("idNV",idNV);
+//                    int idNV = list1.get(i).getMaNV();
+//                    bundle1.putInt("idNV",idNV);
+                    bundle1.putSerializable("nv", list1.get(i));
                     intent.putExtras(bundle1);
                     startActivity(intent);
                     finish();

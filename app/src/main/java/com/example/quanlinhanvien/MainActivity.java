@@ -7,6 +7,7 @@ import android.content.IntentFilter;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -17,8 +18,10 @@ import androidx.fragment.app.FragmentContainerView;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.example.quanlinhanvien.fragment.frm_attendance;
+import com.example.quanlinhanvien.fragment.frm_me;
 import com.example.quanlinhanvien.fragment.frm_nhanvien;
 import com.example.quanlinhanvien.fragment.frm_trangchu;
+import com.example.quanlinhanvien.model.nhanvien;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
@@ -38,7 +41,10 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
-        TextView tvTitle = findViewById(R.id.tvTitle);
+        Toolbar toolbar = findViewById(R.id.toolbar);
+
+        Bundle bundle = getIntent().getExtras();
+        nhanvien nhanvien = (nhanvien) bundle.getSerializable("nv");
 
         //get id nhan vien
 //        intent = getIntent();
@@ -92,7 +98,7 @@ public class MainActivity extends AppCompatActivity {
 //                        fragment = new frm_trangchu();
 //                        break;
 //                }
-////                drawerLayout.closeDrawer(navigationView);
+//                drawerLayout.closeDrawer(navigationView);
 //                setTitle(item.getTitle());
 //                return false;
 //            }
@@ -106,17 +112,17 @@ public class MainActivity extends AppCompatActivity {
                 switch (item.getItemId()){
                     case R.id.home:
                         fragment = new frm_trangchu();
-                        tvTitle.setText("Employees Management");
+                        toolbar.setVisibility(View.VISIBLE);
                         break;
 
                     case R.id.scan:
                         fragment = new frm_attendance();
-                        tvTitle.setText("Scan QR Code");
+                        toolbar.setVisibility(View.GONE);
                         break;
 
                     case R.id.me:
-                        fragment = new frm_nhanvien();
-                        tvTitle.setText("Nguyễn Duy Hiền Sỹ");
+                        fragment = new frm_me(nhanvien);
+                        toolbar.setVisibility(View.GONE);
                         break;
 
                     default:

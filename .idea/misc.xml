@@ -14,6 +14,7 @@
         <entry key="..\:/Sy/FPT_POLYTECHNIC/BAITAP/KY_4/DuAnMot/GIT/quanlinhanvien/app/src/main/res/drawable/custom_option_me.xml" value="0.1165" />
         <entry key="..\:/Sy/FPT_POLYTECHNIC/BAITAP/KY_4/DuAnMot/GIT/quanlinhanvien/app/src/main/res/drawable/custom_qrcode_icon.xml" value="0.1165" />
         <entry key="..\:/Sy/FPT_POLYTECHNIC/BAITAP/KY_4/DuAnMot/GIT/quanlinhanvien/app/src/main/res/drawable/custom_scrollview.xml" value="0.1165" />
+        <entry key="..\:/Sy/FPT_POLYTECHNIC/BAITAP/KY_4/DuAnMot/GIT/quanlinhanvien/app/src/main/res/drawable/ic_back.xml" value="0.1165" />
         <entry key="..\:/Sy/FPT_POLYTECHNIC/BAITAP/KY_4/DuAnMot/GIT/quanlinhanvien/app/src/main/res/drawable/ic_home.xml" value="0.1165" />
         <entry key="..\:/Sy/FPT_POLYTECHNIC/BAITAP/KY_4/DuAnMot/GIT/quanlinhanvien/app/src/main/res/drawable/ic_home_focus.xml" value="0.1165" />
         <entry key="..\:/Sy/FPT_POLYTECHNIC/BAITAP/KY_4/DuAnMot/GIT/quanlinhanvien/app/src/main/res/drawable/ic_home_normal.xml" value="0.1165" />
@@ -38,7 +39,7 @@
         <entry key="..\:/Sy/FPT_POLYTECHNIC/BAITAP/KY_4/DuAnMot/GIT/quanlinhanvien/app/src/main/res/layout/frm_me.xml" value="0.18" />
         <entry key="..\:/Sy/FPT_POLYTECHNIC/BAITAP/KY_4/DuAnMot/GIT/quanlinhanvien/app/src/main/res/layout/frm_qrcode.xml" value="0.1734375" />
         <entry key="..\:/Sy/FPT_POLYTECHNIC/BAITAP/KY_4/DuAnMot/GIT/quanlinhanvien/app/src/main/res/layout/frm_store_2.xml" value="0.130078125" />
-        <entry key="..\:/Sy/FPT_POLYTECHNIC/BAITAP/KY_4/DuAnMot/GIT/quanlinhanvien/app/src/main/res/layout/frm_thongke.xml" value="0.25" />
+        <entry key="..\:/Sy/FPT_POLYTECHNIC/BAITAP/KY_4/DuAnMot/GIT/quanlinhanvien/app/src/main/res/layout/frm_thongke.xml" value="0.2" />
         <entry key="..\:/Sy/FPT_POLYTECHNIC/BAITAP/KY_4/DuAnMot/GIT/quanlinhanvien/app/src/main/res/layout/frm_thongtin.xml" value="0.1734375" />
         <entry key="..\:/Sy/FPT_POLYTECHNIC/BAITAP/KY_4/DuAnMot/GIT/quanlinhanvien/app/src/main/res/layout/frm_trangchu.xml" value="0.18" />
         <entry key="..\:/Sy/FPT_POLYTECHNIC/BAITAP/KY_4/DuAnMot/GIT/quanlinhanvien/app/src/main/res/layout/frm_vitri.xml" value="0.1734375" />

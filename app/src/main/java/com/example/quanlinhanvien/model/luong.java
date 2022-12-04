@@ -3,7 +3,7 @@ package com.example.quanlinhanvien.model;
 public class luong {
     float tonggiolam;
     float tongLuong;
-    luong(){};
+
     public luong(float tonggiolam, float tongLuong) {
         this.tonggiolam = tonggiolam;
         this.tongLuong = tongLuong;

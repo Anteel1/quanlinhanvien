@@ -134,22 +134,18 @@ public class frm_thongke extends Fragment {
 
     public void previousMonthAction() {
         selectedDate = selectedDate.minusMonths(1);
-
     }
 
     public void nextMonthAction() {
         selectedDate = selectedDate.plusMonths(1);
-
     }
 
     private void demoCallAPILuong() {
-
         service_API requestInterface = new Retrofit.Builder()
                 .baseUrl(Base_Service)
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create())
                 .build().create(service_API.class);
-
         new CompositeDisposable().add(requestInterface.getLuong(idNV, selectedDate.getMonth().getValue())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
@@ -164,7 +160,7 @@ public class frm_thongke extends Fragment {
     }
 
     private void handleError(Throwable error) {
-        Log.d("erro", error.toString());
+        Log.d("erroLuong", error.toString());
         Toast.makeText(getContext(), error.toString(), Toast.LENGTH_SHORT).show();
         //khi gọi API KHÔNG THÀNH CÔNG thì thực hiện xử lý ở đây
     }
@@ -195,7 +191,7 @@ public class frm_thongke extends Fragment {
     }
 
     private void handleError_ngayLam(Throwable error) {
-        Log.d("erro", error.toString());
+        Log.d("erroDate", error.toString());
         Toast.makeText(getContext(), error.toString(), Toast.LENGTH_SHORT).show();
         //khi gọi API KHÔNG THÀNH CÔNG thì thực hiện xử lý ở đây
     }

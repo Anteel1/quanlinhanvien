@@ -6,7 +6,6 @@ import androidx.viewpager2.adapter.FragmentStateAdapter;
 
 import com.example.quanlinhanvien.fragment.frm_genQRcode;
 import com.example.quanlinhanvien.fragment.frm_map;
-import com.example.quanlinhanvien.fragment.frm_nfc;
 import com.example.quanlinhanvien.fragment.frm_storeDetail;
 
 public class adapter_viewpager extends FragmentStateAdapter {
@@ -24,8 +23,6 @@ public class adapter_viewpager extends FragmentStateAdapter {
                 return new frm_genQRcode();
             case 2:
                 return new frm_map();
-            case 3 :
-                return new frm_nfc();
             default:
                 return new frm_storeDetail();
         }
@@ -33,6 +30,6 @@ public class adapter_viewpager extends FragmentStateAdapter {
 
     @Override
     public int getItemCount() {
-        return 4;
+        return 3;
     }
 }

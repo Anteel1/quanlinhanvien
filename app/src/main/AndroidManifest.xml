@@ -29,10 +29,10 @@
             android:value="AIzaSyAlM-Lha2LyW8c1EDKiWpJYYzZ4qL-U5tM" />
 
         <activity
-            android:name=".MainActivity"
+            android:name=".manhinhchoActivity"
             android:exported="false"></activity>
         <activity
-            android:name=".manhinhchoActivity"
+            android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

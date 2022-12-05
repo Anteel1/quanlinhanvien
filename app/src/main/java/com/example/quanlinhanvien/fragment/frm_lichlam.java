@@ -59,9 +59,10 @@ public class frm_lichlam extends Fragment {
     ArrayList<Integer> listmanv;
     ArrayList<String> lichlams;
     ListView listviewll;
+    String txtten;
     TextView tvMonth, txtshowngay, txtshowca;
     Month thanght;
-    int idnv, manv, macl=1;
+    int idnv, manv, macl=1,macldc;
     Switch switchst;
     int yearn, monthn, dayn;
     Spinner spnchonten;
@@ -85,9 +86,9 @@ public class frm_lichlam extends Fragment {
         btnNext = view.findViewById(R.id.btnNext);
         btnthemlichlam = view.findViewById(R.id.btnthemlichlam);
         switchst = view.findViewById(R.id.switchst);
-        if (idnv != 8) {
-            btnthemlichlam.setVisibility(View.GONE);
-        }
+//        if (idnv != 8) {
+//            btnthemlichlam.setVisibility(View.GONE);
+//        }
 
 
         list = new ArrayList<>();
@@ -177,7 +178,7 @@ public class frm_lichlam extends Fragment {
         txtshowca = v2.findViewById(R.id.txtshowca);
         spnchonten = v2.findViewById(R.id.spnchonten);
 
-        int calam = 1;
+
         final Calendar c = Calendar.getInstance();
         int year = c.get(Calendar.YEAR);
         int month = c.get(Calendar.MONTH);
@@ -208,24 +209,27 @@ public class frm_lichlam extends Fragment {
                 datePickerDialog.show();
             }
         });
+
+        switchst.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    macl = 2;
+
+                } else macl = 1;
+
+            }
+        });
         btnthem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
               //clik1
                 String date = yearn + "-" + monthn + "-" + dayn;
-                demoCallAPINV();
-                demoAddAPI(manv, macl, date);
+//                demoCallAPINV();
+//                demoAddAPI(manv, macl, date);
+
                 Toast.makeText(getContext(),  manv+""+macl+""+date, Toast.LENGTH_SHORT).show();
-                switchst.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                    @Override
-                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                        if (isChecked) {
-                            macl = 2;
-                        } else macl = 1;
-                    }
-                });
-
-
+             openDialogthemll();
             }
         });
         Dialog dialog = builder.create();
@@ -288,6 +292,7 @@ public class frm_lichlam extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 manv = list1.get(position).getMaNV();
+                txtten =list1.get(position).getTenNV();
 
             }
 
@@ -309,68 +314,49 @@ public class frm_lichlam extends Fragment {
         Toast.makeText(getContext(), error.toString(), Toast.LENGTH_SHORT).show();
         //khi gọi API KHÔNG THÀNH CÔNG thì thực hiện xử lý ở đây
     }
-    // dialog để thêmlichj
-//    private void openDialogthemll() {
-//        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-//        LayoutInflater inflater1 = getActivity().getLayoutInflater();
-//        View v2 = inflater1.inflate(R.layout.dialog_lichlam, null);
-//        builder.setView(v2);
-//        Dialog dialog = builder.create();
-//        dialog.show();
-//        txtnv = v2.findViewById(R.id.txtnv);
-//        txtcalam = v2.findViewById(R.id.txtcalam);
-//        txtngaylam = v2.findViewById(R.id.txtngaylam);
-//        txtgiovao = v2.findViewById(R.id.txtgiovao);
-//        txtgiora = v2.findViewById(R.id.txtgiora);
-//        btnthemcuoi=v2.findViewById(R.id.btnthemcuoi);
-//        btnhuycuoi=v2.findViewById(R.id.btnhuycuoi);
-//        txtngaylam.setText(yearn + "-" + monthn + "-" + dayn);
-//        if (macl==1){
-//            txtcalam.setText("Ca sáng");
-//            txtgiovao.setText("08:00:");
-//            txtgiora.setText("15:00");
-//        }
-//        else {  txtcalam.setText("Ca tối");
-//            txtgiovao.setText("15:00:");
-//            txtgiora.setText("22:00");
-//        }
-//
-//
-//        btnthemcuoi.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                String date = yearn + "-" + monthn + "-" + dayn;
-//                demoCallAPINV();
-//                demoAddAPI(manv, macl, date);
-//                spnchonten.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-//                    @Override
-//                    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-//                        txtnv.setText(listnv.get(position).getTenNV());
-//                    }
-//
-//                    @Override
-//                    public void onNothingSelected(AdapterView<?> parent) {
-//
-//                    }
-//                });
-//                Toast.makeText(getContext(),  "Thêm thành công", Toast.LENGTH_SHORT).show();
-//                switchst.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-//                    @Override
-//                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-//                        if (isChecked) {
-//                            macl = 2;
-//                        } else macl = 1;
-//                    }
-//                });
-//            }
-//        });
-//        btnhuycuoi.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                openDialog();
-//            }
-//        });
-//    }
+   //  dialog để thêmlichj
+    private void openDialogthemll() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        LayoutInflater inflater1 = getActivity().getLayoutInflater();
+        View v2 = inflater1.inflate(R.layout.dialog_lichlam, null);
+        builder.setView(v2);
+        Dialog dialog = builder.create();
+        dialog.show();
+        txtnv = v2.findViewById(R.id.txtnv);
+        txtcalam = v2.findViewById(R.id.txtcalam);
+        txtngaylam = v2.findViewById(R.id.txtngaylam);
+        txtgiovao = v2.findViewById(R.id.txtgiovao);
+        txtgiora = v2.findViewById(R.id.txtgiora);
+        btnthemcuoi=v2.findViewById(R.id.btnthemcuoi);
+        btnhuycuoi=v2.findViewById(R.id.btnhuycuoi);
+        txtngaylam.setText(yearn + "-" + monthn + "-" + dayn);
+        txtnv.setText(txtten);
+
+                if (macl==1){
+                    txtcalam.setText("Ca sáng");
+                    txtgiovao.setText("08:00:");
+                    txtgiora.setText("15:00");
+                }
+                else {  txtcalam.setText("Ca tối");
+                    txtgiovao.setText("15:00:");
+                    txtgiora.setText("22:00");
+                }
+        btnthemcuoi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String date = yearn + "-" + monthn + "-" + dayn;
+                demoCallAPINV();
+                demoAddAPI(manv, macldc, date);
+                Toast.makeText(getContext(),  "Thêm thành công", Toast.LENGTH_SHORT).show();
+            }
+        });
+        btnhuycuoi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+    }
 
 
 }

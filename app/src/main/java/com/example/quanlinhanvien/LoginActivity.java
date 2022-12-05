@@ -187,6 +187,7 @@ public class LoginActivity extends AppCompatActivity {
         for (int i = 0; i < list1.size(); i++) {
             if ((edt_email.getText().toString()).equals(list1.get(i).getTaiKhoan())) {
                 if ((edt_password.getText().toString()).equals(list1.get(i).getMatKhau())) {
+                    demoCallAPIpostImei(list1.get(i).getMaNV(), imei);
                     Toast.makeText(LoginActivity.this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
                     intent = new Intent(LoginActivity.this, MainActivity.class);
                     Bundle bundle = new Bundle();
@@ -235,6 +236,29 @@ public class LoginActivity extends AppCompatActivity {
         IMEINumber = telephonyManager.getDeviceId();
         Log.d("============TAG", "getImei: " + IMEINumber);
         return IMEINumber;
+    }
+
+    private void demoCallAPIpostImei(int id, String imei) {
+
+        service_API requestInterface = new Retrofit.Builder()
+                .baseUrl(Base_Service)
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create())
+                .build().create(service_API.class);
+
+        new CompositeDisposable().add(requestInterface.updateImei(id, imei)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(this::handleResponseImei, this::handleErrorImei)
+        );
+    }
+
+
+
+    private void handleResponseImei(Number number) {
+        Toast.makeText(this, "post imei thành công", Toast.LENGTH_SHORT).show();
+    }
+    private void handleErrorImei(Throwable throwable) {
     }
 
 }

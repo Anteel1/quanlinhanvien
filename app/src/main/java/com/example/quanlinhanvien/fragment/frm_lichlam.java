@@ -52,17 +52,17 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 
 public class frm_lichlam extends Fragment {
-    Button btnBack, btnNext, btnthemlichlam, btnchonngay, btnthem,btnthemcuoi,btnhuycuoi;
-    TextView txtnv,txtcalam,txtngaylam,txtgiovao,txtgiora;
-    ArrayList<lichlam> list,listll;
-    ArrayList<nhanvien> listnv =new ArrayList<>();
+    Button btnBack, btnNext, btnthemlichlam, btnchonngay, btnthem, btnthemcuoi, btnhuycuoi;
+    TextView txtnv, txtcalam, txtngaylam, txtgiovao, txtgiora;
+    ArrayList<lichlam> list, listll;
+    ArrayList<nhanvien> listnv = new ArrayList<>();
     ArrayList<Integer> listmanv;
     ArrayList<String> lichlams;
     ListView listviewll;
     String txtten;
     TextView tvMonth, txtshowngay, txtshowca;
     Month thanght;
-    int idnv, manv, macl=1,macldc;
+    int idnv, manv, macl = 1, macldc;
     Switch switchst;
     int yearn, monthn, dayn;
     Spinner spnchonten;
@@ -223,13 +223,13 @@ public class frm_lichlam extends Fragment {
         btnthem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-              //clik1
+                //clik1
                 String date = yearn + "-" + monthn + "-" + dayn;
 //                demoCallAPINV();
 //                demoAddAPI(manv, macl, date);
 
-                Toast.makeText(getContext(),  manv+""+macl+""+date, Toast.LENGTH_SHORT).show();
-             openDialogthemll();
+                Toast.makeText(getContext(), manv + "" + macl + "" + date, Toast.LENGTH_SHORT).show();
+                openDialogthemll();
             }
         });
         Dialog dialog = builder.create();
@@ -283,7 +283,7 @@ public class frm_lichlam extends Fragment {
         lichlams = new ArrayList<String>();
         for (int i = 0; i < list1.size(); i++) {
             lichlams.add(list1.get(i).getTenNV());
-          //  listnv.add(list1.get(i));
+            //  listnv.add(list1.get(i));
             //   listmanv.add(list1.get(i).getMaNV());
 
             //   listnv.add(list1.get(i));
@@ -292,7 +292,7 @@ public class frm_lichlam extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 manv = list1.get(position).getMaNV();
-                txtten =list1.get(position).getTenNV();
+                txtten = list1.get(position).getTenNV();
 
             }
 
@@ -314,7 +314,8 @@ public class frm_lichlam extends Fragment {
         Toast.makeText(getContext(), error.toString(), Toast.LENGTH_SHORT).show();
         //khi gọi API KHÔNG THÀNH CÔNG thì thực hiện xử lý ở đây
     }
-   //  dialog để thêmlichj
+
+    //  dialog để thêmlichj
     private void openDialogthemll() {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         LayoutInflater inflater1 = getActivity().getLayoutInflater();
@@ -327,27 +328,28 @@ public class frm_lichlam extends Fragment {
         txtngaylam = v2.findViewById(R.id.txtngaylam);
         txtgiovao = v2.findViewById(R.id.txtgiovao);
         txtgiora = v2.findViewById(R.id.txtgiora);
-        btnthemcuoi=v2.findViewById(R.id.btnthemcuoi);
-        btnhuycuoi=v2.findViewById(R.id.btnhuycuoi);
+        btnthemcuoi = v2.findViewById(R.id.btnthemcuoi);
+        btnhuycuoi = v2.findViewById(R.id.btnhuycuoi);
         txtngaylam.setText(yearn + "-" + monthn + "-" + dayn);
         txtnv.setText(txtten);
 
-                if (macl==1){
-                    txtcalam.setText("Ca sáng");
-                    txtgiovao.setText("08:00:");
-                    txtgiora.setText("15:00");
-                }
-                else {  txtcalam.setText("Ca tối");
-                    txtgiovao.setText("15:00:");
-                    txtgiora.setText("22:00");
-                }
+        if (macl == 1) {
+            txtcalam.setText("Ca sáng");
+            txtgiovao.setText("08:00:");
+            txtgiora.setText("15:00");
+        } else {
+            txtcalam.setText("Ca tối");
+            txtgiovao.setText("15:00:");
+            txtgiora.setText("22:00");
+        }
         btnthemcuoi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String date = yearn + "-" + monthn + "-" + dayn;
                 demoCallAPINV();
-                demoAddAPI(manv, macldc, date);
-                Toast.makeText(getContext(),  "Thêm thành công", Toast.LENGTH_SHORT).show();
+                demoAddAPI(manv, macl, date);
+                Toast.makeText(getContext(), "Thêm thành công", Toast.LENGTH_SHORT).show();
+                dialog.dismiss();
             }
         });
         btnhuycuoi.setOnClickListener(new View.OnClickListener() {

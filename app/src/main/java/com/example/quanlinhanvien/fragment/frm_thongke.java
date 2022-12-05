@@ -24,6 +24,14 @@ import com.example.quanlinhanvien.adapter.adapter_calendar;
 import com.example.quanlinhanvien.model.luong;
 import com.example.quanlinhanvien.model.ngaylam;
 import com.example.quanlinhanvien.service.service_API;
+import com.github.mikephil.charting.charts.PieChart;
+import com.github.mikephil.charting.components.Legend;
+import com.github.mikephil.charting.data.Entry;
+import com.github.mikephil.charting.data.PieData;
+import com.github.mikephil.charting.data.PieDataSet;
+import com.github.mikephil.charting.data.PieEntry;
+import com.github.mikephil.charting.highlight.Highlight;
+import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 
 import java.time.LocalDate;
@@ -36,20 +44,22 @@ import io.reactivex.schedulers.Schedulers;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class frm_thongke extends Fragment {
+public class frm_thongke extends Fragment implements OnChartValueSelectedListener {
     public frm_thongke(int idNV) {
         this.idNV = idNV;
     }
-
+    ArrayList<ngaylam>listNgaylam;
     adapter_calendar adapter;
     RecyclerView calendarRecyclerView;
     TextView month;
     LocalDate selectedDate;
     Button btnback, btnnext;
     TextView txtSalary;
-    ArrayList<String>dayCompare;
+    float[] trangthai;
+    Double luongTong;
     int idNV;
-
+    PieChart mChart;
+    float[] yData ;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -59,11 +69,21 @@ public class frm_thongke extends Fragment {
         btnback = view.findViewById(R.id.btnBack);
         btnnext = view.findViewById(R.id.btnNext);
         txtSalary = view.findViewById(R.id.txtTienLuong);
+        // chart
+        mChart = view.findViewById(R.id.piechart);
+        mChart.setHoleRadius(35f);
+        mChart.setTransparentCircleAlpha(0);
+        mChart.setCenterText("Thống kê");
+        mChart.setCenterTextSize(10);
+        mChart.setDrawEntryLabels(true);
+        mChart.setOnChartValueSelectedListener(this);
+
         selectedDate = LocalDate.now();
-        dayCompare = new ArrayList<>();
+        listNgaylam = new ArrayList<>();
         loadData();
         btnback.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         btnnext.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
         btnback.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -95,11 +115,14 @@ public class frm_thongke extends Fragment {
     }
     private void loadData()
     {
-        demoCallAPI_ngaylam();
-        demoCallAPILuong();
+        luongTong = 0.0;
+        demoCallAPI();
+        demoCallAPI_luongDungGio();
+        demoCallAPI_luongTreGio();
+        txtSalary.setText("Salary:"+luongTong+"00VND");
         month.setText((selectedDate).getMonth()+" "+(selectedDate).getYear());
         ArrayList<String> daysInMonth = daysInMonthArray(selectedDate);
-        adapter = new adapter_calendar(getContext(),daysInMonth,dayCompare);
+        adapter = new adapter_calendar(getContext(),daysInMonth,listNgaylam);
         RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getContext(), 7);
         calendarRecyclerView.setLayoutManager(layoutManager);
         calendarRecyclerView.setAdapter(adapter);
@@ -134,34 +157,7 @@ public class frm_thongke extends Fragment {
         selectedDate = selectedDate.plusMonths(1);
 
     }
-
-    private void demoCallAPILuong() {
-
-        service_API requestInterface = new Retrofit.Builder()
-                .baseUrl(Base_Service)
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                .addConverterFactory(GsonConverterFactory.create())
-                .build().create(service_API.class);
-
-        new CompositeDisposable().add(requestInterface.getLuong(idNV, selectedDate.getMonth().getValue())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeOn(Schedulers.io())
-                .subscribe(this::handleResponse, this::handleError)
-        );
-    }
-
-    private void handleResponse(luong luong) {
-        //API trả về dữ liệu thành công, thực hiện việc lấy data
-        Log.d("luong infor", luong.getTonggiolam() + " " + luong.getTongLuong());
-        txtSalary.setText("Salary: " + luong.getTongLuong() + "00 VND");
-    }
-
-    private void handleError(Throwable error) {
-        Log.d("erro", error.toString());
-        Toast.makeText(getContext(), error.toString(), Toast.LENGTH_SHORT).show();
-        //khi gọi API KHÔNG THÀNH CÔNG thì thực hiện xử lý ở đây
-    }
-    private void demoCallAPI_ngaylam() {
+    private void demoCallAPI() {
 
         service_API requestInterface = new Retrofit.Builder()
                 .baseUrl(Base_Service)
@@ -172,23 +168,125 @@ public class frm_thongke extends Fragment {
         new CompositeDisposable().add(requestInterface.getNgayLam(idNV,selectedDate.getMonth().getValue())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
-                .subscribe(this::handleResponse_ngaylam, this::handleError_ngayLam)
+                .subscribe(this::handleResponse, this::handleError)
         );
     }
 
-    private void handleResponse_ngaylam(ArrayList<ngaylam>list) {
+    private void handleResponse(ArrayList<ngaylam> list1) {
         //API trả về dữ liệu thành công, thực hiện việc lấy data
-        dayCompare.clear();
-        for(int i = 0;i < list.size(); i++){
-            dayCompare.add(i,list.get(i).getNgaylam());
+        listNgaylam.clear();
+        int dungGio = 0;
+        int treGio = 0;
+        int dangLam =0;
+        for(int i =0; i <list1.size(); i++){
+            listNgaylam.add(i,list1.get(i));
+            Integer integer = list1.get(i).getTrangthai();
+            if(integer !=null){
+                if(integer ==1){
+                    dungGio++;
+                }else if(integer == 2){
+                    treGio++;
+                }else{
+                    dangLam++;
+                }
+            }
         }
+        trangthai = new float[]{dungGio,treGio,dangLam};
+        addDataSet(mChart);
         adapter.notifyDataSetChanged();
-        Log.d("Ngày làm:"," "+dayCompare.size());
+        Log.d("size:"," "+list1.size());
     }
 
-    private void handleError_ngayLam(Throwable error) {
+    private void handleError(Throwable error) {
         Log.d("erro", error.toString());
         Toast.makeText(getContext(), error.toString(), Toast.LENGTH_SHORT).show();
         //khi gọi API KHÔNG THÀNH CÔNG thì thực hiện xử lý ở đây
+    }
+
+    private void demoCallAPI_luongTreGio() {
+
+        service_API requestInterface = new Retrofit.Builder()
+                .baseUrl(Base_Service)
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create())
+                .build().create(service_API.class);
+
+        new CompositeDisposable().add(requestInterface.getLuongTreGio(idNV,selectedDate.getMonth().getValue())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(this::handleResponse_treGio, this::handleError_treGio)
+        );
+    }
+
+    private void handleResponse_treGio(luong luong) {
+        //API trả về dữ liệu thành công, thực hiện việc lấy data
+        luongTong += luong.getTienLuong();
+        txtSalary.setText("Salary:"+luongTong+"00NVD");
+    }
+
+    private void handleError_treGio(Throwable error) {
+        Log.d("erro-tre gio :", error.toString());
+        Toast.makeText(getContext(), error.toString(), Toast.LENGTH_SHORT).show();
+        //khi gọi API KHÔNG THÀNH CÔNG thì thực hiện xử lý ở đây
+    }
+
+    private void demoCallAPI_luongDungGio() {
+
+        service_API requestInterface = new Retrofit.Builder()
+                .baseUrl(Base_Service)
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create())
+                .build().create(service_API.class);
+
+        new CompositeDisposable().add(requestInterface.getLuongDungGio(idNV,selectedDate.getMonth().getValue())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(this::handleResponse_dungGio, this::handleError_dungGio)
+        );
+    }
+
+    private void handleResponse_dungGio(luong luong) {
+        //API trả về dữ liệu thành công, thực hiện việc lấy data
+        luongTong += luong.getTienLuong();
+        txtSalary.setText("Salary:"+luongTong+"00NVD");
+    }
+
+    private void handleError_dungGio(Throwable error) {
+        Log.d("erro-dung gio :", error.toString());
+        Toast.makeText(getContext(), error.toString(), Toast.LENGTH_SHORT).show();
+        //khi gọi API KHÔNG THÀNH CÔNG thì thực hiện xử lý ở đây
+    }
+
+
+    // pie chart
+    @Override
+    public void onValueSelected(Entry e, Highlight h) {
+
+    }
+
+    @Override
+    public void onNothingSelected() {
+
+    }
+    private void addDataSet(PieChart pieChart) {
+        ArrayList<PieEntry> entrys = new ArrayList<>();
+        yData = trangthai;
+        String[] xData = { "Ontime", "Late", "Working" };
+        for (int i = 0; i < yData.length;i++){
+                entrys.add(new PieEntry(yData[i], xData[i]));
+        }
+        PieDataSet pieDataSet=new PieDataSet(entrys," ");
+        pieDataSet.setSliceSpace(3);
+        pieDataSet.setValueTextSize(12);
+        ArrayList<Integer> colors=new ArrayList<>();
+        colors.add(Color.parseColor("#73AB6B"));
+        colors.add(Color.RED);
+        colors.add(Color.YELLOW);
+        pieDataSet.setColors(colors);
+        Legend legend=pieChart.getLegend();
+        legend.setForm(Legend.LegendForm.CIRCLE);
+        PieData pieData=new PieData(pieDataSet);
+        pieChart.setData(pieData);
+        pieChart.invalidate();
     }
 }

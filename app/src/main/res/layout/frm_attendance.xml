@@ -8,24 +8,20 @@
 
     <TextClock
         android:id="@+id/tc_gio"
-        style="@style/textMedium"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="20dp"
         android:gravity="center"
         android:textColor="#838383"
-        android:textSize="20sp"
-        android:textStyle="bold" />
+        android:textSize="16sp"/>
 
     <TextView
         android:id="@+id/tc_ngay"
-        style="@style/textMedium"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:textColor="#838383"
-        android:textSize="20sp"
-        android:textStyle="italic" />
+        android:textSize="16sp" />
 
     <Button
         android:id="@+id/btnNFC"

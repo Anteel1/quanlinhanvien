@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.quanlinhanvien.R;
+import com.example.quanlinhanvien.model.ngaylam;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -19,11 +20,11 @@ import java.util.ArrayList;
 public class adapter_calendar extends RecyclerView.Adapter<adapter_calendar.ViewHolder> {
     Context context;
     ArrayList<String>dayOfMonth;
-    ArrayList<String>dayCompare;
-    public adapter_calendar(Context context,ArrayList<String>dayOfMonth,ArrayList<String>dayCompare){
+    ArrayList<ngaylam>listNgayLam;
+    public adapter_calendar(Context context,ArrayList<String>dayOfMonth,ArrayList<ngaylam>listNgayLam){
         this.context=context;
         this.dayOfMonth=dayOfMonth;
-        this.dayCompare = dayCompare;
+        this.listNgayLam = listNgayLam;
     }
     @NonNull
     @Override
@@ -37,23 +38,24 @@ public class adapter_calendar extends RecyclerView.Adapter<adapter_calendar.View
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         String day = dayOfMonth.get(position);
-        Log.d("day compare size", dayCompare.size()+ " ");
+        Log.d("list ngay lam size", listNgayLam.size()+ " ");
         Log.d("Test 11  ",day);
-        for (int i =0;i<dayCompare.size();i++){
-            LocalDateTime date1 = LocalDateTime.parse(dayCompare.get(i));
-            String day1 =String.valueOf(date1.getDayOfMonth());
-            int year = date1.getYear();
-            int month = date1.getDayOfMonth();
-            Log.d("day",year+" "+month+" "+day1);
-            if(day.equals(day1)){
-                holder.item.setTextColor(Color.GREEN);
+        for (int i =0;i<listNgayLam.size();i++){
+            LocalDateTime date1 = LocalDateTime.parse(listNgayLam.get(i).getNgaylam());
+            String day1=String.valueOf(date1.getDayOfMonth());
+            Log.d("day: ",day1);
+            if(day.equals(day1) && listNgayLam.get(i).getTrangthai() == 0){
+                holder.item.setBackgroundColor(Color.YELLOW);
                 break;
-            }else{
-                holder.item.setTextColor(Color.GRAY);
+            }else if(day.equals(day1) && listNgayLam.get(i).getTrangthai() == 1){
+                holder.item.setBackgroundColor(Color.parseColor("#73AB6B"));
+                break;
+            }else if(day.equals(day1) && listNgayLam.get(i).getTrangthai() == 2){
+                holder.item.setBackgroundColor(Color.RED);
+                break;
             }
         }
         holder.item.setText(day);
-
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{

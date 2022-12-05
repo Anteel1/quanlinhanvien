@@ -24,10 +24,11 @@
             android:layout_alignParentEnd="true"
             android:layout_alignParentTop="true"
             android:text="Employees Management"
+
             android:textColor="@color/white"
             android:textSize="20sp"
             android:textStyle="bold"
-            android:layout_marginEnd="100dp"/>
+            android:layout_toRightOf="@+id/iv_menu_toolbar"/>
 
     </RelativeLayout>
 

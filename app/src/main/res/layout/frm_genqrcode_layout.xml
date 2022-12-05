@@ -10,36 +10,15 @@
         android:id="@+id/ivQRCode"
         android:layout_width="300dp"
         android:layout_height="300dp"
-        android:layout_marginTop="50dp" />
-
-    <Spinner
-        android:id="@+id/edtInput"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginEnd="20dp"
-        android:hint="Nhập nội dung cần tạo"
-        android:paddingVertical="16dp" />
-
-    <Button
-        android:id="@+id/btnGenerate"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginEnd="20dp"
-        android:backgroundTint="@color/statusbar"
-        android:text="Tạo QR Code" />
-
+        />
     <Button
         android:id="@+id/btnSave"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
-        android:backgroundTint="@color/white"
+        android:backgroundTint="@color/statusbar"
         android:text="Lưu QR Code"
-        android:textColor="@color/statusbar" />
+        android:textColor="@color/white" />
 
 </LinearLayout>

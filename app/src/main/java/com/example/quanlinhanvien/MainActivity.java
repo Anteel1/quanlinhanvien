@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
                         onRestoreInstanceState(savedInstanceState);
                         break;
                     case R.id.menu_Attendance:
-                        fragment = new frm_attendance();
+                        fragment = new frm_attendance(idNV);
                         onRestoreInstanceState(savedInstanceState);
                         break;
                     case R.id.menu_store:

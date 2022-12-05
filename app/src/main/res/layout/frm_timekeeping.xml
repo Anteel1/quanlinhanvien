@@ -15,7 +15,8 @@
         android:gravity="center"
         android:textColor="#838383"
         android:textSize="20sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:visibility="gone" />
 
     <TextView
         android:id="@+id/tc_ngay"
@@ -25,7 +26,8 @@
         android:gravity="center"
         android:textColor="#838383"
         android:textSize="20sp"
-        android:textStyle="italic" />
+        android:textStyle="italic"
+        android:visibility="gone" />
 
     <Button
         android:id="@+id/btnNFC"
@@ -34,7 +36,8 @@
         android:layout_gravity="center"
         android:backgroundTint="@color/statusbar"
         android:text="Check in NFC"
-        android:textAllCaps="false" />
+        android:textAllCaps="false"
+        android:visibility="gone" />
 
     <Button
         android:id="@+id/btnQR"
@@ -43,7 +46,8 @@
         android:layout_gravity="center"
         android:backgroundTint="@color/statusbar"
         android:text="Check in QRCode"
-        android:textAllCaps="false" />
+        android:textAllCaps="false"
+        android:visibility="gone" />
 
     <LinearLayout
         android:id="@+id/layout_icon"
@@ -123,8 +127,8 @@
     <FrameLayout
         android:id="@+id/layout_scan"
         android:layout_width="match_parent"
-        android:layout_height="400dp"
-        android:visibility="gone">
+        android:layout_height="match_parent"
+        android:visibility="visible">
 
         <com.budiyev.android.codescanner.CodeScannerView
             android:id="@+id/scanner_view"
@@ -141,24 +145,25 @@
     <TextView
         android:id="@+id/resutl"
         android:layout_width="match_parent"
-        android:visibility="gone"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:visibility="gone" />
 
     <ImageView
         android:id="@+id/imgCamera"
-        android:layout_margin="8dp"
         android:layout_width="300dp"
         android:layout_height="300dp"
         android:layout_gravity="center"
+        android:layout_margin="8dp"
         android:visibility="gone" />
+
     <Button
+        android:id="@+id/btnUpdateIMG"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Ok"
-        android:textAllCaps="false"
         android:layout_gravity="center"
         android:backgroundTint="@color/statusbar"
-        android:visibility="gone"
-        android:id="@+id/btnUpdateIMG"
-        />
+        android:text="Ok"
+        android:textAllCaps="false"
+        android:visibility="gone" />
+
 </LinearLayout>

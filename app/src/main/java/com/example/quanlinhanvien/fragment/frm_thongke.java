@@ -49,7 +49,7 @@ public class frm_thongke extends Fragment {
     //    Button btnback, btnnext;
     ImageView imgBack, imgNext;
     TextView txtSalary;
-    ArrayList<String> dayCompare;
+    ArrayList<ngaylam> dayCompare;
     int idNV;
 
     @Nullable
@@ -179,19 +179,13 @@ public class frm_thongke extends Fragment {
     }
 
     private void handleResponse_ngaylam(ArrayList<ngaylam> list) {
-        Log.d("TAG", "handleResponse_ngaylam: " + list.get(1).getNgaylam() + " - " + list.get(1).getSccl());
-        //API trả về dữ liệu thành công, thực hiện việc lấy data
         dayCompare.clear();
-        for (int i = 0; i < list.size(); i++) {
-            dayCompare.add(i, list.get(i).getNgaylam());
-        }
-        adapter.notifyDataSetChanged();
-        Log.d("Ngày làm:", " " + dayCompare.size());
+        dayCompare = list;
+        Log.d("TAG", "handleResponse_ngaylam: " + list.get(0).getNgaylam() + " - " + list.get(0).getTrangThai() + " - " + idNV);
     }
 
     private void handleError_ngayLam(Throwable error) {
         Log.d("erroDate", error.toString());
         Toast.makeText(getContext(), error.toString(), Toast.LENGTH_SHORT).show();
-        //khi gọi API KHÔNG THÀNH CÔNG thì thực hiện xử lý ở đây
     }
 }

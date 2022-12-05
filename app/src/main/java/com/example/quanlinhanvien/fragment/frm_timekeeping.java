@@ -50,6 +50,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
@@ -97,6 +98,7 @@ public class frm_timekeeping extends Fragment {
 
         demoCallAPI_calam();
         configCloudinary();
+
         btnQRCode.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -106,6 +108,7 @@ public class frm_timekeeping extends Fragment {
 
             }
         });
+
         btnNFC.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -114,8 +117,13 @@ public class frm_timekeeping extends Fragment {
                 turnonCamera();
             }
         });
+
+        Date date = Calendar.getInstance().getTime();
+        String[] date2 = String.valueOf(date).split(" ");
+
         tc_gio.setFormat12Hour("hh:mm a");
-        tc_ngay.setText(LocalDate.now().getDayOfMonth() + "," + LocalDate.now().getDayOfWeek() + "," + LocalDate.now().getMonth() + "," + LocalDate.now().getYear());
+        tc_ngay.setText(date2[0] + " " + date2[1] + " " + date2[2]);
+
         imgCheckIn = v.findViewById(R.id.btnCheckin);
         imgCheckOut = v.findViewById(R.id.btnCheckOut);
 
@@ -143,6 +151,7 @@ public class frm_timekeeping extends Fragment {
                 // gọi post lên update bảng chấm công
             }
         });
+
         imgCheckOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -158,6 +167,11 @@ public class frm_timekeeping extends Fragment {
                 // gọi post lên update bảng chấm công
             }
         });
+
+        gio = LocalDateTime.now().getHour();
+        phut = LocalDateTime.now().getMinute();
+        checkIn();
+
         scanQRpermission();
         txtResutl = v.findViewById(R.id.resutl);
         scannerView = v.findViewById(R.id.scanner_view);
@@ -267,13 +281,11 @@ public class frm_timekeeping extends Fragment {
     }
 
     private void demoCallAPI_calam() {
-
         service_API requestInterface = new Retrofit.Builder()
                 .baseUrl(Base_Service)
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create())
                 .build().create(service_API.class);
-
         new CompositeDisposable().add(requestInterface.getModelAPI_calam()
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())

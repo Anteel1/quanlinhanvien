@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/line"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:id="@+id/cardView"
+    android:layout_width="50dp"
+    android:layout_height="50dp"
     android:layout_margin="4dp"
-    android:gravity="center"
-    android:background="@drawable/custom_scrollview">
+    android:background="@drawable/custom_item_calendar"
+    app:cardCornerRadius="12dp">
 
     <TextView
         android:id="@+id/item_date"
@@ -19,4 +19,4 @@
         android:textColor="@color/black"
         android:textSize="16sp" />
 
-</LinearLayout>
+</androidx.cardview.widget.CardView>

@@ -15,24 +15,27 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.quanlinhanvien.R;
+import com.example.quanlinhanvien.model.ngaylam;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public class adapter_calendar extends RecyclerView.Adapter<adapter_calendar.ViewHolder> {
     Context context;
-    ArrayList<String>dayOfMonth;
-    ArrayList<String>dayCompare;
-    public adapter_calendar(Context context,ArrayList<String>dayOfMonth,ArrayList<String>dayCompare){
-        this.context=context;
-        this.dayOfMonth=dayOfMonth;
+    ArrayList<String> dayOfMonth;
+    ArrayList<ngaylam> dayCompare;
+
+    public adapter_calendar(Context context, ArrayList<String> dayOfMonth, ArrayList<ngaylam> dayCompare) {
+        this.context = context;
+        this.dayOfMonth = dayOfMonth;
         this.dayCompare = dayCompare;
     }
+
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(context);
-        View v = layoutInflater.inflate(R.layout.item_date,parent,false);
+        View v = layoutInflater.inflate(R.layout.item_date, parent, false);
         ViewHolder viewHolder = new ViewHolder(v);
         return viewHolder;
     }
@@ -40,37 +43,30 @@ public class adapter_calendar extends RecyclerView.Adapter<adapter_calendar.View
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         String day = dayOfMonth.get(position);
-        Log.d("day compare size", dayCompare.size()+ " ");
-        Log.d("Test 11  ",day);
-        for (int i =0;i<dayCompare.size();i++){
-            LocalDateTime date1 = LocalDateTime.parse(dayCompare.get(i));
-            String day1 =String.valueOf(date1.getDayOfMonth());
-            int year = date1.getYear();
-            int month = date1.getDayOfMonth();
-            Log.d("day",year+" "+month+" "+day1);
-            if(day.equals(day1)){
-//                holder.item.setTextColor(Color.GREEN);
-//                holder.cardView.setCardBackgroundColor(Color.parseColor("#B173AB6B"));
-                    holder.line.setBackgroundColor(new Color().parseColor("#fff"));
-//                holder.cardView.setBackgroundColor(Color.parseColor("B173AB6B"));
-//                holder.cardView.setRadius(32);
-//                break;
-            }else{
-//                holder.item.setTextColor(Color.GRAY);
+
+        for (int i = 0; i < dayCompare.size(); i++) {
+            LocalDateTime date1 = LocalDateTime.parse(dayCompare.get(i).getNgaylam());
+            String day1 = String.valueOf(date1.getDayOfMonth());
+            if (day.equals(day1)) {
+                if (dayCompare.get(i).getTrangThai() == 1) holder.cardView.setCardBackgroundColor(Color.parseColor("#B173AB6B"));
+                else if (dayCompare.get(i).getTrangThai() == 2) holder.cardView.setCardBackgroundColor(Color.parseColor("#FF0000"));
+                else if (dayCompare.get(i).getTrangThai() == 0) holder.cardView.setCardBackgroundColor(Color.parseColor("#FFBB86FC"));
+
+//                holder.item.setTextColor(new Color().parseColor("#fff"));
+            }else {
+
             }
         }
         holder.item.setText(day);
-
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
-//        CardView cardView;
-        LinearLayout line;
+    public class ViewHolder extends RecyclerView.ViewHolder {
+        CardView cardView;
         TextView item;
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-//            cardView = itemView.findViewById(R.id.cardView);
-            line = itemView.findViewById(R.id.line);
+            cardView = itemView.findViewById(R.id.cardView);
             item = itemView.findViewById(R.id.item_date);
         }
     }

@@ -49,6 +49,7 @@ import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
@@ -59,11 +60,7 @@ import io.reactivex.schedulers.Schedulers;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class frm_attendance extends Fragment {
-    int idNV;
-    public frm_attendance(int idNV) {
-        this.idNV = idNV;
-    }
+public class frm_timekeeping extends Fragment {
     private CodeScanner mCodeScanner;
     private CodeScannerView scannerView;
     Button btnQRCode, btnNFC, btnUpdate;
@@ -79,12 +76,13 @@ public class frm_attendance extends Fragment {
     String url;
     int gio, phut;
     int maCL;
-    int check;
+    boolean tregio;
     private HashMap config = new HashMap();
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.frm_attendance, container, false);
+        View v = inflater.inflate(R.layout.frm_timekeeping, container, false);
         tc_gio = v.findViewById(R.id.tc_gio);
         tc_ngay = v.findViewById(R.id.tc_ngay);
         layout_icon = v.findViewById(R.id.layout_icon);
@@ -97,21 +95,14 @@ public class frm_attendance extends Fragment {
         btnUpdate = v.findViewById(R.id.btnUpdateIMG);
         imgCamera = v.findViewById(R.id.imgCamera);
 
-
-
-        tc_gio.setFormat12Hour("hh:mm a");
-        tc_ngay.setText(LocalDate.now().getDayOfMonth()+","+LocalDate.now().getDayOfWeek()+","+LocalDate.now().getMonth()+","+LocalDate.now().getYear());
-        imgCheckIn = v.findViewById(R.id.btnCheckin);
-        imgCheckOut = v.findViewById(R.id.btnCheckOut);
-
-
+        demoCallAPI_calam();
+        configCloudinary();
         btnQRCode.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 layout_icon.setVisibility(View.VISIBLE);
                 btnNFC.setVisibility(View.GONE);
                 btnQRCode.setVisibility(View.GONE);
-                check =1;
 
             }
         });
@@ -120,9 +111,23 @@ public class frm_attendance extends Fragment {
             public void onClick(View v) {
                 btnNFC.setVisibility(View.GONE);
                 btnQRCode.setVisibility(View.GONE);
-                check= 0;
+                turnonCamera();
             }
         });
+        tc_gio.setFormat12Hour("hh:mm a");
+        tc_ngay.setText(LocalDate.now().getDayOfMonth() + "," + LocalDate.now().getDayOfWeek() + "," + LocalDate.now().getMonth() + "," + LocalDate.now().getYear());
+        imgCheckIn = v.findViewById(R.id.btnCheckin);
+        imgCheckOut = v.findViewById(R.id.btnCheckOut);
+
+        Calendar calendar = Calendar.getInstance();
+        int hour = calendar.get(Calendar.HOUR_OF_DAY);
+        int mitune = calendar.get(Calendar.MINUTE);
+
+//        if (hour == 20 && mitune >= 40) {
+//            imgCheckIn.setEnabled(false);
+//            imgCheckIn.setColorFilter(Color.parseColor("#10A19D"));
+//        }
+
         imgCheckIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -134,9 +139,8 @@ public class frm_attendance extends Fragment {
                 txtTitle.setVisibility(View.VISIBLE);
                 txtTitle.setText("Check in");
                 layout_scan.setVisibility(View.VISIBLE);
-                if(check == 1){
-                    codeScanner(1);
-                }
+                checkIn();
+                // gọi post lên update bảng chấm công
             }
         });
         imgCheckOut.setOnClickListener(new View.OnClickListener() {
@@ -150,36 +154,33 @@ public class frm_attendance extends Fragment {
                 txtTitle.setVisibility(View.VISIBLE);
                 txtTitle.setText("Check out");
                 layout_scan.setVisibility(View.VISIBLE);
-                if(check ==1){
-                    codeScanner(2);
-                }
+                checkOut();
+                // gọi post lên update bảng chấm công
             }
         });
-
+        scanQRpermission();
         txtResutl = v.findViewById(R.id.resutl);
         scannerView = v.findViewById(R.id.scanner_view);
         list = new ArrayList<>();
+        codeScanner();
 
-        scanQRpermission();
-        demoCallAPI_calam();
-        configCloudinary();
-
+        // get location theo km
         return v;
     }
 
-//    @Override
-//    public void onResume() {
-//        super.onResume();
-//        mCodeScanner.startPreview();
-//    }
-//
-//    @Override
-//    public void onPause() {
-//        mCodeScanner.releaseResources();
-//        super.onPause();
-//    }
+    @Override
+    public void onResume() {
+        super.onResume();
+        mCodeScanner.startPreview();
+    }
 
-    private void codeScanner(int check) {
+    @Override
+    public void onPause() {
+        mCodeScanner.releaseResources();
+        super.onPause();
+    }
+
+    private void codeScanner() {
         mCodeScanner = new CodeScanner(getContext(), scannerView);
         mCodeScanner.setDecodeCallback(new DecodeCallback() {
             @Override
@@ -188,16 +189,8 @@ public class frm_attendance extends Fragment {
                     @Override
                     public void run() {
                         //data location cua hang
-                        list.clear();
                         list.add(0, new Location(0, "City food Store", result.toString()));
-                        // data mau
-                        list.add(1,new Location(1,"Nhà riêng","10.7612992,106.5872721"));
-                        if(check ==1){
-                            checkIn();
-                        }else{
-                            checkOut();
-                        }
-
+                        checkIn();
                     }
                 });
             }
@@ -213,10 +206,8 @@ public class frm_attendance extends Fragment {
     private void scanQRpermission() {
         int permission = ActivityCompat.checkSelfPermission((Activity) getContext(), android.Manifest.permission.CAMERA);
         if (permission != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions((Activity) getContext(), new String[]{android.Manifest.permission.CAMERA},
-                    100);
+            ActivityCompat.requestPermissions((Activity) getContext(), new String[]{android.Manifest.permission.CAMERA}, 100);
         }
-
     }
 
 
@@ -309,7 +300,14 @@ public class frm_attendance extends Fragment {
         int ok = 1;
         if (getData(2).size() == 1) {
             for (calam calam : listCalam) {
-                if (Integer.parseInt(calam.getGioBD().substring(0,2)) - 1 <= gio && Integer.parseInt(calam.getGioKT().substring(0,2)) - 1 >= gio) {
+                if (Integer.parseInt(calam.getGioBD().substring(0, 2)) - 1 <= gio && Integer.parseInt(calam.getGioKT().substring(0, 2)) - 1 >= gio) {
+                    if (gio < Integer.parseInt(calam.getGioBD().substring(0, 2))) {
+
+                    } else if (gio == Integer.parseInt(calam.getGioBD().substring(0, 2))) {
+
+                    } else {
+
+                    }
                     maCL = calam.getMaCL();
                     layout_scan.setVisibility(View.GONE);
                     ok = 2;
@@ -317,10 +315,10 @@ public class frm_attendance extends Fragment {
                     break;
                 }
             }
-            if(ok == 2 ){
-                turnonCamera();
-            }else{
-                Toast.makeText(getContext(), "Check in failed", Toast.LENGTH_SHORT).show();
+            if (ok == 2) {
+
+            } else {
+                Toast.makeText(getContext(), "Chấm công thất bại", Toast.LENGTH_SHORT).show();
             }
         } else {
             Log.d("Distance", "noooooo");
@@ -329,20 +327,7 @@ public class frm_attendance extends Fragment {
     }
 
     private void checkOut() {
-        if (getData(2).size() == 1) {
-            for (calam calam : listCalam) {
-                if (Integer.parseInt(calam.getGioKT().substring(0,2))  <= gio) {
-                    maCL = calam.getMaCL();
-                    layout_scan.setVisibility(View.GONE);
-                    Toast.makeText(getContext(), "Ok check out success", Toast.LENGTH_SHORT).show();
-                    break;
-                }
-            }
-            demoCallAPI_checkOut();
-        } else {
-            Log.d("Distance", "noooooo");
-            Toast.makeText(getContext(), "Bạn không nằm trong khu vực cửa hàng", Toast.LENGTH_SHORT).show();
-        }
+
     }
 
     // hien thi hinh anh
@@ -356,27 +341,27 @@ public class frm_attendance extends Fragment {
             btnUpdate.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    try{
+                    try {
                         // gen file sau khi chup
-                        File root  = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
-                        File file =  new File(root + "/img_request");
+                        File root = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
+                        File file = new File(root + "/img_request");
                         file.mkdirs();
-                        Random generation =  new Random();
+                        Random generation = new Random();
                         int n = 10000;
                         n = generation.nextInt(n);
-                        String stringFile = "Image_"+n+".png";
-                        File fileImg =  new File(file,stringFile);
-                        Log.d("file:"," "+fileImg);
-                        if(fileImg.exists())
+                        String stringFile = "Image_" + n + ".png";
+                        File fileImg = new File(file, stringFile);
+                        Log.d("file:", " " + fileImg);
+                        if (fileImg.exists())
                             fileImg.delete();
                         FileOutputStream out = new FileOutputStream(fileImg);
-                        bitmap.compress(Bitmap.CompressFormat.PNG,90,out);
-                        Log.d("file_img"," "+fileImg);
+                        bitmap.compress(Bitmap.CompressFormat.PNG, 90, out);
+                        Log.d("file_img", " " + fileImg);
                         uploadIMG(fileImg);
                         out.flush();
                         out.close();
-                    }catch (Exception ex){
-                        Log.d("exception   ",ex.toString());
+                    } catch (Exception ex) {
+                        Log.d("exception   ", ex.toString());
                         Toast.makeText(getContext(), "Chấm công thất bại, thử lại", Toast.LENGTH_SHORT).show();
                     }
 
@@ -384,7 +369,6 @@ public class frm_attendance extends Fragment {
                 }
             });
         }
-
         super.onActivityResult(requestCode, resultCode, data);
     }
 
@@ -394,100 +378,54 @@ public class frm_attendance extends Fragment {
     }
 
     private void uploadIMG(File file) {
-       MediaManager.get().upload(Uri.fromFile(file)).callback(new UploadCallback() {
-           @Override
-           public void onStart(String requestId) {
+        MediaManager.get().upload(Uri.fromFile(file)).callback(new UploadCallback() {
+            @Override
+            public void onStart(String requestId) {
 
-           }
+            }
 
-           @Override
-           public void onProgress(String requestId, long bytes, long totalBytes) {
+            @Override
+            public void onProgress(String requestId, long bytes, long totalBytes) {
 
-           }
+            }
 
-           @Override
-           public void onSuccess(String requestId, Map resultData) {
-               Log.d("Result",resultData.get("url").toString());
-               url = resultData.get("url").toString();
+            @Override
+            public void onSuccess(String requestId, Map resultData) {
+                Log.d("Result", resultData.get("url").toString());
+                url = resultData.get("url").toString();
+                Toast.makeText(getContext(), "Chấm công thành công", Toast.LENGTH_SHORT).show();
                 // post o day
-               demoCallAPI(url );
-               imgCamera.setVisibility(View.GONE);
-               btnUpdate.setVisibility(View.GONE);
-               txtTitle.setVisibility(View.GONE);
-               btnNFC.setVisibility(View.VISIBLE);
-               btnQRCode.setVisibility(View.VISIBLE);
-           }
+                imgCamera.setVisibility(View.GONE);
+                btnUpdate.setVisibility(View.GONE);
+                btnNFC.setVisibility(View.VISIBLE);
+                btnQRCode.setVisibility(View.VISIBLE);
+            }
 
-           @Override
-           public void onError(String requestId, ErrorInfo error) {
+            @Override
+            public void onError(String requestId, ErrorInfo error) {
 
-           }
+            }
 
-           @Override
-           public void onReschedule(String requestId, ErrorInfo error) {
+            @Override
+            public void onReschedule(String requestId, ErrorInfo error) {
 
-           }
-       }).dispatch();
+            }
+        }).dispatch();
     }
 
     private void configCloudinary() {
         config.put("cloud_name", "dnxe9l57i");
         config.put("api_key", "991189484643755");
         config.put("api_secret", "e6ZiAtks5BeldzKgTew3IqC8KHk");
-        MediaManager.init(getContext(), config);
-    }
-    // api here
-    private void demoCallAPI(String url) {
-
-        service_API requestInterface = new Retrofit.Builder()
-                .baseUrl(Base_Service)
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                .addConverterFactory(GsonConverterFactory.create())
-                .build().create(service_API.class);
-
-        new CompositeDisposable().add(requestInterface.postCheckIn(idNV,maCL,url)
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeOn(Schedulers.io())
-                .subscribe(this::handleResponse_checkIn, this::handleError_checkIn)
-        );
     }
 
-    private void handleResponse_checkIn(Number number) {
-        //API trả về dữ liệu thành công, thực hiện việc lấy data
-        Toast.makeText(getContext(), "Chấm công thành công", Toast.LENGTH_SHORT).show();
-        Log.d("size:"," "+number);
-    }
-
-    private void handleError_checkIn(Throwable error) {
-        Log.d("erro", error.toString());
-        Toast.makeText(getContext(), error.toString(), Toast.LENGTH_SHORT).show();
-        //khi gọi API KHÔNG THÀNH CÔNG thì thực hiện xử lý ở đây
-    }
-    private void demoCallAPI_checkOut() {
-
-        service_API requestInterface = new Retrofit.Builder()
-                .baseUrl(Base_Service)
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                .addConverterFactory(GsonConverterFactory.create())
-                .build().create(service_API.class);
-
-        new CompositeDisposable().add(requestInterface.postCheckOut(idNV,maCL)
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeOn(Schedulers.io())
-                .subscribe(this::handleResponse_checkOut, this::handleError_checkOut)
-        );
-    }
-
-    private void handleResponse_checkOut(Number number) {
-        //API trả về dữ liệu thành công, thực hiện việc lấy data
-        Toast.makeText(getContext(), "Chấm công thành công", Toast.LENGTH_SHORT).show();
-        Log.d("size:"," "+number);
-    }
-
-    private void handleError_checkOut(Throwable error) {
-        Log.d("erro", error.toString());
-        Toast.makeText(getContext(), error.toString(), Toast.LENGTH_SHORT).show();
-        //khi gọi API KHÔNG THÀNH CÔNG thì thực hiện xử lý ở đây
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        if (outState == null) {
+            MediaManager.init(getContext(), config);
+        } else {
+            super.onSaveInstanceState(outState);
+        }
     }
 
 }

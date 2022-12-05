@@ -37,12 +37,12 @@
             android:value="AIzaSyDNFzVPKrnxsl87gAwSoeg-Wtst0xjayQg" />
 
         <activity
-            android:name=".MainActivity"
+            android:name=".manhinhchoActivity"
             android:exported="false" >
 
         </activity>
         <activity
-            android:name=".manhinhchoActivity"
+            android:name=".LoginActivity"
             android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -56,7 +56,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".LoginActivity"
+            android:name=".MainActivity"
             android:exported="false" />
     </application>
 

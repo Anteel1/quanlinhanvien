@@ -63,11 +63,8 @@ public class LoginActivity extends AppCompatActivity {
 //                startActivity(intent);
 //                finish();
 //                getImei();
-
             }
         });
-
-
     }
 
 
@@ -85,7 +82,6 @@ public class LoginActivity extends AppCompatActivity {
     //kiểm tra không được bỏ trống thông tin đăng nhập
 //    public boolean kiemtra_email() {
 //        String email = edt_email.getText().toString();
-//
 //        //validate email
 //        if (!email.isEmpty()) {
 //            if (Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
@@ -99,7 +95,6 @@ public class LoginActivity extends AppCompatActivity {
 //        } else {
 //            return false;
 //        }
-//
 //    }
 //
 //    public boolean kiemtra_password() {
@@ -119,7 +114,6 @@ public class LoginActivity extends AppCompatActivity {
     //kiểm tra các edit text
 
     public void kiemtra() {
-
         String thongbao_email = "";
         String email = edt_email.getText().toString();
 
@@ -149,13 +143,11 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void demoCallAPI() {
-
         service_API requestInterface = new Retrofit.Builder()
                 .baseUrl(Base_Service)
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create())
                 .build().create(service_API.class);
-
         new CompositeDisposable().add(requestInterface.getModelAPI()
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
@@ -163,18 +155,19 @@ public class LoginActivity extends AppCompatActivity {
         );
     }
 
-     private void handleResponse(ArrayList<nhanvien> list1) {
+    private void handleResponse(ArrayList<nhanvien> list1) {
         //API trả về dữ liệu thành công, thực hiện việc lấy data
-         Toast.makeText(LoginActivity.this, "thành công", Toast.LENGTH_SHORT).show();
-         for (int i = 0; i < list1.size(); i++) {
+        Toast.makeText(LoginActivity.this, "thành công", Toast.LENGTH_SHORT).show();
+        for (int i = 0; i < list1.size(); i++) {
             if ((edt_email.getText().toString()).equals(list1.get(i).getTaiKhoan())) {
                 if ((edt_password.getText().toString()).equals(list1.get(i).getMatKhau())) {
                     Toast.makeText(LoginActivity.this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
                     progressBar.setVisibility(View.GONE);
                     intent = new Intent(LoginActivity.this, MainActivity.class);
                     Bundle bundle1 = new Bundle();
-                    int idNV = list1.get(i).getMaNV();
-                    bundle1.putInt("idNV",idNV);
+//                    int idNV = list1.get(i).getMaNV();
+//                    bundle1.putInt("idNV",idNV);
+                    bundle1.putSerializable("nv", list1.get(i));
                     intent.putExtras(bundle1);
                     startActivity(intent);
                     finish();
@@ -210,8 +203,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public String getImei() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q)
-        {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
             IMEINumber = Settings.Secure.getString(this.getContentResolver(), Settings.Secure.ANDROID_ID);
         } else {
             final TelephonyManager mTelephony = (TelephonyManager) this.getSystemService(Context.TELEPHONY_SERVICE);
@@ -221,12 +213,10 @@ public class LoginActivity extends AppCompatActivity {
                 }
             }
             assert mTelephony != null;
-            if (mTelephony.getDeviceId() != null)
-            {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
-                {
+            if (mTelephony.getDeviceId() != null) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                     IMEINumber = mTelephony.getImei();
-                }else {
+                } else {
                     IMEINumber = mTelephony.getDeviceId();
                 }
             } else {
@@ -236,5 +226,4 @@ public class LoginActivity extends AppCompatActivity {
         Log.d("deviceId", IMEINumber);
         return IMEINumber;
     }
-
 }

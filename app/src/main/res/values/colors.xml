@@ -10,6 +10,7 @@
     <color name="green">#008000</color>
     <color name="red">#FF0000</color>
     <color name ="statusbar">#73AB6B</color>
+    <color name ="statusbar2">#B173AB6B</color>
     <color name ="gray">#808080</color>
 
 </resources>

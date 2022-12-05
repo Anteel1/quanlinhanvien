@@ -1,5 +1,6 @@
 package com.example.quanlinhanvien.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -21,7 +22,8 @@ import java.util.Date;
 import java.util.Locale;
 
 public class frm_trangchu extends Fragment {
-    TextClock tc_gio, tc_ngay;
+    TextClock tc_gio;
+    TextView tv_ngay;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -31,10 +33,15 @@ public class frm_trangchu extends Fragment {
 //        gio.animate().translationY(-250).setDuration(800).setStartDelay(600).translationX(-90);
 
         tc_gio = view.findViewById(R.id.tc_gio);
-        tc_ngay = view.findViewById(R.id.tc_ngay);
+        tv_ngay = view.findViewById(R.id.tv_ngay);
+
+        Date date = Calendar.getInstance().getTime();
+        String[] date2 = String.valueOf(date).split(" ");
+
+        Log.d("TAG", "onCreateView: " + date);
 
         tc_gio.setFormat12Hour("hh:mm a");
-        tc_ngay.setFormat12Hour("EEE, MMM d");
+        tv_ngay.setText(date2[0] + " " + date2[1] + " " + date2[2]);
 
         return view;
     }

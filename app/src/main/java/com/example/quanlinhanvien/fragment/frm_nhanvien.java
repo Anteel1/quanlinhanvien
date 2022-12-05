@@ -4,6 +4,7 @@ import static com.example.quanlinhanvien.service.service_API.Base_Service;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -74,6 +75,7 @@ public class frm_nhanvien extends Fragment implements DatePickerDialog.OnDateSet
         list = new ArrayList<>();
         loaddata();
         demoCallAPI();
+
         return view;
     }
     private void loaddata(){

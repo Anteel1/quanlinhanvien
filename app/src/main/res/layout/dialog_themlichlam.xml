@@ -15,7 +15,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Thêm lịch làm"
+        android:text="Tạo lịch làm"
         android:textSize="26sp"
         android:layout_gravity="center"
         ></TextView>
@@ -135,7 +135,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:backgroundTint="#73AB6B"
-        android:text="Thêm"
+        android:text="Tạo"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:layout_gravity="center"

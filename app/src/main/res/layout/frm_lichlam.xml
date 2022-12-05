@@ -104,15 +104,24 @@
         android:layout_width="match_parent"
         android:layout_height="2dp"
         android:background="#80CAC3C3"/>
+
     <ListView
         android:id="@+id/listviewll"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
-    <Button
-        android:id="@+id/btnthemlichlam"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:backgroundTint="#73AB6B"
-        android:text="Thêm lịch làm"
-        ></Button>
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="bottom"
+        >
+        <Button
+            android:id="@+id/btnthemlichlam"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#73AB6B"
+            android:text="Thêm lịch làm"
+
+            ></Button>
+    </LinearLayout>
 </LinearLayout>

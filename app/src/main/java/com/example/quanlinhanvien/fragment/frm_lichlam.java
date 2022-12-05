@@ -52,20 +52,19 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 
 public class frm_lichlam extends Fragment {
-    Button btnBack, btnNext,btnthemlichlam,btnchonngay,btnthem;
-    ArrayList<lichlam> list;
-    ArrayList<nhanvien> listnv;
+    Button btnBack, btnNext, btnthemlichlam, btnchonngay, btnthem,btnthemcuoi,btnhuycuoi;
+    TextView txtnv,txtcalam,txtngaylam,txtgiovao,txtgiora;
+    ArrayList<lichlam> list,listll;
+    ArrayList<nhanvien> listnv =new ArrayList<>();
     ArrayList<Integer> listmanv;
     ArrayList<String> lichlams;
     ListView listviewll;
-    TextView tvMonth,txtshowngay,txtshowca;
+    TextView tvMonth, txtshowngay, txtshowca;
     Month thanght;
-    int idnv,manv,po;
+    int idnv, manv, macl=1;
     Switch switchst;
-    int yearn,monthn,dayn;
+    int yearn, monthn, dayn;
     Spinner spnchonten;
-
-
 
 
     public frm_lichlam(int idnv) {
@@ -84,14 +83,11 @@ public class frm_lichlam extends Fragment {
         listviewll = view.findViewById(R.id.listviewll);
         btnBack = view.findViewById(R.id.btnBack);
         btnNext = view.findViewById(R.id.btnNext);
-        btnthemlichlam= view.findViewById(R.id.btnthemlichlam);
+        btnthemlichlam = view.findViewById(R.id.btnthemlichlam);
         switchst = view.findViewById(R.id.switchst);
-        if (idnv!=8){  btnthemlichlam.setVisibility(View.GONE); }
-
-
-
-
-
+        if (idnv != 8) {
+            btnthemlichlam.setVisibility(View.GONE);
+        }
 
 
         list = new ArrayList<>();
@@ -170,38 +166,30 @@ public class frm_lichlam extends Fragment {
 
     }
 
-    private void openDialog(){
+    private void openDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        LayoutInflater inflater1 =getActivity().getLayoutInflater();
-        View v2 =inflater1.inflate(R.layout.dialog_themlichlam,null);
+        LayoutInflater inflater1 = getActivity().getLayoutInflater();
+        View v2 = inflater1.inflate(R.layout.dialog_themlichlam, null);
         builder.setView(v2);
-        btnchonngay=v2.findViewById(R.id.btnchonngay);
-        txtshowngay=v2.findViewById(R.id.txtshowngay);
-        switchst=v2.findViewById(R.id.switchst);
-        txtshowca=v2.findViewById(R.id.txtshowca);
-        spnchonten=v2.findViewById(R.id.spnchonten);
+        btnchonngay = v2.findViewById(R.id.btnchonngay);
+        txtshowngay = v2.findViewById(R.id.txtshowngay);
+        switchst = v2.findViewById(R.id.switchst);
+        txtshowca = v2.findViewById(R.id.txtshowca);
+        spnchonten = v2.findViewById(R.id.spnchonten);
 
-         int calam = 1;
+        int calam = 1;
         final Calendar c = Calendar.getInstance();
         int year = c.get(Calendar.YEAR);
         int month = c.get(Calendar.MONTH);
         int day = c.get(Calendar.DAY_OF_MONTH);
-        txtshowngay.setText(day + "-" + (month+1) + "-" + year);
+        txtshowngay.setText(day + "-" + (month + 1) + "-" + year);
         btnthem = v2.findViewById(R.id.btnthem);
         demoCallAPINV();
-
-
-
-
-
-
-        switchst.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        switchst.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+            public void onClick(View v) {
                 txtshowca.setText(
-                        (switchst.isChecked() ? "Ca Tối" : "Ca sáng"));
-            //    boolean val =   remember switchst.isChecked();
-
+                        (switchst.isChecked() ? "Ca tối" : "Ca sáng"));
             }
         });
 
@@ -211,41 +199,40 @@ public class frm_lichlam extends Fragment {
                 DatePickerDialog datePickerDialog = new DatePickerDialog(getContext(), new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                        txtshowngay.setText(dayOfMonth + "-" + (month+1) + "-" + year);
-                        dayn= dayOfMonth;
-                        monthn = month+1;
-                        yearn=year;
+                        txtshowngay.setText(dayOfMonth + "-" + (month + 1) + "-" + year);
+                        dayn = dayOfMonth;
+                        monthn = month + 1;
+                        yearn = year;
                     }
-                },year,month,day);
+                }, year, month, day);
                 datePickerDialog.show();
             }
         });
         btnthem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String date=yearn+"-"+monthn+"-"+dayn;
-                Toast.makeText(getContext(), ""+date, Toast.LENGTH_SHORT).show();
-                demoAddAPI(manv,1,date);
+              //clik1
+                String date = yearn + "-" + monthn + "-" + dayn;
                 demoCallAPINV();
+                demoAddAPI(manv, macl, date);
+                Toast.makeText(getContext(),  manv+""+macl+""+date, Toast.LENGTH_SHORT).show();
+                switchst.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                    @Override
+                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                        if (isChecked) {
+                            macl = 2;
+                        } else macl = 1;
+                    }
+                });
 
 
-//                if(spnchonten.getSelectedItem().equals( listnv.get(i).getTenNV()))  {
-//                    manv=listnv.get(i).getMaNV();
-//                }
-
-
-//
-//                if ( ){
-//                    calam= 1;
-//                }
-//                else {
-//                    calam =2;}
             }
         });
         Dialog dialog = builder.create();
         dialog.show();
 
     }
+
     private void demoAddAPI(int idNV, int maCL, String ngaylam) {
 
         service_API requestInterface = new Retrofit.Builder()
@@ -254,7 +241,7 @@ public class frm_lichlam extends Fragment {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build().create(service_API.class);
 
-        new CompositeDisposable().add(requestInterface.addLichlamnv(idNV, maCL,ngaylam)
+        new CompositeDisposable().add(requestInterface.addLichlamnv(idNV, maCL, ngaylam)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe(this::handleResponseadd, this::handleErroradd)
@@ -271,6 +258,7 @@ public class frm_lichlam extends Fragment {
         Log.d("TAG", "loi2_________________");
         //khi gọi API KHÔNG THÀNH CÔNG thì thực hiện xử lý ở đây
     }
+
     private void demoCallAPINV() {
 
         service_API requestInterface = new Retrofit.Builder()
@@ -289,17 +277,20 @@ public class frm_lichlam extends Fragment {
     private void handleResponseNV(ArrayList<nhanvien> list1) {
         //API trả về dữ liệu thành công, thực hiện việc lấy data
         lichlams = new ArrayList<String>();
-        for(int i =0; i <list1.size(); i++){
+        for (int i = 0; i < list1.size(); i++) {
             lichlams.add(list1.get(i).getTenNV());
-         //   listmanv.add(list1.get(i).getMaNV());
+          //  listnv.add(list1.get(i));
+            //   listmanv.add(list1.get(i).getMaNV());
 
-         //   listnv.add(list1.get(i));
+            //   listnv.add(list1.get(i));
         }
         spnchonten.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                manv=list1.get(position).getMaNV();
+                manv = list1.get(position).getMaNV();
+
             }
+
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
 
@@ -307,9 +298,8 @@ public class frm_lichlam extends Fragment {
         });
 
 
-        ArrayAdapter arrayAdapter = new ArrayAdapter(getContext(), androidx.appcompat.R.layout.support_simple_spinner_dropdown_item,lichlams);
+        ArrayAdapter arrayAdapter = new ArrayAdapter(getContext(), androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, lichlams);
         spnchonten.setAdapter(arrayAdapter);
-
 
 
     }
@@ -319,10 +309,71 @@ public class frm_lichlam extends Fragment {
         Toast.makeText(getContext(), error.toString(), Toast.LENGTH_SHORT).show();
         //khi gọi API KHÔNG THÀNH CÔNG thì thực hiện xử lý ở đây
     }
+    // dialog để thêmlichj
+//    private void openDialogthemll() {
+//        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+//        LayoutInflater inflater1 = getActivity().getLayoutInflater();
+//        View v2 = inflater1.inflate(R.layout.dialog_lichlam, null);
+//        builder.setView(v2);
+//        Dialog dialog = builder.create();
+//        dialog.show();
+//        txtnv = v2.findViewById(R.id.txtnv);
+//        txtcalam = v2.findViewById(R.id.txtcalam);
+//        txtngaylam = v2.findViewById(R.id.txtngaylam);
+//        txtgiovao = v2.findViewById(R.id.txtgiovao);
+//        txtgiora = v2.findViewById(R.id.txtgiora);
+//        btnthemcuoi=v2.findViewById(R.id.btnthemcuoi);
+//        btnhuycuoi=v2.findViewById(R.id.btnhuycuoi);
+//        txtngaylam.setText(yearn + "-" + monthn + "-" + dayn);
+//        if (macl==1){
+//            txtcalam.setText("Ca sáng");
+//            txtgiovao.setText("08:00:");
+//            txtgiora.setText("15:00");
+//        }
+//        else {  txtcalam.setText("Ca tối");
+//            txtgiovao.setText("15:00:");
+//            txtgiora.setText("22:00");
+//        }
+//
+//
+//        btnthemcuoi.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                String date = yearn + "-" + monthn + "-" + dayn;
+//                demoCallAPINV();
+//                demoAddAPI(manv, macl, date);
+//                spnchonten.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+//                    @Override
+//                    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+//                        txtnv.setText(listnv.get(position).getTenNV());
+//                    }
+//
+//                    @Override
+//                    public void onNothingSelected(AdapterView<?> parent) {
+//
+//                    }
+//                });
+//                Toast.makeText(getContext(),  "Thêm thành công", Toast.LENGTH_SHORT).show();
+//                switchst.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+//                    @Override
+//                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+//                        if (isChecked) {
+//                            macl = 2;
+//                        } else macl = 1;
+//                    }
+//                });
+//            }
+//        });
+//        btnhuycuoi.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                openDialog();
+//            }
+//        });
+//    }
 
 
-
-    }
+}
 
 
 

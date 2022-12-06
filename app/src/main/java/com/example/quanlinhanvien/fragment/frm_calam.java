@@ -46,7 +46,7 @@ public class frm_calam extends Fragment {
         socl = view.findViewById(R.id.txtsocl);
         recyclerView = view.findViewById(R.id.rcv_calam);
         list = new ArrayList<>();
-//        demoCallAPI();
+        demoCallAPI();
 
 
         return view;

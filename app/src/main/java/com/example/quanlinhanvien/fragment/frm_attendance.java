@@ -70,8 +70,8 @@ public class frm_attendance extends Fragment {
     TextView txtTitle, txtResutl;
     ArrayList<Location> list;
     TextClock tc_gio;
-    TextView tc_ngay;
-    LinearLayout layout_icon;
+    TextView tc_ngay,txtNFC;
+    LinearLayout layout_icon,layoutNFC;
     ImageView imgCheckIn, imgCheckOut;
     FrameLayout layout_scan;
     ArrayList<calam> listCalam;
@@ -80,7 +80,9 @@ public class frm_attendance extends Fragment {
     int gio, phut;
     int maCL;
     int check;
+    String dataNFC;
     private HashMap config = new HashMap();
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -96,7 +98,7 @@ public class frm_attendance extends Fragment {
         btnQRCode = v.findViewById(R.id.btnQR);
         btnUpdate = v.findViewById(R.id.btnUpdateIMG);
         imgCamera = v.findViewById(R.id.imgCamera);
-
+        layoutNFC = v.findViewById(R.id.layout_readNFC);
 
 
         tc_gio.setFormat12Hour("hh:mm a");
@@ -118,6 +120,8 @@ public class frm_attendance extends Fragment {
         btnNFC.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                layoutNFC.setVisibility(View.VISIBLE);
+                layout_icon.setVisibility(View.VISIBLE);
                 btnNFC.setVisibility(View.GONE);
                 btnQRCode.setVisibility(View.GONE);
                 check= 0;
@@ -129,13 +133,14 @@ public class frm_attendance extends Fragment {
                 // get localtime
                 gio = LocalDateTime.now().getHour();
                 phut = LocalDateTime.now().getMinute();
-
                 layout_icon.setVisibility(View.GONE);
                 txtTitle.setVisibility(View.VISIBLE);
                 txtTitle.setText("Check in");
-                layout_scan.setVisibility(View.VISIBLE);
                 if(check == 1){
+                    layout_scan.setVisibility(View.VISIBLE);
                     codeScanner(1);
+                }else{
+                    getDATANFC(1);
                 }
             }
         });
@@ -149,9 +154,11 @@ public class frm_attendance extends Fragment {
                 layout_icon.setVisibility(View.GONE);
                 txtTitle.setVisibility(View.VISIBLE);
                 txtTitle.setText("Check out");
-                layout_scan.setVisibility(View.VISIBLE);
                 if(check ==1){
+                    layout_scan.setVisibility(View.VISIBLE);
                     codeScanner(2);
+                }else{
+                    getDATANFC(2);
                 }
             }
         });
@@ -165,6 +172,25 @@ public class frm_attendance extends Fragment {
         configCloudinary();
 
         return v;
+    }
+
+    private void getDATANFC(int check) {
+
+        if (getActivity() != null && getActivity().getIntent().hasExtra("dataNFC")) {
+            dataNFC = getActivity().getIntent().getStringExtra("dataNFC");
+            if(dataNFC != null){
+                list.clear();
+                list.add(0,new Location(0,"City food store 1",dataNFC));
+                list.add(1,new Location(1,"Nhà riêng","10.7612992,106.5872721"));
+                if(check ==1){
+                    checkIn();
+                }else{
+                    checkOut();
+                }
+            }
+        }else{
+            Toast.makeText(getContext(), "Failed !", Toast.LENGTH_SHORT).show();
+        }
     }
 
 //    @Override
@@ -312,6 +338,7 @@ public class frm_attendance extends Fragment {
                 if (Integer.parseInt(calam.getGioBD().substring(0,2)) - 1 <= gio && Integer.parseInt(calam.getGioKT().substring(0,2)) - 1 >= gio) {
                     maCL = calam.getMaCL();
                     layout_scan.setVisibility(View.GONE);
+                    layoutNFC.setVisibility(View.GONE);
                     ok = 2;
                     Toast.makeText(getContext(), "Ok check in success", Toast.LENGTH_SHORT).show();
                     break;
@@ -489,5 +516,4 @@ public class frm_attendance extends Fragment {
         Toast.makeText(getContext(), error.toString(), Toast.LENGTH_SHORT).show();
         //khi gọi API KHÔNG THÀNH CÔNG thì thực hiện xử lý ở đây
     }
-
 }

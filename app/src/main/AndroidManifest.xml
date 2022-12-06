@@ -4,6 +4,7 @@
     package="com.example.quanlinhanvien">
 
     <uses-permission android:name="android.permission.NFC"/>
+    <uses-feature android:name="android.hardware.nfc" />
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.INTERNET"/>
@@ -35,11 +36,21 @@
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyDNFzVPKrnxsl87gAwSoeg-Wtst0xjayQg" />
-
         <activity
             android:name=".MainActivity"
             android:exported="false" >
+        <intent-filter>
+            <action android:name="android.nfc.action.NDEF_DISCOVERED"/>
 
+            <category android:name="android.itent.category.DEFAULT"/>
+
+            <action android:name="android.nfc.action.TAG_DISCOVERED" />
+            <data android:mimeType="text/plain"/>
+        </intent-filter>
+            <meta-data
+                android:name="android.nfc.action.TECH_DISCOVERED"
+                android:resource="@xml/nfc"
+                />
         </activity>
         <activity
             android:name=".manhinhchoActivity"
@@ -47,11 +58,6 @@
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
-                <action android:name="android.nfc.action.NDEF_DISCOVERED"/>
-
-                <category android:name="android.itent.category.DEFAULT"/>
-
-                <data android:mimeType="text/plain"/>
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

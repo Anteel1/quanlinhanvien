@@ -10,7 +10,7 @@
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_gravity="center"
-        android:src="@drawable/user"></ImageView>
+        android:src="@drawable/user"/>
 
     <TextView
         android:layout_width="190dp"
@@ -19,7 +19,7 @@
         android:layout_gravity="center"
         android:text="Create Profile"
         android:id="@+id/txtTitle"
-        android:textSize="18sp"></TextView>
+        android:textSize="18sp"/>
 
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
@@ -72,11 +72,46 @@
             android:id="@+id/txtPassword"
             />
     </com.google.android.material.textfield.TextInputLayout>
+<!--    <com.google.android.material.textfield.TextInputLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_margin="2dp"-->
+<!--        android:hint="Created date"-->
+<!--        android:paddingStart="10dp"-->
+<!--        app:boxStrokeColor="@color/statusbar"-->
+<!--        app:hintTextColor="@color/statusbar"-->
+<!--        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"-->
+
+<!--        >-->
+<!--        <com.google.android.material.textfield.TextInputEditText-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:focusable="false"-->
+<!--            android:id="@+id/txtCreateDate"-->
+<!--            />-->
+<!--    </com.google.android.material.textfield.TextInputLayout>-->
+<!--    <com.google.android.material.textfield.TextInputLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_margin="2dp"-->
+<!--        android:hint="Phone Number"-->
+<!--        android:paddingStart="10dp"-->
+<!--        app:boxStrokeColor="@color/statusbar"-->
+<!--        app:hintTextColor="@color/statusbar"-->
+<!--        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"-->
+
+<!--        >-->
+<!--        <com.google.android.material.textfield.TextInputEditText-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:id="@+id/txtPhoneNumber"-->
+<!--            />-->
+<!--    </com.google.android.material.textfield.TextInputLayout>-->
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="2dp"
-        android:hint="Created date"
+        android:hint="Imei"
         android:paddingStart="10dp"
         app:boxStrokeColor="@color/statusbar"
         app:hintTextColor="@color/statusbar"
@@ -86,15 +121,13 @@
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:focusable="false"
-            android:id="@+id/txtCreateDate"
+            android:id="@+id/txtImei"
             />
     </com.google.android.material.textfield.TextInputLayout>
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="2dp"
-        android:hint="Phone Number"
+        android:hint="Mã nhân viên"
         android:paddingStart="10dp"
         app:boxStrokeColor="@color/statusbar"
         app:hintTextColor="@color/statusbar"
@@ -104,14 +137,13 @@
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/txtPhoneNumber"
+            android:id="@+id/txtMaNV"
             />
     </com.google.android.material.textfield.TextInputLayout>
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="2dp"
-        android:hint="Address"
+        android:hint="Mã công việc"
         android:paddingStart="10dp"
         app:boxStrokeColor="@color/statusbar"
         app:hintTextColor="@color/statusbar"
@@ -121,39 +153,7 @@
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/txtAddress"
-            />
-    </com.google.android.material.textfield.TextInputLayout>
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Store ID"
-        android:paddingStart="10dp"
-        app:boxStrokeColor="@color/statusbar"
-        app:hintTextColor="@color/statusbar"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-
-        >
-        <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/txtStore"
-            />
-    </com.google.android.material.textfield.TextInputLayout>
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Duty ID"
-        android:paddingStart="10dp"
-        app:boxStrokeColor="@color/statusbar"
-        app:hintTextColor="@color/statusbar"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-
-        >
-        <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/txtDutyID"
+            android:id="@+id/txtMaCV"
             />
     </com.google.android.material.textfield.TextInputLayout>
     <Button
@@ -166,6 +166,6 @@
         android:backgroundTint="#73AB6B"
         android:paddingVertical="14dp"
         android:textAllCaps="false"
-        android:text="Sign up"></Button>
+        android:text="Sign up"/>
 
 </LinearLayout>

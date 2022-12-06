@@ -71,15 +71,6 @@ public class LoginActivity extends AppCompatActivity {
                         demoCallAPI();
                     }
                 }.start();
-
-//                intent =new Intent(LoginActivity.this, MainActivity.class);
-//                startActivity(intent);
-//                finish();
-//                getImei();
-
-
-//                        progressBar.setVisibility(View.GONE);
-
             }
         });
 
@@ -98,41 +89,6 @@ public class LoginActivity extends AppCompatActivity {
         progressBar = findViewById(R.id.prb_login);
     }
 
-    //kiểm tra không được bỏ trống thông tin đăng nhập
-//    public boolean kiemtra_email() {
-//        String email = edt_email.getText().toString();
-//
-//        //validate email
-//        if (!email.isEmpty()) {
-//            if (Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-//                bundle = new Bundle();
-//                bundle.putString("email", email);
-//                intent.putExtras(bundle);
-//                return true;
-//            } else {
-//                return false;
-//            }
-//        } else {
-//            return false;
-//        }
-//
-//    }
-//
-//    public boolean kiemtra_password() {
-//        //validate password
-//        String password = edt_password.getText().toString();
-//
-//        if (!password.isEmpty()) {
-//            bundle = new Bundle();
-//            bundle.putString("password", password);
-//            intent.putExtras(bundle);
-//            return true;
-//        }else{
-//            return false;
-//        }
-//    }
-
-    //kiểm tra các edit text
 
     public void kiemtra() {
         String thongbao_email = "";
@@ -187,14 +143,20 @@ public class LoginActivity extends AppCompatActivity {
         for (int i = 0; i < list1.size(); i++) {
             if ((edt_email.getText().toString()).equals(list1.get(i).getTaiKhoan())) {
                 if ((edt_password.getText().toString()).equals(list1.get(i).getMatKhau())) {
-                    demoCallAPIpostImei(list1.get(i).getMaNV(), imei);
-                    Toast.makeText(LoginActivity.this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
-                    intent = new Intent(LoginActivity.this, MainActivity.class);
-                    Bundle bundle = new Bundle();
-                    bundle.putInt("idNV", list1.get(i).getMaNV());
-                    intent.putExtras(bundle);
-                    startActivity(intent);
-                    finish();
+                    if(checkiemei(list1.get(i).getMaNV(), list1.get(i).getImei())){
+                        Toast.makeText(LoginActivity.this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
+                        intent = new Intent(LoginActivity.this, MainActivity.class);
+                        Bundle bundle = new Bundle();
+                        bundle.putInt("idNV", list1.get(i).getMaNV());
+                        intent.putExtras(bundle);
+                        startActivity(intent);
+                        finish();
+                        break;
+                    }else{
+                        Toast.makeText(LoginActivity.this, "Chưa đúng Imei", Toast.LENGTH_SHORT).show();
+                        break;
+                    }
+
                 } else {
                     txtLayoutPassword.setHelperText("Sai mật khẩu");
                     progressBar.setVisibility(View.GONE);
@@ -259,6 +221,17 @@ public class LoginActivity extends AppCompatActivity {
         Toast.makeText(this, "post imei thành công", Toast.LENGTH_SHORT).show();
     }
     private void handleErrorImei(Throwable throwable) {
+    }
+
+    public boolean checkiemei(int id, String imei1){
+        if (imei1 == null || imei1.isEmpty()) {
+            demoCallAPIpostImei(id, imei);
+            return true;
+        } else if(imei1.equals(imei)){
+            return true;
+        }else{
+            return false;
+        }
     }
 
 }

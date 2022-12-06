@@ -25,7 +25,7 @@ public interface service_API {
     Observable<Number> updateImei(@Query("idNV") int idNV, @Query("Imei") String Imei);
 
 
-    @POST("api/update/_NV/_QL")
+    @POST("api/update_NV_QL")
     Observable<Number> updateNV(@Query("maNV") int maNV, @Query("tenVN") String tenNV, @Query("TaiKhoan") String taikhoan,
                                 @Query("MatKhau") String MatKhau, @Query("Imei") String Imei, @Query("MaCV") int MaCV);
 

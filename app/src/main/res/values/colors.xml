@@ -11,5 +11,7 @@
     <color name="red">#FF0000</color>
     <color name ="statusbar">#73AB6B</color>
     <color name ="gray">#808080</color>
+    <color name ="sang">#F8F693</color>
+    <color name ="toi">#374777</color>
 
 </resources>

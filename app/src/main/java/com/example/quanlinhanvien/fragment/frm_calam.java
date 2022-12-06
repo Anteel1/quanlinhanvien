@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -36,12 +37,13 @@ public class frm_calam extends Fragment {
     ArrayList<calam> list;
     RecyclerView recyclerView;
     adapter_calam adapter_calam;
+    TextView socl;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.frm_calam, container, false);
-
+        socl = view.findViewById(R.id.txtsocl);
         recyclerView = view.findViewById(R.id.rcv_calam);
         list = new ArrayList<>();
 //        demoCallAPI();
@@ -70,7 +72,9 @@ public class frm_calam extends Fragment {
 
         for (int i = 0; i < list_calam.size(); i++) {
             list.add(list_calam.get(i));
+
         }
+        socl.setText(""+list_calam.size());
         loaddata(list);
 
 

@@ -53,7 +53,7 @@
         android:layout_weight="1"
         android:text="09:55"
         android:textColor="#D12C2C2C"
-        android:textSize="16sp" />
+        android:textSize="14sp" />
 
     <View
         android:layout_width="2dp"
@@ -71,7 +71,7 @@
 
         android:text="13:55"
         android:textColor="#D12C2C2C"
-        android:textSize="16sp" />
+        android:textSize="14sp" />
 
 
 </LinearLayout>

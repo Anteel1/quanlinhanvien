@@ -29,9 +29,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Quanlinhanvien"
         tools:targetApi="31">
-        <activity
-            android:name=".demoActivity"
-            android:exported="false" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"

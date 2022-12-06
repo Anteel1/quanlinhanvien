@@ -32,7 +32,6 @@ public class frm_store extends Fragment {
                     case 0: tab.setText("Info");break;
                     case 1: tab.setText("QR");break;
                     case 2 :tab.setText("Map");break;
-                    case 3 :tab.setText("NFC");break;
                 }
             }
         }).attach();

@@ -156,5 +156,13 @@
         android:layout_height="wrap_content"
         android:layout_margin="14dp"
         android:text="Salary : 2000000 VND" />
-
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <com.github.mikephil.charting.charts.PieChart
+            android:id="@+id/piechart"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:layout_marginTop="8dp" />
+    </RelativeLayout>
 </LinearLayout>

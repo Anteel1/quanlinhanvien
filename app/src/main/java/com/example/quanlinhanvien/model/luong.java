@@ -1,27 +1,17 @@
 package com.example.quanlinhanvien.model;
 
 public class luong {
-    float tonggiolam;
-    float tongLuong;
+    public Double tienLuong;
 
-    public luong(float tonggiolam, float tongLuong) {
-        this.tonggiolam = tonggiolam;
-        this.tongLuong = tongLuong;
+    public luong(Double tienLuong) {
+        this.tienLuong = tienLuong;
     }
 
-    public float getTonggiolam() {
-        return tonggiolam;
+    public Double getTienLuong() {
+        return tienLuong;
     }
 
-    public void setTonggiolam(float tonggiolam) {
-        this.tonggiolam = tonggiolam;
-    }
-
-    public float getTongLuong() {
-        return tongLuong;
-    }
-
-    public void setTongLuong(float tongLuong) {
-        this.tongLuong = tongLuong;
+    public void setTongLuong(Double tienLuong) {
+        this.tienLuong = tienLuong;
     }
 }

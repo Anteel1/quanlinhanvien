@@ -9,6 +9,7 @@
     app:cardCornerRadius="12dp">
 
     <TextView
+
         android:id="@+id/item_date"
         style="@style/textLight"
         android:layout_width="match_parent"

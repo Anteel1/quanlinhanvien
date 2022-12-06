@@ -21,7 +21,6 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -31,12 +30,9 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import com.example.quanlinhanvien.R;
-import com.example.quanlinhanvien.adapter.adapter_store;
-import com.example.quanlinhanvien.model.cuahang;
 
 import java.io.IOException;
 import java.io.OutputStream;
-import java.util.ArrayList;
 import java.util.Objects;
 
 import androidmads.library.qrgenearator.QRGContents;
@@ -46,41 +42,19 @@ import androidmads.library.qrgenearator.QRGSaver;
 
 public class frm_genQRcode extends Fragment {
     private Bitmap bitmap;
-    ArrayList<cuahang> list;
-    adapter_store spnAdapter;
     String location;
-    Spinner edtInput;
+
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
                              @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.frm_genqrcode_layout, container, false);
+             View view = inflater.inflate(R.layout.frm_genqrcode_layout, container, false);
 
-        ImageView ivQRCode = view.findViewById(R.id.ivQRCode);
-        Button btnGenerate = view.findViewById(R.id.btnGenerate);
-        Button btnSave = view.findViewById(R.id.btnSave);
-        list = new ArrayList<>();
-        location = "10.8525148,106.6249008";
-        //10.8525148,106.6249008
-//        edtInput.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-//            @Override
-//            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-//                location = list.get(position).getDiaChi();
-//            }
-//
-//            @Override
-//            public void onNothingSelected(AdapterView<?> parent) {
-//
-//            }
-//        });
-//        btnGenerate.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//
-//            }
-//        }); {
-        //gen code
+            ImageView ivQRCode = view.findViewById(R.id.ivQRCode);
+            Button btnSave = view.findViewById(R.id.btnSave);
+            location = "10.8525148,106.6249008";
+             //gen code
             WindowManager manager = (WindowManager) getActivity().getSystemService(WINDOW_SERVICE);
             Display display = manager.getDefaultDisplay();
             Point point = new Point();
@@ -134,37 +108,4 @@ public class frm_genQRcode extends Fragment {
         });
         return view;
     }
-//    private void demoCallAPI() {
-//
-//        service_API requestInterface = new Retrofit.Builder()
-//                .baseUrl(Base_Service)
-//                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-//                .addConverterFactory(GsonConverterFactory.create())
-//                .build().create(service_API.class);
-//
-//        new CompositeDisposable().add(requestInterface.getModelCHAPI()
-//                .observeOn(AndroidSchedulers.mainThread())
-//                .subscribeOn(Schedulers.io())
-//                .subscribe(this::handleResponse, this::handleError)
-//        );
-//    }
-//
-//    private void handleResponse(ArrayList<cuahang> list1) {
-//        //API trả về dữ liệu thành công, thực hiện việc lấy data
-//        for(int i =0; i <list1.size(); i++){
-//            list.add(i,list1.get(i));
-//        }
-//        spnAdapter.notifyDataSetChanged();
-//    }
-//
-//    private void handleError(Throwable error) {
-//        Log.d("erro", error.toString());
-//        Toast.makeText(getContext(), error.toString(), Toast.LENGTH_SHORT).show();
-//        //khi gọi API KHÔNG THÀNH CÔNG thì thực hiện xử lý ở đây
-//    }
-//    private void loaddata(){
-//        spnAdapter = new adapter_store(getContext(),list);
-//        edtInput.setAdapter(spnAdapter);
-//    }
-
 }

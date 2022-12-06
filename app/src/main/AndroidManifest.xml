@@ -3,6 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.quanlinhanvien">
 
+    <uses-permission android:name="android.permission.NFC"/>
+
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
@@ -32,7 +34,7 @@
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyAlM-Lha2LyW8c1EDKiWpJYYzZ4qL-U5tM" />
+            android:value="AIzaSyDNFzVPKrnxsl87gAwSoeg-Wtst0xjayQg" />
 
         <activity
             android:name=".manhinhchoActivity"
@@ -44,6 +46,12 @@
             android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
+                <action android:name="android.nfc.action.NDEF_DISCOVERED"/>
+
+                <category android:name="android.itent.category.DEFAULT"/>
+
+                <data android:mimeType="text/plain"/>
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

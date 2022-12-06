@@ -22,13 +22,12 @@ import java.util.ArrayList;
 
 public class adapter_calendar extends RecyclerView.Adapter<adapter_calendar.ViewHolder> {
     Context context;
-    ArrayList<String> dayOfMonth;
-    ArrayList<ngaylam> dayCompare;
-
-    public adapter_calendar(Context context, ArrayList<String> dayOfMonth, ArrayList<ngaylam> dayCompare) {
-        this.context = context;
-        this.dayOfMonth = dayOfMonth;
-        this.dayCompare = dayCompare;
+    ArrayList<String>dayOfMonth;
+    ArrayList<ngaylam>listNgayLam;
+    public adapter_calendar(Context context,ArrayList<String>dayOfMonth,ArrayList<ngaylam>listNgayLam){
+        this.context=context;
+        this.dayOfMonth=dayOfMonth;
+        this.listNgayLam = listNgayLam;
     }
 
     @NonNull

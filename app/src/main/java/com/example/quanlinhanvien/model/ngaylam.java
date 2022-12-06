@@ -4,7 +4,7 @@ public class ngaylam {
     String ngaylam;
     int trangThai;
 
-    public ngaylam(String ngaylam, int sccl) {
+    public ngaylam(String ngaylam, int trangthai) {
         this.ngaylam = ngaylam;
         this.trangThai = trangThai;
     }

@@ -49,7 +49,7 @@ public class frm_thongke extends Fragment {
     //    Button btnback, btnnext;
     ImageView imgBack, imgNext;
     TextView txtSalary;
-    ArrayList<String> dayCompare;
+    ArrayList<ngaylam> dayCompare;
     int idNV;
 
     @Nullable

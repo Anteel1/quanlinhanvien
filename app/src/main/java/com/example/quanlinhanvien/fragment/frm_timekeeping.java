@@ -3,10 +3,19 @@ package com.example.quanlinhanvien.fragment;
 import static com.example.quanlinhanvien.service.service_API.Base_Service;
 
 import android.app.Activity;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.nfc.NfcAdapter;
+import android.nfc.NfcManager;
+import android.nfc.tech.IsoDep;
+import android.nfc.tech.NfcA;
+import android.nfc.tech.NfcB;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
@@ -49,7 +58,6 @@ import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
@@ -79,6 +87,12 @@ public class frm_timekeeping extends Fragment {
     boolean tregio;
     private HashMap config = new HashMap();
 
+    // nfc
+    private static Class targetActivity = null;
+    private NfcAdapter nfcAdapter = null;
+    private IntentFilter[] intentFiltersArray = null;
+    private String[][] techListsArray = null;
+    private PendingIntent pendingIntent = null;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -97,6 +111,8 @@ public class frm_timekeeping extends Fragment {
 
         demoCallAPI_calam();
         configCloudinary();
+        nfcInit();
+
         btnQRCode.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -119,14 +135,6 @@ public class frm_timekeeping extends Fragment {
         imgCheckIn = v.findViewById(R.id.btnCheckin);
         imgCheckOut = v.findViewById(R.id.btnCheckOut);
 
-        Calendar calendar = Calendar.getInstance();
-        int hour = calendar.get(Calendar.HOUR_OF_DAY);
-        int mitune = calendar.get(Calendar.MINUTE);
-
-//        if (hour == 20 && mitune >= 40) {
-//            imgCheckIn.setEnabled(false);
-//            imgCheckIn.setColorFilter(Color.parseColor("#10A19D"));
-//        }
 
         imgCheckIn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -171,13 +179,31 @@ public class frm_timekeeping extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
+        Intent intent = new Intent();
+        intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.S) {
+            PendingIntent nfcPendingIntent = PendingIntent.getActivity(getContext(), 0, intent, PendingIntent.FLAG_MUTABLE);
+        }else {
+            PendingIntent nfcPendingIntent = PendingIntent.getActivity(getContext(), 0, intent, 0);
+        }
+        if (nfcAdapter != null) {
+            nfcAdapter.enableForegroundDispatch(getActivity(), pendingIntent, intentFiltersArray, techListsArray);
+        }
+
         mCodeScanner.startPreview();
     }
 
     @Override
     public void onPause() {
-        mCodeScanner.releaseResources();
         super.onPause();
+        mCodeScanner.releaseResources();
+        if (nfcAdapter != null) {
+            try {
+                nfcAdapter.disableForegroundDispatch(getActivity());
+            } catch (IllegalStateException ex) {
+                Log.e("ATHTAG", "Error disabling NFC foreground dispatch", ex);
+            }
+        }
     }
 
     private void codeScanner() {
@@ -426,6 +452,30 @@ public class frm_timekeeping extends Fragment {
         } else {
             super.onSaveInstanceState(outState);
         }
+    }
+    private void nfcInit(){
+        NfcManager nfcManager = (NfcManager) getActivity().getSystemService(Context.NFC_SERVICE);
+//        nfcAdapter = nfcManager.getDefaultAdapter();
+        nfcAdapter = NfcAdapter.getDefaultAdapter(getContext());
+
+
+        if (nfcManager != null) {
+            System.out.println("NFC Manager ready ...");
+        }
+
+        if (nfcAdapter != null) {
+            System.out.println("NFC Adapter ready ...");
+        }
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            pendingIntent = PendingIntent.getActivity(
+                    getContext(), 0, new Intent(getContext(), getClass()).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP), PendingIntent.FLAG_MUTABLE);
+        }else {
+            pendingIntent = PendingIntent.getActivity(
+                    getContext(), 0, new Intent(getContext(), getClass()).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP), 0);
+        }
+        intentFiltersArray = new IntentFilter[]{new IntentFilter(NfcAdapter.ACTION_TECH_DISCOVERED)};
+        techListsArray = new String[][]{new String[]{NfcA.class.getName()}, new String[]{NfcB.class.getName()}, new String[]{IsoDep.class.getName()}};
     }
 
 }

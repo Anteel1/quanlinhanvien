@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginLeft="12dp"
-    app:cardCornerRadius="12dp"
-    android:layout_margin="4dp">
+    android:id="@+id/cardView"
+    android:layout_width="50dp"
+    android:layout_height="50dp"
+    android:layout_margin="4dp"
+    android:background="@drawable/custom_item_calendar"
+    app:cardCornerRadius="12dp">
+
     <TextView
 
         android:id="@+id/item_date"
+        style="@style/textLight"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-
-        android:fontFamily="@font/roboto_light"
         android:gravity="center"
         android:text="1"
-        android:textAlignment="center"
         android:textColor="@color/black"
         android:textSize="16sp" />
 

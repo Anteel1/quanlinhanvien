@@ -103,7 +103,7 @@ public class frm_thongke extends Fragment {
 
     private void loadData() {
         demoCallAPI_ngaylam();
-        demoCallAPILuong();
+//        demoCallAPILuong();
         month.setText((selectedDate).getMonth() + " " + (selectedDate).getYear());
         ArrayList<String> daysInMonth = daysInMonthArray(selectedDate);
         adapter = new adapter_calendar(getContext(), daysInMonth, dayCompare);
@@ -140,39 +140,37 @@ public class frm_thongke extends Fragment {
         selectedDate = selectedDate.plusMonths(1);
     }
 
-    private void demoCallAPILuong() {
-        service_API requestInterface = new Retrofit.Builder()
-                .baseUrl(Base_Service)
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                .addConverterFactory(GsonConverterFactory.create())
-                .build().create(service_API.class);
-        new CompositeDisposable().add(requestInterface.getLuong(idNV, selectedDate.getMonth().getValue())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeOn(Schedulers.io())
-                .subscribe(this::handleResponse, this::handleError)
-        );
-    }
-
-    private void handleResponse(luong luong) {
-        //API trả về dữ liệu thành công, thực hiện việc lấy data
-        Log.d("luong infor", luong.getTonggiolam() + " " + luong.getTongLuong());
-        txtSalary.setText("Salary: " + luong.getTongLuong() + "00 VND");
-    }
-
-    private void handleError(Throwable error) {
-        Log.d("erroLuong", error.toString());
-        Toast.makeText(getContext(), error.toString(), Toast.LENGTH_SHORT).show();
-        //khi gọi API KHÔNG THÀNH CÔNG thì thực hiện xử lý ở đây
-    }
+//    private void demoCallAPILuong() {
+//        service_API requestInterface = new Retrofit.Builder()
+//                .baseUrl(Base_Service)
+//                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+//                .addConverterFactory(GsonConverterFactory.create())
+//                .build().create(service_API.class);
+//        new CompositeDisposable().add(requestInterface.getLuong(idNV, selectedDate.getMonth().getValue())
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .subscribeOn(Schedulers.io())
+//                .subscribe(this::handleResponse, this::handleError)
+//        );
+//    }
+//
+//    private void handleResponse(luong luong) {
+//        API trả về dữ liệu thành công, thực hiện việc lấy data
+//        Log.d("luong infor", luong.getTonggiolam() + " " + luong.getTongLuong());
+//        txtSalary.setText("Salary: " + luong.getTongLuong() + "00 VND");
+//    }
+//
+//    private void handleError(Throwable error) {
+//        Log.d("erroLuong", error.toString());
+//        Toast.makeText(getContext(), error.toString(), Toast.LENGTH_SHORT).show();
+//        //khi gọi API KHÔNG THÀNH CÔNG thì thực hiện xử lý ở đây
+//    }
 
     private void demoCallAPI_ngaylam() {
-
         service_API requestInterface = new Retrofit.Builder()
                 .baseUrl(Base_Service)
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create())
                 .build().create(service_API.class);
-
         new CompositeDisposable().add(requestInterface.getNgayLam(idNV, selectedDate.getMonth().getValue())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
@@ -181,18 +179,13 @@ public class frm_thongke extends Fragment {
     }
 
     private void handleResponse_ngaylam(ArrayList<ngaylam> list) {
-        //API trả về dữ liệu thành công, thực hiện việc lấy data
         dayCompare.clear();
-        for (int i = 0; i < list.size(); i++) {
-            dayCompare.add(i, list.get(i).getNgaylam());
-        }
-        adapter.notifyDataSetChanged();
-        Log.d("Ngày làm:", " " + dayCompare.size());
+        dayCompare = list;
+        Log.d("TAG", "handleResponse_ngaylam: " + list.get(0).getNgaylam() + " - " + list.get(0).getTrangThai() + " - " + idNV);
     }
 
     private void handleError_ngayLam(Throwable error) {
         Log.d("erroDate", error.toString());
         Toast.makeText(getContext(), error.toString(), Toast.LENGTH_SHORT).show();
-        //khi gọi API KHÔNG THÀNH CÔNG thì thực hiện xử lý ở đây
     }
 }

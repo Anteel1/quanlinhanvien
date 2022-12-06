@@ -2,11 +2,11 @@ package com.example.quanlinhanvien.model;
 
 public class ngaylam {
     String ngaylam;
-    int trangthai;
+    int trangThai;
 
-    public ngaylam(String ngaylam, int trangthai) {
+    public ngaylam(String ngaylam, int trangThai) {
         this.ngaylam = ngaylam;
-        this.trangthai = trangthai;
+        this.trangThai = trangThai;
     }
 
     public String getNgaylam() {
@@ -17,11 +17,11 @@ public class ngaylam {
         this.ngaylam = ngaylam;
     }
 
-    public int getTrangthai() {
-        return trangthai;
+    public int getTrangThai() {
+        return trangThai;
     }
 
-    public void setTrangthai(int trangthai) {
-        this.trangthai = trangthai;
+    public void setTrangThai(int trangThai) {
+        this.trangThai = trangThai;
     }
 }

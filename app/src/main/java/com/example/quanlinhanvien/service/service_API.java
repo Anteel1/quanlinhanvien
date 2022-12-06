@@ -19,22 +19,29 @@ public interface service_API {
 
     @GET("api/getAllNV")
     Observable<ArrayList<nhanvien>> getModelAPI();
+
     @GET("api/getAllCL")
     Observable<ArrayList<calam>> getModelAPI_calam();
+
 //    @GET("api/getLuongNV")
 //    Observable<luong>getLuong(@Query("maNV") int maNV, @Query("thang") int thang);
+
     @GET("api/getLichSuLamNV")
-    Observable<ArrayList<ngaylam>>getNgayLam(@Query("maNV") int maNV, @Query("thang") int thang);
+    Observable<ArrayList<ngaylam>> getNgayLam(@Query("maNV") int maNV, @Query("thang") int thang);
+
     @GET("api/getLichLamNV")
-    Observable<ArrayList<lichlam>> getLichlamnv(@Query("manv") int maNV , @Query("thang") int thang );
+    Observable<ArrayList<lichlam>> getLichlamnv(@Query("manv") int maNV, @Query("thang") int thang);
+
     @GET("api/getLuong_dungGio")
-    Observable<luong> getLuongDungGio(@Query("manv") int maNV , @Query("thang") int thang );
+    Observable<luong> getLuongDungGio(@Query("manv") int maNV, @Query("thang") int thang);
+
     @GET("api/getLuong_treGio")
-    Observable<luong> getLuongTreGio(@Query("manv") int maNV , @Query("thang") int thang );
+    Observable<luong> getLuongTreGio(@Query("manv") int maNV, @Query("thang") int thang);
 
     @POST("api/checkIn")
-    Observable<Number>postCheckIn(@Query("MaNV") int maNV, @Query("MaCL") int maCL,@Query("HinhAnh") String hinhanh);
+    Observable<Number> postCheckIn(@Query("MaNV") int maNV, @Query("MaCL") int maCL, @Query("HinhAnh") String hinhanh);
+
     @POST("api/checkOut")
-    Observable<Number>postCheckOut(@Query("MaNV") int maNV, @Query("MaCL") int maCL);
+    Observable<Number> postCheckOut(@Query("MaNV") int maNV, @Query("MaCL") int maCL);
 
 }

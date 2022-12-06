@@ -10,6 +10,7 @@
         <entry key="..\:/Sy/FPT_POLYTECHNIC/BAITAP/KY_4/DuAnMot/GIT/quanlinhanvien/app/src/main/res/drawable/custom_dialog_logout.xml" value="0.1165" />
         <entry key="..\:/Sy/FPT_POLYTECHNIC/BAITAP/KY_4/DuAnMot/GIT/quanlinhanvien/app/src/main/res/drawable/custom_home_icon.xml" value="0.1165" />
         <entry key="..\:/Sy/FPT_POLYTECHNIC/BAITAP/KY_4/DuAnMot/GIT/quanlinhanvien/app/src/main/res/drawable/custom_icon_bottom_nav.xml" value="0.1165" />
+        <entry key="..\:/Sy/FPT_POLYTECHNIC/BAITAP/KY_4/DuAnMot/GIT/quanlinhanvien/app/src/main/res/drawable/custom_item_calendar.xml" value="0.1165" />
         <entry key="..\:/Sy/FPT_POLYTECHNIC/BAITAP/KY_4/DuAnMot/GIT/quanlinhanvien/app/src/main/res/drawable/custom_me_icon.xml" value="0.1165" />
         <entry key="..\:/Sy/FPT_POLYTECHNIC/BAITAP/KY_4/DuAnMot/GIT/quanlinhanvien/app/src/main/res/drawable/custom_option_me.xml" value="0.1165" />
         <entry key="..\:/Sy/FPT_POLYTECHNIC/BAITAP/KY_4/DuAnMot/GIT/quanlinhanvien/app/src/main/res/drawable/custom_qrcode_icon.xml" value="0.1165" />
@@ -41,9 +42,12 @@
         <entry key="..\:/Sy/FPT_POLYTECHNIC/BAITAP/KY_4/DuAnMot/GIT/quanlinhanvien/app/src/main/res/layout/frm_store_2.xml" value="0.130078125" />
         <entry key="..\:/Sy/FPT_POLYTECHNIC/BAITAP/KY_4/DuAnMot/GIT/quanlinhanvien/app/src/main/res/layout/frm_thongke.xml" value="0.2" />
         <entry key="..\:/Sy/FPT_POLYTECHNIC/BAITAP/KY_4/DuAnMot/GIT/quanlinhanvien/app/src/main/res/layout/frm_thongtin.xml" value="0.1734375" />
+        <entry key="..\:/Sy/FPT_POLYTECHNIC/BAITAP/KY_4/DuAnMot/GIT/quanlinhanvien/app/src/main/res/layout/frm_timekeeping.xml" value="0.1734375" />
         <entry key="..\:/Sy/FPT_POLYTECHNIC/BAITAP/KY_4/DuAnMot/GIT/quanlinhanvien/app/src/main/res/layout/frm_trangchu.xml" value="0.18" />
         <entry key="..\:/Sy/FPT_POLYTECHNIC/BAITAP/KY_4/DuAnMot/GIT/quanlinhanvien/app/src/main/res/layout/frm_vitri.xml" value="0.1734375" />
-        <entry key="..\:/Sy/FPT_POLYTECHNIC/BAITAP/KY_4/DuAnMot/GIT/quanlinhanvien/app/src/main/res/layout/item_date.xml" value="0.1422829581993569" />
+        <entry key="..\:/Sy/FPT_POLYTECHNIC/BAITAP/KY_4/DuAnMot/GIT/quanlinhanvien/app/src/main/res/layout/item_calam.xml" value="0.1734375" />
+        <entry key="..\:/Sy/FPT_POLYTECHNIC/BAITAP/KY_4/DuAnMot/GIT/quanlinhanvien/app/src/main/res/layout/item_chamcong.xml" value="0.1734375" />
+        <entry key="..\:/Sy/FPT_POLYTECHNIC/BAITAP/KY_4/DuAnMot/GIT/quanlinhanvien/app/src/main/res/layout/item_date.xml" value="0.9" />
         <entry key="..\:/Sy/FPT_POLYTECHNIC/BAITAP/KY_4/DuAnMot/GIT/quanlinhanvien/app/src/main/res/layout/item_lichlam.xml" value="0.1734375" />
         <entry key="..\:/Sy/FPT_POLYTECHNIC/BAITAP/KY_4/DuAnMot/GIT/quanlinhanvien/app/src/main/res/layout/item_nhanvien.xml" value="0.1638888888888889" />
         <entry key="..\:/Sy/FPT_POLYTECHNIC/BAITAP/KY_4/DuAnMot/GIT/quanlinhanvien/app/src/main/res/layout/item_store.xml" value="0.1734375" />

@@ -41,12 +41,12 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class frm_nhanvien extends Fragment implements DatePickerDialog.OnDateSetListener {
     ArrayList<String> list;
     RecyclerView recyclerView;
-    TextView txtTotal,txtTitle;
+    TextView txtTotal, txtTitle;
     adapter_nhanvien adapter_nhanvien;
     String ngay;
-    TextInputEditText txtName,txtNameUser,txtPassword
-            ,txtCreateDate,txtPhoneNumber,txtAddress,txtStore,txtDutyID;
-    Button btnsignup,btnUpdate,btnDangky;
+    TextInputEditText txtName, txtNameUser, txtPassword, txtMaCV, txtImei, txtMaNV;
+    Button btnsignup, btnUpdate, btnDangky;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -76,12 +76,14 @@ public class frm_nhanvien extends Fragment implements DatePickerDialog.OnDateSet
         demoCallAPI();
         return view;
     }
-    private void loaddata(){
+
+    private void loaddata() {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(linearLayoutManager);
-        adapter_nhanvien = new adapter_nhanvien(getContext(),list);
+        adapter_nhanvien = new adapter_nhanvien(getContext(), list);
         recyclerView.setAdapter(adapter_nhanvien);
     }
+
     private void demoCallAPI() {
 
         service_API requestInterface = new Retrofit.Builder()
@@ -99,11 +101,11 @@ public class frm_nhanvien extends Fragment implements DatePickerDialog.OnDateSet
 
     private void handleResponse(ArrayList<nhanvien> list1) {
         //API trả về dữ liệu thành công, thực hiện việc lấy data
-        for(int i =0; i <list1.size(); i++){
-            list.add(i,list1.get(i).getTenNV());
+        for (int i = 0; i < list1.size(); i++) {
+            list.add(i, list1.get(i).getTenNV());
         }
         adapter_nhanvien.notifyDataSetChanged();
-        txtTotal.setText("Total employees: "+list1.size());
+        txtTotal.setText("Total employees: " + list1.size());
     }
 
     private void handleError(Throwable error) {
@@ -124,12 +126,13 @@ public class frm_nhanvien extends Fragment implements DatePickerDialog.OnDateSet
     @Override
     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
         ngay = dayOfMonth + "-" + month + "-" + year;
-        txtCreateDate.setText(ngay);
+//        txtCreateDate.setText(ngay);
     }
-    private void openDialog(int type){
+
+    private void openDialog(int type) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        LayoutInflater inflater1 =getActivity().getLayoutInflater();
-        View v2 =inflater1.inflate(R.layout.dialog_signup,null);
+        LayoutInflater inflater1 = getActivity().getLayoutInflater();
+        View v2 = inflater1.inflate(R.layout.dialog_signup, null);
         builder.setView(v2);
         Dialog dialog = builder.create();
         dialog.show();
@@ -137,38 +140,31 @@ public class frm_nhanvien extends Fragment implements DatePickerDialog.OnDateSet
         txtName = v2.findViewById(R.id.txtName);
         txtNameUser = v2.findViewById(R.id.txtNameUser);
         txtPassword = v2.findViewById(R.id.txtPassword);
-        txtCreateDate= v2.findViewById(R.id.txtCreateDate);
-        txtPhoneNumber= v2.findViewById(R.id.txtPhoneNumber);
-        txtAddress = v2.findViewById(R.id.txtAddress);
-        txtStore = v2.findViewById(R.id.txtStore);
-        txtDutyID = v2.findViewById(R.id.txtDutyID);
+        txtMaNV = v2.findViewById(R.id.txtMaNV);
+        txtImei = v2.findViewById(R.id.txtImei);
+        txtMaCV = v2.findViewById(R.id.txtMaCV);
         btnDangky = v2.findViewById(R.id.btndangky);
-        if(type==1){
-//            txtCreateDate.setText(LocalDate.now().getDayOfMonth()+"-"+LocalDate.now()
-//                    .getMonthValue()+"-"+LocalDate.now().getYear());
-            txtCreateDate.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    showDatePicker();
-                }
-            });
+        if (type == 1) {
+            txtImei.setVisibility(View.GONE);
+            txtMaCV.setVisibility(View.GONE);
+            txtPassword.setVisibility(View.GONE);
+            txtMaNV.setVisibility(View.GONE);
             btnDangky.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     demoCallAPIaddNV(txtName.getText().toString(), txtNameUser.getText().toString());
                 }
             });
-        }else{
+        } else {
             txtTitle.setText("Update Profile");
             btnDangky.setText("Update");
-            txtPhoneNumber.setVisibility(View.GONE);
-            txtCreateDate.setVisibility(View.GONE);
+
             btnDangky.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    demoCallAPIupdateNV(Integer.parseInt(txtDutyID.getText().toString()),txtName.getText().toString(),
+                    demoCallAPIupdateNV(Integer.parseInt(txtMaNV.getText().toString()), txtName.getText().toString(),
                             txtNameUser.getText().toString(), txtPassword.getText().toString(),
-                            txtAddress.getText().toString(), Integer.parseInt(txtStore.getText().toString()));
+                            txtImei.getText().toString(), Integer.parseInt(txtMaCV.getText().toString()));
                 }
             });
             Toast.makeText(getContext(), "Cập nhật", Toast.LENGTH_SHORT).show();
@@ -196,6 +192,7 @@ public class frm_nhanvien extends Fragment implements DatePickerDialog.OnDateSet
         Toast.makeText(getContext(), "add nhân viên thành công", Toast.LENGTH_SHORT).show();
         demoCallAPI();
     }
+
     private void handleErrorAddNV(Throwable throwable) {
     }
 
@@ -220,8 +217,8 @@ public class frm_nhanvien extends Fragment implements DatePickerDialog.OnDateSet
     }
 
     private void handleErrorUpdateNV(Throwable throwable) {
-        Log.d("=============TAG", "handleErrorUpdateNV: "+throwable);
-        Toast.makeText(getContext(), "update thất bại "+throwable, Toast.LENGTH_SHORT).show();
+        Log.d("=============TAG", "handleErrorUpdateNV: " + throwable);
+        Toast.makeText(getContext(), "update thất bại " + throwable, Toast.LENGTH_SHORT).show();
 
     }
 

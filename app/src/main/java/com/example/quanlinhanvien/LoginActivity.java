@@ -9,6 +9,7 @@ import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.os.CountDownTimer;
 import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.util.Patterns;
@@ -56,13 +57,29 @@ public class LoginActivity extends AppCompatActivity {
         btn_signin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                progressBar.setVisibility(View.VISIBLE);
-                kiemtra();
-                demoCallAPI();
+
+                new CountDownTimer(4000, 1000) {
+
+                    public void onTick(long millisUntilFinished) {
+                        progressBar.setVisibility(View.VISIBLE);
+//                        mTextField.setText("seconds remaining: " + millisUntilFinished / 1000);
+                    }
+
+                    public void onFinish() {
+//                        mTextField.setText("done!");
+                        progressBar.setVisibility(View.GONE);
+                        kiemtra();
+                        demoCallAPI();
+                    }
+                }.start();
+
 //                intent =new Intent(LoginActivity.this, MainActivity.class);
 //                startActivity(intent);
 //                finish();
 //                getImei();
+
+
+//                        progressBar.setVisibility(View.GONE);
 
             }
         });
@@ -119,7 +136,6 @@ public class LoginActivity extends AppCompatActivity {
     //kiểm tra các edit text
 
     public void kiemtra() {
-
         String thongbao_email = "";
         String email = edt_email.getText().toString();
 
@@ -146,6 +162,8 @@ public class LoginActivity extends AppCompatActivity {
             txtLayoutPassword.setHelperText(thongbao_password);
             txtLayoutPassword.setHelperTextColor(getResources().getColorStateList(R.color.red));
         }
+
+
     }
 
     private void demoCallAPI() {
@@ -163,19 +181,18 @@ public class LoginActivity extends AppCompatActivity {
         );
     }
 
-     private void handleResponse(ArrayList<nhanvien> list1) {
+    private void handleResponse(ArrayList<nhanvien> list1) {
         //API trả về dữ liệu thành công, thực hiện việc lấy data
          Toast.makeText(LoginActivity.this, "thành công", Toast.LENGTH_SHORT).show();
          for (int i = 0; i < list1.size(); i++) {
             if ((edt_email.getText().toString()).equals(list1.get(i).getTaiKhoan())) {
                 if ((edt_password.getText().toString()).equals(list1.get(i).getMatKhau())) {
+                    demoCallAPIpostImei(list1.get(i).getMaNV(), imei);
                     Toast.makeText(LoginActivity.this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
-                    progressBar.setVisibility(View.GONE);
                     intent = new Intent(LoginActivity.this, MainActivity.class);
-                    Bundle bundle1 = new Bundle();
-                    int idNV = list1.get(i).getMaNV();
-                    bundle1.putInt("idNV",idNV);
-                    intent.putExtras(bundle1);
+                    Bundle bundle = new Bundle();
+                    bundle.putInt("idNV", list1.get(i).getMaNV());
+                    intent.putExtras(bundle);
                     startActivity(intent);
                     finish();
                 } else {
@@ -235,6 +252,29 @@ public class LoginActivity extends AppCompatActivity {
         }
         Log.d("deviceId", IMEINumber);
         return IMEINumber;
+    }
+
+    private void demoCallAPIpostImei(int id, String imei) {
+
+        service_API requestInterface = new Retrofit.Builder()
+                .baseUrl(Base_Service)
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create())
+                .build().create(service_API.class);
+
+        new CompositeDisposable().add(requestInterface.updateImei(id, imei)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(this::handleResponseImei, this::handleErrorImei)
+        );
+    }
+
+
+
+    private void handleResponseImei(Number number) {
+        Toast.makeText(this, "post imei thành công", Toast.LENGTH_SHORT).show();
+    }
+    private void handleErrorImei(Throwable throwable) {
     }
 
 }

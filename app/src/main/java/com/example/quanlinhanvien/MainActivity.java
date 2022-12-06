@@ -42,7 +42,7 @@ import com.google.android.material.navigation.NavigationView;
 import java.io.UnsupportedEncodingException;
 
 public class MainActivity extends AppCompatActivity {
-    TextView tv;
+    TextView tv_tieude;
     ImageView iv_menu;
     DrawerLayout drawerLayout;
     Toolbar toolbar;
@@ -113,7 +113,7 @@ public class MainActivity extends AppCompatActivity {
                         break;
                 }
                 drawerLayout.closeDrawer(navigationView);
-                setTitle(item.getTitle());
+                tv_tieude.setText(item.getTitle());
                 return false;
             }
         });
@@ -123,6 +123,7 @@ public class MainActivity extends AppCompatActivity {
     public void anhxa() {
         toolbar = findViewById(R.id.toolbar);
         iv_menu = findViewById(R.id.iv_menu_toolbar);
+        tv_tieude = findViewById(R.id.tv_tieude);
         drawerLayout = findViewById(R.id.drawerLayout);
         navigationView = findViewById(R.id.navigation_view);
     }

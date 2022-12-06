@@ -5,17 +5,28 @@
     android:layout_height="wrap_content"
     android:background="@color/statusbar">
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="2dp">
 
         <ImageView
+            android:padding="8dp"
             android:id="@+id/iv_menu_toolbar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentStart="true"
             android:src="@drawable/ic_menu" />
+
+        <TextView
+            android:id="@+id/tv_tieude"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@+id/iv_menu_toolbar"
+            android:padding="8dp"
+            android:text="Employees Management"
+            android:textColor="@color/white"
+            android:textSize="20dp" />
 
         <TextView
             style="@style/textMedium"
@@ -30,6 +41,6 @@
             android:textStyle="bold"
             android:layout_toRightOf="@+id/iv_menu_toolbar"/>
 
-    </RelativeLayout>
+    </LinearLayout>
 
 </androidx.appcompat.widget.Toolbar>

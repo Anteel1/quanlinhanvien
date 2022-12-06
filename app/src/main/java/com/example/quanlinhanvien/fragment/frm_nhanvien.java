@@ -152,11 +152,75 @@ public class frm_nhanvien extends Fragment implements DatePickerDialog.OnDateSet
                     showDatePicker();
                 }
             });
+            btnDangky.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    demoCallAPIaddNV(txtName.getText().toString(), txtNameUser.getText().toString());
+                }
+            });
         }else{
             txtTitle.setText("Update Profile");
             btnDangky.setText("Update");
+            txtPhoneNumber.setVisibility(View.GONE);
+            txtCreateDate.setVisibility(View.GONE);
+            btnDangky.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    demoCallAPIupdateNV(Integer.parseInt(txtDutyID.getText().toString()),txtName.getText().toString(),
+                            txtNameUser.getText().toString(), txtPassword.getText().toString(),
+                            txtAddress.getText().toString(), Integer.parseInt(txtStore.getText().toString()));
+                }
+            });
             Toast.makeText(getContext(), "Cập nhật", Toast.LENGTH_SHORT).show();
         }
 
     }
+
+    private void demoCallAPIaddNV(String tenNV, String taikhoan) {
+
+        service_API requestInterface = new Retrofit.Builder()
+                .baseUrl(Base_Service)
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create())
+                .build().create(service_API.class);
+
+        new CompositeDisposable().add(requestInterface.addnV(tenNV, taikhoan)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(this::handleResponseAddNV, this::handleErrorAddNV)
+        );
+    }
+
+
+    private void handleResponseAddNV(Number number) {
+        Toast.makeText(getContext(), "add nhân viên thành công", Toast.LENGTH_SHORT).show();
+    }
+    private void handleErrorAddNV(Throwable throwable) {
+    }
+
+    private void demoCallAPIupdateNV(int maNV, String TenNV, String TaiKhoan, String MatKhau, String Imei, int MaCV) {
+
+        service_API requestInterface = new Retrofit.Builder()
+                .baseUrl(Base_Service)
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create())
+                .build().create(service_API.class);
+
+        new CompositeDisposable().add(requestInterface.updateNV(maNV, TenNV, TaiKhoan, MatKhau, Imei, MaCV)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(this::handleResponseUpdateNV, this::handleErrorUpdateNV)
+        );
+    }
+
+    private void handleResponseUpdateNV(Number number) {
+        Toast.makeText(getContext(), "update thành công ", Toast.LENGTH_SHORT).show();
+    }
+
+    private void handleErrorUpdateNV(Throwable throwable) {
+        Log.d("=============TAG", "handleErrorUpdateNV: "+throwable);
+        Toast.makeText(getContext(), "update thất bại "+throwable, Toast.LENGTH_SHORT).show();
+
+    }
+
 }

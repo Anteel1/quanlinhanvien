@@ -194,6 +194,7 @@ public class frm_nhanvien extends Fragment implements DatePickerDialog.OnDateSet
 
     private void handleResponseAddNV(Number number) {
         Toast.makeText(getContext(), "add nhân viên thành công", Toast.LENGTH_SHORT).show();
+        demoCallAPI();
     }
     private void handleErrorAddNV(Throwable throwable) {
     }
@@ -215,6 +216,7 @@ public class frm_nhanvien extends Fragment implements DatePickerDialog.OnDateSet
 
     private void handleResponseUpdateNV(Number number) {
         Toast.makeText(getContext(), "update thành công ", Toast.LENGTH_SHORT).show();
+        demoCallAPI();
     }
 
     private void handleErrorUpdateNV(Throwable throwable) {

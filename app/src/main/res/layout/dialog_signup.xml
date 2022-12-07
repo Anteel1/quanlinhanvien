@@ -117,12 +117,9 @@
         app:hintTextColor="@color/statusbar">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/txtCreateDate"
+            android:id="@+id/txtImei"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            />
-
-            android:id="@+id/txtImei"
             />
     </com.google.android.material.textfield.TextInputLayout>
 

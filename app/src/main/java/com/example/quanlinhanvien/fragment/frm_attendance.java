@@ -70,7 +70,7 @@ public class frm_attendance extends Fragment {
     TextView txtTitle, txtResutl;
     ArrayList<Location> list;
     TextClock tc_gio;
-    TextView tc_ngay,txtNFC;
+    TextView tc_ngay;
     LinearLayout layout_icon,layoutNFC;
     ImageView imgCheckIn, imgCheckOut;
     FrameLayout layout_scan;

@@ -49,7 +49,6 @@ import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
@@ -81,7 +80,7 @@ public class frm_attendance extends Fragment {
     int maCL;
     int check;
     String dataNFC;
-    private HashMap config = new HashMap();
+
 
     @Nullable
     @Override
@@ -169,8 +168,6 @@ public class frm_attendance extends Fragment {
 
         scanQRpermission();
         demoCallAPI_calam();
-        configCloudinary();
-
         return v;
     }
 
@@ -456,13 +453,6 @@ public class frm_attendance extends Fragment {
 
            }
        }).dispatch();
-    }
-
-    private void configCloudinary() {
-        config.put("cloud_name", "dnxe9l57i");
-        config.put("api_key", "991189484643755");
-        config.put("api_secret", "e6ZiAtks5BeldzKgTew3IqC8KHk");
-        MediaManager.init(getContext(), config);
     }
     // api here
     private void demoCallAPI(String url) {

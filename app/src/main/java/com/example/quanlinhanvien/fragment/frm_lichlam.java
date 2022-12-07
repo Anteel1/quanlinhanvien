@@ -14,7 +14,6 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.DatePicker;
-import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Switch;
@@ -24,9 +23,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
-import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 
 import com.example.quanlinhanvien.R;
 import com.example.quanlinhanvien.adapter.adapter_lichlam;
@@ -35,14 +32,10 @@ import com.example.quanlinhanvien.model.nhanvien;
 import com.example.quanlinhanvien.service.service_API;
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.Month;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
@@ -66,11 +59,11 @@ public class frm_lichlam extends Fragment {
     Switch switchst;
     int yearn, monthn, dayn;
     Spinner spnchonten;
+    int chucvu;
 
-
-    public frm_lichlam(int idnv) {
+    public frm_lichlam(int idnv, int chucvu) {
         this.idnv = idnv;
-
+        this.chucvu = chucvu;
     }
 
 
@@ -86,11 +79,9 @@ public class frm_lichlam extends Fragment {
         btnNext = view.findViewById(R.id.btnNext);
         btnthemlichlam = view.findViewById(R.id.btnthemlichlam);
         switchst = view.findViewById(R.id.switchst);
-//        if (idnv != 8) {
-//            btnthemlichlam.setVisibility(View.GONE);
-//        }
-
-
+        if(chucvu ==1 || chucvu !=2){
+            btnthemlichlam.setVisibility(View.GONE);
+        }
         list = new ArrayList<>();
 
         btnBack.setOnClickListener(new View.OnClickListener() {
@@ -177,15 +168,15 @@ public class frm_lichlam extends Fragment {
         switchst = v2.findViewById(R.id.switchst);
         txtshowca = v2.findViewById(R.id.txtshowca);
         spnchonten = v2.findViewById(R.id.spnchonten);
-
-
+        Dialog dialog = builder.create();
+        dialog.show();
+        demoCallAPINV();
         final Calendar c = Calendar.getInstance();
         int year = c.get(Calendar.YEAR);
         int month = c.get(Calendar.MONTH);
         int day = c.get(Calendar.DAY_OF_MONTH);
         txtshowngay.setText(day + "-" + (month + 1) + "-" + year);
         btnthem = v2.findViewById(R.id.btnthem);
-        demoCallAPINV();
         switchst.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -229,11 +220,11 @@ public class frm_lichlam extends Fragment {
 //                demoAddAPI(manv, macl, date);
 
                 Toast.makeText(getContext(), manv + "" + macl + "" + date, Toast.LENGTH_SHORT).show();
+                dialog.dismiss();
                 openDialogthemll();
             }
         });
-        Dialog dialog = builder.create();
-        dialog.show();
+
 
     }
 
@@ -345,11 +336,19 @@ public class frm_lichlam extends Fragment {
         btnthemcuoi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String date = yearn + "-" + monthn + "-" + dayn;
-                demoCallAPINV();
-                demoAddAPI(manv, macl, date);
-                Toast.makeText(getContext(), "Thêm thành công", Toast.LENGTH_SHORT).show();
-                dialog.dismiss();
+                if (yearn == 0) {
+                    String date0 = LocalDate.now().getYear() + "-" + LocalDate.now().getMonthValue() + "-" + LocalDate.now().getDayOfMonth();
+
+                    demoAddAPI(manv, macl, date0);
+                    Toast.makeText(getContext(), "Thêm thành công", Toast.LENGTH_SHORT).show();
+                    dialog.dismiss();
+                } else {
+                    String date = yearn + "-" + monthn + "-" + dayn;
+                    demoAddAPI(manv, macl, date);
+                    Toast.makeText(getContext(), "Thêm thành công", Toast.LENGTH_SHORT).show();
+                    dialog.dismiss();
+                }
+                demoCallAPI(idnv,thanght.getValue());
             }
         });
         btnhuycuoi.setOnClickListener(new View.OnClickListener() {
@@ -358,6 +357,7 @@ public class frm_lichlam extends Fragment {
                 dialog.dismiss();
             }
         });
+
     }
 
 

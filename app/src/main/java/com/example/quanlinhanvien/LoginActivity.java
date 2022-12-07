@@ -44,9 +44,7 @@ public class LoginActivity extends AppCompatActivity {
     TextInputEditText edt_email, edt_password;
     Button btn_signin;
     Intent intent;
-    Bundle bundle;
     String IMEINumber, imei;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -148,6 +146,7 @@ public class LoginActivity extends AppCompatActivity {
                         intent = new Intent(LoginActivity.this, MainActivity.class);
                         Bundle bundle = new Bundle();
                         bundle.putInt("idNV", list1.get(i).getMaNV());
+                        bundle.putInt("chucvu",list1.get(i).getMaCV());
                         intent.putExtras(bundle);
                         startActivity(intent);
                         finish();

@@ -28,6 +28,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 
+import com.cloudinary.android.MediaManager;
 import com.example.quanlinhanvien.fragment.frm_attendance;
 import com.example.quanlinhanvien.fragment.frm_calam;
 import com.example.quanlinhanvien.fragment.frm_dangxuat;
@@ -40,6 +41,7 @@ import com.example.quanlinhanvien.fragment.frm_trangchu;
 import com.google.android.material.navigation.NavigationView;
 
 import java.io.UnsupportedEncodingException;
+import java.util.HashMap;
 
 public class MainActivity extends AppCompatActivity {
     TextView tv_tieude;
@@ -50,11 +52,13 @@ public class MainActivity extends AppCompatActivity {
     Fragment fragment;
     Intent intent;
     String data;
-
+    int chucvu;
     private NfcAdapter nfcAdapter = null;
     private IntentFilter[] intentFiltersArray = null;
     private String[][] techListsArray = null;
     private PendingIntent pendingIntent = null;
+
+    private HashMap config = new HashMap();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,6 +69,7 @@ public class MainActivity extends AppCompatActivity {
         intent = getIntent();
         Bundle bundle = intent.getExtras();
         int idNV = bundle.getInt("idNV", -1);
+        int chucvu= bundle.getInt("chucvu",-1);
         anhxa();
         menu_nav();
         fragment = new frm_trangchu();
@@ -86,7 +91,7 @@ public class MainActivity extends AppCompatActivity {
                         onRestoreInstanceState(savedInstanceState);
                         break;
                     case R.id.menu_lichlam:
-                        fragment = new frm_lichlam(idNV);
+                        fragment = new frm_lichlam(idNV,chucvu);
                         onRestoreInstanceState(savedInstanceState);
                         break;
                     case R.id.menu_calam:
@@ -240,4 +245,10 @@ public class MainActivity extends AppCompatActivity {
         setIntent(intent);
     }
 
+    private void configCloudinary() {
+        config.put("cloud_name", "dnxe9l57i");
+        config.put("api_key", "991189484643755");
+        config.put("api_secret", "e6ZiAtks5BeldzKgTew3IqC8KHk");
+        MediaManager.init(this, config);
+    }
 }

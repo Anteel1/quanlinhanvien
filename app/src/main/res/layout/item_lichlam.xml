@@ -57,9 +57,9 @@
 
     <View
         android:layout_width="2dp"
-        android:layout_height="20dp"
+        android:layout_height="60dp"
         android:layout_marginLeft="10dp"
-        android:layout_marginTop="19dp"
+
         android:background="#80CAC3C3" />
 
     <TextView

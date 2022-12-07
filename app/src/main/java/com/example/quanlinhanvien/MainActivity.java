@@ -1,13 +1,21 @@
 package com.example.quanlinhanvien;
 
+import static com.example.quanlinhanvien.service.service_API.Base_Service;
+
+import android.annotation.SuppressLint;
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -23,15 +31,28 @@ import com.example.quanlinhanvien.fragment.frm_nhanvien;
 import com.example.quanlinhanvien.fragment.frm_store;
 import com.example.quanlinhanvien.fragment.frm_thongke;
 import com.example.quanlinhanvien.fragment.frm_trangchu;
+import com.example.quanlinhanvien.model.nhanvien;
+import com.example.quanlinhanvien.service.service_API;
 import com.google.android.material.navigation.NavigationView;
+import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
+
+import java.util.ArrayList;
+
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.schedulers.Schedulers;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainActivity extends AppCompatActivity {
-    TextView tv;
+    TextView usname;
     ImageView iv_menu;
     DrawerLayout drawerLayout;
     Toolbar toolbar;
     NavigationView navigationView;
     Fragment fragment;
+    private View headerLayout;
+    int idnv;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,7 +60,9 @@ public class MainActivity extends AppCompatActivity {
         anhxa();
         menu_nav();
         Intent i = this.getIntent();
-        int idnv = i.getIntExtra("idnv",0);
+        idnv = i.getIntExtra("idnv",0);
+        demoCallAPINV();
+
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -101,6 +124,13 @@ public class MainActivity extends AppCompatActivity {
         iv_menu = findViewById(R.id.iv_menu_toolbar);
         drawerLayout = findViewById(R.id.drawerLayout);
         navigationView = findViewById(R.id.navigation_view);
+        navigationView = findViewById(R.id.navigation_view);
+        headerLayout=navigationView.getHeaderView(0);
+        usname=headerLayout.findViewById(R.id.name);
+
+
+
+
     }
 
     public void menu_nav() {
@@ -124,4 +154,34 @@ public class MainActivity extends AppCompatActivity {
 
         }
     }
+    private void demoCallAPINV() {
+
+        service_API requestInterface = new Retrofit.Builder()
+                .baseUrl(Base_Service)
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create())
+                .build().create(service_API.class);
+
+        new CompositeDisposable().add(requestInterface.getModelAPI()
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(this::handleResponseNV, this::handleErrorNV)
+        );
+    }
+
+    private void handleResponseNV(ArrayList<nhanvien> list1) {
+
+        for (int i = 0; i < list1.size(); i++) {
+            if (idnv==list1.get(i).getMaNV()){
+                usname.setText(list1.get(i).getTenNV());
+
+            }
+        }
+    }
+    private void handleErrorNV(Throwable error) {
+        Log.d("erro", error.toString());
+    }
+
+
+
 }

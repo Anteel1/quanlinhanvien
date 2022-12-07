@@ -86,9 +86,9 @@ public class frm_lichlam extends Fragment {
         btnNext = view.findViewById(R.id.btnNext);
         btnthemlichlam = view.findViewById(R.id.btnthemlichlam);
         switchst = view.findViewById(R.id.switchst);
-//        if (idnv != 8) {
-//            btnthemlichlam.setVisibility(View.GONE);
-//        }
+        if (idnv != 8) {
+            btnthemlichlam.setVisibility(View.GONE);
+        }
 
 
         list = new ArrayList<>();
@@ -345,12 +345,22 @@ public class frm_lichlam extends Fragment {
         btnthemcuoi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String date = yearn + "-" + monthn + "-" + dayn;
-                demoCallAPINV();
-                demoAddAPI(manv, macl, date);
-                Toast.makeText(getContext(), "Thêm thành công", Toast.LENGTH_SHORT).show();
-                dialog.dismiss();
+                if (yearn == 0) {
+                    String date0 = LocalDate.now().getYear() + "-" + LocalDate.now().getMonthValue() + "-" + LocalDate.now().getDayOfMonth();
+                    demoCallAPINV();
+                    demoAddAPI(manv, macl, date0);
+                    Toast.makeText(getContext(), "Thêm thành công", Toast.LENGTH_SHORT).show();
+                    dialog.dismiss();
+                } else {
+                    String date = yearn + "-" + monthn + "-" + dayn;
+                    demoCallAPINV();
+                    demoAddAPI(manv, macl, date);
+                    Toast.makeText(getContext(), "Thêm thành công", Toast.LENGTH_SHORT).show();
+                    dialog.dismiss();
+                }
+                demoCallAPI(idnv, thanght.getValue());
             }
+
         });
         btnhuycuoi.setOnClickListener(new View.OnClickListener() {
             @Override

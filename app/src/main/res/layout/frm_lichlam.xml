@@ -107,21 +107,24 @@
 
     <ListView
         android:id="@+id/listviewll"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom" />
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
+        android:layout_height="wrap_content"
         android:gravity="bottom"
-        >
-        <Button
-            android:id="@+id/btnthemlichlam"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:backgroundTint="#73AB6B"
-            android:text="Thêm lịch làm"
+        android:orientation="vertical">
 
-            ></Button>
     </LinearLayout>
+
+    <Button
+        android:id="@+id/btnthemlichlam"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#73AB6B"
+        android:text="Thêm lịch làm"
+
+        ></Button>
 </LinearLayout>

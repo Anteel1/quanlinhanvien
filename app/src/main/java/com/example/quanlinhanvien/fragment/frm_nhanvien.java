@@ -41,7 +41,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class frm_nhanvien extends Fragment implements DatePickerDialog.OnDateSetListener {
     ArrayList<String> list;
     RecyclerView recyclerView;
-    TextView txtTotal,txtTitle;
+    TextView txtTotal,txtTitle,uname;
     adapter_nhanvien adapter_nhanvien;
     String ngay;
     TextInputEditText txtName,txtNameUser,txtPassword,txtCreateDate,txtPhoneNumber,txtAddress,txtStore,txtDutyID;

@@ -361,6 +361,7 @@ public class frm_attendance extends Fragment {
                 if (Integer.parseInt(calam.getGioKT().substring(0,2))  <= gio) {
                     maCL = calam.getMaCL();
                     layout_scan.setVisibility(View.GONE);
+                    layoutNFC.setVisibility(View.GONE);
                     Toast.makeText(getContext(), "Ok check out success", Toast.LENGTH_SHORT).show();
                     break;
                 }
@@ -508,6 +509,9 @@ public class frm_attendance extends Fragment {
     private void handleResponse_checkOut(Number number) {
         //API trả về dữ liệu thành công, thực hiện việc lấy data
         Toast.makeText(getContext(), "Chấm công thành công", Toast.LENGTH_SHORT).show();
+        txtTitle.setVisibility(View.GONE);
+        btnNFC.setVisibility(View.VISIBLE);
+        btnQRCode.setVisibility(View.VISIBLE);
         Log.d("size:"," "+number);
     }
 

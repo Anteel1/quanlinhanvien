@@ -37,6 +37,7 @@ public class adapter_nhanvien extends RecyclerView.Adapter<adapter_nhanvien.View
     Context context;
     ArrayList<String> list;
     ArrayList<nhanvien> listNV;
+    int row_index = -1;
 
 
     public adapter_nhanvien(Context context , ArrayList<String> list, ArrayList<nhanvien> listNV, ItemClickListener itemClickListener){
@@ -63,12 +64,22 @@ public class adapter_nhanvien extends RecyclerView.Adapter<adapter_nhanvien.View
         holder.tv.setText(str);
 
         holder.cardView.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
+                row_index = position;
+                notifyDataSetChanged();
+//                holder.linearLayout.setBackgroundColor(Color.GREEN);
                 itemClickListener.onClick(position);
-                holder.linearLayout.setBackgroundColor(Color.RED);
             }
         });
+        if(row_index==position){
+            holder.linearLayout.setBackgroundColor(Color.GREEN);
+        }
+        else
+        {
+            holder.linearLayout.setBackgroundColor(Color.parseColor("#ffffff"));
+        }
     }
 
     @Override

@@ -11,8 +11,6 @@
         android:layout_height="wrap_content"
         android:padding="8dp"
         android:id="@+id/click"
-        android:backgroundTint="@color/white"
-        android:background="@drawable/custom_edt"
         android:orientation="vertical"
         >
         <TextView

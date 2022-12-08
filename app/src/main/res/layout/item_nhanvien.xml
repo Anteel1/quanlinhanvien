@@ -4,11 +4,14 @@
     android:layout_margin="8dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:cardCornerRadius="10dp"
+    android:id="@+id/cardview"
     android:layout_height="wrap_content">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="8dp"
+        android:id="@+id/click"
+        android:backgroundTint="@color/white"
         android:background="@drawable/custom_edt"
         android:orientation="vertical"
         >

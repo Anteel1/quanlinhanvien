@@ -24,12 +24,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.quanlinhanvien.R;
 import com.example.quanlinhanvien.adapter.adapter_nhanvien;
 import com.example.quanlinhanvien.model_api.nhanvien;
+import com.example.quanlinhanvien.service.ItemClickListener;
 import com.example.quanlinhanvien.service.service_API;
 import com.google.android.material.textfield.TextInputEditText;
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
@@ -37,14 +39,17 @@ import io.reactivex.schedulers.Schedulers;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class frm_nhanvien extends Fragment implements DatePickerDialog.OnDateSetListener {
+public class frm_nhanvien extends Fragment implements  ItemClickListener {
     ArrayList<String> list;
+    ArrayList<nhanvien> listNV;
     RecyclerView recyclerView;
     TextView txtTotal, txtTitle;
     adapter_nhanvien adapter_nhanvien;
     String ngay;
     TextInputEditText txtName, txtNameUser, txtPassword, txtMaCV, txtImei, txtMaNV;
     Button btnsignup, btnUpdate, btnDangky;
+    int maNV;
+    HashMap<String, Integer> id = new HashMap<String, Integer>();
 
     @Nullable
     @Override
@@ -56,31 +61,38 @@ public class frm_nhanvien extends Fragment implements DatePickerDialog.OnDateSet
         btnsignup = view.findViewById(R.id.btnsignup);
         btnUpdate = view.findViewById(R.id.btnupdate);
 
+        list = new ArrayList<>();
+        listNV = new ArrayList<>();
+        loaddata();
+        demoCallAPI();
+
         btnsignup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openDialog(1);
+                openDialog(1, -1);
             }
         });
-
         btnUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openDialog(2);
+                openDialog(2, maNV);
             }
         });
 
-        list = new ArrayList<>();
-        loaddata();
-        demoCallAPI();
+
+
+
         return view;
     }
 
     private void loaddata() {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
+
         recyclerView.setLayoutManager(linearLayoutManager);
-        adapter_nhanvien = new adapter_nhanvien(getContext(), list);
+
+        adapter_nhanvien = new adapter_nhanvien(getContext(), list, listNV, this);
         recyclerView.setAdapter(adapter_nhanvien);
+
     }
 
     private void demoCallAPI() {
@@ -100,9 +112,13 @@ public class frm_nhanvien extends Fragment implements DatePickerDialog.OnDateSet
 
     private void handleResponse(ArrayList<nhanvien> list1) {
         //API trả về dữ liệu thành công, thực hiện việc lấy data
+
         for (int i = 0; i < list1.size(); i++) {
             list.add(i, list1.get(i).getTenNV());
+            nhanvien nv = list1.get(i);
+            listNV.add(list1.get(i));
         }
+        Log.d("========TAG", "handleResponse: "+listNV.size());
         adapter_nhanvien.notifyDataSetChanged();
         txtTotal.setText("Total employees: " + list1.size());
     }
@@ -113,22 +129,22 @@ public class frm_nhanvien extends Fragment implements DatePickerDialog.OnDateSet
         //khi gọi API KHÔNG THÀNH CÔNG thì thực hiện xử lý ở đây
     }
 
-    private void showDatePicker() {
-        DatePickerDialog datePickerDialog = new DatePickerDialog(
-                getContext(), this, Calendar.getInstance().get(Calendar.YEAR),
-                Calendar.getInstance().get(Calendar.MONTH),
-                Calendar.getInstance().get(Calendar.DAY_OF_MONTH)
-        );
-        datePickerDialog.show();
-    }
+//    private void showDatePicker() {
+//        DatePickerDialog datePickerDialog = new DatePickerDialog(
+//                getContext(), this, Calendar.getInstance().get(Calendar.YEAR),
+//                Calendar.getInstance().get(Calendar.MONTH),
+//                Calendar.getInstance().get(Calendar.DAY_OF_MONTH)
+//        );
+//        datePickerDialog.show();
+//    }
+//
+//    @Override
+//    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+//        ngay = dayOfMonth + "-" + month + "-" + year;
+////        txtCreateDate.setText(ngay);
+//    }
 
-    @Override
-    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-        ngay = dayOfMonth + "-" + month + "-" + year;
-//        txtCreateDate.setText(ngay);
-    }
-
-    private void openDialog(int type) {
+    private void openDialog(int type, int manv) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         LayoutInflater inflater1 = getActivity().getLayoutInflater();
         View v2 = inflater1.inflate(R.layout.dialog_signup, null);
@@ -157,11 +173,19 @@ public class frm_nhanvien extends Fragment implements DatePickerDialog.OnDateSet
         } else {
             txtTitle.setText("Update Profile");
             btnDangky.setText("Update");
+            txtMaNV.setVisibility(View.GONE);
+            txtPassword.setText(listNV.get(manv).getMatKhau());
+            txtNameUser.setText(listNV.get(manv).getTaiKhoan());
+            txtMaCV.setText(listNV.get(manv).getMaCV()+"");
+            txtImei.setText(listNV.get(manv).getImei());
+            txtName.setText(listNV.get(manv).getTenNV());
 
+            txtMaNV.setText(""+manv);
             btnDangky.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    demoCallAPIupdateNV(Integer.parseInt(txtMaNV.getText().toString()), txtName.getText().toString(),
+                    int ma = manv+1;
+                    demoCallAPIupdateNV(ma, txtName.getText().toString(),
                             txtNameUser.getText().toString(), txtPassword.getText().toString(),
                             txtImei.getText().toString(), Integer.parseInt(txtMaCV.getText().toString()));
                 }
@@ -219,4 +243,13 @@ public class frm_nhanvien extends Fragment implements DatePickerDialog.OnDateSet
 
     }
 
+
+    @Override
+    public void onClick(int pos) {
+        id.put("id", pos);
+        maNV =id.get("id");
+
+        Toast.makeText(getContext(), "đã chọn ", Toast.LENGTH_SHORT).show();
+
+    }
 }

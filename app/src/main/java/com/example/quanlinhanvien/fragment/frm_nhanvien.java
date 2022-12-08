@@ -2,7 +2,6 @@ package com.example.quanlinhanvien.fragment;
 
 import static com.example.quanlinhanvien.service.service_API.Base_Service;
 
-import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.os.Bundle;
 import android.util.Log;
@@ -10,7 +9,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,7 +21,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.quanlinhanvien.R;
 import com.example.quanlinhanvien.adapter.adapter_nhanvien;
-//import com.example.quanlinhanvien.model.nhanvien;
 import com.example.quanlinhanvien.model.nhanvien;
 import com.example.quanlinhanvien.service.ItemClickListener;
 import com.example.quanlinhanvien.service.service_API;
@@ -31,7 +28,6 @@ import com.google.android.material.textfield.TextInputEditText;
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.HashMap;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -169,6 +165,8 @@ public class frm_nhanvien extends Fragment implements  ItemClickListener {
                 @Override
                 public void onClick(View v) {
                     demoCallAPIaddNV(txtName.getText().toString(), txtNameUser.getText().toString());
+                    dialog.dismiss();
+                    demoCallAPI();
                 }
             });
         } else {
@@ -189,6 +187,8 @@ public class frm_nhanvien extends Fragment implements  ItemClickListener {
                     demoCallAPIupdateNV(ma, txtName.getText().toString(),
                             txtNameUser.getText().toString(), txtPassword.getText().toString(),
                             txtImei.getText().toString(), Integer.parseInt(txtMaCV.getText().toString()));
+                    dialog.dismiss();
+                    demoCallAPI();
                 }
             });
             Toast.makeText(getContext(), "Cập nhật", Toast.LENGTH_SHORT).show();

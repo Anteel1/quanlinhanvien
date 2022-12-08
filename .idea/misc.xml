@@ -3,95 +3,51 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Ki_4_2/duan1/quanlinhanvien/app/src/main/res/drawable/lichlamicon.xml" value="0.1" />
-        <entry key="..\:/Ki_4_2/duan1/quanlinhanvien/app/src/main/res/drawable/nentoi.xml" value="0.144" />
-        <entry key="..\:/Ki_4_2/duan1/quanlinhanvien/app/src/main/res/drawable/sun.xml" value="0.1" />
-        <entry key="..\:/Ki_4_2/duan1/quanlinhanvien/app/src/main/res/drawable/thumb.xml" value="0.1" />
-        <entry key="..\:/Ki_4_2/duan1/quanlinhanvien/app/src/main/res/drawable/track.xml" value="0.1" />
-        <entry key="..\:/Ki_4_2/duan1/quanlinhanvien/app/src/main/res/layout/activity_login.xml" value="0.12158054711246201" />
-        <entry key="..\:/Ki_4_2/duan1/quanlinhanvien/app/src/main/res/layout/activity_main.xml" value="0.12158054711246201" />
-        <entry key="..\:/Ki_4_2/duan1/quanlinhanvien/app/src/main/res/layout/dialog_lichlam.xml" value="0.24895833333333334" />
-        <entry key="..\:/Ki_4_2/duan1/quanlinhanvien/app/src/main/res/layout/dialog_signup.xml" value="0.12158054711246201" />
-        <entry key="..\:/Ki_4_2/duan1/quanlinhanvien/app/src/main/res/layout/dialog_themlichlam.xml" value="0.2" />
-        <entry key="..\:/Ki_4_2/duan1/quanlinhanvien/app/src/main/res/layout/dialog_update.xml" value="0.12037037037037036" />
-        <entry key="..\:/Ki_4_2/duan1/quanlinhanvien/app/src/main/res/layout/frm_calam.xml" value="0.176" />
-        <entry key="..\:/Ki_4_2/duan1/quanlinhanvien/app/src/main/res/layout/frm_dangkylichlam.xml" value="0.12158054711246201" />
-        <entry key="..\:/Ki_4_2/duan1/quanlinhanvien/app/src/main/res/layout/frm_lichlam.xml" value="0.176" />
-        <entry key="..\:/Ki_4_2/duan1/quanlinhanvien/app/src/main/res/layout/frm_nhanvien.xml" value="0.12158054711246201" />
-        <entry key="..\:/Ki_4_2/duan1/quanlinhanvien/app/src/main/res/layout/item_calam.xml" value="0.176" />
-        <entry key="..\:/Ki_4_2/duan1/quanlinhanvien/app/src/main/res/layout/item_chamcong.xml" value="0.12158054711246201" />
-        <entry key="..\:/Ki_4_2/duan1/quanlinhanvien/app/src/main/res/layout/item_lichlam.xml" value="0.2" />
-        <entry key="..\:/Ki_4_2/duan1/quanlinhanvien/app/src/main/res/layout/item_nhanvien.xml" value="0.12158054711246201" />
-        <entry key="..\:/Ki_4_2/duan1/quanlinhanvien/app/src/main/res/layout/item_spinner.xml" value="0.213768115942029" />
-        <entry key="..\:/Ki_4_2/duan1/quanlinhanvien/app/src/main/res/layout/item_store.xml" value="0.24139492753623187" />
-        <entry key="..\:/Ki_4_2/duan1/quanlinhanvien/app/src/main/res/layout/nav_header_layout.xml" value="0.22644927536231885" />
-        <entry key="..\:/Ki_4_2/duan1/quanlinhanvien/app/src/main/res/layout/toolbar.xml" value="0.22644927536231885" />
-        <entry key="..\:/Ki_4_2/duan1/quanlinhanvien/app/src/main/res/menu/menu_nav.xml" value="0.25" />
-        <entry key="..\:/Sy/FPT_POLYTECHNIC/BAITAP/KY_4/DuAnMot/GIT/quanlinhanvien/app/src/main/res/drawable/bg_nav.xml" value="0.1165" />
-        <entry key="..\:/Sy/FPT_POLYTECHNIC/BAITAP/KY_4/DuAnMot/GIT/quanlinhanvien/app/src/main/res/drawable/ic_menu.xml" value="0.1165" />
-        <entry key="..\:/Sy/FPT_POLYTECHNIC/BAITAP/KY_4/DuAnMot/GIT/quanlinhanvien/app/src/main/res/layout/activity_login.xml" value="0.2" />
-        <entry key="..\:/Sy/FPT_POLYTECHNIC/BAITAP/KY_4/DuAnMot/GIT/quanlinhanvien/app/src/main/res/layout/activity_main.xml" value="0.1638888888888889" />
-        <entry key="..\:/Sy/FPT_POLYTECHNIC/BAITAP/KY_4/DuAnMot/GIT/quanlinhanvien/app/src/main/res/layout/activity_man_hinh_cho.xml" value="0.1638888888888889" />
-        <entry key="..\:/Sy/FPT_POLYTECHNIC/BAITAP/KY_4/DuAnMot/GIT/quanlinhanvien/app/src/main/res/layout/activity_manhinhcho.xml" value="0.1638888888888889" />
-        <entry key="..\:/Sy/FPT_POLYTECHNIC/BAITAP/KY_4/DuAnMot/GIT/quanlinhanvien/app/src/main/res/layout/activity_store.xml" value="0.1734375" />
-        <entry key="..\:/Sy/FPT_POLYTECHNIC/BAITAP/KY_4/DuAnMot/GIT/quanlinhanvien/app/src/main/res/layout/dialog_signup.xml" value="0.22" />
-        <entry key="..\:/Sy/FPT_POLYTECHNIC/BAITAP/KY_4/DuAnMot/GIT/quanlinhanvien/app/src/main/res/layout/dialog_update.xml" value="0.1734375" />
-        <entry key="..\:/Sy/FPT_POLYTECHNIC/BAITAP/KY_4/DuAnMot/GIT/quanlinhanvien/app/src/main/res/layout/frm_attendance.xml" value="0.1734375" />
-        <entry key="..\:/Sy/FPT_POLYTECHNIC/BAITAP/KY_4/DuAnMot/GIT/quanlinhanvien/app/src/main/res/layout/frm_dangkylichlam.xml" value="0.1734375" />
-        <entry key="..\:/Sy/FPT_POLYTECHNIC/BAITAP/KY_4/DuAnMot/GIT/quanlinhanvien/app/src/main/res/layout/frm_dangxuat.xml" value="0.2" />
-        <entry key="..\:/Sy/FPT_POLYTECHNIC/BAITAP/KY_4/DuAnMot/GIT/quanlinhanvien/app/src/main/res/layout/frm_diemdanh.xml" value="0.1638888888888889" />
-        <entry key="..\:/Sy/FPT_POLYTECHNIC/BAITAP/KY_4/DuAnMot/GIT/quanlinhanvien/app/src/main/res/layout/frm_genqrcode_layout.xml" value="0.1734375" />
-        <entry key="..\:/Sy/FPT_POLYTECHNIC/BAITAP/KY_4/DuAnMot/GIT/quanlinhanvien/app/src/main/res/layout/frm_qrcode.xml" value="0.1734375" />
-        <entry key="..\:/Sy/FPT_POLYTECHNIC/BAITAP/KY_4/DuAnMot/GIT/quanlinhanvien/app/src/main/res/layout/frm_store_2.xml" value="0.130078125" />
-        <entry key="..\:/Sy/FPT_POLYTECHNIC/BAITAP/KY_4/DuAnMot/GIT/quanlinhanvien/app/src/main/res/layout/frm_thongke.xml" value="0.2" />
-        <entry key="..\:/Sy/FPT_POLYTECHNIC/BAITAP/KY_4/DuAnMot/GIT/quanlinhanvien/app/src/main/res/layout/frm_thongtin.xml" value="0.1734375" />
-        <entry key="..\:/Sy/FPT_POLYTECHNIC/BAITAP/KY_4/DuAnMot/GIT/quanlinhanvien/app/src/main/res/layout/frm_trangchu.xml" value="0.25" />
-        <entry key="..\:/Sy/FPT_POLYTECHNIC/BAITAP/KY_4/DuAnMot/GIT/quanlinhanvien/app/src/main/res/layout/frm_vitri.xml" value="0.1734375" />
-        <entry key="..\:/Sy/FPT_POLYTECHNIC/BAITAP/KY_4/DuAnMot/GIT/quanlinhanvien/app/src/main/res/layout/item_date.xml" value="0.1422829581993569" />
-        <entry key="..\:/Sy/FPT_POLYTECHNIC/BAITAP/KY_4/DuAnMot/GIT/quanlinhanvien/app/src/main/res/layout/item_lichlam.xml" value="0.1734375" />
-        <entry key="..\:/Sy/FPT_POLYTECHNIC/BAITAP/KY_4/DuAnMot/GIT/quanlinhanvien/app/src/main/res/layout/item_nhanvien.xml" value="0.1638888888888889" />
-        <entry key="..\:/Sy/FPT_POLYTECHNIC/BAITAP/KY_4/DuAnMot/GIT/quanlinhanvien/app/src/main/res/layout/item_store.xml" value="0.1734375" />
-        <entry key="..\:/Sy/FPT_POLYTECHNIC/BAITAP/KY_4/DuAnMot/GIT/quanlinhanvien/app/src/main/res/layout/nav_header_layout.xml" value="0.5347432024169184" />
-        <entry key="..\:/Sy/FPT_POLYTECHNIC/BAITAP/KY_4/DuAnMot/GIT/quanlinhanvien/app/src/main/res/layout/toolbar.xml" value="0.22" />
-        <entry key="..\:/Sy/FPT_POLYTECHNIC/BAITAP/KY_4/DuAnMot/GIT/quanlinhanvien/app/src/main/res/menu/menu_nav.xml" value="0.1734375" />
-        <entry key="..\:/Sy/FPT_POLYTECHNIC/BAITAP/KY_4/DuAnMot/GIT/quanlinhanvien/app/src/main/res/menu/menu_tablayout.xml" value="0.1734375" />
-        <entry key="..\:/du_an_1/quanlinhanvien/app/src/main/res/layout/activity_login.xml" value="0.22826086956521738" />
+        <entry key="..\:/du_an_1/quanlinhanvien/app/src/main/res/drawable-v24/bg_nav1.xml" value="0.1805" />
+        <entry key="..\:/du_an_1/quanlinhanvien/app/src/main/res/drawable-v24/bg_nav2.xml" value="0.1805" />
+        <entry key="..\:/du_an_1/quanlinhanvien/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1295" />
+        <entry key="..\:/du_an_1/quanlinhanvien/app/src/main/res/drawable/bg_nav.xml" value="0.1295" />
+        <entry key="..\:/du_an_1/quanlinhanvien/app/src/main/res/drawable/bg_prb.xml" value="0.1295" />
+        <entry key="..\:/du_an_1/quanlinhanvien/app/src/main/res/drawable/custom_edt.xml" value="0.1295" />
+        <entry key="..\:/du_an_1/quanlinhanvien/app/src/main/res/drawable/custom_edt_cursor.xml" value="0.1805" />
+        <entry key="..\:/du_an_1/quanlinhanvien/app/src/main/res/drawable/custom_ic_email.xml" value="0.1295" />
+        <entry key="..\:/du_an_1/quanlinhanvien/app/src/main/res/drawable/custom_progressbar.xml" value="0.1295" />
+        <entry key="..\:/du_an_1/quanlinhanvien/app/src/main/res/drawable/ic_baseline_home_24.xml" value="0.1805" />
+        <entry key="..\:/du_an_1/quanlinhanvien/app/src/main/res/drawable/ic_email.xml" value="0.1805" />
+        <entry key="..\:/du_an_1/quanlinhanvien/app/src/main/res/drawable/ic_email_2.xml" value="0.1805" />
+        <entry key="..\:/du_an_1/quanlinhanvien/app/src/main/res/drawable/ic_home.xml" value="0.1805" />
+        <entry key="..\:/du_an_1/quanlinhanvien/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1805" />
+        <entry key="..\:/du_an_1/quanlinhanvien/app/src/main/res/drawable/ic_lock.xml" value="0.1805" />
+        <entry key="..\:/du_an_1/quanlinhanvien/app/src/main/res/drawable/ic_lock_2.xml" value="0.1805" />
+        <entry key="..\:/du_an_1/quanlinhanvien/app/src/main/res/drawable/ic_menu.xml" value="0.1805" />
+        <entry key="..\:/du_an_1/quanlinhanvien/app/src/main/res/drawable/ic_person.xml" value="0.1295" />
+        <entry key="..\:/du_an_1/quanlinhanvien/app/src/main/res/drawable/nav_bg.xml" value="0.1295" />
+        <entry key="..\:/du_an_1/quanlinhanvien/app/src/main/res/layout/activity_login.xml" value="0.264" />
+        <entry key="..\:/du_an_1/quanlinhanvien/app/src/main/res/layout/activity_main.xml" value="0.12360688956433637" />
         <entry key="..\:/du_an_1/quanlinhanvien/app/src/main/res/layout/activity_manhinhcho.xml" value="0.22826086956521738" />
+        <entry key="..\:/du_an_1/quanlinhanvien/app/src/main/res/layout/activity_progressbar.xml" value="0.22826086956521738" />
+        <entry key="..\:/du_an_1/quanlinhanvien/app/src/main/res/layout/dialog_signup.xml" value="0.22826086956521738" />
+        <entry key="..\:/du_an_1/quanlinhanvien/app/src/main/res/layout/frm_calam.xml" value="0.22826086956521738" />
         <entry key="..\:/du_an_1/quanlinhanvien/app/src/main/res/layout/frm_dangkylichlam.xml" value="0.22826086956521738" />
         <entry key="..\:/du_an_1/quanlinhanvien/app/src/main/res/layout/frm_dangxuat.xml" value="0.22826086956521738" />
+        <entry key="..\:/du_an_1/quanlinhanvien/app/src/main/res/layout/frm_nhanvien.xml" value="0.22826086956521738" />
         <entry key="..\:/du_an_1/quanlinhanvien/app/src/main/res/layout/frm_thongke.xml" value="0.22826086956521738" />
         <entry key="..\:/du_an_1/quanlinhanvien/app/src/main/res/layout/frm_trangchu.xml" value="0.264" />
+        <entry key="..\:/du_an_1/quanlinhanvien/app/src/main/res/layout/item_calam.xml" value="0.1721311475409836" />
+        <entry key="..\:/du_an_1/quanlinhanvien/app/src/main/res/layout/item_nhanvien.xml" value="0.22826086956521738" />
         <entry key="..\:/du_an_1/quanlinhanvien/app/src/main/res/layout/nav_header_layout.xml" value="0.12360688956433637" />
+        <entry key="..\:/du_an_1/quanlinhanvien/app/src/main/res/layout/toolbar.xml" value="0.25416666666666665" />
+        <entry key="..\:/du_an_1/quanlinhanvien/app/src/main/res/menu/menu_nav.xml" value="0.25416666666666665" />
         <entry key="..\:/github/quanlinhanvien/app/src/main/res/drawable/bg_nav.xml" value="0.1" />
         <entry key="..\:/github/quanlinhanvien/app/src/main/res/drawable/custom_edt.xml" value="0.1305" />
         <entry key="..\:/github/quanlinhanvien/app/src/main/res/drawable/ic_email_2.xml" value="0.1" />
         <entry key="..\:/github/quanlinhanvien/app/src/main/res/drawable/ic_lock_2.xml" value="0.1" />
         <entry key="..\:/github/quanlinhanvien/app/src/main/res/drawable/login_edt_bg.xml" value="0.1305" />
         <entry key="..\:/github/quanlinhanvien/app/src/main/res/layout/activity_login.xml" value="0.22" />
-        <entry key="..\:/github/quanlinhanvien/app/src/main/res/layout/activity_main.xml" value="0.21" />
-        <entry key="..\:/github/quanlinhanvien/app/src/main/res/layout/activity_manhinhcho.xml" value="0.1" />
+        <entry key="..\:/github/quanlinhanvien/app/src/main/res/layout/activity_main.xml" value="0.11231884057971014" />
         <entry key="..\:/github/quanlinhanvien/app/src/main/res/layout/activity_trang_chu.xml" value="0.1875" />
-        <entry key="..\:/github/quanlinhanvien/app/src/main/res/layout/dialog_signup.xml" value="0.22" />
-        <entry key="..\:/github/quanlinhanvien/app/src/main/res/layout/frm_attendance.xml" value="0.25" />
-        <entry key="..\:/github/quanlinhanvien/app/src/main/res/layout/frm_calam.xml" value="0.18645833333333334" />
-        <entry key="..\:/github/quanlinhanvien/app/src/main/res/layout/frm_dangkylichlam.xml" value="0.1" />
-        <entry key="..\:/github/quanlinhanvien/app/src/main/res/layout/frm_diemdanh.xml" value="0.1" />
-        <entry key="..\:/github/quanlinhanvien/app/src/main/res/layout/frm_genqrcode_layout.xml" value="0.1" />
-        <entry key="..\:/github/quanlinhanvien/app/src/main/res/layout/frm_lichlam.xml" value="0.18645833333333334" />
-        <entry key="..\:/github/quanlinhanvien/app/src/main/res/layout/frm_nfc_write.xml" value="0.13505311077389984" />
-        <entry key="..\:/github/quanlinhanvien/app/src/main/res/layout/frm_nhanvien.xml" value="0.18645833333333334" />
-        <entry key="..\:/github/quanlinhanvien/app/src/main/res/layout/frm_storedetail.xml" value="0.25" />
-        <entry key="..\:/github/quanlinhanvien/app/src/main/res/layout/frm_thongke.xml" value="0.1" />
-        <entry key="..\:/github/quanlinhanvien/app/src/main/res/layout/frm_trangchu.xml" value="0.18645833333333334" />
-        <entry key="..\:/github/quanlinhanvien/app/src/main/res/layout/frn_mapstore.xml" value="0.1390625" />
-        <entry key="..\:/github/quanlinhanvien/app/src/main/res/layout/item_calam.xml" value="0.18645833333333334" />
-        <entry key="..\:/github/quanlinhanvien/app/src/main/res/layout/item_date.xml" value="0.25" />
-        <entry key="..\:/github/quanlinhanvien/app/src/main/res/layout/item_lichlam.xml" value="0.25" />
-        <entry key="..\:/github/quanlinhanvien/app/src/main/res/layout/item_store.xml" value="0.18645833333333334" />
-        <entry key="..\:/github/quanlinhanvien/app/src/main/res/layout/nav_header_layout.xml" value="0.18645833333333334" />
+        <entry key="..\:/github/quanlinhanvien/app/src/main/res/layout/item_nhanvien.xml" value="0.22" />
         <entry key="..\:/github/quanlinhanvien/app/src/main/res/layout/toolbar.xml" value="0.1875" />
-        <entry key="..\:/github/quanlinhanvien/app/src/main/res/menu/menu_nav.xml" value="0.25" />
-        <entry key="..\:/github/quanlinhanvien/app/src/main/res/xml/nfc.xml" value="0.18541666666666667" />
       </map>
     </option>
   </component>

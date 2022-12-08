@@ -82,6 +82,13 @@ public class MainActivity extends AppCompatActivity {
         menu_nav();
         fragment = new frm_trangchu();
         onRestoreInstanceState(savedInstanceState);
+
+        // phan quyen
+        navigationView.getMenu().findItem(R.id.menu_store).setVisible(idNV == 2);
+        navigationView.getMenu().findItem(R.id.menu_nhanvien).setVisible(idNV ==2);
+        navigationView.getMenu().findItem(R.id.menu_genqrcode).setVisible(false);
+
+
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -156,6 +163,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         usname.setText(tenNV);
+
     }
 
     @Override

@@ -338,7 +338,6 @@ public class frm_lichlam extends Fragment {
             public void onClick(View v) {
                 if (yearn == 0) {
                     String date0 = LocalDate.now().getYear() + "-" + LocalDate.now().getMonthValue() + "-" + LocalDate.now().getDayOfMonth();
-
                     demoAddAPI(manv, macl, date0);
                     Toast.makeText(getContext(), "Thêm thành công", Toast.LENGTH_SHORT).show();
                     dialog.dismiss();
@@ -350,6 +349,7 @@ public class frm_lichlam extends Fragment {
                 }
                 demoCallAPI(idnv,thanght.getValue());
             }
+
         });
         btnhuycuoi.setOnClickListener(new View.OnClickListener() {
             @Override

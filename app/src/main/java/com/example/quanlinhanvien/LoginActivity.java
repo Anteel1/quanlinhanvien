@@ -147,6 +147,7 @@ public class LoginActivity extends AppCompatActivity {
                         Bundle bundle = new Bundle();
                         bundle.putInt("idNV", list1.get(i).getMaNV());
                         bundle.putInt("chucvu",list1.get(i).getMaCV());
+                        bundle.putString("Name",list1.get(i).getTenNV());
                         intent.putExtras(bundle);
                         startActivity(intent);
                         finish();

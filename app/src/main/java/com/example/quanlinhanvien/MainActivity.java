@@ -23,7 +23,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -39,18 +38,7 @@ import com.example.quanlinhanvien.fragment.frm_nhanvien;
 import com.example.quanlinhanvien.fragment.frm_store;
 import com.example.quanlinhanvien.fragment.frm_thongke;
 import com.example.quanlinhanvien.fragment.frm_trangchu;
-import com.example.quanlinhanvien.model.nhanvien;
-import com.example.quanlinhanvien.service.service_API;
 import com.google.android.material.navigation.NavigationView;
-import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
-
-import java.util.ArrayList;
-
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.CompositeDisposable;
-import io.reactivex.schedulers.Schedulers;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
@@ -71,9 +59,13 @@ public class MainActivity extends AppCompatActivity {
     private String[][] techListsArray = null;
     private PendingIntent pendingIntent = null;
 
+
+
     private HashMap config = new HashMap();
+
+    String tenNV;
     private View headerLayout;
-    int idnv;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -85,6 +77,7 @@ public class MainActivity extends AppCompatActivity {
         Bundle bundle = intent.getExtras();
         int idNV = bundle.getInt("idNV", -1);
         int chucvu= bundle.getInt("chucvu",-1);
+        tenNV = bundle.getString("Name","");
         anhxa();
         menu_nav();
         fragment = new frm_trangchu();
@@ -162,6 +155,7 @@ public class MainActivity extends AppCompatActivity {
                 drawerLayout.openDrawer(navigationView);
             }
         });
+        usname.setText(tenNV);
     }
 
     @Override

@@ -88,9 +88,6 @@ public class MainActivity extends AppCompatActivity {
         navigationView.getMenu().findItem(R.id.menu_nhanvien).setVisible(chucvu ==2);
         navigationView.getMenu().findItem(R.id.menu_genqrcode).setVisible(false);
 
-        configCloudinary();
-
-
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -173,6 +170,7 @@ public class MainActivity extends AppCompatActivity {
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction().
                     add(R.id.fragment_view, fragment).commit();
+            configCloudinary();
         } else {
             getSupportFragmentManager().beginTransaction().
                     replace(R.id.fragment_view, fragment).commit();

@@ -84,9 +84,11 @@ public class MainActivity extends AppCompatActivity {
         onRestoreInstanceState(savedInstanceState);
 
         // phan quyen
-        navigationView.getMenu().findItem(R.id.menu_store).setVisible(idNV == 2);
-        navigationView.getMenu().findItem(R.id.menu_nhanvien).setVisible(idNV ==2);
+        navigationView.getMenu().findItem(R.id.menu_store).setVisible(chucvu == 2);
+        navigationView.getMenu().findItem(R.id.menu_nhanvien).setVisible(chucvu ==2);
         navigationView.getMenu().findItem(R.id.menu_genqrcode).setVisible(false);
+
+        configCloudinary();
 
 
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {

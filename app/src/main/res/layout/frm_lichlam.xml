@@ -3,11 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_height="match_parent"
     android:layout_width="match_parent"
+
     >
 <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
+
 
     android:background="@color/white"
     android:orientation="vertical">
@@ -118,26 +119,8 @@
     <ListView
         android:id="@+id/listviewll"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="20"
+        android:layout_height="wrap_content"
         />
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:layout_weight="1"
-        android:gravity="bottom"
-        android:layout_gravity="right"
-        >
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/btnthemlichlam"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:backgroundTint="@color/statusbar"
-            android:src="@drawable/ic_baseline_add_24"
-            app:tint="@color/white"
-            ></com.google.android.material.floatingactionbutton.FloatingActionButton>
-    </LinearLayout>
 </LinearLayout>
 
 </LinearLayout>
@@ -147,4 +130,15 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:visibility="gone" />
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:layout_margin="4dp"
+        android:id="@+id/btnthemlichlam"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/statusbar"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:src="@drawable/ic_baseline_add_24"
+        app:tint="@color/white"
+        ></com.google.android.material.floatingactionbutton.FloatingActionButton>
 </RelativeLayout>

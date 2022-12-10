@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -60,6 +61,8 @@ public class frm_thongke extends Fragment implements OnChartValueSelectedListene
     int idNV;
     PieChart mChart;
     float[] yData ;
+
+    ProgressBar progressBar;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -69,6 +72,9 @@ public class frm_thongke extends Fragment implements OnChartValueSelectedListene
         btnback = view.findViewById(R.id.btnBack);
         btnnext = view.findViewById(R.id.btnNext);
         txtSalary = view.findViewById(R.id.txtTienLuong);
+
+        progressBar = view.findViewById(R.id.prb_login);
+        progressBar.setVisibility(View.VISIBLE);
         // chart
         mChart = view.findViewById(R.id.piechart);
         mChart.setHoleRadius(35f);
@@ -87,6 +93,7 @@ public class frm_thongke extends Fragment implements OnChartValueSelectedListene
         btnback.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                progressBar.setVisibility(View.VISIBLE);
                 previousMonthAction();
                 loadData();
             }
@@ -94,6 +101,7 @@ public class frm_thongke extends Fragment implements OnChartValueSelectedListene
         btnnext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                progressBar.setVisibility(View.VISIBLE);
                 nextMonthAction();
                 loadData();
             }
@@ -200,6 +208,7 @@ public class frm_thongke extends Fragment implements OnChartValueSelectedListene
     private void handleError(Throwable error) {
         Log.d("erro", error.toString());
         Toast.makeText(getContext(), error.toString(), Toast.LENGTH_SHORT).show();
+        progressBar.setVisibility(View.GONE);
         //khi gọi API KHÔNG THÀNH CÔNG thì thực hiện xử lý ở đây
     }
 
@@ -288,5 +297,6 @@ public class frm_thongke extends Fragment implements OnChartValueSelectedListene
         PieData pieData=new PieData(pieDataSet);
         pieChart.setData(pieData);
         pieChart.invalidate();
+        progressBar.setVisibility(View.GONE);
     }
 }

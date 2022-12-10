@@ -16,7 +16,7 @@
         android:textSize="46sp"
         android:textStyle="bold" />
 
-    <TextClock
+    <TextView
         android:id="@+id/tc_ngay"
         style="@style/textMedium"
         android:layout_width="match_parent"

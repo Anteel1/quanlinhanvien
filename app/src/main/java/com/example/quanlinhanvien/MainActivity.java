@@ -71,6 +71,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         // nfc
+        initNFC();
         //get id nhan vien
         intent = getIntent();
         Bundle bundle = intent.getExtras();
@@ -230,9 +231,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
         if (fragment instanceof frm_attendance) {
-
-            initNFC();
-
             // Use NFC to read tag
             String action = intent.getAction();
             if (NfcAdapter.ACTION_TAG_DISCOVERED.equals(action)
@@ -255,7 +253,7 @@ public class MainActivity extends AppCompatActivity {
                     try
                     {
                         data = new String(payload1, languageCodeLength1 + 1, payload1.length - languageCodeLength1 - 1, textEncoding1);
-                        Toast.makeText(this, "Đã đọc được NFC", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(this, "Read NFC success !", Toast.LENGTH_SHORT).show();
                     }
                     catch (UnsupportedEncodingException e)
                     {
@@ -267,6 +265,8 @@ public class MainActivity extends AppCompatActivity {
                     Toast.makeText(this, "No tag found", Toast.LENGTH_SHORT).show();
                 }
             }
+        }else{
+            Toast.makeText(this, "Put tag on Timekeeping", Toast.LENGTH_SHORT).show();
         }
         intent.putExtra("dataNFC",data);
         setIntent(intent);

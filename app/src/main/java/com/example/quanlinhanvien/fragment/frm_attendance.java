@@ -18,6 +18,7 @@ import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextClock;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -81,7 +82,7 @@ public class frm_attendance extends Fragment {
     int check;
     String dataNFC;
 
-
+    ProgressBar progressBar;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -98,6 +99,7 @@ public class frm_attendance extends Fragment {
         btnUpdate = v.findViewById(R.id.btnUpdateIMG);
         imgCamera = v.findViewById(R.id.imgCamera);
         layoutNFC = v.findViewById(R.id.layout_readNFC);
+        progressBar = v.findViewById(R.id.prb_login);
 
 
         tc_gio.setFormat12Hour("hh:mm a");
@@ -364,10 +366,9 @@ public class frm_attendance extends Fragment {
                     break;
                 }
             }
-            if(maCL != 1 || maCL  !=2){
+            if(maCL != 1 & maCL  !=2){
                 Toast.makeText(getContext(), "Too early to off shift", Toast.LENGTH_SHORT).show();
             }else{
-
                 demoCallAPI_checkOut();
             }
         } else {
@@ -478,7 +479,7 @@ public class frm_attendance extends Fragment {
 
     private void handleResponse_checkIn(Number number) {
         //API trả về dữ liệu thành công, thực hiện việc lấy data
-        if(Integer.parseInt(String.valueOf(number))  >1){
+        if(Integer.parseInt(String.valueOf(number))  ==2){
             Toast.makeText(getContext(), "Success. Thank you !", Toast.LENGTH_SHORT).show();
             txtTitle.setVisibility(View.GONE);
             btnNFC.setVisibility(View.VISIBLE);
@@ -511,7 +512,7 @@ public class frm_attendance extends Fragment {
 
     private void handleResponse_checkOut(Number number) {
         //API trả về dữ liệu thành công, thực hiện việc lấy data
-        if(Integer.parseInt(String.valueOf(number))  >1){
+        if(Integer.parseInt(String.valueOf(number))  ==2 ){
             Toast.makeText(getContext(), "Success. Thank you !", Toast.LENGTH_SHORT).show();
             txtTitle.setVisibility(View.GONE);
             btnNFC.setVisibility(View.VISIBLE);
@@ -519,7 +520,6 @@ public class frm_attendance extends Fragment {
             Log.d("size:"," "+number);
         }else{
             Toast.makeText(getContext(), "Something went wrong, contact developer", Toast.LENGTH_SHORT).show();
-
         }
 
     }

@@ -46,7 +46,9 @@
         <entry key="..\:/github/quanlinhanvien/app/src/main/res/layout/activity_login.xml" value="0.22" />
         <entry key="..\:/github/quanlinhanvien/app/src/main/res/layout/activity_main.xml" value="0.11231884057971014" />
         <entry key="..\:/github/quanlinhanvien/app/src/main/res/layout/activity_trang_chu.xml" value="0.1875" />
-        <entry key="..\:/github/quanlinhanvien/app/src/main/res/layout/item_nhanvien.xml" value="0.22" />
+        <entry key="..\:/github/quanlinhanvien/app/src/main/res/layout/frm_attendance.xml" value="0.1" />
+        <entry key="..\:/github/quanlinhanvien/app/src/main/res/layout/frm_nhanvien.xml" value="0.22" />
+        <entry key="..\:/github/quanlinhanvien/app/src/main/res/layout/item_nhanvien.xml" value="0.25" />
         <entry key="..\:/github/quanlinhanvien/app/src/main/res/layout/toolbar.xml" value="0.1875" />
       </map>
     </option>

@@ -9,7 +9,6 @@ import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
-import android.os.CountDownTimer;
 import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.util.Patterns;
@@ -55,21 +54,12 @@ public class LoginActivity extends AppCompatActivity {
         btn_signin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(kiemtra()) {
+                    demoCallAPI();
+                }else{
 
-                new CountDownTimer(4000, 1000) {
+                }
 
-                    public void onTick(long millisUntilFinished) {
-                        progressBar.setVisibility(View.VISIBLE);
-//                        mTextField.setText("seconds remaining: " + millisUntilFinished / 1000);
-                    }
-
-                    public void onFinish() {
-//                        mTextField.setText("done!");
-                        progressBar.setVisibility(View.GONE);
-                        kiemtra();
-                        demoCallAPI();
-                    }
-                }.start();
             }
         });
 
@@ -89,22 +79,25 @@ public class LoginActivity extends AppCompatActivity {
     }
 
 
-    public void kiemtra() {
+    public boolean kiemtra() {
         String thongbao_email = "";
         String email = edt_email.getText().toString();
-
+        boolean check = true;
         //validate email
         if (!email.isEmpty()) {
             if (Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+
             } else {
-                thongbao_email += "Hãy nhập đúng email của bạn";
+                thongbao_email += "Enter the correct email";
                 txtlayoutEmail.setHelperText(thongbao_email);
                 txtlayoutEmail.setHelperTextColor(getResources().getColorStateList(R.color.red));
+                check = false;
             }
         } else {
-            thongbao_email += "Email không được để trống";
+            thongbao_email += "Email cannot be empty ";
             txtlayoutEmail.setHelperText(thongbao_email);
             txtlayoutEmail.setHelperTextColor(getResources().getColorStateList(R.color.red));
+            check = false;
         }
 
         String password = edt_password.getText().toString();
@@ -112,12 +105,12 @@ public class LoginActivity extends AppCompatActivity {
         String thongbao_password = "";
         if (!password.isEmpty()) {
         } else {
-            thongbao_password += "Password không được để trống";
+            thongbao_password += "Password cannot be empty ";
             txtLayoutPassword.setHelperText(thongbao_password);
             txtLayoutPassword.setHelperTextColor(getResources().getColorStateList(R.color.red));
+            check = false;
         }
-
-
+        return check;
     }
 
     private void demoCallAPI() {
@@ -137,35 +130,41 @@ public class LoginActivity extends AppCompatActivity {
 
     private void handleResponse(ArrayList<nhanvien> list1) {
         //API trả về dữ liệu thành công, thực hiện việc lấy data
-         Toast.makeText(LoginActivity.this, "thành công", Toast.LENGTH_SHORT).show();
          for (int i = 0; i < list1.size(); i++) {
             if ((edt_email.getText().toString()).equals(list1.get(i).getTaiKhoan())) {
                 if ((edt_password.getText().toString()).equals(list1.get(i).getMatKhau())) {
                     if(checkiemei(list1.get(i).getMaNV(), list1.get(i).getImei())){
-                        Toast.makeText(LoginActivity.this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(LoginActivity.this, "Login success !", Toast.LENGTH_SHORT).show();
                         intent = new Intent(LoginActivity.this, MainActivity.class);
                         Bundle bundle = new Bundle();
                         bundle.putInt("idNV", list1.get(i).getMaNV());
                         bundle.putInt("chucvu",list1.get(i).getMaCV());
                         bundle.putString("Name",list1.get(i).getTenNV());
                         intent.putExtras(bundle);
+
+                        progressBar.setVisibility(View.GONE);
+
                         startActivity(intent);
                         finish();
                         break;
                     }else{
-                        Toast.makeText(LoginActivity.this, "Chưa đúng Imei", Toast.LENGTH_SHORT).show();
+                        progressBar.setVisibility(View.GONE);
+                        Toast.makeText(LoginActivity.this, "Not correct Phone", Toast.LENGTH_SHORT).show();
                         break;
                     }
 
                 } else {
-                    txtLayoutPassword.setHelperText("Sai mật khẩu");
+                    txtLayoutPassword.setHelperText("Not correct password");
                     progressBar.setVisibility(View.GONE);
                     txtLayoutPassword.setHelperTextColor(getResources().getColorStateList(R.color.red));
                     break;
-                }
-            }
+                }}}
+            txtlayoutEmail.setHelperText("Not correct email");
+            txtlayoutEmail.setHelperTextColor(getResources().getColorStateList(R.color.red));
+        Toast.makeText(this, "Login failed", Toast.LENGTH_SHORT).show();
+        progressBar.setVisibility(View.GONE);
         }
-    }
+
 
     private void handleError(Throwable error) {
         Log.d("erro", error.toString());
@@ -234,7 +233,7 @@ public class LoginActivity extends AppCompatActivity {
 
 
     private void handleResponseImei(Number number) {
-        Toast.makeText(this, "post imei thành công", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Get Imei success", Toast.LENGTH_SHORT).show();
     }
     private void handleErrorImei(Throwable throwable) {
     }

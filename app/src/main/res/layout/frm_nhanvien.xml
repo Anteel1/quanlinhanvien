@@ -12,28 +12,52 @@
         android:layout_alignParentTop="true"
         android:text="Total employees"
         android:textAlignment="center"
-        android:textSize="16dp" />
-
+        android:fontFamily="@font/roboto_light"
+        android:textColor="@color/statusbar"
+        android:padding="8dp"
+        android:textSize="18dp" />
     <View
         android:layout_width="match_parent"
         android:layout_height="2dp"
         android:layout_below="@+id/totalListNV"
-        android:background="#919090" />
-
-    <TextView
-        android:id="@+id/line1"
+        android:background="@color/statusbar" />
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:orientation="horizontal"
         android:layout_below="@+id/totalListNV"
-        android:layout_margin="10dp"
-        android:text="Name"
-        android:textStyle="bold" />
+        android:id="@+id/linenear01"
+        >
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            android:text="Staff's name"
+            android:textColor="@color/statusbar"
+            android:fontFamily="@font/roboto_light"
+            android:layout_weight="1"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            android:text="Staff's email"
+            android:textColor="@color/statusbar"
+            android:fontFamily="@font/roboto_light"
+            android:layout_weight="1"
+            android:textStyle="bold" />
+
+    </LinearLayout>
 
     <View
         android:layout_width="match_parent"
         android:layout_height="2dp"
-        android:layout_below="@+id/line1"
-        android:background="#919090" />
+        android:layout_below="@+id/linenear01"
+        android:id="@+id/line1"
+        android:layout_marginBottom="4dp"
+        android:background="@color/statusbar" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rcv_nhanvien"
@@ -73,5 +97,11 @@
             android:textSize="18sp" />
 
     </LinearLayout>
+    <ProgressBar
+        android:id="@+id/prb_login"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:visibility="gone" />
 
 </RelativeLayout>

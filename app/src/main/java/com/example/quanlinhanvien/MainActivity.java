@@ -71,7 +71,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         // nfc
-        initNFC();
         //get id nhan vien
         intent = getIntent();
         Bundle bundle = intent.getExtras();
@@ -82,6 +81,8 @@ public class MainActivity extends AppCompatActivity {
         menu_nav();
         fragment = new frm_trangchu();
         onRestoreInstanceState(savedInstanceState);
+
+        configCloudinary();
 
         // phan quyen
         navigationView.getMenu().findItem(R.id.menu_store).setVisible(chucvu == 2);
@@ -170,7 +171,6 @@ public class MainActivity extends AppCompatActivity {
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction().
                     add(R.id.fragment_view, fragment).commit();
-            configCloudinary();
         } else {
             getSupportFragmentManager().beginTransaction().
                     replace(R.id.fragment_view, fragment).commit();
@@ -230,6 +230,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
         if (fragment instanceof frm_attendance) {
+
+            initNFC();
+
             // Use NFC to read tag
             String action = intent.getAction();
             if (NfcAdapter.ACTION_TAG_DISCOVERED.equals(action)

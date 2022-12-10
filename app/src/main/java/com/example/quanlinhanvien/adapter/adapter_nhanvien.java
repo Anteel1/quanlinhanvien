@@ -22,14 +22,12 @@ import java.util.ArrayList;
 public class adapter_nhanvien extends RecyclerView.Adapter<adapter_nhanvien.ViewHolder>{
     private final ItemClickListener itemClickListener;
     Context context;
-    ArrayList<String> list;
     ArrayList<nhanvien> listNV;
     int row_index = -1;
 
 
-    public adapter_nhanvien(Context context , ArrayList<String> list, ArrayList<nhanvien> listNV, ItemClickListener itemClickListener){
+    public adapter_nhanvien(Context context , ArrayList<nhanvien> listNV, ItemClickListener itemClickListener){
         this.context = context;
-        this.list = list;
         this.listNV = listNV;
         this.itemClickListener = itemClickListener;
     }
@@ -46,9 +44,9 @@ public class adapter_nhanvien extends RecyclerView.Adapter<adapter_nhanvien.View
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, @SuppressLint("RecyclerView") int position) {
-        String str = list.get(position);
-        nhanvien nv = listNV.get(position);
+        String str = listNV.get(position).getTenNV();
         holder.tv.setText(str);
+        holder.tvEmail.setText(listNV.get(position).getTaiKhoan());
 
         holder.cardView.setOnClickListener(new View.OnClickListener() {
 
@@ -56,28 +54,32 @@ public class adapter_nhanvien extends RecyclerView.Adapter<adapter_nhanvien.View
             public void onClick(View v) {
                 row_index = position;
                 notifyDataSetChanged();
-//                holder.linearLayout.setBackgroundColor(Color.GREEN);
                 itemClickListener.onClick(position);
             }
         });
         if(row_index==position){
             holder.linearLayout.setBackgroundColor(Color.parseColor("#73AB6B"));
+            holder.tv.setTextColor(Color.WHITE);
+            holder.tvEmail.setTextColor(Color.WHITE);
         }
         else
         {
             holder.linearLayout.setBackgroundColor(Color.parseColor("#ffffff"));
+            holder.tv.setTextColor(Color.parseColor("#73AB6B"));
+            holder.tvEmail.setTextColor(Color.parseColor("#73AB6B"));
         }
+
     }
 
     @Override
     public int getItemCount() {
-        return list.size();
+        return listNV.size();
     }
 //    public interface ItemClickListener {
 //        void onClick(nhanvien nv);
 //    }
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        TextView tv;
+        TextView tv,tvEmail;
         LinearLayout linearLayout;
         CardView cardView;
         public ViewHolder(@NonNull View itemView, ItemClickListener itemClickListener) {
@@ -85,7 +87,7 @@ public class adapter_nhanvien extends RecyclerView.Adapter<adapter_nhanvien.View
             tv = itemView.findViewById(R.id.txtTenNV);
             linearLayout = itemView.findViewById(R.id.click);
             cardView = itemView.findViewById(R.id.cardview);
-
+            tvEmail = itemView.findViewById(R.id.txtEmail);
         }
     }
 

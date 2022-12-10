@@ -186,7 +186,7 @@ public class frm_attendance extends Fragment {
                 }
             }
         }else{
-            Toast.makeText(getContext(), "Failed !", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), "Failed to get NFC TAG!", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -291,6 +291,7 @@ public class frm_attendance extends Fragment {
         if (gpsTracker.canGetLocation()) {
             double latitude = gpsTracker.getLatitude();
             double longitude = gpsTracker.getLongitude();
+            Toast.makeText(getContext(), "Get GPS success", Toast.LENGTH_SHORT).show();
             return new LatLng(latitude, longitude);
         } else {
             // gpsTracker.showSettingsAlert();
@@ -337,7 +338,7 @@ public class frm_attendance extends Fragment {
                     layout_scan.setVisibility(View.GONE);
                     layoutNFC.setVisibility(View.GONE);
                     ok = 2;
-                    Toast.makeText(getContext(), "Ok check in success", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "Ok check location success", Toast.LENGTH_SHORT).show();
                     break;
                 }
             }
@@ -348,25 +349,30 @@ public class frm_attendance extends Fragment {
             }
         } else {
             Log.d("Distance", "noooooo");
-            Toast.makeText(getContext(), "Bạn không nằm trong khu vực cửa hàng", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), "You are not in the workplace", Toast.LENGTH_SHORT).show();
         }
     }
 
     private void checkOut() {
         if (getData(2).size() == 1) {
             for (calam calam : listCalam) {
-                if (Integer.parseInt(calam.getGioKT().substring(0,2))  <= gio) {
+                if (Integer.parseInt(calam.getGioKT().substring(0,2))  <= gio && Integer.parseInt(calam.getGioBD().substring(0,2)) +1< gio) {
                     maCL = calam.getMaCL();
                     layout_scan.setVisibility(View.GONE);
                     layoutNFC.setVisibility(View.GONE);
-                    Toast.makeText(getContext(), "Ok check out success", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "Ok check location success", Toast.LENGTH_SHORT).show();
                     break;
                 }
             }
-            demoCallAPI_checkOut();
+            if(maCL != 1 || maCL  !=2){
+                Toast.makeText(getContext(), "Too early to off shift", Toast.LENGTH_SHORT).show();
+            }else{
+
+                demoCallAPI_checkOut();
+            }
         } else {
             Log.d("Distance", "noooooo");
-            Toast.makeText(getContext(), "Bạn không nằm trong khu vực cửa hàng", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), "You are not in the workplace", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -402,7 +408,7 @@ public class frm_attendance extends Fragment {
                         out.close();
                     }catch (Exception ex){
                         Log.d("exception   ",ex.toString());
-                        Toast.makeText(getContext(), "Chấm công thất bại, thử lại", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), "Can not get Image !", Toast.LENGTH_SHORT).show();
                     }
 
 
@@ -472,8 +478,15 @@ public class frm_attendance extends Fragment {
 
     private void handleResponse_checkIn(Number number) {
         //API trả về dữ liệu thành công, thực hiện việc lấy data
-        Toast.makeText(getContext(), "Chấm công thành công", Toast.LENGTH_SHORT).show();
-        Log.d("size:"," "+number);
+        if(Integer.parseInt(String.valueOf(number))  >1){
+            Toast.makeText(getContext(), "Success. Thank you !", Toast.LENGTH_SHORT).show();
+            txtTitle.setVisibility(View.GONE);
+            btnNFC.setVisibility(View.VISIBLE);
+            btnQRCode.setVisibility(View.VISIBLE);
+            Log.d("size:"," "+number);
+        }else{
+            Toast.makeText(getContext(), "Something went wrong, contact developer", Toast.LENGTH_SHORT).show();
+        }
     }
 
     private void handleError_checkIn(Throwable error) {
@@ -498,11 +511,17 @@ public class frm_attendance extends Fragment {
 
     private void handleResponse_checkOut(Number number) {
         //API trả về dữ liệu thành công, thực hiện việc lấy data
-        Toast.makeText(getContext(), "Chấm công thành công", Toast.LENGTH_SHORT).show();
-        txtTitle.setVisibility(View.GONE);
-        btnNFC.setVisibility(View.VISIBLE);
-        btnQRCode.setVisibility(View.VISIBLE);
-        Log.d("size:"," "+number);
+        if(Integer.parseInt(String.valueOf(number))  >1){
+            Toast.makeText(getContext(), "Success. Thank you !", Toast.LENGTH_SHORT).show();
+            txtTitle.setVisibility(View.GONE);
+            btnNFC.setVisibility(View.VISIBLE);
+            btnQRCode.setVisibility(View.VISIBLE);
+            Log.d("size:"," "+number);
+        }else{
+            Toast.makeText(getContext(), "Something went wrong, contact developer", Toast.LENGTH_SHORT).show();
+
+        }
+
     }
 
     private void handleError_checkOut(Throwable error) {

@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,7 +29,6 @@ import com.google.android.material.textfield.TextInputEditText;
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
@@ -42,12 +42,12 @@ public class frm_nhanvien extends Fragment implements  ItemClickListener {
     RecyclerView recyclerView;
     TextView txtTotal, txtTitle;
     adapter_nhanvien adapter_nhanvien;
-    String ngay;
     TextInputEditText txtName, txtNameUser, txtPassword, txtMaCV, txtImei, txtMaNV;
     Button btnsignup, btnUpdate, btnDangky;
     int maNV;
-    HashMap<String, Integer> id = new HashMap<String, Integer>();
+    int position;
 
+    ProgressBar progressBar;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -58,9 +58,11 @@ public class frm_nhanvien extends Fragment implements  ItemClickListener {
         btnsignup = view.findViewById(R.id.btnsignup);
         btnUpdate = view.findViewById(R.id.btnupdate);
 
+        progressBar = view.findViewById(R.id.prb_login);
+        progressBar.setVisibility(View.VISIBLE);
+
         list = new ArrayList<>();
         listNV = new ArrayList<>();
-        loaddata();
         demoCallAPI();
 
         btnsignup.setOnClickListener(new View.OnClickListener() {
@@ -75,10 +77,6 @@ public class frm_nhanvien extends Fragment implements  ItemClickListener {
                 openDialog(2, maNV);
             }
         });
-
-
-
-
         return view;
     }
 
@@ -87,9 +85,9 @@ public class frm_nhanvien extends Fragment implements  ItemClickListener {
 
         recyclerView.setLayoutManager(linearLayoutManager);
 
-        adapter_nhanvien = new adapter_nhanvien(getContext(), list, listNV, this);
+        adapter_nhanvien = new adapter_nhanvien(getContext(), listNV, this);
         recyclerView.setAdapter(adapter_nhanvien);
-
+        progressBar.setVisibility(View.GONE);
     }
 
     private void demoCallAPI() {
@@ -109,15 +107,13 @@ public class frm_nhanvien extends Fragment implements  ItemClickListener {
 
     private void handleResponse(ArrayList<nhanvien> list1) {
         //API trả về dữ liệu thành công, thực hiện việc lấy data
-
+        listNV.clear();
         for (int i = 0; i < list1.size(); i++) {
-            list.add(i, list1.get(i).getTenNV());
-            nhanvien nv = list1.get(i);
             listNV.add(list1.get(i));
         }
         Log.d("========TAG", "handleResponse: "+listNV.size());
-        adapter_nhanvien.notifyDataSetChanged();
         txtTotal.setText("Total employees: " + list1.size());
+        loaddata();
     }
 
     private void handleError(Throwable error) {
@@ -125,21 +121,6 @@ public class frm_nhanvien extends Fragment implements  ItemClickListener {
         Toast.makeText(getContext(), error.toString(), Toast.LENGTH_SHORT).show();
         //khi gọi API KHÔNG THÀNH CÔNG thì thực hiện xử lý ở đây
     }
-
-//    private void showDatePicker() {
-//        DatePickerDialog datePickerDialog = new DatePickerDialog(
-//                getContext(), this, Calendar.getInstance().get(Calendar.YEAR),
-//                Calendar.getInstance().get(Calendar.MONTH),
-//                Calendar.getInstance().get(Calendar.DAY_OF_MONTH)
-//        );
-//        datePickerDialog.show();
-//    }
-//
-//    @Override
-//    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-//        ngay = dayOfMonth + "-" + month + "-" + year;
-////        txtCreateDate.setText(ngay);
-//    }
 
     private void openDialog(int type, int manv) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
@@ -166,34 +147,30 @@ public class frm_nhanvien extends Fragment implements  ItemClickListener {
                 public void onClick(View v) {
                     demoCallAPIaddNV(txtName.getText().toString(), txtNameUser.getText().toString());
                     dialog.dismiss();
-                    demoCallAPI();
+                    progressBar.setVisibility(View.VISIBLE);
                 }
             });
         } else {
             txtTitle.setText("Update Profile");
             btnDangky.setText("Update");
             txtMaNV.setVisibility(View.GONE);
-            txtPassword.setText(listNV.get(manv).getMatKhau());
-            txtNameUser.setText(listNV.get(manv).getTaiKhoan());
-            txtMaCV.setText(listNV.get(manv).getMaCV()+"");
-            txtImei.setText(listNV.get(manv).getImei());
-            txtName.setText(listNV.get(manv).getTenNV());
+            txtPassword.setText(listNV.get(position).getMatKhau());
+            txtNameUser.setText(listNV.get(position).getTaiKhoan());
+            txtMaCV.setText(listNV.get(position).getMaCV()+"");
+            txtImei.setText(listNV.get(position).getImei());
+            txtName.setText(listNV.get(position).getTenNV());
 
-            txtMaNV.setText(""+manv);
             btnDangky.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    int ma = manv+1;
-                    demoCallAPIupdateNV(ma, txtName.getText().toString(),
+                    demoCallAPIupdateNV(maNV, txtName.getText().toString(),
                             txtNameUser.getText().toString(), txtPassword.getText().toString(),
                             txtImei.getText().toString(), Integer.parseInt(txtMaCV.getText().toString()));
                     dialog.dismiss();
-                    demoCallAPI();
+                    progressBar.setVisibility(View.VISIBLE);
                 }
             });
-            Toast.makeText(getContext(), "Cập nhật", Toast.LENGTH_SHORT).show();
         }
-
     }
 
     private void demoCallAPIaddNV(String tenNV, String taikhoan) {
@@ -213,8 +190,13 @@ public class frm_nhanvien extends Fragment implements  ItemClickListener {
 
 
     private void handleResponseAddNV(Number number) {
-        Toast.makeText(getContext(), "add nhân viên thành công", Toast.LENGTH_SHORT).show();
-        demoCallAPI();
+        if(Integer.parseInt(String.valueOf(number)) >=1){
+            Toast.makeText(getContext(), "Sign up success ! ", Toast.LENGTH_SHORT).show();
+            demoCallAPI();
+        }else{
+            Toast.makeText(getContext(), "Something went wrong !", Toast.LENGTH_SHORT).show();
+        }
+
     }
 
     private void handleErrorAddNV(Throwable throwable) {
@@ -236,23 +218,20 @@ public class frm_nhanvien extends Fragment implements  ItemClickListener {
     }
 
     private void handleResponseUpdateNV(Number number) {
-        Toast.makeText(getContext(), "update thành công ", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(), "Update success ! ", Toast.LENGTH_SHORT).show();
         demoCallAPI();
     }
 
     private void handleErrorUpdateNV(Throwable throwable) {
         Log.d("=============TAG", "handleErrorUpdateNV: " + throwable);
-        Toast.makeText(getContext(), "update thất bại " + throwable, Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(), "Update failed !" + throwable, Toast.LENGTH_SHORT).show();
 
     }
 
 
     @Override
     public void onClick(int pos) {
-        id.put("id", pos);
-        maNV =id.get("id");
-
-        Toast.makeText(getContext(), "đã chọn ", Toast.LENGTH_SHORT).show();
-
+        position = pos;
+        maNV= listNV.get(pos).getMaNV();
     }
 }

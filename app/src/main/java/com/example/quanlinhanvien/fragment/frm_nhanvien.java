@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ProgressBar;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,6 +22,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.quanlinhanvien.R;
+import com.example.quanlinhanvien.adapter.adapter_maCV;
 import com.example.quanlinhanvien.adapter.adapter_nhanvien;
 import com.example.quanlinhanvien.model.nhanvien;
 import com.example.quanlinhanvien.service.ItemClickListener;
@@ -42,10 +44,12 @@ public class frm_nhanvien extends Fragment implements  ItemClickListener {
     RecyclerView recyclerView;
     TextView txtTotal, txtTitle;
     adapter_nhanvien adapter_nhanvien;
-    TextInputEditText txtName, txtNameUser, txtPassword, txtMaCV, txtImei, txtMaNV;
+    TextInputEditText txtName, txtNameUser, txtPassword, txtImei, txtMaNV;
+    Spinner txtMaCV;
     Button btnsignup, btnUpdate, btnDangky;
     int maNV;
     int position;
+    int maCV;
 
     ProgressBar progressBar;
     @Nullable
@@ -137,6 +141,12 @@ public class frm_nhanvien extends Fragment implements  ItemClickListener {
         txtImei = v2.findViewById(R.id.txtImei);
         txtMaCV = v2.findViewById(R.id.txtMaCV);
         btnDangky = v2.findViewById(R.id.btndangky);
+
+        // spinner
+        String[] dataSpinner = {"Employee","Manager","Retire"};
+        adapter_maCV adapter_maCV = new adapter_maCV(getContext(),dataSpinner);
+        txtMaCV.setAdapter(adapter_maCV);
+
         if (type == 1) {
             txtImei.setVisibility(View.GONE);
             txtMaCV.setVisibility(View.GONE);
@@ -156,16 +166,25 @@ public class frm_nhanvien extends Fragment implements  ItemClickListener {
             txtMaNV.setVisibility(View.GONE);
             txtPassword.setText(listNV.get(position).getMatKhau());
             txtNameUser.setText(listNV.get(position).getTaiKhoan());
-            txtMaCV.setText(listNV.get(position).getMaCV()+"");
+            txtMaCV.setSelection(listNV.get(position).getMaCV()-1);
             txtImei.setText(listNV.get(position).getImei());
             txtName.setText(listNV.get(position).getTenNV());
 
             btnDangky.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+
+                    if (txtMaCV.getSelectedItem().equals("Employee")){
+                        maCV = 1;
+                    }else if(txtMaCV.getSelectedItem().equals("Manager")){
+                        maCV =2;
+                    }else{
+                        maCV =4;
+                    }
+
                     demoCallAPIupdateNV(maNV, txtName.getText().toString(),
                             txtNameUser.getText().toString(), txtPassword.getText().toString(),
-                            txtImei.getText().toString(), Integer.parseInt(txtMaCV.getText().toString()));
+                            txtImei.getText().toString(), maCV);
                     dialog.dismiss();
                     progressBar.setVisibility(View.VISIBLE);
                 }

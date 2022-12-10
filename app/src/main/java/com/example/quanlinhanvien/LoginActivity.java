@@ -54,6 +54,7 @@ public class LoginActivity extends AppCompatActivity {
         btn_signin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                progressBar.setVisibility(View.VISIBLE);
                 if(kiemtra()) {
                     demoCallAPI();
                 }else{
@@ -130,6 +131,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private void handleResponse(ArrayList<nhanvien> list1) {
         //API trả về dữ liệu thành công, thực hiện việc lấy data
+        int check1 =0;
          for (int i = 0; i < list1.size(); i++) {
             if ((edt_email.getText().toString()).equals(list1.get(i).getTaiKhoan())) {
                 if ((edt_password.getText().toString()).equals(list1.get(i).getMatKhau())) {
@@ -158,11 +160,9 @@ public class LoginActivity extends AppCompatActivity {
                     progressBar.setVisibility(View.GONE);
                     txtLayoutPassword.setHelperTextColor(getResources().getColorStateList(R.color.red));
                     break;
-                }}}
-            txtlayoutEmail.setHelperText("Not correct email");
-            txtlayoutEmail.setHelperTextColor(getResources().getColorStateList(R.color.red));
-        Toast.makeText(this, "Login failed", Toast.LENGTH_SHORT).show();
-        progressBar.setVisibility(View.GONE);
+                }
+            }
+         }
         }
 
 

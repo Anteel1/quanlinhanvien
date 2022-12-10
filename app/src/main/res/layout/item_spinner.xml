@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:backgroundTint="@color/statusbar"
+    app:cardCornerRadius="4dp"
+    android:layout_height="wrap_content">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/txtSpinner"
+        android:textColor="@color/white"
+        android:paddingStart="10dp"
+        android:paddingVertical="8dp"
+        android:text="dsadsadas"
+        />
+</androidx.cardview.widget.CardView>

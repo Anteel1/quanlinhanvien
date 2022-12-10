@@ -40,6 +40,7 @@
         <entry key="..\:/du_an_1/quanlinhanvien/app/src/main/res/menu/menu_nav.xml" value="0.25416666666666665" />
         <entry key="..\:/github/quanlinhanvien/app/src/main/res/drawable/bg_nav.xml" value="0.1" />
         <entry key="..\:/github/quanlinhanvien/app/src/main/res/drawable/custom_edt.xml" value="0.1305" />
+        <entry key="..\:/github/quanlinhanvien/app/src/main/res/drawable/ic_baseline_add_24.xml" value="0.132" />
         <entry key="..\:/github/quanlinhanvien/app/src/main/res/drawable/ic_email_2.xml" value="0.1" />
         <entry key="..\:/github/quanlinhanvien/app/src/main/res/drawable/ic_lock_2.xml" value="0.1" />
         <entry key="..\:/github/quanlinhanvien/app/src/main/res/drawable/login_edt_bg.xml" value="0.1305" />
@@ -47,12 +48,16 @@
         <entry key="..\:/github/quanlinhanvien/app/src/main/res/layout/activity_main.xml" value="0.11231884057971014" />
         <entry key="..\:/github/quanlinhanvien/app/src/main/res/layout/activity_trang_chu.xml" value="0.1875" />
         <entry key="..\:/github/quanlinhanvien/app/src/main/res/layout/dialog_signup.xml" value="0.25" />
+        <entry key="..\:/github/quanlinhanvien/app/src/main/res/layout/dialog_themlichlam.xml" value="0.25" />
         <entry key="..\:/github/quanlinhanvien/app/src/main/res/layout/dialog_update.xml" value="0.18645833333333334" />
         <entry key="..\:/github/quanlinhanvien/app/src/main/res/layout/frm_attendance.xml" value="0.22" />
+        <entry key="..\:/github/quanlinhanvien/app/src/main/res/layout/frm_calam.xml" value="0.22" />
+        <entry key="..\:/github/quanlinhanvien/app/src/main/res/layout/frm_lichlam.xml" value="0.25" />
         <entry key="..\:/github/quanlinhanvien/app/src/main/res/layout/frm_nhanvien.xml" value="0.22" />
         <entry key="..\:/github/quanlinhanvien/app/src/main/res/layout/item_nhanvien.xml" value="0.25" />
         <entry key="..\:/github/quanlinhanvien/app/src/main/res/layout/item_spinner.xml" value="0.25" />
         <entry key="..\:/github/quanlinhanvien/app/src/main/res/layout/toolbar.xml" value="0.1875" />
+        <entry key="..\:/github/quanlinhanvien/app/src/main/res/menu/menu_nav.xml" value="0.18645833333333334" />
       </map>
     </option>
   </component>

@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="8dp"
     android:orientation="vertical"
     >
     <ImageView
@@ -15,18 +16,19 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Tạo lịch làm"
-        android:textSize="26sp"
+        android:text="Add schedule"
+        android:textSize="20sp"
+        android:textColor="@color/statusbar"
         android:layout_gravity="center"
         ></TextView>
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp"
+        android:layout_margin="12dp"
         android:gravity="center"
-        android:text="Tên nhân viên"
-        android:padding="5dp"
-        android:paddingHorizontal="10dp" />
+        android:text="Staff's name"
+        android:textColor="@color/statusbar"
+        />
     <Spinner
         android:id="@+id/spnchonten"
         android:layout_width="match_parent"
@@ -34,7 +36,6 @@
         android:layout_margin="12dp"
         android:spinnerMode="dropdown"
         android:background="@drawable/custom_edt"
-
         />
 
     <TextView
@@ -68,7 +69,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="03-12-2022"
-                android:textSize="14dp"
+                android:layout_weight="1"
+                android:textColor="@color/statusbar"
 
                 />
             <Button
@@ -78,7 +80,8 @@
                 android:layout_gravity="center"
                 android:layout_weight="1"
                 android:backgroundTint="#73AB6B"
-                android:text="Chọn ngày"
+                android:text="Select day"
+                android:textAllCaps="false"
                 tools:ignore="OnClick" />
 
 
@@ -95,9 +98,9 @@
                 android:id="@+id/txtshowca"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Ca sáng"
-                android:textSize="14dp"
-
+                android:text="Shift"
+                android:layout_weight="1"
+                android:textColor="@color/statusbar"
                 />
         <Switch
             android:id="@+id/switchst"
@@ -107,7 +110,7 @@
             android:padding="10dp"
             android:thumb="@drawable/thumb"
             android:track="@drawable/track"
-
+            android:layout_weight="1"
             />
         </LinearLayout>
 
@@ -135,7 +138,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:backgroundTint="#73AB6B"
-        android:text="Tạo"
+        android:text="Create"
+        android:textAllCaps="false"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:layout_gravity="center"

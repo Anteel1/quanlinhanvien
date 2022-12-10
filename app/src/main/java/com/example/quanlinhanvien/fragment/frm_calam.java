@@ -8,8 +8,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -20,7 +20,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.quanlinhanvien.R;
 import com.example.quanlinhanvien.adapter.adapter_calam;
 import com.example.quanlinhanvien.model.calam;
-
 import com.example.quanlinhanvien.service.service_API;
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 
@@ -39,15 +38,17 @@ public class frm_calam extends Fragment {
     adapter_calam adapter_calam;
     TextView socl;
 
+    ProgressBar progressBar;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.frm_calam, container, false);
         socl = view.findViewById(R.id.txtsocl);
         recyclerView = view.findViewById(R.id.rcv_calam);
+        progressBar = view.findViewById(R.id.prb_login);
         list = new ArrayList<>();
         demoCallAPI();
-
+        progressBar.setVisibility(View.VISIBLE);
 
         return view;
     }
@@ -76,16 +77,11 @@ public class frm_calam extends Fragment {
         }
         socl.setText(""+list_calam.size());
         loaddata(list);
-
-
-        Toast.makeText(getContext(), "=============thành công", Toast.LENGTH_SHORT).show();
-
-
     }
 
     private void handleError(Throwable error) {
         Log.d("erro", error.toString());
-        Toast.makeText(getContext(), "=============" + error, Toast.LENGTH_SHORT).show();
+        progressBar.setVisibility(View.GONE);
         //khi gọi API KHÔNG THÀNH CÔNG thì thực hiện xử lý ở đây
     }
 
@@ -97,6 +93,7 @@ public class frm_calam extends Fragment {
 
         adapter_calam = new adapter_calam(getContext(), list);
         recyclerView.setAdapter(adapter_calam);
+        progressBar.setVisibility(View.GONE);
     }
 
 }

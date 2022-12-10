@@ -15,6 +15,7 @@ import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -30,6 +31,7 @@ import com.example.quanlinhanvien.adapter.adapter_lichlam;
 import com.example.quanlinhanvien.model.lichlam;
 import com.example.quanlinhanvien.model.nhanvien;
 import com.example.quanlinhanvien.service.service_API;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 
 import java.time.LocalDate;
@@ -45,7 +47,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 
 public class frm_lichlam extends Fragment {
-    Button btnBack, btnNext, btnthemlichlam, btnchonngay, btnthem, btnthemcuoi, btnhuycuoi;
+    Button btnBack, btnNext, btnchonngay, btnthem, btnthemcuoi, btnhuycuoi;
+    FloatingActionButton btnthemlichlam;
     TextView txtnv, txtcalam, txtngaylam, txtgiovao, txtgiora;
     ArrayList<lichlam> list, listll;
     ArrayList<nhanvien> listnv = new ArrayList<>();
@@ -60,7 +63,7 @@ public class frm_lichlam extends Fragment {
     int yearn, monthn, dayn;
     Spinner spnchonten;
     int chucvu;
-
+    ProgressBar progressBar;
     public frm_lichlam(int idnv, int chucvu) {
         this.idnv = idnv;
         this.chucvu = chucvu;
@@ -79,6 +82,15 @@ public class frm_lichlam extends Fragment {
         btnNext = view.findViewById(R.id.btnNext);
         btnthemlichlam = view.findViewById(R.id.btnthemlichlam);
         switchst = view.findViewById(R.id.switchst);
+
+        progressBar = view.findViewById(R.id.prb_login);
+        progressBar.setVisibility(View.VISIBLE);
+
+        // get year month day
+        yearn = LocalDate.now().getYear();
+        monthn = LocalDate.now().getMonthValue();
+        dayn = LocalDate.now().getDayOfMonth();
+        
         if(chucvu ==1 || chucvu !=2){
             btnthemlichlam.setVisibility(View.GONE);
         }
@@ -104,6 +116,7 @@ public class frm_lichlam extends Fragment {
         btnthemlichlam.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                progressBar.setVisibility(View.VISIBLE);
                 openDialog();
             }
         });
@@ -140,22 +153,19 @@ public class frm_lichlam extends Fragment {
         for (int i = 0; i < lichlams.size(); i++) {
             list.add(lichlams.get(i));
         }
-
         show(list);
-
     }
 
 
     private void handleError(Throwable error) {
-        Log.d("TAG", "loi_________________");
+        Log.d("TAG", "Erro:"+error.toString());
         //khi gọi API KHÔNG THÀNH CÔNG thì thực hiện xử lý ở đây
     }
 
     private void show(ArrayList<lichlam> listll) {
         adapter_lichlam adapter_lichlam = new adapter_lichlam(listll, getContext());
         listviewll.setAdapter(adapter_lichlam);
-
-
+        progressBar.setVisibility(View.GONE);
     }
 
     private void openDialog() {
@@ -181,7 +191,7 @@ public class frm_lichlam extends Fragment {
             @Override
             public void onClick(View v) {
                 txtshowca.setText(
-                        (switchst.isChecked() ? "Ca tối" : "Ca sáng"));
+                        (switchst.isChecked() ? "Morning shift" : "Night shift"));
             }
         });
 
@@ -206,7 +216,6 @@ public class frm_lichlam extends Fragment {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
                     macl = 2;
-
                 } else macl = 1;
 
             }
@@ -215,11 +224,6 @@ public class frm_lichlam extends Fragment {
             @Override
             public void onClick(View v) {
                 //clik1
-                String date = yearn + "-" + monthn + "-" + dayn;
-//                demoCallAPINV();
-//                demoAddAPI(manv, macl, date);
-
-                Toast.makeText(getContext(), manv + "" + macl + "" + date, Toast.LENGTH_SHORT).show();
                 dialog.dismiss();
                 openDialogthemll();
             }
@@ -244,13 +248,16 @@ public class frm_lichlam extends Fragment {
     }
 
     private void handleResponseadd(Number number) {
-
-
+        if(Integer.parseInt(String.valueOf(number)) == 1){
+            Toast.makeText(getContext(), "Create success !", Toast.LENGTH_SHORT).show();
+            progressBar.setVisibility(View.GONE);
+        }
     }
 
 
     private void handleErroradd(Throwable error) {
-        Log.d("TAG", "loi2_________________");
+        Log.d("TAG", "Erro:"+error);
+        progressBar.setVisibility(View.GONE);
         //khi gọi API KHÔNG THÀNH CÔNG thì thực hiện xử lý ở đây
     }
 
@@ -271,13 +278,9 @@ public class frm_lichlam extends Fragment {
 
     private void handleResponseNV(ArrayList<nhanvien> list1) {
         //API trả về dữ liệu thành công, thực hiện việc lấy data
-        lichlams = new ArrayList<String>();
+        lichlams = new ArrayList<>();
         for (int i = 0; i < list1.size(); i++) {
             lichlams.add(list1.get(i).getTenNV());
-            //  listnv.add(list1.get(i));
-            //   listmanv.add(list1.get(i).getMaNV());
-
-            //   listnv.add(list1.get(i));
         }
         spnchonten.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -292,21 +295,18 @@ public class frm_lichlam extends Fragment {
 
             }
         });
-
-
         ArrayAdapter arrayAdapter = new ArrayAdapter(getContext(), androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, lichlams);
         spnchonten.setAdapter(arrayAdapter);
-
-
+        progressBar.setVisibility(View.GONE);
     }
 
     private void handleErrorNV(Throwable error) {
         Log.d("erro", error.toString());
-        Toast.makeText(getContext(), error.toString(), Toast.LENGTH_SHORT).show();
+        progressBar.setVisibility(View.GONE);
         //khi gọi API KHÔNG THÀNH CÔNG thì thực hiện xử lý ở đây
     }
 
-    //  dialog để thêmlichj
+    //  dialog add lich
     private void openDialogthemll() {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         LayoutInflater inflater1 = getActivity().getLayoutInflater();
@@ -325,29 +325,21 @@ public class frm_lichlam extends Fragment {
         txtnv.setText(txtten);
 
         if (macl == 1) {
-            txtcalam.setText("Ca sáng");
+            txtcalam.setText("Morning shift");
             txtgiovao.setText("08:00:");
             txtgiora.setText("15:00");
         } else {
-            txtcalam.setText("Ca tối");
+            txtcalam.setText("Night shift");
             txtgiovao.setText("15:00:");
             txtgiora.setText("22:00");
         }
         btnthemcuoi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (yearn == 0) {
-                    String date0 = LocalDate.now().getYear() + "-" + LocalDate.now().getMonthValue() + "-" + LocalDate.now().getDayOfMonth();
-                    demoAddAPI(manv, macl, date0);
-                    Toast.makeText(getContext(), "Thêm thành công", Toast.LENGTH_SHORT).show();
-                    dialog.dismiss();
-                } else {
+                    progressBar.setVisibility(View.VISIBLE);
                     String date = yearn + "-" + monthn + "-" + dayn;
                     demoAddAPI(manv, macl, date);
-                    Toast.makeText(getContext(), "Thêm thành công", Toast.LENGTH_SHORT).show();
                     dialog.dismiss();
-                }
-                demoCallAPI(idnv,thanght.getValue());
             }
 
         });

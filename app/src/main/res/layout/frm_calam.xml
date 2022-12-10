@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+<LinearLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
@@ -15,8 +19,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAlignment="center"
-            android:text="Ca làm"
-            android:textSize="30dp" />
+            android:text="Shifts"
+            android:textColor="@color/statusbar"
+            android:textSize="20dp" />
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -27,7 +32,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Tổng số ca làm: "
+                android:text="Total shift: "
                 android:textSize="18sp"
                 android:textAlignment="viewEnd"
                 android:layout_weight="1"
@@ -39,7 +44,7 @@
                 android:layout_weight="8"
                 android:text="40"
                 android:textAlignment="viewEnd"
-                android:textColor="#53D11E"
+                android:textColor="@color/statusbar"
                 android:textSize="20sp"
                 />
         </LinearLayout>
@@ -83,8 +88,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:layout_marginTop="9dp"
-            android:text="Ca"
-            android:textColor="@color/black"
+            android:text="Shift"
+            android:textColor="@color/statusbar"
             android:textSize="18sp" />
 
         <TextView
@@ -93,7 +98,7 @@
             android:layout_weight="2"
             android:layout_marginTop="9dp"
             android:text="In"
-            android:textColor="@color/black"
+            android:textColor="@color/statusbar"
             android:textSize="18sp" />
 
         <TextView
@@ -102,7 +107,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="9dp"
             android:text="Out"
-            android:textColor="@color/black"
+            android:textColor="@color/statusbar"
             android:textSize="18sp" />
     </LinearLayout>
 
@@ -117,3 +122,11 @@
         android:layout_height="wrap_content" />
 
 </LinearLayout>
+    <ProgressBar
+        android:id="@+id/prb_login"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:visibility="gone" />
+
+</RelativeLayout>

@@ -21,7 +21,7 @@
     <item
         android:id="@+id/menu_lichlam"
         android:icon="@drawable/desk_alt"
-        android:title="Attendance" />
+        android:title="Work schedule" />
 
     <item
         android:id="@+id/menu_store"

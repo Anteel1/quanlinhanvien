@@ -174,7 +174,7 @@ public class frm_attendance extends Fragment {
     }
 
     private void getDATANFC(int check) {
-
+        progressBar.setVisibility(View.VISIBLE);
         if (getActivity() != null && getActivity().getIntent().hasExtra("dataNFC")) {
             dataNFC = getActivity().getIntent().getStringExtra("dataNFC");
             if(dataNFC != null){
@@ -212,6 +212,7 @@ public class frm_attendance extends Fragment {
                 getActivity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
+                        progressBar.setVisibility(View.VISIBLE);
                         //data location cua hang
                         list.clear();
                         list.add(0, new Location(0, "City food Store", result.toString()));
@@ -345,12 +346,15 @@ public class frm_attendance extends Fragment {
                 }
             }
             if(ok == 2 ){
+                progressBar.setVisibility(View.GONE);
                 turnonCamera();
             }else{
+                progressBar.setVisibility(View.GONE);
                 Toast.makeText(getContext(), "Check in failed", Toast.LENGTH_SHORT).show();
             }
         } else {
             Log.d("Distance", "noooooo");
+            progressBar.setVisibility(View.GONE);
             Toast.makeText(getContext(), "You are not in the workplace", Toast.LENGTH_SHORT).show();
         }
     }
@@ -367,12 +371,15 @@ public class frm_attendance extends Fragment {
                 }
             }
             if(maCL != 1 & maCL  !=2){
+                progressBar.setVisibility(View.GONE);
                 Toast.makeText(getContext(), "Too early to off shift", Toast.LENGTH_SHORT).show();
             }else{
+                progressBar.setVisibility(View.GONE);
                 demoCallAPI_checkOut();
             }
         } else {
             Log.d("Distance", "noooooo");
+            progressBar.setVisibility(View.GONE);
             Toast.makeText(getContext(), "You are not in the workplace", Toast.LENGTH_SHORT).show();
         }
     }
@@ -389,6 +396,7 @@ public class frm_attendance extends Fragment {
                 @Override
                 public void onClick(View v) {
                     try{
+                        progressBar.setVisibility(View.VISIBLE);
                         // gen file sau khi chup
                         File root  = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
                         File file =  new File(root + "/img_request");
@@ -485,13 +493,16 @@ public class frm_attendance extends Fragment {
             btnNFC.setVisibility(View.VISIBLE);
             btnQRCode.setVisibility(View.VISIBLE);
             Log.d("size:"," "+number);
+            progressBar.setVisibility(View.GONE);
         }else{
+            progressBar.setVisibility(View.GONE);
             Toast.makeText(getContext(), "Something went wrong, contact developer", Toast.LENGTH_SHORT).show();
         }
     }
 
     private void handleError_checkIn(Throwable error) {
         Log.d("erro", error.toString());
+        progressBar.setVisibility(View.GONE);
         Toast.makeText(getContext(), error.toString(), Toast.LENGTH_SHORT).show();
         //khi gọi API KHÔNG THÀNH CÔNG thì thực hiện xử lý ở đây
     }
@@ -514,11 +525,13 @@ public class frm_attendance extends Fragment {
         //API trả về dữ liệu thành công, thực hiện việc lấy data
         if(Integer.parseInt(String.valueOf(number))  ==2 ){
             Toast.makeText(getContext(), "Success. Thank you !", Toast.LENGTH_SHORT).show();
+            progressBar.setVisibility(View.GONE);
             txtTitle.setVisibility(View.GONE);
             btnNFC.setVisibility(View.VISIBLE);
             btnQRCode.setVisibility(View.VISIBLE);
             Log.d("size:"," "+number);
         }else{
+            progressBar.setVisibility(View.GONE);
             Toast.makeText(getContext(), "Something went wrong, contact developer", Toast.LENGTH_SHORT).show();
         }
 
@@ -526,6 +539,7 @@ public class frm_attendance extends Fragment {
 
     private void handleError_checkOut(Throwable error) {
         Log.d("erro", error.toString());
+        progressBar.setVisibility(View.GONE);
         Toast.makeText(getContext(), error.toString(), Toast.LENGTH_SHORT).show();
         //khi gọi API KHÔNG THÀNH CÔNG thì thực hiện xử lý ở đây
     }

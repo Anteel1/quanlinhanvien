@@ -194,6 +194,8 @@ public class frm_thongke extends Fragment implements OnChartValueSelectedListene
                     dungGio++;
                 }else if(integer == 2){
                     treGio++;
+                }else if(integer == 0){
+
                 }else{
                     dangLam++;
                 }

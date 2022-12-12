@@ -250,7 +250,7 @@ public class frm_lichlam extends Fragment {
     private void handleResponseadd(Number number) {
         if(Integer.parseInt(String.valueOf(number)) == 1){
             Toast.makeText(getContext(), "Create success !", Toast.LENGTH_SHORT).show();
-            progressBar.setVisibility(View.GONE);
+            demoCallAPI(idnv,thanght.getValue());
         }
     }
 

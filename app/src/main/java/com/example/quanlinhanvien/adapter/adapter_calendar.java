@@ -44,7 +44,7 @@ public class adapter_calendar extends RecyclerView.Adapter<adapter_calendar.View
             LocalDateTime date1 = LocalDateTime.parse(listNgayLam.get(i).getNgaylam());
             String day1=String.valueOf(date1.getDayOfMonth());
             Log.d("day: ",day1);
-            if(day.equals(day1) && listNgayLam.get(i).getTrangthai() == 0){
+            if(day.equals(day1) && listNgayLam.get(i).getTrangthai() == 4){
                 holder.item.setBackgroundColor(Color.parseColor("#F8DE7E"));
                 break;
             }else if(day.equals(day1) && listNgayLam.get(i).getTrangthai() == 1){

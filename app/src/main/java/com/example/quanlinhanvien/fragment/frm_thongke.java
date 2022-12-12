@@ -79,7 +79,7 @@ public class frm_thongke extends Fragment implements OnChartValueSelectedListene
         mChart = view.findViewById(R.id.piechart);
         mChart.setHoleRadius(35f);
         mChart.setTransparentCircleAlpha(0);
-        mChart.setCenterText("Thống kê");
+        mChart.setCenterText("Status");
         mChart.setCenterTextSize(10);
         mChart.setDrawEntryLabels(true);
         mChart.setOnChartValueSelectedListener(this);
@@ -289,14 +289,16 @@ public class frm_thongke extends Fragment implements OnChartValueSelectedListene
         pieDataSet.setValueTextSize(12);
         ArrayList<Integer> colors=new ArrayList<>();
         colors.add(Color.parseColor("#73AB6B"));
-        colors.add(Color.RED);
-        colors.add(Color.YELLOW);
+        colors.add(Color.parseColor("#FA8072"));
+        colors.add(Color.parseColor("#F8DE7E"));
         pieDataSet.setColors(colors);
         Legend legend=pieChart.getLegend();
         legend.setForm(Legend.LegendForm.CIRCLE);
         PieData pieData=new PieData(pieDataSet);
         pieChart.setData(pieData);
         pieChart.invalidate();
+        pieChart.setRotationEnabled(false);
+        pieChart.setClickable(false);
         progressBar.setVisibility(View.GONE);
     }
 }

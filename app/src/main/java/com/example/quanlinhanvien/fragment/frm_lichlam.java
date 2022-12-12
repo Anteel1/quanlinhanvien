@@ -51,19 +51,22 @@ public class frm_lichlam extends Fragment {
     FloatingActionButton btnthemlichlam;
     TextView txtnv, txtcalam, txtngaylam, txtgiovao, txtgiora;
     ArrayList<lichlam> list, listll;
-    ArrayList<nhanvien> listnv = new ArrayList<>();
+    ArrayList<nhanvien> listnv ;
     ArrayList<Integer> listmanv;
     ArrayList<String> lichlams;
     ListView listviewll;
     String txtten;
     TextView tvMonth, txtshowngay, txtshowca;
     Month thanght;
-    int idnv, manv, macl = 1, macldc;
+
+    int idnv, manv, macl ;
     Switch switchst;
     int yearn, monthn, dayn;
     Spinner spnchonten;
     int chucvu;
     ProgressBar progressBar;
+
+
     public frm_lichlam(int idnv, int chucvu) {
         this.idnv = idnv;
         this.chucvu = chucvu;
@@ -95,6 +98,7 @@ public class frm_lichlam extends Fragment {
             btnthemlichlam.setVisibility(View.GONE);
         }
         list = new ArrayList<>();
+        listnv = new ArrayList<>();
 
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -112,7 +116,6 @@ public class frm_lichlam extends Fragment {
                 demoCallAPI(idnv, thanght.getValue());
             }
         });
-        demoCallAPI(idnv, LocalDate.now().getMonth().getValue());
         btnthemlichlam.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -120,8 +123,7 @@ public class frm_lichlam extends Fragment {
                 openDialog();
             }
         });
-
-
+        demoCallAPI(idnv,thanght.getValue());
         return view;
     }
 
@@ -228,8 +230,6 @@ public class frm_lichlam extends Fragment {
                 openDialogthemll();
             }
         });
-
-
     }
 
     private void demoAddAPI(int idNV, int maCL, String ngaylam) {
@@ -279,8 +279,10 @@ public class frm_lichlam extends Fragment {
     private void handleResponseNV(ArrayList<nhanvien> list1) {
         //API trả về dữ liệu thành công, thực hiện việc lấy data
         lichlams = new ArrayList<>();
+        listnv = new ArrayList<>();
         for (int i = 0; i < list1.size(); i++) {
             lichlams.add(list1.get(i).getTenNV());
+            listnv.add(list1.get(i));
         }
         spnchonten.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -295,6 +297,7 @@ public class frm_lichlam extends Fragment {
 
             }
         });
+
         ArrayAdapter arrayAdapter = new ArrayAdapter(getContext(), androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, lichlams);
         spnchonten.setAdapter(arrayAdapter);
         progressBar.setVisibility(View.GONE);

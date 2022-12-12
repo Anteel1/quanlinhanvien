@@ -45,13 +45,13 @@ public class adapter_calendar extends RecyclerView.Adapter<adapter_calendar.View
             String day1=String.valueOf(date1.getDayOfMonth());
             Log.d("day: ",day1);
             if(day.equals(day1) && listNgayLam.get(i).getTrangthai() == 0){
-                holder.item.setBackgroundColor(Color.YELLOW);
+                holder.item.setBackgroundColor(Color.parseColor("#F8DE7E"));
                 break;
             }else if(day.equals(day1) && listNgayLam.get(i).getTrangthai() == 1){
                 holder.item.setBackgroundColor(Color.parseColor("#73AB6B"));
                 break;
             }else if(day.equals(day1) && listNgayLam.get(i).getTrangthai() == 2){
-                holder.item.setBackgroundColor(Color.RED);
+                holder.item.setBackgroundColor(Color.parseColor("#FA8072"));
                 break;
             }
         }

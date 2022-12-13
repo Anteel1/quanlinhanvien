@@ -1,6 +1,7 @@
 package com.example.quanlinhanvien.fragment;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +15,8 @@ import androidx.fragment.app.Fragment;
 import com.example.quanlinhanvien.R;
 
 import java.time.LocalDate;
+import java.util.Calendar;
+import java.util.Date;
 
 public class frm_trangchu extends Fragment {
     TextClock tc_gio;
@@ -29,9 +32,14 @@ public class frm_trangchu extends Fragment {
         tc_gio = view.findViewById(R.id.tc_gio);
         tc_ngay = view.findViewById(R.id.tc_ngay);
 
+        Date date = Calendar.getInstance().getTime();
+        String[] date2 = String.valueOf(date).split(" ");
+
         tc_gio.setFormat12Hour("hh:mm a");
-        tc_ngay.setText(LocalDate.now().getDayOfMonth()+" ,"+LocalDate.now().getDayOfWeek()+" ,"
-        +LocalDate.now().getMonth()+" ,"+LocalDate.now().getYear());
+        tc_ngay.setText(date2[0] + ", " + date2[1] + " " + date2[2]);
+        Log.d("TAG", "onCreateView: " + date);
+//        tc_ngay.setText(LocalDate.now().getDayOfMonth()+", "+LocalDate.now().getDayOfWeek()+", "
+//        +LocalDate.now().getMonth()+", "+LocalDate.now().getYear());
 
         return view;
     }

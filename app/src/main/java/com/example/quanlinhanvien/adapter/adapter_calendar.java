@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -45,13 +46,13 @@ public class adapter_calendar extends RecyclerView.Adapter<adapter_calendar.View
             String day1=String.valueOf(date1.getDayOfMonth());
             Log.d("day: ",day1);
             if(day.equals(day1) && listNgayLam.get(i).getTrangthai() == 4){
-                holder.item.setBackgroundColor(Color.parseColor("#F8DE7E"));
+                holder.line.setBackgroundColor(Color.parseColor("#F8DE7E"));
                 break;
             }else if(day.equals(day1) && listNgayLam.get(i).getTrangthai() == 1){
-                holder.item.setBackgroundColor(Color.parseColor("#73AB6B"));
+                holder.line.setBackgroundColor(Color.parseColor("#73AB6B"));
                 break;
             }else if(day.equals(day1) && listNgayLam.get(i).getTrangthai() == 2){
-                holder.item.setBackgroundColor(Color.parseColor("#FA8072"));
+                holder.line.setBackgroundColor(Color.parseColor("#FA8072"));
                 break;
             }
         }
@@ -59,10 +60,12 @@ public class adapter_calendar extends RecyclerView.Adapter<adapter_calendar.View
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
+        LinearLayout line;
         TextView item;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            item = itemView.findViewById(R.id.item_date);
+            this.line = itemView.findViewById(R.id.line);
+            this.item = itemView.findViewById(R.id.item_date);
         }
     }
 

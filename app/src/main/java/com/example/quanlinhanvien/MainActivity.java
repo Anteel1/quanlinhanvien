@@ -134,7 +134,9 @@ public class MainActivity extends AppCompatActivity {
                         break;
                 }
                 drawerLayout.closeDrawer(navigationView);
-                tv_tieude.setText(item.getTitle());
+                if (item.getItemId() == R.id.menu_home){
+                    tv_tieude.setText("Employees Management");
+                }else tv_tieude.setText(item.getTitle());
                 return false;
             }
         });

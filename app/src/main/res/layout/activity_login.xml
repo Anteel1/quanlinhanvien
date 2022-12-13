@@ -51,7 +51,7 @@
                     android:id="@+id/edt_email"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="minhtri@gmail.com" />
+                    android:text="Admin@gmail.com" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -99,7 +99,8 @@
                 android:layout_margin="8dp"
                 android:backgroundTint="#73AB6B"
                 android:padding="16dp"
-                android:text="Sign in"
+                android:text="Sign In"
+                android:textAllCaps="false"
                 android:textColor="@color/white" />
 
         </LinearLayout>

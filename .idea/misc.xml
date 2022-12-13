@@ -3,6 +3,14 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Sy/FPT_POLYTECHNIC/BAITAP/KY_4/DuAnMot/GIT/quanlinhanvien/app/src/main/res/drawable/custom_block.xml" value="0.1165" />
+        <entry key="..\:/Sy/FPT_POLYTECHNIC/BAITAP/KY_4/DuAnMot/GIT/quanlinhanvien/app/src/main/res/drawable/custom_edt.xml" value="0.1165" />
+        <entry key="..\:/Sy/FPT_POLYTECHNIC/BAITAP/KY_4/DuAnMot/GIT/quanlinhanvien/app/src/main/res/layout/activity_login.xml" value="0.1638888888888889" />
+        <entry key="..\:/Sy/FPT_POLYTECHNIC/BAITAP/KY_4/DuAnMot/GIT/quanlinhanvien/app/src/main/res/layout/frm_attendance.xml" value="0.18" />
+        <entry key="..\:/Sy/FPT_POLYTECHNIC/BAITAP/KY_4/DuAnMot/GIT/quanlinhanvien/app/src/main/res/layout/frm_thongke.xml" value="0.1638888888888889" />
+        <entry key="..\:/Sy/FPT_POLYTECHNIC/BAITAP/KY_4/DuAnMot/GIT/quanlinhanvien/app/src/main/res/layout/frm_trangchu.xml" value="0.1638888888888889" />
+        <entry key="..\:/Sy/FPT_POLYTECHNIC/BAITAP/KY_4/DuAnMot/GIT/quanlinhanvien/app/src/main/res/layout/item_date.xml" value="0.3377862595419847" />
+        <entry key="..\:/Sy/FPT_POLYTECHNIC/BAITAP/KY_4/DuAnMot/GIT/quanlinhanvien/app/src/main/res/layout/toolbar.xml" value="0.1734375" />
         <entry key="..\:/du_an_1/quanlinhanvien/app/src/main/res/drawable-v24/bg_nav1.xml" value="0.1805" />
         <entry key="..\:/du_an_1/quanlinhanvien/app/src/main/res/drawable-v24/bg_nav2.xml" value="0.1805" />
         <entry key="..\:/du_an_1/quanlinhanvien/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1295" />

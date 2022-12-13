@@ -50,7 +50,7 @@
                 />
         </activity>
         <activity
-            android:name=".manhinhchoActivity"
+            android:name=".LoginActivity"
             android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -59,7 +59,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".LoginActivity"
+            android:name=".manhinhchoActivity"
             android:exported="false" />
     </application>
 

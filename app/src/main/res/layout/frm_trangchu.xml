@@ -13,21 +13,20 @@
         android:layout_marginTop="80dp"
         android:gravity="center"
         android:textColor="#838383"
-        android:textSize="40sp"
-        android:textStyle="bold" />
+        android:textSize="40sp" />
 
     <TextView
         android:id="@+id/tc_ngay"
-        style="@style/textMedium"
+        style="@style/textLight"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="12dp"
+        android:layout_marginVertical="12dp"
         android:gravity="center"
         android:textColor="#838383"
         android:textSize="22sp" />
 
     <TextView
-        style="@style/textMedium"
+        style="@style/textLight"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"

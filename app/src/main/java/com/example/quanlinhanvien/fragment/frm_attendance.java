@@ -50,6 +50,8 @@ import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Map;
 import java.util.Random;
 
@@ -101,9 +103,12 @@ public class frm_attendance extends Fragment {
         layoutNFC = v.findViewById(R.id.layout_readNFC);
         progressBar = v.findViewById(R.id.prb_login);
 
+        Date date = Calendar.getInstance().getTime();
+        String[] date2 = String.valueOf(date).split(" ");
 
         tc_gio.setFormat12Hour("hh:mm a");
-        tc_ngay.setText(LocalDate.now().getDayOfMonth()+","+LocalDate.now().getDayOfWeek()+","+LocalDate.now().getMonth()+","+LocalDate.now().getYear());
+        tc_ngay.setText(date2[2] + " " + " " + date2[0] + " " + date2[1] + " " + date2[5]);
+//        tc_ngay.setText(LocalDate.now().getDayOfMonth()+","+LocalDate.now().getDayOfWeek()+","+LocalDate.now().getMonth()+","+LocalDate.now().getYear());
         imgCheckIn = v.findViewById(R.id.btnCheckin);
         imgCheckOut = v.findViewById(R.id.btnCheckOut);
 

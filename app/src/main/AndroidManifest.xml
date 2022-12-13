@@ -3,23 +3,25 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.quanlinhanvien">
 
-    <uses-permission android:name="android.permission.NFC"/>
+    <uses-permission android:name="android.permission.NFC" />
     <uses-feature android:name="android.hardware.nfc" />
 
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
-    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.CAMERA" />
+
     <uses-feature
         android:name="android.hardware.camera"
-        android:required="false"/>
+        android:required="false" />
+
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    <uses-permission android:name="android.permission.READ_PRIVILEGED_PHONE_STATE"
+    <uses-permission
+        android:name="android.permission.READ_PRIVILEGED_PHONE_STATE"
         tools:ignore="ProtectedPermissions" />
 
     <application
-        tools:replace="android:fullBackupContent"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -28,30 +30,31 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Quanlinhanvien"
+        tools:replace="android:fullBackupContent"
         tools:targetApi="31">
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyDNFzVPKrnxsl87gAwSoeg-Wtst0xjayQg" />
+
         <activity
             android:name=".MainActivity"
-            android:exported="false" >
-        <intent-filter>
-            <action android:name="android.nfc.action.NDEF_DISCOVERED"/>
+            android:exported="false">
+            <intent-filter>
+                <action android:name="android.nfc.action.NDEF_DISCOVERED" />
 
-            <category android:name="android.itent.category.DEFAULT"/>
+                <category android:name="android.itent.category.DEFAULT" />
 
-            <action android:name="android.nfc.action.TAG_DISCOVERED" />
-            <data android:mimeType="text/plain"/>
-        </intent-filter>
+                <action android:name="android.nfc.action.TAG_DISCOVERED" />
+                <data android:mimeType="text/plain" />
+            </intent-filter>
             <meta-data
                 android:name="android.nfc.action.TECH_DISCOVERED"
-                android:resource="@xml/nfc"
-                />
+                android:resource="@xml/nfc" />
         </activity>
         <activity
-            android:name=".LoginActivity"
-            android:exported="true" >
+            android:name=".manhinhchoActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -59,7 +62,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".manhinhchoActivity"
+            android:name=".LoginActivity"
             android:exported="false" />
     </application>
 

@@ -4,6 +4,8 @@ import static com.example.quanlinhanvien.service.service_API.Base_Service;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -88,6 +90,9 @@ public class frm_lichlam extends Fragment {
 
         progressBar = view.findViewById(R.id.prb_login);
         progressBar.setVisibility(View.VISIBLE);
+
+        btnBack.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        btnNext.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
         // get year month day
         yearn = LocalDate.now().getYear();

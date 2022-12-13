@@ -49,7 +49,8 @@ public class frm_thongke extends Fragment implements OnChartValueSelectedListene
     public frm_thongke(int idNV) {
         this.idNV = idNV;
     }
-    ArrayList<ngaylam>listNgaylam;
+
+    ArrayList<ngaylam> listNgaylam;
     adapter_calendar adapter;
     RecyclerView calendarRecyclerView;
     TextView month;
@@ -60,9 +61,10 @@ public class frm_thongke extends Fragment implements OnChartValueSelectedListene
     Double luongTong;
     int idNV;
     PieChart mChart;
-    float[] yData ;
+    float[] yData;
 
     ProgressBar progressBar;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -77,7 +79,7 @@ public class frm_thongke extends Fragment implements OnChartValueSelectedListene
         progressBar.setVisibility(View.VISIBLE);
         // chart
         mChart = view.findViewById(R.id.piechart);
-        mChart.setHoleRadius(35f);
+        mChart.setHoleRadius(30f);
         mChart.setTransparentCircleAlpha(0);
         mChart.setCenterText("Status");
         mChart.setCenterTextSize(10);
@@ -121,16 +123,16 @@ public class frm_thongke extends Fragment implements OnChartValueSelectedListene
 //        }
         return view;
     }
-    private void loadData()
-    {
+
+    private void loadData() {
         luongTong = 0.0;
         demoCallAPI();
         demoCallAPI_luongDungGio();
         demoCallAPI_luongTreGio();
-        txtSalary.setText("Salary:"+luongTong+"00VND");
-        month.setText((selectedDate).getMonth()+" "+(selectedDate).getYear());
+        txtSalary.setText("Salary: " + Math.round(luongTong) + "000 VND");
+        month.setText((selectedDate).getMonth() + " " + (selectedDate).getYear());
         ArrayList<String> daysInMonth = daysInMonthArray(selectedDate);
-        adapter = new adapter_calendar(getContext(),daysInMonth,listNgaylam);
+        adapter = new adapter_calendar(getContext(), daysInMonth, listNgaylam);
         RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getContext(), 7);
         calendarRecyclerView.setLayoutManager(layoutManager);
         calendarRecyclerView.setAdapter(adapter);
@@ -139,18 +141,18 @@ public class frm_thongke extends Fragment implements OnChartValueSelectedListene
     // list ngay trong thang
     private ArrayList<String> daysInMonthArray(LocalDate date) {
         ArrayList<String> daysInMonthArray = new ArrayList<>();
-        YearMonth yearMonth = YearMonth.from(date);
+        YearMonth yearMonth = YearMonth.from(date); // năm tháng
+        LocalDate firstOfMonth = date.withDayOfMonth(1); // ngày đầu trong tháng
+        int daysInMonth = yearMonth.lengthOfMonth(); // số lượng ngày trong tháng
+        int dayOfWeek = firstOfMonth.getDayOfWeek().getValue(); // ngày thứ ... trong tuần
 
-        int daysInMonth = yearMonth.lengthOfMonth();
+        Log.d("TAG", "daysInMonthArray: " + yearMonth + " l " + firstOfMonth + " l " + daysInMonth + " l " + dayOfWeek);
 
-        LocalDate firstOfMonth = selectedDate.withDayOfMonth(1);
-        int dayOfWeek = firstOfMonth.getDayOfWeek().getValue();
-
-        for (int i = 1; i <= 42; i++) {
-            if (i <= dayOfWeek || i > daysInMonth + dayOfWeek) {
+        for (int i = 0; i < daysInMonth + dayOfWeek; i++) {
+            if (i < dayOfWeek) {
                 daysInMonthArray.add("");
             } else {
-                daysInMonthArray.add(String.valueOf(i - dayOfWeek));
+                daysInMonthArray.add(String.valueOf(i + 1 - dayOfWeek));
             }
         }
         return daysInMonthArray;
@@ -165,6 +167,7 @@ public class frm_thongke extends Fragment implements OnChartValueSelectedListene
         selectedDate = selectedDate.plusMonths(1);
 
     }
+
     private void demoCallAPI() {
 
         service_API requestInterface = new Retrofit.Builder()
@@ -173,7 +176,7 @@ public class frm_thongke extends Fragment implements OnChartValueSelectedListene
                 .addConverterFactory(GsonConverterFactory.create())
                 .build().create(service_API.class);
 
-        new CompositeDisposable().add(requestInterface.getNgayLam(idNV,selectedDate.getMonth().getValue())
+        new CompositeDisposable().add(requestInterface.getNgayLam(idNV, selectedDate.getMonth().getValue())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe(this::handleResponse, this::handleError)
@@ -185,26 +188,27 @@ public class frm_thongke extends Fragment implements OnChartValueSelectedListene
         listNgaylam.clear();
         int dungGio = 0;
         int treGio = 0;
-        int dangLam =0;
-        for(int i =0; i <list1.size(); i++){
-            listNgaylam.add(i,list1.get(i));
+        int dangLam = 0;
+        for (int i = 0; i < list1.size(); i++) {
+            listNgaylam.add(i, list1.get(i));
             Integer integer = list1.get(i).getTrangthai();
-            if(integer !=null){
-                if(integer ==1){
+            if (integer != null) {
+                if (integer == 1) {
                     dungGio++;
-                }else if(integer == 2){
+                } else if (integer == 2) {
                     treGio++;
-                }else if(integer == 0){
+                } else if (integer == 0) {
 
-                }else{
+                } else {
                     dangLam++;
                 }
             }
         }
-        trangthai = new float[]{dungGio,treGio,dangLam};
+        Log.d("TAG", "handleResponse: " + dungGio);
+        trangthai = new float[]{dungGio, treGio, dangLam};
         addDataSet(mChart);
         adapter.notifyDataSetChanged();
-        Log.d("size:"," "+list1.size());
+        Log.d("size:", " " + list1.size());
     }
 
     private void handleError(Throwable error) {
@@ -222,7 +226,7 @@ public class frm_thongke extends Fragment implements OnChartValueSelectedListene
                 .addConverterFactory(GsonConverterFactory.create())
                 .build().create(service_API.class);
 
-        new CompositeDisposable().add(requestInterface.getLuongTreGio(idNV,selectedDate.getMonth().getValue())
+        new CompositeDisposable().add(requestInterface.getLuongTreGio(idNV, selectedDate.getMonth().getValue())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe(this::handleResponse_treGio, this::handleError_treGio)
@@ -230,15 +234,13 @@ public class frm_thongke extends Fragment implements OnChartValueSelectedListene
     }
 
     private void handleResponse_treGio(luong luong) {
-        //API trả về dữ liệu thành công, thực hiện việc lấy data
         luongTong += luong.getTienLuong();
-        txtSalary.setText("Salary:"+luongTong+"00NVD");
+        txtSalary.setText("Salary: " + Math.round(luongTong) + "000 VND");
     }
 
     private void handleError_treGio(Throwable error) {
         Log.d("erro-tre gio :", error.toString());
         Toast.makeText(getContext(), error.toString(), Toast.LENGTH_SHORT).show();
-        //khi gọi API KHÔNG THÀNH CÔNG thì thực hiện xử lý ở đây
     }
 
     private void demoCallAPI_luongDungGio() {
@@ -249,7 +251,7 @@ public class frm_thongke extends Fragment implements OnChartValueSelectedListene
                 .addConverterFactory(GsonConverterFactory.create())
                 .build().create(service_API.class);
 
-        new CompositeDisposable().add(requestInterface.getLuongDungGio(idNV,selectedDate.getMonth().getValue())
+        new CompositeDisposable().add(requestInterface.getLuongDungGio(idNV, selectedDate.getMonth().getValue())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe(this::handleResponse_dungGio, this::handleError_dungGio)
@@ -257,15 +259,13 @@ public class frm_thongke extends Fragment implements OnChartValueSelectedListene
     }
 
     private void handleResponse_dungGio(luong luong) {
-        //API trả về dữ liệu thành công, thực hiện việc lấy data
         luongTong += luong.getTienLuong();
-        txtSalary.setText("Salary:"+luongTong+"00NVD");
+        txtSalary.setText("Salary: " + Math.round(luongTong) + "000 VND");
     }
 
     private void handleError_dungGio(Throwable error) {
         Log.d("erro-dung gio :", error.toString());
         Toast.makeText(getContext(), error.toString(), Toast.LENGTH_SHORT).show();
-        //khi gọi API KHÔNG THÀNH CÔNG thì thực hiện xử lý ở đây
     }
 
 
@@ -279,24 +279,31 @@ public class frm_thongke extends Fragment implements OnChartValueSelectedListene
     public void onNothingSelected() {
 
     }
+
     private void addDataSet(PieChart pieChart) {
         ArrayList<PieEntry> entrys = new ArrayList<>();
         yData = trangthai;
-        String[] xData = { "Ontime", "Late", "Working" };
-        for (int i = 0; i < yData.length;i++){
-                entrys.add(new PieEntry(yData[i], xData[i]));
+        String[] xData = {"Ontime", "Late", "Working"};
+        for (int i = 0; i < yData.length; i++) {
+            entrys.add(new PieEntry(yData[i], xData[i]));
         }
-        PieDataSet pieDataSet=new PieDataSet(entrys," ");
-        pieDataSet.setSliceSpace(3);
+
+        PieDataSet pieDataSet = new PieDataSet(entrys, " ");
+        pieDataSet.setSliceSpace(0);
         pieDataSet.setValueTextSize(12);
-        ArrayList<Integer> colors=new ArrayList<>();
-        colors.add(Color.parseColor("#73AB6B"));
-        colors.add(Color.parseColor("#FA8072"));
-        colors.add(Color.parseColor("#F8DE7E"));
+
+        ArrayList<Integer> colors = new ArrayList<>();
+        colors.add(Color.parseColor("#88A47C"));
+        colors.add(Color.parseColor("#227C70"));
+        colors.add(Color.parseColor("#FF8E9E"));
         pieDataSet.setColors(colors);
-        Legend legend=pieChart.getLegend();
+
+        Legend legend = pieChart.getLegend();
         legend.setForm(Legend.LegendForm.CIRCLE);
-        PieData pieData=new PieData(pieDataSet);
+        legend.setTextSize(14f);
+        legend.setFormSize(14f);
+
+        PieData pieData = new PieData(pieDataSet);
         pieChart.setData(pieData);
         pieChart.invalidate();
         pieChart.setRotationEnabled(false);

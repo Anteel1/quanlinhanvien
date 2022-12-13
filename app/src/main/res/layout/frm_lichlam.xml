@@ -1,141 +1,145 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_height="match_parent"
     android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
-    >
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-
-
-    android:background="@color/white"
-    android:orientation="vertical">
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="4dp"
-        >
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Work schedule"
-            android:gravity="center"
-            android:textSize="20dp"
-            android:textColor="@color/statusbar"
-            />
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:orientation="vertical">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginBottom="8dp"
-            android:layout_marginTop="8dp">
+            android:orientation="vertical"
+            android:padding="4dp">
 
-            <Button
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/back"
-                android:id="@+id/btnBack"
-                android:textColor="@color/statusbar"
-                android:backgroundTint="@color/white"
-                />
+            <!--            <TextView-->
+            <!--                android:layout_width="match_parent"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:gravity="center"-->
+            <!--                android:text="Work schedule"-->
+            <!--                android:textColor="@color/statusbar"-->
+            <!--                android:textSize="20dp" />-->
 
-            <TextView
-                android:id="@+id/tvMonth"
-                android:layout_width="0dp"
-                android:layout_weight="2"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Feb 2021"
-                android:textSize="16sp"
-                android:textAllCaps="false"
-                android:textAlignment="center"
-                android:textColor="@color/statusbar"/>
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:orientation="horizontal">
 
-            <Button
-                android:id="@+id/btnNext"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/next"
-                android:textColor="@color/statusbar"
-                android:backgroundTint="@color/white" />
+                <Button
+                    android:id="@+id/btnBack"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:backgroundTint="@color/white"
+                    android:text="@string/back"
+                    android:textColor="@color/statusbar"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tvMonth"
+                    style="@style/textMedium"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    android:gravity="center"
+                    android:text="Feb 2021"
+                    android:textColor="@color/statusbar"
+                    android:textSize="16sp" />
+
+                <Button
+                    android:id="@+id/btnNext"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:backgroundTint="@color/white"
+                    android:text="@string/next"
+                    android:textColor="@color/statusbar"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
 
         </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#80CAC3C3" />
+
+        <LinearLayout
+            android:id="@+id/line1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="12dp">
+
+            <TextView
+                style="@style/textLight"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:gravity="center"
+                android:text="Name"
+                android:textColor="@color/statusbar"
+                android:textSize="18sp" />
+
+            <TextView
+                style="@style/textLight"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="In"
+                android:textColor="@color/statusbar"
+                android:textSize="18sp" />
+
+            <TextView
+                style="@style/textLight"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:gravity="center"
+                android:text="Out"
+                android:textColor="@color/statusbar"
+                android:textSize="18sp" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#80CAC3C3" />
+
+        <ListView
+            android:id="@+id/listviewll"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scrollbars="none" />
+
     </LinearLayout>
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:background="#80CAC3C3"/>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="41dp"
-        android:orientation="horizontal"
-        android:id="@+id/line1"
-        >
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_marginTop="8dp"
-            android:text="Name"
-            android:textSize="18sp"
-            android:textColor="@color/statusbar"
-            />
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="2"
-            android:layout_marginTop="8dp"
-            android:text="In"
-            android:textSize="18sp"
-            android:textColor="@color/statusbar"
-            />
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_weight="2"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="Out"
-            android:textSize="18sp"
-            android:textColor="@color/statusbar"
-            />
-    </LinearLayout>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:background="#80CAC3C3"/>
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical"
-    >
-    <ListView
-        android:id="@+id/listviewll"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        />
-</LinearLayout>
-
-</LinearLayout>
     <ProgressBar
         android:id="@+id/prb_login"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:visibility="gone" />
+
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:layout_margin="4dp"
         android:id="@+id/btnthemlichlam"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/statusbar"
-        android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="4dp"
+        android:backgroundTint="@color/statusbar"
         android:src="@drawable/ic_baseline_add_24"
-        app:tint="@color/white"
-        ></com.google.android.material.floatingactionbutton.FloatingActionButton>
+        app:tint="@color/white" />
+
 </RelativeLayout>

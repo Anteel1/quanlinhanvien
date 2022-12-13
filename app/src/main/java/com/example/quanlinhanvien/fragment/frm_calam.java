@@ -36,14 +36,13 @@ public class frm_calam extends Fragment {
     ArrayList<calam> list;
     RecyclerView recyclerView;
     adapter_calam adapter_calam;
-    TextView socl;
 
     ProgressBar progressBar;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.frm_calam, container, false);
-        socl = view.findViewById(R.id.txtsocl);
         recyclerView = view.findViewById(R.id.rcv_calam);
         progressBar = view.findViewById(R.id.prb_login);
         list = new ArrayList<>();
@@ -75,14 +74,12 @@ public class frm_calam extends Fragment {
             list.add(list_calam.get(i));
 
         }
-        socl.setText(""+list_calam.size());
         loaddata(list);
     }
 
     private void handleError(Throwable error) {
         Log.d("erro", error.toString());
         progressBar.setVisibility(View.GONE);
-        //khi gọi API KHÔNG THÀNH CÔNG thì thực hiện xử lý ở đây
     }
 
 

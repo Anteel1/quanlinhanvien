@@ -93,6 +93,7 @@ public class frm_nhanvien extends Fragment implements  ItemClickListener {
         adapter_nhanvien = new adapter_nhanvien(getContext(), list, listNV, this);
         recyclerView.setAdapter(adapter_nhanvien);
 
+
     }
 
     private void demoCallAPI() {
@@ -184,8 +185,7 @@ public class frm_nhanvien extends Fragment implements  ItemClickListener {
             btnDangky.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    int ma = manv+1;
-                    demoCallAPIupdateNV(ma, txtName.getText().toString(),
+                    demoCallAPIupdateNV(listNV.get(manv).getMaNV(), txtName.getText().toString(),
                             txtNameUser.getText().toString(), txtPassword.getText().toString(),
                             txtImei.getText().toString(), Integer.parseInt(txtMaCV.getText().toString()));
                 }

@@ -8,12 +8,16 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.cloudinary.android.MediaManager;
+
+import java.util.HashMap;
+
 public class manhinhchoActivity extends AppCompatActivity {
     ProgressBar progressBar;
     TextView textView;
     Handler handler = new Handler();
     int i;
-
+    private HashMap config = new HashMap();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,7 +36,7 @@ public class manhinhchoActivity extends AppCompatActivity {
         });
         thread.start();
 
-
+    configCloudinary();
     }
 
     public void chay() {
@@ -52,5 +56,10 @@ public class manhinhchoActivity extends AppCompatActivity {
         }
 
     }
-
+    private void configCloudinary() {
+        config.put("cloud_name", "dnxe9l57i");
+        config.put("api_key", "991189484643755");
+        config.put("api_secret", "e6ZiAtks5BeldzKgTew3IqC8KHk");
+        MediaManager.init(this, config);
+    }
 }

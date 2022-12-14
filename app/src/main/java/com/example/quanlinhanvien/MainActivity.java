@@ -28,7 +28,6 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 
-import com.cloudinary.android.MediaManager;
 import com.example.quanlinhanvien.fragment.frm_attendance;
 import com.example.quanlinhanvien.fragment.frm_calam;
 import com.example.quanlinhanvien.fragment.frm_dangxuat;
@@ -41,7 +40,6 @@ import com.example.quanlinhanvien.fragment.frm_trangchu;
 import com.google.android.material.navigation.NavigationView;
 
 import java.io.UnsupportedEncodingException;
-import java.util.HashMap;
 
 public class MainActivity extends AppCompatActivity {
     TextView tv_tieude;
@@ -61,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-    private HashMap config = new HashMap();
+
 
     String tenNV;
     private View headerLayout;
@@ -82,8 +80,6 @@ public class MainActivity extends AppCompatActivity {
         menu_nav();
         fragment = new frm_trangchu();
         onRestoreInstanceState(savedInstanceState);
-
-        configCloudinary();
 
         // phan quyen
         navigationView.getMenu().findItem(R.id.menu_store).setVisible(chucvu == 2);
@@ -274,10 +270,5 @@ public class MainActivity extends AppCompatActivity {
         setIntent(intent);
     }
 
-    private void configCloudinary() {
-        config.put("cloud_name", "dnxe9l57i");
-        config.put("api_key", "991189484643755");
-        config.put("api_secret", "e6ZiAtks5BeldzKgTew3IqC8KHk");
-        MediaManager.init(this, config);
-    }
+
 }
